@@ -16,6 +16,23 @@
 		7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */; };
 		7D0CC6F91AD4E7D400BB65BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F71AD4E7D400BB65BB /* LaunchScreen.xib */; };
 		7D0CC7051AD4E7D400BB65BB /* WhichIsBiggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */; };
+		7D0CC7181AD4EA5A00BB65BB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */; };
+		7D0CC7191AD4EA5A00BB65BB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7171AD4EA5A00BB65BB /* Parse.framework */; };
+		7D0CC71B1AD4EA7500BB65BB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */; };
+		7D0CC71D1AD4EA7A00BB65BB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC71C1AD4EA7A00BB65BB /* CFNetwork.framework */; };
+		7D0CC71F1AD4EA7F00BB65BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC71E1AD4EA7F00BB65BB /* CoreGraphics.framework */; };
+		7D0CC7211AD4EA8400BB65BB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7201AD4EA8400BB65BB /* CoreLocation.framework */; };
+		7D0CC7231AD4EA8900BB65BB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7221AD4EA8900BB65BB /* MobileCoreServices.framework */; };
+		7D0CC7251AD4EA8E00BB65BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7241AD4EA8E00BB65BB /* QuartzCore.framework */; };
+		7D0CC7271AD4EA9300BB65BB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7261AD4EA9300BB65BB /* Security.framework */; };
+		7D0CC7291AD4EA9700BB65BB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7281AD4EA9700BB65BB /* StoreKit.framework */; };
+		7D0CC72B1AD4EA9C00BB65BB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */; };
+		7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72C1AD4EAA200BB65BB /* libz.dylib */; };
+		7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */; };
+		7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7321AD4F2B500BB65BB /* WIBParseManager.m */; };
+		7D0CC7361AD4F2D100BB65BB /* WIBGamePlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7351AD4F2D100BB65BB /* WIBGamePlayManager.m */; };
+		7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */; };
+		7D0CC7411AD4F37700BB65BB /* WIBGameOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7401AD4F37700BB65BB /* WIBGameOption.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +63,27 @@
 		7D0CC6FE1AD4E7D400BB65BB /* WhichIsBiggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhichIsBiggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0CC7031AD4E7D400BB65BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhichIsBiggerTests.m; sourceTree = "<group>"; };
+		7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		7D0CC7171AD4EA5A00BB65BB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7D0CC71C1AD4EA7A00BB65BB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7D0CC71E1AD4EA7F00BB65BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7D0CC7201AD4EA8400BB65BB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7D0CC7221AD4EA8900BB65BB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		7D0CC7241AD4EA8E00BB65BB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7D0CC7261AD4EA9300BB65BB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7D0CC7281AD4EA9700BB65BB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7D0CC72C1AD4EAA200BB65BB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		7D0CC7311AD4F2B500BB65BB /* WIBParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBParseManager.h; path = Classes/WIBParseManager.h; sourceTree = "<group>"; };
+		7D0CC7321AD4F2B500BB65BB /* WIBParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBParseManager.m; path = Classes/WIBParseManager.m; sourceTree = "<group>"; };
+		7D0CC7341AD4F2D100BB65BB /* WIBGamePlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGamePlayManager.h; path = Classes/WIBGamePlayManager.h; sourceTree = "<group>"; };
+		7D0CC7351AD4F2D100BB65BB /* WIBGamePlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGamePlayManager.m; path = Classes/WIBGamePlayManager.m; sourceTree = "<group>"; };
+		7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDataModel.h; path = "Classes/Data Model/WIBDataModel.h"; sourceTree = "<group>"; };
+		7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDataModel.m; path = "Classes/Data Model/WIBDataModel.m"; sourceTree = "<group>"; };
+		7D0CC73F1AD4F37700BB65BB /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
+		7D0CC7401AD4F37700BB65BB /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +91,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
+				7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */,
+				7D0CC72B1AD4EA9C00BB65BB /* SystemConfiguration.framework in Frameworks */,
+				7D0CC7291AD4EA9700BB65BB /* StoreKit.framework in Frameworks */,
+				7D0CC7271AD4EA9300BB65BB /* Security.framework in Frameworks */,
+				7D0CC7251AD4EA8E00BB65BB /* QuartzCore.framework in Frameworks */,
+				7D0CC7231AD4EA8900BB65BB /* MobileCoreServices.framework in Frameworks */,
+				7D0CC7211AD4EA8400BB65BB /* CoreLocation.framework in Frameworks */,
+				7D0CC71F1AD4EA7F00BB65BB /* CoreGraphics.framework in Frameworks */,
+				7D0CC71D1AD4EA7A00BB65BB /* CFNetwork.framework in Frameworks */,
+				7D0CC71B1AD4EA7500BB65BB /* AudioToolbox.framework in Frameworks */,
+				7D0CC7191AD4EA5A00BB65BB /* Parse.framework in Frameworks */,
+				7D0CC7181AD4EA5A00BB65BB /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +120,7 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				7D0CC7301AD4EAC400BB65BB /* Frameworks */,
 				7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */,
 				7D0CC7011AD4E7D400BB65BB /* WhichIsBiggerTests */,
 				7D0CC6E61AD4E7D400BB65BB /* Products */,
@@ -91,6 +143,8 @@
 				054EF0801AD4EA270004E0BC /* WIBGameItem.m */,
 				054EF0811AD4EA270004E0BC /* WIBImageView.h */,
 				054EF0821AD4EA270004E0BC /* WIBImageView.m */,
+				7D0CC73A1AD4F2EE00BB65BB /* Managers */,
+				7D0CC73B1AD4F30000BB65BB /* Data Model */,
 				7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */,
 				7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */,
 				7D0CC6EF1AD4E7D400BB65BB /* ViewController.h */,
@@ -127,6 +181,48 @@
 				7D0CC7031AD4E7D400BB65BB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */,
+				7D0CC72C1AD4EAA200BB65BB /* libz.dylib */,
+				7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */,
+				7D0CC7281AD4EA9700BB65BB /* StoreKit.framework */,
+				7D0CC7261AD4EA9300BB65BB /* Security.framework */,
+				7D0CC7241AD4EA8E00BB65BB /* QuartzCore.framework */,
+				7D0CC7221AD4EA8900BB65BB /* MobileCoreServices.framework */,
+				7D0CC7201AD4EA8400BB65BB /* CoreLocation.framework */,
+				7D0CC71E1AD4EA7F00BB65BB /* CoreGraphics.framework */,
+				7D0CC71C1AD4EA7A00BB65BB /* CFNetwork.framework */,
+				7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */,
+				7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */,
+				7D0CC7171AD4EA5A00BB65BB /* Parse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D0CC73A1AD4F2EE00BB65BB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC7311AD4F2B500BB65BB /* WIBParseManager.h */,
+				7D0CC7321AD4F2B500BB65BB /* WIBParseManager.m */,
+				7D0CC7341AD4F2D100BB65BB /* WIBGamePlayManager.h */,
+				7D0CC7351AD4F2D100BB65BB /* WIBGamePlayManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC73F1AD4F37700BB65BB /* WIBGameOption.h */,
+				7D0CC7401AD4F37700BB65BB /* WIBGameOption.m */,
+				7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */,
+				7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,9 +325,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */,
 				7D0CC6F11AD4E7D400BB65BB /* ViewController.m in Sources */,
 				054EF0841AD4EA270004E0BC /* WIBImageView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
+				7D0CC7361AD4F2D100BB65BB /* WIBGamePlayManager.m in Sources */,
+				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
+				7D0CC7411AD4F37700BB65BB /* WIBGameOption.m in Sources */,
 				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
 				054EF0831AD4EA270004E0BC /* WIBGameItem.m in Sources */,
 			);
@@ -355,6 +455,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WhichIsBigger",
+					"/Users/ploury/Downloads/parse-library-1.7.1",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -365,6 +471,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WhichIsBigger",
+					"/Users/ploury/Downloads/parse-library-1.7.1",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

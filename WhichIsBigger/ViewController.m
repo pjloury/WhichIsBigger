@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "WIBImageView.h"
+#import <Parse/Parse.h>
+
+>>>>>>> 77adb2a8f27ab3eed9d7625ce9140aa2ce6a38c9
 
 @interface ViewController ()
 
@@ -22,6 +25,9 @@
     [self setupImageView];
     [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
     // Do any additional setup after loading the view, typically from a nib.
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning {
