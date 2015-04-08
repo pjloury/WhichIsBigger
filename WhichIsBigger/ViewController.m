@@ -10,8 +10,6 @@
 #import "WIBImageView.h"
 #import <Parse/Parse.h>
 
->>>>>>> 77adb2a8f27ab3eed9d7625ce9140aa2ce6a38c9
-
 @interface ViewController ()
 
 @property (nonatomic, strong) WIBImageView *imageView;
