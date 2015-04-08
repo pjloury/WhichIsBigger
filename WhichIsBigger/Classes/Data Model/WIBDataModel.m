@@ -10,4 +10,19 @@
 
 @implementation WIBDataModel
 
+@property (nonatomic, strong) NSMutableDictionary *gameItems;
+
++ (WIBDataModel *)sharedInstance
+{
+    static dispatch_once_t pred;
+    static WIBDataModel *shared = nil;
+    
+    dispatch_once(&pred, ^{
+        shared = [[WIBDataModel alloc] init];
+        
+    });
+    
+    return shared;
+}
+
 @end

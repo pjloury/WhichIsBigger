@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WIBGameOption.h"
 
 @interface WIBGamePlayManager : NSObject
+
++ (WIBGamePlayManager *)sharedInstance;
+- (WIBGameOption *)gameOption;
 
 @end

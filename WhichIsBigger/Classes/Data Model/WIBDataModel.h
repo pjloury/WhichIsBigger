@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WIBGameItem.h"
+
 @interface WIBDataModel : NSObject
+
++ (WIBDataModel *)sharedInstance;
+- (void)insertGameItem:(WIBGameItem *);
 
 @end

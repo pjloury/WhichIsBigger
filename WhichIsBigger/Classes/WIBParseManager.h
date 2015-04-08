@@ -10,4 +10,6 @@
 
 @interface WIBParseManager : NSObject
 
++ (WIBParseManager *)sharedInstance;
+
 @end

@@ -10,4 +10,6 @@
 
 @implementation WIBGameOption
 
+@property (nonatomic, strong) WIBGameItem *option1;
+
 @end
