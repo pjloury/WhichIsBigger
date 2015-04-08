@@ -27,6 +27,10 @@
 		7D0CC72B1AD4EA9C00BB65BB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */; };
 		7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72C1AD4EAA200BB65BB /* libz.dylib */; };
 		7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */; };
+		7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7321AD4F2B500BB65BB /* WIBParseManager.m */; };
+		7D0CC7361AD4F2D100BB65BB /* WIBGamePlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7351AD4F2D100BB65BB /* WIBGamePlayManager.m */; };
+		7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */; };
+		7D0CC7411AD4F37700BB65BB /* WIBGameOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7401AD4F37700BB65BB /* WIBGameOption.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,14 @@
 		7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7D0CC72C1AD4EAA200BB65BB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		7D0CC7311AD4F2B500BB65BB /* WIBParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBParseManager.h; path = Classes/WIBParseManager.h; sourceTree = "<group>"; };
+		7D0CC7321AD4F2B500BB65BB /* WIBParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBParseManager.m; path = Classes/WIBParseManager.m; sourceTree = "<group>"; };
+		7D0CC7341AD4F2D100BB65BB /* WIBGamePlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGamePlayManager.h; path = Classes/WIBGamePlayManager.h; sourceTree = "<group>"; };
+		7D0CC7351AD4F2D100BB65BB /* WIBGamePlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGamePlayManager.m; path = Classes/WIBGamePlayManager.m; sourceTree = "<group>"; };
+		7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDataModel.h; path = "Classes/Data Model/WIBDataModel.h"; sourceTree = "<group>"; };
+		7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDataModel.m; path = "Classes/Data Model/WIBDataModel.m"; sourceTree = "<group>"; };
+		7D0CC73F1AD4F37700BB65BB /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
+		7D0CC7401AD4F37700BB65BB /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +133,8 @@
 		7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */ = {
 			isa = PBXGroup;
 			children = (
+				7D0CC73A1AD4F2EE00BB65BB /* Managers */,
+				7D0CC73B1AD4F30000BB65BB /* Data Model */,
 				7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */,
 				7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */,
 				7D0CC6EF1AD4E7D400BB65BB /* ViewController.h */,
@@ -177,6 +191,28 @@
 				7D0CC7171AD4EA5A00BB65BB /* Parse.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D0CC73A1AD4F2EE00BB65BB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC7311AD4F2B500BB65BB /* WIBParseManager.h */,
+				7D0CC7321AD4F2B500BB65BB /* WIBParseManager.m */,
+				7D0CC7341AD4F2D100BB65BB /* WIBGamePlayManager.h */,
+				7D0CC7351AD4F2D100BB65BB /* WIBGamePlayManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC73F1AD4F37700BB65BB /* WIBGameOption.h */,
+				7D0CC7401AD4F37700BB65BB /* WIBGameOption.m */,
+				7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */,
+				7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,8 +315,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */,
 				7D0CC6F11AD4E7D400BB65BB /* ViewController.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
+				7D0CC7361AD4F2D100BB65BB /* WIBGamePlayManager.m in Sources */,
+				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
+				7D0CC7411AD4F37700BB65BB /* WIBGameOption.m in Sources */,
 				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
