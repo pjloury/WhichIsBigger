@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "WIBParseManager.h"
+#import "WIBGameItem.h"
 
 @interface AppDelegate ()
 
@@ -27,7 +29,15 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [self launchTasks];
+    
     return YES;
+}
+
+- (void)launchTasks
+{
+    [[WIBParseManager sharedInstance] fetchGameItemForCategoryType:WIBCategoryTypeHeight];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

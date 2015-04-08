@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import "WIBImageView.h"
+#import "WIBGameQuestion.h"
+#import "WIBGamePlayManager.h"
 #import <Parse/Parse.h>
-
->>>>>>> 77adb2a8f27ab3eed9d7625ce9140aa2ce6a38c9
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (nonatomic, strong) WIBImageView *imageView;
 
 @end
@@ -28,11 +30,19 @@
     PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
     testObject[@"foo"] = @"bar";
     [testObject saveInBackground];
+    [self loadQuestion];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadQuestion
+{
+    WIBGameQuestion *question = [WIBGamePlayManager sharedInstance].gameQuestion;
+    self.label1.text = question.option1.name;
+    self.label2.text = question.option2.name;
 }
 
 - (void)setupImageView {

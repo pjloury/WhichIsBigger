@@ -7,7 +7,6 @@
 //
 
 #import "WIBParseManager.h"
-#import "WIBGameItem.h"
 #import "WIBDataModel.h"
 
 @implementation WIBParseManager
@@ -25,13 +24,15 @@
     return shared;
 }
 
-- (void)fetchGameItemForCategoryType(WIBCategoryType)
+- (void)fetchGameItemForCategoryType:(WIBCategoryType)type
 {
     //Ask for 10 items of this type
-    
-    WIBGameItem *gameItem = [[WIBGameItem alloc] initWithJSON:json];
+    WIBGameItem *gameItem = [[WIBGameItem alloc] init];
+    gameItem.name = @"Empire";
+    gameItem.photoURL =@"http://nba.com";
+    gameItem.quantity = @(42);
+    gameItem.categoryType = WIBCategoryTypeHeight;
     [[WIBDataModel sharedInstance] insertGameItem: gameItem];
-    
 }
 
 - (void)insertGameItems

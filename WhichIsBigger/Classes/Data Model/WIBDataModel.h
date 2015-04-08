@@ -7,12 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "WIBGameItem.h"
 
-@interface WIBDataModel : NSObject
-
+@interface WIBDataModel : NSObject 
 + (WIBDataModel *)sharedInstance;
-- (void)insertGameItem:(WIBGameItem *);
-
+- (void)insertGameItem:(WIBGameItem *)gameItem;
+- (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType;
 @end

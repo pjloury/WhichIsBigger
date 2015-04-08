@@ -8,9 +8,11 @@
 
 #import "WIBDataModel.h"
 
-@implementation WIBDataModel
+@interface WIBDataModel()
+@property (nonatomic, strong) NSMutableDictionary *gameItemsDictionary;
+@end
 
-@property (nonatomic, strong) NSMutableDictionary *gameItems;
+@implementation WIBDataModel
 
 + (WIBDataModel *)sharedInstance
 {
@@ -19,10 +21,26 @@
     
     dispatch_once(&pred, ^{
         shared = [[WIBDataModel alloc] init];
-        
+        shared.gameItemsDictionary = [NSMutableDictionary dictionary];
     });
     
     return shared;
+}
+
+- (void)insertGameItem:(WIBGameItem *)gameItem
+{
+    NSMutableArray* categoryArray = [self.gameItemsDictionary objectForKey:@(gameItem.categoryType)];
+    [categoryArray addObject:gameItem];
+}
+
+- (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
+{
+    // TODO: Remove RETURNS FIRST OBJECT ALWAYS
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
+    WIBGameItem* gameItem = [gameItemsWithSameCategory firstObject];
+    // Avoid repeats of the same item
+    // [gameItemsWithSameCategory removeObject:gameItem];
+    return gameItem;
 }
 
 @end

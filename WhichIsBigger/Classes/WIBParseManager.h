@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WIBGameItem.h"
 
 @interface WIBParseManager : NSObject
 
 + (WIBParseManager *)sharedInstance;
-
+- (void)fetchGameItemForCategoryType:(WIBCategoryType)type;
 @end
