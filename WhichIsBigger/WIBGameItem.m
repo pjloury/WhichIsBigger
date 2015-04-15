@@ -10,4 +10,16 @@
 
 @implementation WIBGameItem
 
++ (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2
+{
+    if (item1.quantity > item2.quantity)
+    {
+        return item1;
+    }
+    else
+    {
+        return item2;
+    }
+}
+
 @end

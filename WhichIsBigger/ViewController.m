@@ -27,25 +27,29 @@
     [self setupImageView];
     [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
     // Do any additional setup after loading the view, typically from a nib.
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
     [self loadQuestion];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void)loadQuestion
 {
-    WIBGameQuestion *question = [WIBGamePlayManager sharedInstance].gameQuestion;
+    WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] gameQuestion];
     self.label1.text = question.option1.name;
     self.label2.text = question.option2.name;
 }
 
-- (void)setupImageView {
+- (void)next
+{
+    
+}
+
+- (void)setupImageView
+{
     self.imageView = [WIBImageView new];
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.imageView];

@@ -30,13 +30,23 @@
 - (void)insertGameItem:(WIBGameItem *)gameItem
 {
     NSMutableArray* categoryArray = [self.gameItemsDictionary objectForKey:@(gameItem.categoryType)];
+    if(!categoryArray)
+    {
+        categoryArray = [NSMutableArray array];
+        [self.gameItemsDictionary setObject:categoryArray forKey:@(gameItem.categoryType)];
+    }
     [categoryArray addObject:gameItem];
+
+    
 }
 
 - (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
 {
     // TODO: Remove RETURNS FIRST OBJECT ALWAYS
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
+    
+    //THere might be no dictionary
+    
     WIBGameItem* gameItem = [gameItemsWithSameCategory firstObject];
     // Avoid repeats of the same item
     // [gameItemsWithSameCategory removeObject:gameItem];

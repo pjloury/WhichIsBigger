@@ -12,6 +12,6 @@
 @interface WIBGamePlayManager : NSObject
 
 + (WIBGamePlayManager *)sharedInstance;
-- (WIBGameQuestion *)gameQuestion;
+- (WIBGameQuestion *)nextGameQuestion;
 
 @end
