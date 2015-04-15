@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "WIBImageView.h"
 #import "WIBGameQuestion.h"
+#import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
 #import <Parse/Parse.h>
 
@@ -38,7 +39,7 @@
 
 - (void)loadQuestion
 {
-    WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] gameQuestion];
+    WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
     self.label1.text = question.option1.name;
     self.label2.text = question.option2.name;
 }

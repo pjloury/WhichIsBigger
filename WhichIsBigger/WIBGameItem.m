@@ -22,4 +22,16 @@
     }
 }
 
++ (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2
+{
+    if (item1.quantity > item2.quantity)
+    {
+        return item2;
+    }
+    else
+    {
+        return item1;
+    }
+}
+
 @end

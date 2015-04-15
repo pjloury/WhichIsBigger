@@ -39,17 +39,27 @@
     switch (self.option1.categoryType)
     {
         case(WIBCategoryTypeHeight):
-            return @"Which is taller?";
+            return @"Which is Taller?";
         case(WIBCategoryTypeWeight):
-            return @"Which is heavier?";
+            return @"Which is Heavier?";
         case(WIBCategoryTypeAge):
-            return @"Which is older?";
+            return @"Which is Older?";
         case(WIBCategoryTypePrice):
-            return @"Which is worth more?";
+            return @"Which is Worth More?";
         default:
             break;
     }
     return nil;
+}
+
+- (NSNumber *)total1
+{
+    return [NSNumber numberWithDouble: self.multiplier1 * self.option1.quantity.doubleValue];
+}
+
+- (NSNumber *)total2
+{
+    return [NSNumber numberWithDouble: self.multiplier2 * self.option2.quantity.doubleValue];
 }
 
 - (WIBGameItem *)answer

@@ -25,4 +25,5 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) WIBCategoryType categoryType;
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
++ (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
 @end

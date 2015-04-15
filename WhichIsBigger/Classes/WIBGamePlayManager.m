@@ -19,6 +19,8 @@
 
 @implementation WIBGamePlayManager
 
+double difficulty = 10; // 0 to 100
+
 + (WIBGamePlayManager *)sharedInstance
 {
     static dispatch_once_t pred;
@@ -43,36 +45,34 @@
         WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
         
         WIBGameQuestion *gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
+        
+        WIBGameItem *largerItem = [WIBGameItem maxOfItem:item1 item2:item2];
+        WIBGameItem *smallerItem = [WIBGameItem minOfItem:item1 item2:item2];
+        
+        // it actually takes 230.3 Kanyes...
+        double answerQuantity = largerItem.quantity.doubleValue / largerItem.quantity.doubleValue;
+        
+        // random # between 0 and N-1
+        NSUInteger r = arc4random_uniform(2) * 2 -1;
+        
+        double skew = r * answerQuantity / difficulty;
+        double calculatedMultiplier =  answerQuantity + skew;
 
-        // Default case- only scale smaller item
-        // Deal with the smaller and the larger from now on
-        //multiplierSmaller = largerItem / smallerItem = # of smaller items that it would take to equal 1 largerItem
-            230                    1150          5
-            1
+        if(smallerItem == item1)
+        {
+            gameQuestion.multiplier1 = ceil(calculatedMultiplier);
+            gameQuestion.multiplier2 = 1;
+        }
+        else
+        {
+            gameQuestion.multiplier2 = ceil(calculatedMultiplier);
+            gameQuestion.multiplier1 = 1;
+        }
         
-        -230/ 100 = -23
-        //skew = random(-1 to 1)* multiplierSmaller / difficulty
-        //multiplierSmaller = multiplierSmaller + skew
-        253 - > 250
-        //TODO: Try nice round numbers
-        
-
-        
-        
-        [self calculateMultipliers];
-        
-        //which one is larger
+        [self.gameQuestions addObject:gameQuestion];
         
     }
 }
-
-- (void)calculateMultipliers:(WIBGameItem *)item1 item2:(WIBGameItem *)item2
-{
-    [
-
-    
-}
-
 
 - (WIBGameQuestion *)nextGameQuestion
 {
@@ -80,7 +80,5 @@
     [self.gameQuestions removeObject:0];
     return question;
 }
-
-
 
 @end
