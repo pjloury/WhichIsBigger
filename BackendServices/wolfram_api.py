@@ -16,9 +16,14 @@ from parse_rest.datatypes import Object
 from api_keys import *
 
 
-__age_re = re.compile("""(\w+)\syears""")
-__height_re = re.compile("""(.*)\s(meters)""")
-__weight_re = re.compile("""(.*)\s(lb)""")
+import time
+
+pattern = '%m/%d/%Y'
+
+__topic_re = re.compile("""(.*)\s+\|""")
+__birthday_re = re.compile("""(\d+/\d+/\d+)""")
+__height_re = re.compile("""(.*)\s+(meters)""")
+__weight_re = re.compile("""(.*)\s+(lb)""")
 
 ############## WOLFRAM API ##############
 
@@ -36,6 +41,7 @@ class Enum(set):
 Category = Enum(["age", "weight", "height"])
 
 query_string = ""
+
 
 def main():
 
@@ -56,10 +62,19 @@ def main():
         CATEGORY = Category.height
         query_string = '%s height'
 
-
     single_query(OBJECT,CATEGORY)
 
 
+def get_topic(root):
+
+    topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
+
+    m = __topic_re.match(topic)
+
+    if m:
+        return m.group(1)
+    else:
+        raise NameError('Error parsing topic')
 
 def single_query(OBJECT,CATEGORY):
 
@@ -67,12 +82,12 @@ def single_query(OBJECT,CATEGORY):
 
     BUILT_QUERY = QUERYSTRING % (QUERY.replace(' ','%20'),APP_ID)
 
-    if os.path.exists(PICKLE_PATH):
-        xml = pickle.load(open(PICKLE_PATH,'rb'))
-
-    else:
-        xml = urllib2.urlopen(BUILT_QUERY).read()
-        pickle.dump(xml,open(PICKLE_PATH,'wb'))
+    # if os.path.exists(PICKLE_PATH):
+    #     xml = pickle.load(open(PICKLE_PATH,'rb'))
+    #
+    # else:
+    #     xml = urllib2.urlopen(BUILT_QUERY).read()
+    #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
 
@@ -83,11 +98,10 @@ def single_query(OBJECT,CATEGORY):
 
     # print ElementTree.tostring(root)
 
-    for child in root:
-        print child.tag, child.attrib
+    # for child in root:
+    #     print child.tag, child.attrib
 
-
-
+    TOPIC = get_topic(root)
 
     UNIT = ''
     QUANTITY = -1
@@ -96,22 +110,26 @@ def single_query(OBJECT,CATEGORY):
     if CATEGORY == Category.age:
 
 
-        results = root.findall("./pod[@title='Result'][@scanner='Age']")
+        value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
 
-        if len(results) > 0:
-            value = results[0].find('subpod').find('plaintext').text
+        if "month/day/year" in value:
 
-            m = __age_re.match(value)
+            m = __birthday_re.match(value)
 
             if m:
-                QUANTITY = int(m.group(1))
-                UNIT = 'years'
+                QUANTITY = m.group(1)
+
+                #convert scientifc notation to number
+                QUANTITY = int(time.mktime(time.strptime(QUANTITY, pattern)))
+
+                UNIT = "date"
             else:
-                raise NameError('No match for age query')
+                raise NameError('No match for birthday query')
 
 
         else:
             raise NameError('No results found for query: %s' % QUERY)
+
 
 
     elif CATEGORY == Category.height:
@@ -134,6 +152,7 @@ def single_query(OBJECT,CATEGORY):
                     if m:
                         QUANTITY = m.group(1)
 
+                        #convert scientifc notation to number
                         QUANTITY = float(QUANTITY.replace(u"×10^","E+"))
 
                         UNIT = m.group(2)
@@ -163,13 +182,14 @@ def single_query(OBJECT,CATEGORY):
 
                 value = subpod.find('plaintext').text
 
-                if "(pounds)" in value:
+                if "pounds" in value:
 
                     m = __weight_re.match(value)
 
                     if m:
                         QUANTITY = m.group(1)
 
+                        #convert scientifc notation to number
                         QUANTITY = float(QUANTITY.replace(u"×10^","E+"))
 
                         UNIT = m.group(2)
@@ -188,7 +208,7 @@ def single_query(OBJECT,CATEGORY):
     ############## PARSE API ##############
 
 
-    kv = GameItem(category=CATEGORY, name=OBJECT, quantity=QUANTITY, unit=UNIT)
+    kv = GameItem(category=CATEGORY, name=TOPIC, quantity=QUANTITY, unit=UNIT)
 
     kv.save()
 
