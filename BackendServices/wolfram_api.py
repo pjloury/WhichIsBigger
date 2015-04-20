@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
 
 from xml.etree import cElementTree as ElementTree
 import urllib2
@@ -6,19 +7,25 @@ import os
 import pickle
 import re
 
-############## WOLFRAM API ##############
+import sys
 
-category = sys.argv[1]
-obj = sys.argv[2]
+from parse_rest.connection import register
+from parse_rest.datatypes import Object
+
+
+from api_keys import *
+
 
 __age_re = re.compile("""(\w+)\syears""")
+__height_re = re.compile("""(.*)\s(meters)""")
+__weight_re = re.compile("""(.*)\s(lb)""")
 
-QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
-APP_ID = os.environ['WOLFRAM_APP_KEY']
-PICKLE_PATH = './xml.pkl'
+############## WOLFRAM API ##############
 
-REST_API_KEY = os.environ['PARSE_REST_KEY']
-APP_ID_KEY = os.environ['PARSE_API_KEY']
+register(APP_ID_KEY, REST_API_KEY)
+
+class GameItem(Object):
+    pass
 
 class Enum(set):
     def __getattr__(self, name):
@@ -28,73 +35,163 @@ class Enum(set):
 
 Category = Enum(["age", "weight", "height"])
 
-if category == "age":
-    CATEGORY = Category.age
-elif category == "weight":
-    CATEGORY = Category.weight
-elif category == "height":
-    CATEGORY = Category.height
+query_string = ""
 
-OBJECT = obj
+def main():
 
-if CATEGORY == Category.age:
-    query_string = 'how old is %s'
-elif CATEGORY == Category.weight:
-    query_string = 'how much does %s weigh'
-elif CATEGORY == Category.height:
-    query_string = 'how tall is %s'
+    global query_string
 
-QUERY = query_string % OBJECT
+    category = sys.argv[1]
 
-BUILT_QUERY = QUERYSTRING % (QUERY.replace(' ','%20'),APP_ID)
+    OBJECT = " ".join(sys.argv[2:])
 
-if os.path.exists(PICKLE_PATH):
-	xml = pickle.load(open(PICKLE_PATH,'rb'))
 
-else:
+    if category == "age":
+        CATEGORY = Category.age
+        query_string = '%s birthday'
+    elif category == "weight":
+        CATEGORY = Category.weight
+        query_string = '%s weight'
+    elif category == "height":
+        CATEGORY = Category.height
+        query_string = '%s height'
+
+
+    single_query(OBJECT,CATEGORY)
+
+
+
+def single_query(OBJECT,CATEGORY):
+
+    QUERY = query_string % OBJECT
+
+    BUILT_QUERY = QUERYSTRING % (QUERY.replace(' ','%20'),APP_ID)
+
+    if os.path.exists(PICKLE_PATH):
+        xml = pickle.load(open(PICKLE_PATH,'rb'))
+
+    else:
+        xml = urllib2.urlopen(BUILT_QUERY).read()
+        pickle.dump(xml,open(PICKLE_PATH,'wb'))
+
     xml = urllib2.urlopen(BUILT_QUERY).read()
-    pickle.dump(xml,open(PICKLE_PATH,'wb'))
 
 
-root = ElementTree.fromstring(xml)
+    print xml
 
-# print ElementTree.tostring(root)
+    root = ElementTree.fromstring(xml)
 
-# for child in root:
-#     print child.tag, child.attrib
+    # print ElementTree.tostring(root)
+
+    for child in root:
+        print child.tag, child.attrib
 
 
-UNIT = ''
-QUANTITY = -1
 
-results = root.findall("./pod[@title='Result'][@scanner='Age']")
 
-if len(results) > 0:
-    value = results[0].find('subpod').find('plaintext').text
+    UNIT = ''
+    QUANTITY = -1
+
 
     if CATEGORY == Category.age:
-        m = __age_re.match(value)
 
-        if m:
-            QUANTITY = int(m.group(1))
-            UNIT = 'years'
+
+        results = root.findall("./pod[@title='Result'][@scanner='Age']")
+
+        if len(results) > 0:
+            value = results[0].find('subpod').find('plaintext').text
+
+            m = __age_re.match(value)
+
+            if m:
+                QUANTITY = int(m.group(1))
+                UNIT = 'years'
+            else:
+                raise NameError('No match for age query')
+
+
         else:
-            raise NameError('No match for age query')
-
-else:
-    raise NameError('No results found for query: %s' % QUERY)
+            raise NameError('No results found for query: %s' % QUERY)
 
 
-############## PARSE API ##############
+    elif CATEGORY == Category.height:
 
-from parse_rest.connection import register
-from parse_rest.datatypes import Object
 
-register(APP_ID_KEY, REST_API_KEY)
+        subpods = root.find("./pod[@title='Unit conversions']")
 
-class GameItem(Object):
-    pass
+        result_found = False
 
-kv = GameItem(category=CATEGORY, name=OBJECT, quantity=QUANTITY, unit=UNIT)
+        if subpods:
 
-kv.save()
+            for subpod in subpods:
+
+                value = subpod.find('plaintext').text
+
+                if "meters" in value:
+
+                    m = __height_re.match(value)
+
+                    if m:
+                        QUANTITY = m.group(1)
+
+                        QUANTITY = float(QUANTITY.replace(u"×10^","E+"))
+
+                        UNIT = m.group(2)
+                        result_found = True
+                        break
+                    else:
+                        raise NameError('No match for height query')
+
+
+        else:
+            raise NameError('No results found for query: %s' % QUERY)
+
+        if not result_found:
+            raise NameError('No match for height query')
+
+
+    elif CATEGORY == Category.weight:
+
+
+        subpods = root.find("./pod[@title='Unit conversions']")
+
+        result_found = False
+
+        if subpods:
+
+            for subpod in subpods:
+
+                value = subpod.find('plaintext').text
+
+                if "(pounds)" in value:
+
+                    m = __weight_re.match(value)
+
+                    if m:
+                        QUANTITY = m.group(1)
+
+                        QUANTITY = float(QUANTITY.replace(u"×10^","E+"))
+
+                        UNIT = m.group(2)
+                        result_found = True
+                        break
+                    else:
+                        raise NameError('No match for weight query')
+
+
+        else:
+            raise NameError('No results found for query: %s' % QUERY)
+
+        if not result_found:
+            raise NameError('No match for height query')
+
+    ############## PARSE API ##############
+
+
+    kv = GameItem(category=CATEGORY, name=OBJECT, quantity=QUANTITY, unit=UNIT)
+
+    kv.save()
+
+
+if __name__ == "__main__":
+    main()
