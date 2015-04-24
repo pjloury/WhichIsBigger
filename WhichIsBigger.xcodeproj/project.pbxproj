@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		054EF0831AD4EA270004E0BC /* WIBGameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 054EF0801AD4EA270004E0BC /* WIBGameItem.m */; };
 		054EF0841AD4EA270004E0BC /* WIBImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054EF0821AD4EA270004E0BC /* WIBImageView.m */; };
+		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
 		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
 		7D0CC6F11AD4E7D400BB65BB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F01AD4E7D400BB65BB /* ViewController.m */; };
@@ -50,6 +51,8 @@
 		054EF0801AD4EA270004E0BC /* WIBGameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBGameItem.m; sourceTree = "<group>"; };
 		054EF0811AD4EA270004E0BC /* WIBImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBImageView.h; sourceTree = "<group>"; };
 		054EF0821AD4EA270004E0BC /* WIBImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBImageView.m; sourceTree = "<group>"; };
+		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; };
+		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; };
 		7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhichIsBigger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0CC6E91AD4E7D400BB65BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D0CC6EA1AD4E7D400BB65BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */,
 				7D0CC6F71AD4E7D400BB65BB /* LaunchScreen.xib */,
 				7D0CC6F21AD4E7D400BB65BB /* Main.storyboard */,
+				7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */,
+				7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */,
 				7D0CC73A1AD4F2EE00BB65BB /* Managers */,
 				7D0CC6E81AD4E7D400BB65BB /* Supporting Files */,
 				7D0CC6EF1AD4E7D400BB65BB /* ViewController.h */,
@@ -325,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */,
 				7D0CC6F11AD4E7D400BB65BB /* ViewController.m in Sources */,
 				054EF0841AD4EA270004E0BC /* WIBImageView.m in Sources */,

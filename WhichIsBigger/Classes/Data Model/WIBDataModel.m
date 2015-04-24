@@ -35,22 +35,31 @@
         categoryArray = [NSMutableArray array];
         [self.gameItemsDictionary setObject:categoryArray forKey:@(gameItem.categoryType)];
     }
-    [categoryArray addObject:gameItem];
-
-    
+    [categoryArray addObject:gameItem];  
 }
 
 - (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
 {
-    // TODO: Remove RETURNS FIRST OBJECT ALWAYS
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     
-    //THere might be no dictionary
+    int r = arc4random() % [gameItemsWithSameCategory count];
+    WIBGameItem* gameItem = gameItemsWithSameCategory[r];
     
-    WIBGameItem* gameItem = [gameItemsWithSameCategory firstObject];
-    // Avoid repeats of the same item
-    // [gameItemsWithSameCategory removeObject:gameItem];
     return gameItem;
+    
+     //TODO: Implement repeat prevention
+//    if (!gameItem.usedAlready)
+//    {
+//        gameItem.usedAlready = YES;
+//        return gameItem;
+//    }
+//    else //TODO: Potential for Infinite Loop!
+//    {
+//        [self gameItemForCategoryType:categoryType];
+//    }
+    
+    //return nil;
+    // TODO: Add the Item back in at the end of the game
 }
 
 @end
