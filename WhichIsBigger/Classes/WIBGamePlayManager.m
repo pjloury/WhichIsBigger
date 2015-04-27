@@ -17,6 +17,7 @@
 
 @end
 
+
 @implementation WIBGamePlayManager
 
 double difficulty = 10; // 0 to 100
@@ -28,8 +29,19 @@ double difficulty = 10; // 0 to 100
     
     dispatch_once(&pred, ^{
         shared = [[WIBGamePlayManager alloc] init];
+
     });
     return shared;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.gameQuestions = [[NSMutableArray alloc] init];
+    }
+    return self;
 }
 
 - (void)generateQuestions
@@ -39,10 +51,10 @@ double difficulty = 10; // 0 to 100
         // Pick a random category
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
         
-//        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
-//        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
-        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
+//        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
+//        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
         
         WIBGameQuestion *gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
         
@@ -77,7 +89,8 @@ double difficulty = 10; // 0 to 100
 - (WIBGameQuestion *)nextGameQuestion
 {
     WIBGameQuestion *question = [self.gameQuestions firstObject];
-    [self.gameQuestions removeObject:0];
+    [self.gameQuestions removeObjectAtIndex:0];
+    NSLog(@"Only %lu more questions left!", (unsigned long)self.gameQuestions.count);
     return question;
 }
 

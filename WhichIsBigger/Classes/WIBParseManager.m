@@ -8,6 +8,9 @@
 
 #import "WIBParseManager.h"
 #import "WIBDataModel.h"
+#import <Parse/Parse.h>
+
+const NSUInteger kQueryCategoryLimit = 10;
 
 @implementation WIBParseManager
 
@@ -24,15 +27,37 @@
     return shared;
 }
 
+- (void)generateDataModel
+{
+    for (NSUInteger i = WIBCategoryTypeHeight; i <= WIBCategoryTypeAge; i++)
+        [self fetchGameItemForCategoryType:i];
+}
+
 - (void)fetchGameItemForCategoryType:(WIBCategoryType)type
 {
-    //Ask for 10 items of this type
-    WIBGameItem *gameItem = [[WIBGameItem alloc] init];
-    gameItem.name = @"Empire";
-    gameItem.photoURL =@"http://nba.com";
-    gameItem.quantity = @(42);
-    gameItem.categoryType = WIBCategoryTypeHeight;
-    [[WIBDataModel sharedInstance] insertGameItem: gameItem];
+    PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
+    [query whereKey:@"category" equalTo:[WIBGameItem categoryValueForCategoryType:type]];
+    query.limit = kQueryCategoryLimit;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %lu GameItems.", (unsigned long)objects.count);
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                //NSLog(@"%@", object.objectId);
+                WIBGameItem *gameItem = [[WIBGameItem alloc] init];
+                gameItem.name = object[@"name"];
+                gameItem.photoURL = object[@"photoURL"];
+                gameItem.quantity = object[@"quantity"];
+                gameItem.categoryString = object[@"category"];
+                gameItem.categoryType = type;
+                [[WIBDataModel sharedInstance] insertGameItem: gameItem];
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 - (void)insertGameItems

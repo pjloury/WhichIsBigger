@@ -13,4 +13,5 @@
 
 + (WIBParseManager *)sharedInstance;
 - (void)fetchGameItemForCategoryType:(WIBCategoryType)type;
+- (void)generateDataModel;
 @end

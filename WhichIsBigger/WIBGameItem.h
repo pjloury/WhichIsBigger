@@ -12,7 +12,6 @@ typedef enum : NSUInteger {
     WIBCategoryTypeHeight,
     WIBCategoryTypeWeight,
     WIBCategoryTypeAge,
-    WIBCategoryTypePrice,
     WIBCategoryTypeCount
 } WIBCategoryType;
 
@@ -23,7 +22,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *unit;
 @property (nonatomic, strong) NSNumber *quantity;
 @property (nonatomic, assign) WIBCategoryType categoryType;
+@property (nonatomic, assign) NSString *categoryString;
+@property (nonatomic, assign) BOOL usedAlready;
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
 + (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
++ (NSString *)categoryValueForCategoryType:(WIBCategoryType)type;
 @end

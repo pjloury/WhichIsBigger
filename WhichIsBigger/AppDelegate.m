@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "WIBParseManager.h"
 #import "WIBGameItem.h"
+#import "WIBGamePlayManager.h"
 
 @interface AppDelegate ()
 
@@ -24,8 +25,8 @@
     [Parse enableLocalDatastore];
     
     // Initialize Parse.
-    [Parse setApplicationId:@"SHMNEishecvKz8xUv8QaSVDmb77BZZAC6nxtcS72"
-                  clientKey:@"bdcgPqsfGdkxCO8tvE30eDepv3mdhJbnQlJPfOfJ"];
+    [Parse setApplicationId:@"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd"
+                  clientKey:@"ckRmomV114XuUhuKU6WzpeY3zQg4h2McXCQSdEP9"];
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -37,7 +38,7 @@
 
 - (void)launchTasks
 {
-    [[WIBParseManager sharedInstance] fetchGameItemForCategoryType:WIBCategoryTypeHeight];
+    [[WIBParseManager sharedInstance] generateDataModel];    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

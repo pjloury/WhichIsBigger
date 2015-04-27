@@ -28,6 +28,8 @@
     [self setupImageView];
     [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
     // Do any additional setup after loading the view, typically from a nib.
+    [[WIBGamePlayManager sharedInstance] generateQuestions];
+    
     [self loadQuestion];
 }
 
@@ -44,9 +46,9 @@
     self.label2.text = question.option2.name;
 }
 
-- (void)next
-{
-    
+- (IBAction)next:(id)sender {
+    [self loadQuestion];
+
 }
 
 - (void)setupImageView
