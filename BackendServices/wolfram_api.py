@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-15 -*-
 
 from xml.etree import cElementTree as ElementTree
-import urllib2
+import urllib2,urllib
 import os
 import pickle
 import re
@@ -25,6 +25,12 @@ __birthday_re = re.compile("""(\d+/\d+/\d+)""")
 __height_re = re.compile("""(.*)\s+(meters)""")
 __weight_re = re.compile("""(.*)\s+(lb)""")
 
+__list_re = re.compile("""\d+\s+\|\s+([^\|]*)\s+\|""")
+
+
+QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
+
+
 ############## WOLFRAM API ##############
 
 register(APP_ID_KEY, REST_API_KEY)
@@ -41,15 +47,19 @@ class Enum(set):
 Category = Enum(["age", "weight", "height"])
 
 query_string = ""
+multiple_query_string = ""
 
 
 def main():
 
     global query_string
+    global multiple_query_string
 
     category = sys.argv[1]
 
-    OBJECT = " ".join(sys.argv[2:])
+    MODE = sys.argv[2]
+
+    OBJECT = " ".join(sys.argv[3:])
 
 
     if category == "age":
@@ -61,8 +71,46 @@ def main():
     elif category == "height":
         CATEGORY = Category.height
         query_string = '%s height'
+        multiple_query_string = 'tallest %s'
 
-    single_query(OBJECT,CATEGORY)
+    if MODE == "multiple":
+
+
+        objects = collection_query(OBJECT)
+
+        for obj in objects:
+            single_query(obj,CATEGORY)
+
+    else:
+        single_query(OBJECT,CATEGORY)
+
+
+def collection_query(TOPIC):
+
+
+    QUERY = multiple_query_string % TOPIC
+
+    BUILT_QUERY = QUERYSTRING % (QUERY.replace(' ','%20'),APP_ID)
+
+    xml = urllib2.urlopen(BUILT_QUERY).read()
+
+    print xml
+
+    root = ElementTree.fromstring(xml)
+
+    text = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+
+    results = []
+
+    for line in text.split('\n'):
+
+        m = __list_re.match(line)
+
+        if m:
+            results.append(m.group(1))
+
+    return results
+
 
 
 def get_topic(root):
@@ -76,11 +124,17 @@ def get_topic(root):
     else:
         raise NameError('Error parsing topic')
 
-def single_query(OBJECT,CATEGORY):
+def single_query(object,CATEGORY):
 
-    QUERY = query_string % OBJECT
+    #ensure all non-ascii characters are converted to html entities
+    #OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
 
-    BUILT_QUERY = QUERYSTRING % (QUERY.replace(' ','%20'),APP_ID)
+
+    object = object.encode('utf-8')
+
+    QUERY = urllib.quote(query_string % object)
+
+    BUILT_QUERY = QUERYSTRING % (QUERY,APP_ID)
 
     # if os.path.exists(PICKLE_PATH):
     #     xml = pickle.load(open(PICKLE_PATH,'rb'))
@@ -153,7 +207,7 @@ def single_query(OBJECT,CATEGORY):
                         QUANTITY = m.group(1)
 
                         #convert scientifc notation to number
-                        QUANTITY = float(QUANTITY.replace(u"×10^","E+"))
+                        QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
 
                         UNIT = m.group(2)
                         result_found = True
@@ -190,7 +244,7 @@ def single_query(OBJECT,CATEGORY):
                         QUANTITY = m.group(1)
 
                         #convert scientifc notation to number
-                        QUANTITY = float(QUANTITY.replace(u"×10^","E+"))
+                        QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
 
                         UNIT = m.group(2)
                         result_found = True
