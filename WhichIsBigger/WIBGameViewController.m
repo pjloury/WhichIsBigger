@@ -43,10 +43,8 @@
 {
     WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
     
-    
-    
-    self.label1.text = question.option1.name;
-    self.label2.text = question.option2.name;
+    self.gameView1 = [WIBGameView initWithGameOption:question.option1];
+    self.gameView1 = [WIBGameView initWithGameOption:question.option1];
 }
 
 - (IBAction)next:(id)sender {
@@ -54,16 +52,6 @@
 
 }
 
-- (void)setupImageView
-{
-    self.imageView = [WIBImageView new];
-    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:self.imageView];
-    [self.view addConstraints:@[
-                                    [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0],
-                                    [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0],
-                                    [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-                                    ]];
-}
+
 
 @end

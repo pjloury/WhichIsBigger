@@ -20,7 +20,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *photoURL;
 @property (nonatomic, copy) NSString *unit;
-@property (nonatomic, strong) NSNumber *quantity;
+@property (nonatomic, strong) NSNumber *baseQuantity;
 @property (nonatomic, assign) WIBCategoryType categoryType;
 @property (nonatomic, assign) NSString *categoryString;
 @property (nonatomic, assign) BOOL usedAlready;

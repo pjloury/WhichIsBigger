@@ -9,6 +9,7 @@
 #import "WIBGamePlayManager.h"
 #import "WIBDataModel.h"
 #import "WIBGameItem.h"
+#import "WIBGameOption.h"
 
 #import "WIBConstants.h"
 
@@ -64,7 +65,7 @@ double difficulty = 10; // 0 to 100
         WIBGameItem *smallerItem = [WIBGameItem minOfItem:item1 item2:item2];
         
         // it actually takes 230.3 Kanyes...
-        double answerQuantity = largerItem.quantity.doubleValue / largerItem.quantity.doubleValue;
+        double answerQuantity = largerItem.baseQuantity.doubleValue / largerItem.baseQuantity.doubleValue;
         
         // random # between 0 and N-1
         NSUInteger r = arc4random_uniform(2) * 2 -1;
@@ -74,13 +75,13 @@ double difficulty = 10; // 0 to 100
 
         if(smallerItem == item1)
         {
-            gameQuestion.multiplier1 = ceil(calculatedMultiplier);
-            gameQuestion.multiplier2 = 1;
+            gameQuestion.option1.multiplier = ceil(calculatedMultiplier);
+            gameQuestion.option2.multiplier = 1;
         }
         else
         {
-            gameQuestion.multiplier2 = ceil(calculatedMultiplier);
-            gameQuestion.multiplier1 = 1;
+            gameQuestion.option1.multiplier = ceil(calculatedMultiplier);
+            gameQuestion.option2.multiplier = 1;
         }
         
         [self.gameQuestions addObject:gameQuestion];

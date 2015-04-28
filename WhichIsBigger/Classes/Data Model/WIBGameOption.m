@@ -10,4 +10,15 @@
 
 @implementation WIBGameOption
 
+- (id)init
+{
+    self = [super init];
+    return self;
+}
+
+- (NSNumber *)total
+{
+    return [NSNumber numberWithDouble: self.multiplier * self.item.baseQuantity.doubleValue];
+}
+
 @end

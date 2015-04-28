@@ -37,6 +37,7 @@
 		7D70EE641AEF3CE8002E1565 /* WIBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE631AEF3CE8002E1565 /* WIBConstants.m */; };
 		7D70EE671AEF4A9C002E1565 /* WIBGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE661AEF4A9C002E1565 /* WIBGameView.m */; };
 		7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */; };
+		7D70EE6E1AEF5EB8002E1565 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE6D1AEF5EB8002E1565 /* AsyncImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		7D70EE661AEF4A9C002E1565 /* WIBGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameView.m; path = Classes/Views/WIBGameView.m; sourceTree = "<group>"; };
 		7D70EE691AEF507D002E1565 /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "WhichIsBigger/Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
 		7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "WhichIsBigger/Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
+		7D70EE6C1AEF5EB8002E1565 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		7D70EE6D1AEF5EB8002E1565 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,8 @@
 		7D70EE681AEF4D73002E1565 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7D70EE6C1AEF5EB8002E1565 /* AsyncImageView.h */,
+				7D70EE6D1AEF5EB8002E1565 /* AsyncImageView.m */,
 				7D70EE651AEF4A9B002E1565 /* WIBGameView.h */,
 				7D70EE661AEF4A9C002E1565 /* WIBGameView.m */,
 				054EF0811AD4EA270004E0BC /* WIBImageView.h */,
@@ -366,6 +371,7 @@
 				7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */,
 				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
 				054EF0831AD4EA270004E0BC /* WIBGameItem.m in Sources */,
+				7D70EE6E1AEF5EB8002E1565 /* AsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WIBGameItem.h"
 
 @interface WIBGameOption : NSObject
+
+@property (nonatomic, strong) WIBGameItem *item;
+@property (nonatomic) double multiplier;
+@property (nonatomic, readonly) NSNumber *total;
 
 @end

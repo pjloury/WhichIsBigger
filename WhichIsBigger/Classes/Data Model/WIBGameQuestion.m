@@ -8,6 +8,7 @@
 
 #import "WIBGameQuestion.h"
 #import "WIBGameItem.h"
+#import "WIBGameOption.h"
 
 @interface WIBGameQuestion ()
 
@@ -20,23 +21,19 @@
     self = [super init];
     if (self)
     {
-        _option1 = item1;
-        _option2 = item2;
+        
+        
+        _option1 = [[WIBGameOption alloc] init];
+        _option2 = [[WIBGameOption alloc] init];
         NSAssert(item1.categoryType == item2.categoryType, @"GameItems are not the same type");
     }
     
     return self;
 }
 
-- (double)multiplier
-{
-    //TODO: Return an intelligent Multiplier
-    return self.option1.quantity.doubleValue/self.option2.quantity.doubleValue;
-}
-
 - (NSString *)questionText
 {
-    switch (self.option1.categoryType)
+    switch (self.option1.item.categoryType)
     {
         case(WIBCategoryTypeHeight):
             return @"Which is Taller?";
@@ -50,20 +47,10 @@
     return nil;
 }
 
-- (NSNumber *)total1
+- (WIBGameOption *)answer
 {
-    return [NSNumber numberWithDouble: self.multiplier1 * self.option1.quantity.doubleValue];
-}
-
-- (NSNumber *)total2
-{
-    return [NSNumber numberWithDouble: self.multiplier2 * self.option2.quantity.doubleValue];
-}
-
-- (WIBGameItem *)answer
-{
-    NSAssert(self.total1!=self.total2,@"Totals cannot be equal!");
-    if (self.total1 > self.total2)
+    NSAssert(self.option1.total!=self.option2.total,@"Totals cannot be equal!");
+    if (self.option1.total > self.option2.total)
         return self.option1;
     else
     {

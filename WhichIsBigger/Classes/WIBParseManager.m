@@ -49,7 +49,7 @@ const NSUInteger kQueryCategoryLimit = 10;
                 WIBGameItem *gameItem = [[WIBGameItem alloc] init];
                 gameItem.name = object[@"name"];
                 gameItem.photoURL = object[@"photoURL"];
-                gameItem.quantity = object[@"quantity"];
+                gameItem.baseQuantity = object[@"quantity"];
                 gameItem.categoryString = object[@"category"];
                 gameItem.categoryType = type;
                 [[WIBDataModel sharedInstance] insertGameItem: gameItem];
