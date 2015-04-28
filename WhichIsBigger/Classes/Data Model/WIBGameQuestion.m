@@ -44,8 +44,6 @@
             return @"Which is Heavier?";
         case(WIBCategoryTypeAge):
             return @"Which is Older?";
-        case(WIBCategoryTypePrice):
-            return @"Which is Worth More?";
         default:
             break;
     }
