@@ -10,6 +10,8 @@
 #import "WIBDataModel.h"
 #import "WIBGameItem.h"
 
+#import "WIBConstants.h"
+
 @interface WIBGamePlayManager()
 
 @property (nonatomic, strong) NSMutableArray *gameQuestions;
@@ -46,15 +48,15 @@ double difficulty = 10; // 0 to 100
 
 - (void)generateQuestions
 {
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < kNumberOfQuestions; i++)
     {
         // Pick a random category
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
         
-        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
-//        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
-//        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
+//        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
+//        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
         
         WIBGameQuestion *gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
         

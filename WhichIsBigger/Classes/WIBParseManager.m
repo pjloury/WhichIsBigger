@@ -29,7 +29,8 @@ const NSUInteger kQueryCategoryLimit = 10;
 
 - (void)generateDataModel
 {
-    for (NSUInteger i = WIBCategoryTypeHeight; i <= WIBCategoryTypeAge; i++)
+    // TODO: Expand
+    for (NSUInteger i = WIBCategoryTypeHeight; i <= WIBCategoryTypeHeight; i++)
         [self fetchGameItemForCategoryType:i];
 }
 
