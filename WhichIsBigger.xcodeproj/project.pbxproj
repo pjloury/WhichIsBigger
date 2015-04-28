@@ -95,8 +95,8 @@
 		7D70EE631AEF3CE8002E1565 /* WIBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBConstants.m; path = WhichIsBigger/WIBConstants.m; sourceTree = "<group>"; };
 		7D70EE651AEF4A9B002E1565 /* WIBGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameView.h; path = Classes/Views/WIBGameView.h; sourceTree = "<group>"; };
 		7D70EE661AEF4A9C002E1565 /* WIBGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameView.m; path = Classes/Views/WIBGameView.m; sourceTree = "<group>"; };
-		7D70EE691AEF507D002E1565 /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "WhichIsBigger/Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
-		7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "WhichIsBigger/Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
+		7D70EE691AEF507D002E1565 /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
+		7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
 		7D70EE6C1AEF5EB8002E1565 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		7D70EE6D1AEF5EB8002E1565 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,8 +135,6 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
-				7D70EE691AEF507D002E1565 /* WIBGameOption.h */,
-				7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */,
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
 				7D70EE631AEF3CE8002E1565 /* WIBConstants.m */,
 				7D0CC7301AD4EAC400BB65BB /* Frameworks */,
@@ -235,6 +233,8 @@
 		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				7D70EE691AEF507D002E1565 /* WIBGameOption.h */,
+				7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */,
 				7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */,
 				7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */,
 				054EF07F1AD4EA270004E0BC /* WIBGameItem.h */,
@@ -358,20 +358,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
-				7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */,
 				7D0CC6F11AD4E7D400BB65BB /* WIBGameViewController.m in Sources */,
+				7D0CC7331AD4F2B500BB65BB /* WIBParseManager.m in Sources */,
+				7D0CC7361AD4F2D100BB65BB /* WIBGamePlayManager.m in Sources */,
 				7D70EE671AEF4A9C002E1565 /* WIBGameView.m in Sources */,
 				054EF0841AD4EA270004E0BC /* WIBImageView.m in Sources */,
-				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
-				7D0CC7361AD4F2D100BB65BB /* WIBGamePlayManager.m in Sources */,
-				7D70EE641AEF3CE8002E1565 /* WIBConstants.m in Sources */,
+				7D70EE6E1AEF5EB8002E1565 /* AsyncImageView.m in Sources */,
 				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
 				7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */,
 				7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */,
-				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
 				054EF0831AD4EA270004E0BC /* WIBGameItem.m in Sources */,
-				7D70EE6E1AEF5EB8002E1565 /* AsyncImageView.m in Sources */,
+				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
+				7D70EE641AEF3CE8002E1565 /* WIBConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WIBHomeWIBGameViewController : UIWIBGameViewController
+@interface WIBHomeViewController : UIViewController
 
 @end

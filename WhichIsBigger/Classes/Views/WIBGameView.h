@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "WIBImageView.h"
+@class WIBGameOption;
 
 @interface WIBGameView : UIView
 
+- (id)initWithGameOption:(WIBGameOption *)option;
+- (void)setupUI;
 @end

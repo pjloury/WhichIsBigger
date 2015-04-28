@@ -15,17 +15,14 @@
 #import <Parse/Parse.h>
 
 @interface WIBGameViewController ()
-@property (weak, nonatomic) IBOutlet WIBGameView *gameView1;
-@property (weak, nonatomic) IBOutlet WIBGameView *gameView2;
-
-
+@property (strong, nonatomic) IBOutlet WIBGameView *gameView1;
+@property (strong, nonatomic) IBOutlet WIBGameView *gameView2;
 @end
 
 @implementation WIBGameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupImageView];
     [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
     // Do any additional setup after loading the view, typically from a nib.
     [[WIBGamePlayManager sharedInstance] generateQuestions];
@@ -42,14 +39,23 @@
 - (void)loadQuestion
 {
     WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
-    
-    self.gameView1 = [WIBGameView initWithGameOption:question.option1];
-    self.gameView1 = [WIBGameView initWithGameOption:question.option1];
+    self.gameView1 = [[WIBGameView alloc ] initWithGameOption:question.option1];
+    self.gameView1 = [[WIBGameView alloc  ]initWithGameOption:question.option1];
+}
+
+- (void)viewDidLayoutSubviews
+{
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.gameView1 setupUI];
+    [self.gameView2 setupUI];
 }
 
 - (IBAction)next:(id)sender {
     [self loadQuestion];
-
 }
 
 

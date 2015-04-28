@@ -49,7 +49,7 @@ double difficulty = 10; // 0 to 100
 
 - (void)generateQuestions
 {
-    for(int i = 0; i < kNumberOfQuestions; i++)
+    for(int i = 0; i < 10; i++)
     {
         // Pick a random category
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);

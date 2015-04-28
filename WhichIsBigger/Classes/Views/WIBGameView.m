@@ -8,12 +8,14 @@
 
 #import "WIBGameView.h"
 #import "WIBGameOption.h"
+#import "AsyncImageView.h"
 
 @interface WIBGameView()
 @property (nonatomic, strong)  WIBGameOption *option;
-@property (nonatomic, weak) IBOutlet UILabel *optionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *itemNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *scaleLabel;
 @property (nonatomic, strong) IBOutlet WIBImageView *imageView;
+@property (nonatomic, strong) IBOutlet AsyncImageView *aiv;
 @end
 
 @implementation WIBGameView
@@ -24,20 +26,27 @@
     if (self)
     {
         _option = option;
-        [self setupUI];
-
     }
     return self;
 }
 
-- (void)setupUI
+- (void)awakeFromNib
 {
-    self.optionLabel.text = self.option.item.name;
-    self.scaleLabel.text = [NSString stringWithFormat:@"%f",self.option.multiplier];
-    
-    
+    //[self setupUI];
 }
 
+- (void)setupUI
+{
+    self.itemNameLabel.text = self.option.item.name;
+    self.scaleLabel.text = [NSString stringWithFormat:@"%f",self.option.multiplier];
+    self.aiv.imageURL = [NSURL URLWithString:self.option.item.photoURL];
+    
+    self.itemNameLabel.backgroundColor = [UIColor greenColor];
+    NSLog(@"%@",self.option.item.name.description);
+    NSLog(@" %f",self.option.multiplier);
+    NSLog(@"%@",self.option.item.photoURL.description);
+    
+}
 
 - (void)setupImageView
 {
