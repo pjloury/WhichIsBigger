@@ -8,6 +8,15 @@
 
 #import "WIBGameView.h"
 
+
+@interface WIBGameView()
+
+@property (nonatomic, weak) IBOutlet UILabel *optionName;
+@property (nonatomic, weak) IBOutlet UILabel *scaleFactor;
+@property (nonatomic, weak) IBOutlet WIBImageView *imageView;
+
+@end
+
 @implementation WIBGameView
 
 @end

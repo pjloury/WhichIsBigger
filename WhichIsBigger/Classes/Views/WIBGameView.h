@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WIBImageView.h"
+
 @interface WIBGameView : UIView
 
 @end

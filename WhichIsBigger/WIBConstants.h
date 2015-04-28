@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+const int kNumberOfQuestions = 10;
+
 @interface WIBConstants : NSObject
+
+
 
 @end

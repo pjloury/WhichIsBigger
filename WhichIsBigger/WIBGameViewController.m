@@ -1,27 +1,27 @@
 //
-//  ViewController.m
+//  WIBGameViewController.m
 //  WhichIsBigger
 //
 //  Created by PJ Loury on 4/7/15.
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "WIBImageView.h"
+#import "WIBGameViewController.h"
+
+#import "WIBGameView.h"
 #import "WIBGameQuestion.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
 #import <Parse/Parse.h>
 
-@interface ViewController ()
+@interface WIBGameViewController ()
+@property (weak, nonatomic) IBOutlet WIBGameView *gameView1;
+@property (weak, nonatomic) IBOutlet WIBGameView *gameView2;
 
-@property (weak, nonatomic) IBOutlet UILabel *label1;
-@property (weak, nonatomic) IBOutlet UILabel *label2;
-@property (nonatomic, strong) WIBImageView *imageView;
 
 @end
 
-@implementation ViewController
+@implementation WIBGameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +42,9 @@
 - (void)loadQuestion
 {
     WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
+    
+    
+    
     self.label1.text = question.option1.name;
     self.label2.text = question.option2.name;
 }
