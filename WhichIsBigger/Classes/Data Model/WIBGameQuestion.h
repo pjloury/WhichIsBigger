@@ -15,6 +15,7 @@
 @property (nonatomic, strong) WIBGameOption *option1;
 @property (nonatomic, strong) WIBGameOption *option2;
 @property (nonatomic, readonly) NSString *questionText;
+@property double answerQuantity;
 
 - (id)initWithGameItem:(WIBGameItem *)item1 gameItem2:(WIBGameItem *)item2;
 - (WIBGameOption *)answer;

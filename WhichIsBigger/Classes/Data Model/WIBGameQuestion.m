@@ -50,7 +50,9 @@
 {
     NSAssert(self.option1.total!=self.option2.total,@"Totals cannot be equal!");
     if (self.option1.total > self.option2.total)
+    {
         return self.option1;
+    }
     else
     {
         return self.option2;

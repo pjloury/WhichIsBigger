@@ -12,5 +12,6 @@
 @class WIBGameOption;
 
 @interface WIBGameView : UIView
+@property BOOL containsCorrectAnswer;
 - (void)setupUI:(WIBGameOption*)option;
 @end

@@ -10,7 +10,7 @@
 #import "WIBDataModel.h"
 #import <Parse/Parse.h>
 
-const NSUInteger kQueryCategoryLimit = 10;
+const NSUInteger kQueryCategoryLimit = 20;
 
 @implementation WIBParseManager
 

@@ -24,13 +24,15 @@
 {
     self.option = option;
     
+    self.backgroundColor = [UIColor clearColor];
+    
     self.itemNameLabel.text = self.option.item.name;
-    self.scaleLabel.text = [NSString stringWithFormat:@"%f",self.option.multiplier];
+    self.scaleLabel.text = [NSString stringWithFormat:@"%d",self.option.multiplier];
     self.aiv.imageURL = [NSURL URLWithString:self.option.item.photoURL];
     
     self.itemNameLabel.backgroundColor = [UIColor greenColor];
     NSLog(@"%@",self.option.item.name.description);
-    NSLog(@" %f",self.option.multiplier);
+    NSLog(@" %d",self.option.multiplier);
     NSLog(@"%@",self.option.item.photoURL.description);
 }
 

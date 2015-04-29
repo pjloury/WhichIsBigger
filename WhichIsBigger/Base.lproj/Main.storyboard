@@ -173,6 +173,9 @@
                                 <state key="normal" title="Pause">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedPausePlay:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PgT-5Q-cGg"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8v-13-RxK" userLabel="GameView 2" customClass="WIBGameView">
                                 <rect key="frame" x="353" y="196" width="140" height="180"/>
@@ -257,11 +260,46 @@
                     <connections>
                         <outlet property="gameView1" destination="77E-ch-Yfg" id="l7f-s9-LEK"/>
                         <outlet property="gameView2" destination="p8v-13-RxK" id="g7Y-P2-pIS"/>
+                        <outlet property="pausePlayButton" destination="yWd-1d-zg8" id="bGL-H9-3Xq"/>
+                        <outlet property="timerLabel" destination="ad0-gc-pJF" id="bID-7f-ZGf"/>
+                        <segue destination="jIF-eA-FXD" kind="show" identifier="gameCompleteSegue" id="Jnb-jB-wbz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749" y="17"/>
+        </scene>
+        <!--Game Complete View Controller-->
+        <scene sceneID="k7r-0K-I2a">
+            <objects>
+                <viewController id="jIF-eA-FXD" customClass="WIBGameCompleteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uY7-lc-UHR"/>
+                        <viewControllerLayoutGuide type="bottom" id="gcN-nJ-ykV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YdS-3B-qjr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Complete!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpp-Jy-MS3">
+                                <rect key="frame" x="269" y="262" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-YJ-iq0">
+                                <rect key="frame" x="238" y="423" width="103" height="30"/>
+                                <state key="normal" title="Play Again!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cde-34-vjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1520" y="17"/>
         </scene>
     </scenes>
 </document>

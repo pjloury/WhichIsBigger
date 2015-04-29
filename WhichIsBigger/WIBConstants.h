@@ -13,8 +13,8 @@
 #define HELVETICA_NEUE_LIGHT    @"HelveticaNeue-Light"
 #define HELVETICA_NEUE_MEDIUM   @"HelveticaNeue-Medium"
 
+#define ARC4RANDOM_MAX      0x100000000
+
 @interface WIBConstants : NSObject
-
-
 
 @end
