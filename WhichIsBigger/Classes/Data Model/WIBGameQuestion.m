@@ -21,10 +21,9 @@
     self = [super init];
     if (self)
     {
-        _option1 = [[WIBGameOption alloc] init];
-        _option1.item = item1;
-        _option2 = [[WIBGameOption alloc] init];
-        _option2.item = item2;
+        _option1 = [[WIBGameOption alloc] initWithItem:item1];
+        _option2 = [[WIBGameOption alloc] initWithItem:item2];
+        
         NSAssert(item1.categoryType == item2.categoryType, @"GameItems are not the same type");
     }
     

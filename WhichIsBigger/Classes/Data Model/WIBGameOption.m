@@ -10,9 +10,12 @@
 
 @implementation WIBGameOption
 
-- (id)init
+- (id)initWithItem:(WIBGameItem *)item
 {
-    self = [super init];
+    if (self = [super init]) {
+        _item = item;
+    }
+    
     return self;
 }
 

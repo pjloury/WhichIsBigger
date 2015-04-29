@@ -70,10 +70,10 @@
     
     animation.duration = .15f;
     animation.fromValue = @(1);
-    animation.toValue = @(1.3f);
+    animation.toValue = @(1.2f);
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
-    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];// functionWithControlPoints:0.4 :0 :0 :1.0];
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
     [self.layer addAnimation:animation forKey:@"scale"];
 }
 
@@ -81,12 +81,10 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     
     animation.duration = .1f;
-    //animation.fromValue = @(1);
     animation.toValue = @(1);
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
     animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
-    //animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.4 :0 :0 :1.0];
     [self.layer addAnimation:animation forKey:@"scale1"];
 }
 

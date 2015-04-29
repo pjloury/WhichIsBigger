@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define HELVETICA_NEUE          @"HelveticaNeue"
+#define HELVETICA_NEUE_BOLD     @"HelveticaNeue-Bold"
+#define HELVETICA_NEUE_LIGHT    @"HelveticaNeue-Light"
+#define HELVETICA_NEUE_MEDIUM   @"HelveticaNeue-Medium"
 
 @interface WIBConstants : NSObject
 

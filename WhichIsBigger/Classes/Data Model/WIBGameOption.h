@@ -11,6 +11,8 @@
 
 @interface WIBGameOption : NSObject
 
+- (id)initWithItem:(WIBGameItem *)item;
+
 @property (nonatomic, strong) WIBGameItem *item;
 @property (nonatomic) double multiplier;
 @property (nonatomic, readonly) NSNumber *total;
