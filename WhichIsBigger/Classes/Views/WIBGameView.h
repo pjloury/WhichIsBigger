@@ -12,7 +12,5 @@
 @class WIBGameOption;
 
 @interface WIBGameView : UIView
-
-- (id)initWithGameOption:(WIBGameOption *)option;
-- (void)setupUI;
+- (void)setupUI:(WIBGameOption*)option;
 @end

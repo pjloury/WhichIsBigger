@@ -14,29 +14,16 @@
 @property (nonatomic, strong)  WIBGameOption *option;
 @property (nonatomic, weak) IBOutlet UILabel *itemNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *scaleLabel;
-@property (nonatomic, strong) IBOutlet WIBImageView *imageView;
-@property (nonatomic, strong) IBOutlet AsyncImageView *aiv;
+@property (nonatomic, weak) IBOutlet WIBImageView *imageView;
+@property (nonatomic, weak) IBOutlet AsyncImageView *aiv;
 @end
 
 @implementation WIBGameView
 
-- (id)initWithGameOption:(WIBGameOption *)option
+- (void)setupUI:(WIBGameOption*)option
 {
-    self = [super init];
-    if (self)
-    {
-        _option = option;
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    //[self setupUI];
-}
-
-- (void)setupUI
-{
+    self.option = option;
+    
     self.itemNameLabel.text = self.option.item.name;
     self.scaleLabel.text = [NSString stringWithFormat:@"%f",self.option.multiplier];
     self.aiv.imageURL = [NSURL URLWithString:self.option.item.photoURL];
@@ -45,7 +32,6 @@
     NSLog(@"%@",self.option.item.name.description);
     NSLog(@" %f",self.option.multiplier);
     NSLog(@"%@",self.option.item.photoURL.description);
-    
 }
 
 - (void)setupImageView
