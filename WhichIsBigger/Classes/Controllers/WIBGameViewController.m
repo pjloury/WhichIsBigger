@@ -9,9 +9,12 @@
 #import "WIBGameViewController.h"
 
 #import "WIBGameView.h"
+#import "WIBQuestionView.h"
 #import "WIBGameQuestion.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
+#import "UIView+AutoLayout.h"
+#import "UIColor+Additions.h"
 #import <Parse/Parse.h>
 
 @interface WIBGameViewController ()
@@ -24,6 +27,7 @@
 - (IBAction)pressedPausePlay:(id)sender;
 @property int currSeconds;
 
+@property (nonatomic, strong) WIBQuestionView *questionView;
 
 @end
 
@@ -41,6 +45,9 @@
     UITapGestureRecognizer *gameView2TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gameView2Tapped:)];
     [self.gameView2 addGestureRecognizer:gameView2TapGestureRecognizer];
     
+    
+    [self configureBackground];
+    [self configureOptionViews];
     
 }
 
@@ -70,15 +77,21 @@
     //[self startTimer];
 }
 
-- (void)viewDidLayoutSubviews
-{
-
+- (void)configureOptionViews {
+    [[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
+    
+    self.questionView = [[WIBQuestionView alloc] initWithGameQuestion:question];
+    
+    [self.view addSubview:self.questionView];
+    [self.questionView ic_pinViewToAllSidesOfSuperViewWithPadding:0];
 }
 
-//Guarantees autolayout done
-- (void)layoutSubviews
-{
-    
+- (void)configureBackground {
+    CAGradientLayer *gradient = [UIColor gradientLayerWithColor:[UIColor sexyRedColor]];
+    gradient.frame = self.view.bounds;
+    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
 - (void)startTimer
