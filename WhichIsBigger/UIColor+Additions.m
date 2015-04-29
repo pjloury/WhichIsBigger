@@ -122,7 +122,7 @@ alpha:1.0]
         UIColor *firstColor = [[UIColor colorArray] objectAtIndex:firstColorIndex];
         UIColor *secondColor = [[UIColor colorArray] objectAtIndex:secondColorIndex];
         
-        gradientLayer.colors = [UIColor cgColorArray];//[NSArray arrayWithObjects:(id)[firstColor CGColor], (id)[secondColor CGColor], nil];
+        gradientLayer.colors = [NSArray arrayWithObjects:(id)[firstColor CGColor], (id)[secondColor CGColor], nil];
     }
     return gradientLayer;
 }

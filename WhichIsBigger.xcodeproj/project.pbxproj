@@ -39,6 +39,7 @@
 		F30117841AF09B9C00F1D854 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30117831AF09B9C00F1D854 /* AsyncImageView.m */; };
 		F30117871AF09BC300F1D854 /* WIBGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30117861AF09BC300F1D854 /* WIBGameView.m */; };
 		F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE631AEF3CE8002E1565 /* WIBConstants.m */; };
+		F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F301178A1AF0A68200F1D854 /* WIBQuestionView.m */; };
 		F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */; };
 		F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659251ADE3BDE00932FC9 /* UIColor+Additions.m */; };
 /* End PBXBuildFile section */
@@ -104,6 +105,8 @@
 		F30117831AF09B9C00F1D854 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		F30117851AF09BC300F1D854 /* WIBGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameView.h; path = Classes/Views/WIBGameView.h; sourceTree = "<group>"; };
 		F30117861AF09BC300F1D854 /* WIBGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameView.m; path = Classes/Views/WIBGameView.m; sourceTree = "<group>"; };
+		F30117891AF0A68200F1D854 /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBQuestionView.h; sourceTree = "<group>"; };
+		F301178A1AF0A68200F1D854 /* WIBQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBQuestionView.m; sourceTree = "<group>"; };
 		F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				F301177B1AF0993D00F1D854 /* WIBImageView.m */,
 				F301177C1AF0993D00F1D854 /* WIBOptionView.h */,
 				F301177D1AF0993D00F1D854 /* WIBOptionView.m */,
+				F30117891AF0A68200F1D854 /* WIBQuestionView.h */,
+				F301178A1AF0A68200F1D854 /* WIBQuestionView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
+				F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				7D0CC6F11AD4E7D400BB65BB /* WIBGameViewController.m in Sources */,

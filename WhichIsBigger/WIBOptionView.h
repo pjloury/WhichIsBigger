@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class WIBGameItem;
+@class WIBGameOption;
 
 @interface WIBOptionView : UIView
 
-- (instancetype)initWithGameItem:(WIBGameItem *)item;
+- (instancetype)initWithGameOption:(WIBGameOption *)option;
 
 @end

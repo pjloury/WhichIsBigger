@@ -9,35 +9,33 @@
 #import "WIBGameViewController.h"
 
 #import "WIBGameView.h"
+#import "WIBQuestionView.h"
 #import "WIBGameQuestion.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
+#import "UIView+AutoLayout.h"
+#import "UIColor+Additions.h"
 #import <Parse/Parse.h>
 
 @interface WIBGameViewController ()
+
 @property (weak, nonatomic) IBOutlet WIBGameView *gameView1;
 @property (weak, nonatomic) IBOutlet WIBGameView *gameView2;
+
+@property (nonatomic, strong) WIBQuestionView *questionView;
+
+
 @end
 
 @implementation WIBGameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
-    // Do any additional setup after loading the view, typically from a nib.
+    
     [[WIBGamePlayManager sharedInstance] generateQuestions];
-    [self loadQuestion];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    [self configureBackground];
+    [self configureOptionViews];
 }
 
 - (void)loadQuestion
@@ -47,19 +45,26 @@
     [self.gameView2 setupUI:question.option2];
 }
 
-- (void)viewDidLayoutSubviews
-{
-
-}
-
-//Guarantees autolayout done
-- (void)layoutSubviews
-{
-    
-}
-
 - (IBAction)next:(id)sender {
     [self loadQuestion];
+}
+
+- (void)configureOptionViews {
+    [[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
+    
+    self.questionView = [[WIBQuestionView alloc] initWithGameQuestion:question];
+    
+    [self.view addSubview:self.questionView];
+    [self.questionView ic_pinViewToAllSidesOfSuperViewWithPadding:0];
+}
+
+- (void)configureBackground {
+    CAGradientLayer *gradient = [UIColor gradientLayerWithColor:[UIColor sexyRedColor]];
+    gradient.frame = self.view.bounds;
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
 }
 
 
