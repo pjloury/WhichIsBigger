@@ -21,12 +21,20 @@ import time
 pattern = '%m/%d/%Y'
 
 __topic_re = re.compile("""(.*)\s+\|""")
+
+__topic_re1 = re.compile("""(.*)\s+\(""")
+
 __birthday_re = re.compile("""(\d+/\d+/\d+)""")
 __height_re = re.compile("""(.*)\s+(meters)""")
 __weight_re = re.compile("""(.*)\s+(lb)""")
 
+__image_re = re.compile("""src=\"//(\S+)\"""")
+
+
 __list_re = re.compile("""\d+\s+\|\s+([^\|]*)\s+\|""")
 
+
+QUERYSTRING_IMAGE = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s&format=plaintext,html"
 
 QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
 
@@ -44,7 +52,7 @@ class Enum(set):
             return name
         raise AttributeError
 
-Category = Enum(["age", "weight", "height"])
+Category = Enum(["age", "weight", "height","none"])
 
 query_string = ""
 multiple_query_string = ""
@@ -61,25 +69,34 @@ def main():
 
     OBJECT = " ".join(sys.argv[3:])
 
+    QUERY_STRINGS = {"age":'%s birthday',"weight":'%s weight',"height":'%s height',"none":'%s'}
+    MULTIPLE_QUERY_STRINGS = {"age":'oldest %s',"weight":'heaviest %s',"height":'tallest %s',"none":'%s'}
 
     if category == "age":
         CATEGORY = Category.age
-        query_string = '%s birthday'
     elif category == "weight":
         CATEGORY = Category.weight
-        query_string = '%s weight'
     elif category == "height":
         CATEGORY = Category.height
-        query_string = '%s height'
-        multiple_query_string = 'tallest %s'
+    elif category == "none":
+        CATEGORY = Category.none
+
+    query_string = QUERY_STRINGS[category]
+    multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
+
 
     if MODE == "multiple":
-
 
         objects = collection_query(OBJECT)
 
         for obj in objects:
             single_query(obj,CATEGORY)
+
+    elif MODE == "aggregate":
+
+        for CATEGORY in ["age","height"]:
+            query_string = QUERY_STRINGS[CATEGORY]
+            single_query(OBJECT,CATEGORY)
 
     else:
         single_query(OBJECT,CATEGORY)
@@ -122,15 +139,67 @@ def get_topic(root):
     if m:
         return m.group(1)
     else:
+
+        m = __topic_re1.match(topic)
+
+        if m:
+            return m.group(1)
+
         raise NameError('Error parsing topic')
+
+
+def image_query(object):
+
+    object = object.encode('utf-8')
+
+    QUERY = urllib.quote(object)
+
+    BUILT_QUERY = QUERYSTRING_IMAGE % (QUERY,APP_ID)
+
+    # if os.path.exists(PICKLE_PATH):
+    #     xml = pickle.load(open(PICKLE_PATH,'rb'))
+    #
+    # else:
+    #     xml = urllib2.urlopen(BUILT_QUERY).read()
+    #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
+
+    xml = urllib2.urlopen(BUILT_QUERY).read()
+
+
+    print xml
+
+    root = ElementTree.fromstring(xml)
+
+
+    image_node = root.find("./pod[@title='Image']")
+
+    if image_node:
+        value = image_node.find('markup').text
+
+        m = __image_re.search(value)
+
+        if m:
+            return m.group(1)
+        else:
+            return None
+
+    else:
+        return None
 
 def single_query(object,CATEGORY):
 
     #ensure all non-ascii characters are converted to html entities
     #OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
 
+    PHOTO = ''
+
 
     object = object.encode('utf-8')
+
+    image_url = image_query(object)
+
+    if image_url:
+        PHOTO = image_url
 
     QUERY = urllib.quote(query_string % object)
 
@@ -161,7 +230,17 @@ def single_query(object,CATEGORY):
     QUANTITY = -1
 
 
-    if CATEGORY == Category.age:
+    if CATEGORY == Category.none:
+
+        value = root.find("./pod[@title='Image']").find('markup').text
+
+        m = __image_re.search(value)
+
+        if m:
+            PHOTO = m.group(1)
+
+
+    elif CATEGORY == Category.age:
 
 
         value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
@@ -199,7 +278,7 @@ def single_query(object,CATEGORY):
 
                 value = subpod.find('plaintext').text
 
-                if "meters" in value:
+                if " meters" in value:
 
                     m = __height_re.match(value)
 
@@ -236,7 +315,7 @@ def single_query(object,CATEGORY):
 
                 value = subpod.find('plaintext').text
 
-                if "pounds" in value:
+                if " pounds" in value:
 
                     m = __weight_re.match(value)
 
@@ -262,7 +341,7 @@ def single_query(object,CATEGORY):
     ############## PARSE API ##############
 
 
-    kv = GameItem(category=CATEGORY, name=TOPIC, quantity=QUANTITY, unit=UNIT)
+    kv = GameItem(category=CATEGORY, name=TOPIC, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
 
     kv.save()
 
