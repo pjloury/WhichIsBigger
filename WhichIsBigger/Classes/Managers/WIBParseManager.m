@@ -10,7 +10,7 @@
 #import "WIBDataModel.h"
 #import <Parse/Parse.h>
 
-const NSUInteger kQueryCategoryLimit = 10;
+const NSUInteger kQueryCategoryLimit = 20;
 
 @implementation WIBParseManager
 
@@ -29,7 +29,8 @@ const NSUInteger kQueryCategoryLimit = 10;
 
 - (void)generateDataModel
 {
-    for (NSUInteger i = WIBCategoryTypeHeight; i <= WIBCategoryTypeAge; i++)
+    // TODO: Expand
+    for (NSUInteger i = WIBCategoryTypeHeight; i <= WIBCategoryTypeHeight; i++)
         [self fetchGameItemForCategoryType:i];
 }
 
@@ -48,7 +49,7 @@ const NSUInteger kQueryCategoryLimit = 10;
                 WIBGameItem *gameItem = [[WIBGameItem alloc] init];
                 gameItem.name = object[@"name"];
                 gameItem.photoURL = object[@"photoURL"];
-                gameItem.quantity = object[@"quantity"];
+                gameItem.baseQuantity = object[@"quantity"];
                 gameItem.categoryString = object[@"category"];
                 gameItem.categoryType = type;
                 [[WIBDataModel sharedInstance] insertGameItem: gameItem];

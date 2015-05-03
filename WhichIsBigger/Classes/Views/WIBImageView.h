@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class WIBGameItem;
+
 @interface WIBImageView : UIButton
+
+- (instancetype)initWithGameItem:(WIBGameItem *)item;
 
 @end

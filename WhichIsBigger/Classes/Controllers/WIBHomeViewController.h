@@ -1,5 +1,5 @@
 //
-//  WIBHomeViewController.h
+//  WIBHomeWIBGameViewController.h
 //  WhichIsBigger
 //
 //  Created by PJ Loury on 4/23/15.

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WIBGameViewController.h
 //  WhichIsBigger
 //
 //  Created by PJ Loury on 4/7/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface WIBGameViewController : UIViewController
 
 
 @end

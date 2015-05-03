@@ -9,17 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class WIBGameItem;
+@class WIBGameOption;
 @interface WIBGameQuestion : NSObject
 
-@property (nonatomic, strong) WIBGameItem *option1;
-@property (nonatomic, strong) WIBGameItem *option2;
-@property (nonatomic) double multiplier1;
-@property (nonatomic) double multiplier2;
-@property (nonatomic, readonly) NSNumber *total1;
-@property (nonatomic, readonly) NSNumber *total2;
+@property (nonatomic, strong) WIBGameOption *option1;
+@property (nonatomic, strong) WIBGameOption *option2;
 @property (nonatomic, readonly) NSString *questionText;
+@property double answerQuantity;
 
 - (id)initWithGameItem:(WIBGameItem *)item1 gameItem2:(WIBGameItem *)item2;
-- (WIBGameItem *)answer;
+- (WIBGameOption *)answer;
 
 @end

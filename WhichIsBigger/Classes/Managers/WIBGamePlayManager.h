@@ -14,5 +14,6 @@
 - (void)generateQuestions;
 + (WIBGamePlayManager *)sharedInstance;
 - (WIBGameQuestion *)nextGameQuestion;
+- (BOOL)questionsRemaining;
 
 @end
