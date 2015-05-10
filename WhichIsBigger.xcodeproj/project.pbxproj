@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3319095B1D690B4993D93C4A /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2005668DEDACBC0BB1D9B915 /* libPods-WhichIsBigger.a */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
 		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2005668DEDACBC0BB1D9B915 /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhichIsBigger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 		7D943FB11AF0C73A0061387B /* WIBGameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameItem.m; path = "Classes/Data Model/WIBGameItem.m"; sourceTree = "<group>"; };
 		7D943FB51AF0C8CA0061387B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameViewController.m; path = Classes/Controllers/WIBGameViewController.m; sourceTree = "<group>"; };
+		9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.debug.xcconfig"; sourceTree = "<group>"; };
 		F301177C1AF0993D00F1D854 /* WIBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBOptionView.h; sourceTree = "<group>"; };
 		F301177D1AF0993D00F1D854 /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBOptionView.m; sourceTree = "<group>"; };
 		F30117851AF09BC300F1D854 /* WIBGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameView.h; path = Classes/Views/WIBGameView.h; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 		F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
 		F37659251ADE3BDE00932FC9 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
+		F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				7D0CC71B1AD4EA7500BB65BB /* AudioToolbox.framework in Frameworks */,
 				7D0CC7191AD4EA5A00BB65BB /* Parse.framework in Frameworks */,
 				7D0CC7181AD4EA5A00BB65BB /* Bolts.framework in Frameworks */,
+				3319095B1D690B4993D93C4A /* libPods-WhichIsBigger.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +153,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A8391618E6BDC98E5C3DF80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */,
+				F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +171,7 @@
 				7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */,
 				7D0CC7011AD4E7D400BB65BB /* WhichIsBiggerTests */,
 				7D0CC6E61AD4E7D400BB65BB /* Products */,
+				7A8391618E6BDC98E5C3DF80 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +244,7 @@
 				7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */,
 				7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */,
 				7D0CC7171AD4EA5A00BB65BB /* Parse.framework */,
+				2005668DEDACBC0BB1D9B915 /* libPods-WhichIsBigger.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -307,9 +323,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D0CC7081AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBigger" */;
 			buildPhases = (
+				1E30623319D61F83166A1BD1 /* Check Pods Manifest.lock */,
 				7D0CC6E11AD4E7D400BB65BB /* Sources */,
 				7D0CC6E21AD4E7D400BB65BB /* Frameworks */,
 				7D0CC6E31AD4E7D400BB65BB /* Resources */,
+				DB639B97B9B9458757F92049 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -395,6 +413,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E30623319D61F83166A1BD1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DB639B97B9B9458757F92049 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7D0CC6E11AD4E7D400BB65BB /* Sources */ = {
@@ -539,6 +590,7 @@
 		};
 		7D0CC7091AD4E7D400BB65BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -555,6 +607,7 @@
 		};
 		7D0CC70A1AD4E7D400BB65BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
