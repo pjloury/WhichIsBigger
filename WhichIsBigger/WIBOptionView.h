@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WIBQuestionView.h"
 @class WIBGameOption;
+@class WIBImageView;
 
 @interface WIBOptionView : UIView
-
 - (instancetype)initWithGameOption:(WIBGameOption *)option;
+- (void)refreshWithOption:(WIBGameOption *)option;
+@property (nonatomic, weak) id<WIBQuestionViewDelegate> delegate;
 
+@end
+
+@protocol WIBOptionViewDelegate
+
+@required
+- (void)imageViewWasSelected:(WIBImageView *)imageView;
 @end

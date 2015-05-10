@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WIBGameViewController : UIViewController
+@class WIBQuestionView;
+@protocol WIBGamePlayDelegate <NSObject>
 
+@required
+- (void)questionView:(WIBQuestionView *)questionView didTapNextButton:(UIButton *)nextButton;
 
 @end
 
+@interface WIBGameViewController : UIViewController<WIBGamePlayDelegate>
+- (void)questionView:(WIBQuestionView *)questionView didTapNextButton:(UIButton *)nextButton;;
+
+@end

@@ -38,14 +38,37 @@
     [categoryArray addObject:gameItem];  
 }
 
+- (BOOL)unusedItemsAvailableForCategory:(WIBCategoryType)categoryType
+{
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
+    for( WIBGameItem *gameItem in gameItemsWithSameCategory)
+    {
+        if(!gameItem.alreadyUsed)
+            return YES;
+        else
+        {
+            NSLog(@"Already used!");
+        }
+    }
+    return NO;
+}
+
 - (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = gameItemsWithSameCategory[r];
-    
-    return gameItem;
+    if(!gameItem.alreadyUsed)
+    {
+        gameItem.alreadyUsed = YES;
+        return gameItem;
+    }
+    else
+    {
+        NSAssert([self unusedItemsAvailableForCategory:categoryType],@"DUDE YOU RAN OUT OF GAME ITEMS!!");
+        return [self gameItemForCategoryType:categoryType];
+    }
     
      //TODO: Implement repeat prevention
 //    if (!gameItem.usedAlready)

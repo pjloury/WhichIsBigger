@@ -22,7 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // [Optional] Power your app with Local Datastore. For more info, go to
     // https://parse.com/docs/ios_guide#localdatastore/iOS
-    [Parse enableLocalDatastore];
+    
+    // Do not cache PF Objects unless we know that they contain all the required properties
+    //[Parse enableLocalDatastore];
     
     // Initialize Parse.
     [Parse setApplicationId:@"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd"
@@ -31,14 +33,7 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [self launchTasks];
-    
     return YES;
-}
-
-- (void)launchTasks
-{
-    [[WIBParseManager sharedInstance] generateDataModel];    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

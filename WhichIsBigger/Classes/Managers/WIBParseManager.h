@@ -13,5 +13,6 @@
 
 + (WIBParseManager *)sharedInstance;
 - (void)fetchGameItemForCategoryType:(WIBCategoryType)type;
-- (void)generateDataModel;
+- (void)generateDataModelWithCompletion:(void (^)())completion;
+
 @end

@@ -8,44 +8,54 @@
 
 #import "WIBImageView.h"
 #import "WIBGameItem.h"
+#import "AsyncImageView.h"
 
 @interface WIBImageView ()
 
 @property (nonatomic, weak) WIBGameItem *gameItem;
+@property (nonatomic, strong) AsyncImageView *subImageView;
 
 @end
 
 @implementation WIBImageView
 
-- (instancetype)init {
+- (instancetype)initWithGameItem:(WIBGameItem *)item {
     if (self = [super init]) {
+        _gameItem = item;
         [self setup];
     }
     return self;
 }
 
-- (instancetype)initWithGameItem:(WIBGameItem *)item {
-    if (self = [self init]) {
-        _gameItem = item;
-    }
-    return self;
-}
-
 - (void)setup {
-    [self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateNormal];
-    [self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateHighlighted];
+    //[self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateNormal];
+    //[self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateHighlighted];
+    
     [self addTarget:self action:@selector(actionDidPressButton:) forControlEvents:UIControlEventTouchDown];
     [self addTarget:self action:@selector(actionDidReleaseButton:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     self.showsTouchWhenHighlighted = NO;
     
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOpacity = .3;
-    self.layer.shadowRadius = 2;
-    self.layer.shadowOffset = CGSizeZero;
+    self.backgroundColor = [UIColor blueColor];
     
-    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.imageView.layer.borderWidth = 2;
-    self.contentMode = UIViewContentModeScaleAspectFill;
+    self.subImageView = [[AsyncImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
+    self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
+    self.subImageView.userInteractionEnabled = NO;
+    self.subImageView.exclusiveTouch = NO;
+    self.subImageView.center = self.center;
+    self.subImageView.showActivityIndicator = YES;
+    self.subImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [self insertSubview:self.subImageView atIndex:0];
+    //self.subImageView.backgroundColor = [UIColor greenColor];
+    
+//    self.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.layer.shadowOpacity = .3;
+//    self.layer.shadowRadius = 2;
+//    self.layer.shadowOffset = CGSizeZero;
+//    
+//    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+//    self.imageView.layer.borderWidth = 2;
+//    self.contentMode = UIViewContentModeScaleAspectFill;
     [self configureConstraints];
 }
 
@@ -60,6 +70,7 @@
 }
 
 - (void)layoutSubviews {
+    self.subImageView.center = self.center;
     [super layoutSubviews];
     [self roundViewEdges];
 }
@@ -75,6 +86,8 @@
     animation.fillMode = kCAFillModeForwards;
     animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
     [self.layer addAnimation:animation forKey:@"scale"];
+    
+    [self.delegate imageViewWasSelected:self];
 }
 
 - (void)actionDidReleaseButton:(id)sender {

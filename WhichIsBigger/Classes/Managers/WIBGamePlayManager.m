@@ -8,8 +8,11 @@
 
 #import "WIBGamePlayManager.h"
 #import "WIBDataModel.h"
-#import "WIBGameItem.h"
+
+// Models
+#import "WIBGameQuestion.h"
 #import "WIBGameOption.h"
+#import "WIBGameItem.h"
 
 #import "WIBConstants.h"
 
@@ -17,13 +20,13 @@
 
 @property (nonatomic, strong) NSMutableArray *gameQuestions;
 @property (nonatomic) NSInteger difficulty;
+@property NSInteger questionIndex;
 
 @end
 
-
 @implementation WIBGamePlayManager
 
-double difficulty = 1; // 1 to 100
+double difficulty = 80; // 1 to 100
 
 + (WIBGamePlayManager *)sharedInstance
 {
@@ -49,7 +52,7 @@ double difficulty = 1; // 1 to 100
 
 - (void)generateQuestions
 {
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
         // Pick a random category
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
@@ -57,7 +60,7 @@ double difficulty = 1; // 1 to 100
 //        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
 //        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
         WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
-
+        
         WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
         
         WIBGameQuestion *gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
@@ -91,13 +94,12 @@ double difficulty = 1; // 1 to 100
         }
         
         [self.gameQuestions addObject:gameQuestion];
-        
     }
 }
 
-- (BOOL)questionsRemaining
+- (BOOL)questionIndexIsInBounds
 {
-    if(self.gameQuestions.count > 0)
+    if(self.questionIndex <= NUMBER_OF_QUESTIONS-1)
         return YES;
     else
         return NO;
@@ -105,10 +107,35 @@ double difficulty = 1; // 1 to 100
 
 - (WIBGameQuestion *)nextGameQuestion
 {
-    WIBGameQuestion *question = [self.gameQuestions firstObject];
-    [self.gameQuestions removeObjectAtIndex:0];
-    NSLog(@"Only %lu more questions left!", (unsigned long)self.gameQuestions.count);
+    NSLog(@"QUESTION %ld",self.questionIndex+1);
+    WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
+    if(self.questionIndex == NUMBER_OF_QUESTIONS-1) //When you hit 9
+    {
+        [self gameComplete];
+    }
+    self.questionIndex++;
     return question;
+}
+
+// Who should determine that the game is over???
+- (void)gameComplete
+{
+    for (WIBGameQuestion *question in self.gameQuestions)
+    {
+        question.option1.item.alreadyUsed = NO;
+        question.option2.item.alreadyUsed = NO;
+    }
+}
+
+- (NSInteger)numberCorrectAnswers
+{
+    NSInteger correctAnswers = 0;
+    for (WIBGameQuestion *question in self.gameQuestions)
+    {
+        if(question.answeredCorrectly)
+            correctAnswers++;
+    }
+    return correctAnswers;
 }
 
 @end

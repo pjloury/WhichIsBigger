@@ -7,10 +7,14 @@
 //
 
 #import "WIBParseManager.h"
-#import "WIBDataModel.h"
+
 #import <Parse/Parse.h>
 
-const NSUInteger kQueryCategoryLimit = 20;
+// Constants
+#import "WIBConstants.h"
+
+// Data Model
+#import "WIBDataModel.h"
 
 @implementation WIBParseManager
 
@@ -27,18 +31,19 @@ const NSUInteger kQueryCategoryLimit = 20;
     return shared;
 }
 
-- (void)generateDataModel
+- (void)generateDataModelWithCompletion:(void (^)())completion
 {
     // TODO: Expand
     for (NSUInteger i = WIBCategoryTypeHeight; i <= WIBCategoryTypeHeight; i++)
         [self fetchGameItemForCategoryType:i];
+    completion();
 }
 
 - (void)fetchGameItemForCategoryType:(WIBCategoryType)type
 {
     PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
     [query whereKey:@"category" equalTo:[WIBGameItem categoryValueForCategoryType:type]];
-    query.limit = kQueryCategoryLimit;
+    query.limit = QUERY_LIMIT_PER_CATEGORY;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.

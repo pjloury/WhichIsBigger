@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIBOptionView.h"
 
 @class WIBGameItem;
+
 
 @interface WIBImageView : UIButton
 
 - (instancetype)initWithGameItem:(WIBGameItem *)item;
+
+@property (nonatomic, weak) id<WIBOptionViewDelegate> delegate;
 
 @end

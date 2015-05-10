@@ -13,10 +13,13 @@
 #import "WIBConstants.h"
 #import "UIView+AutoLayout.h"
 
-@interface WIBOptionView ()
+@interface WIBOptionView ()<WIBOptionViewDelegate>
 
+// Models
 @property (nonatomic, weak) WIBGameOption *gameOption;
-@property (nonatomic, weak, readonly) WIBGameItem *gameItem;
+//@property (nonatomic, weak, readonly) WIBGameItem *gameItem;
+
+// Views
 @property (nonatomic, strong) WIBImageView *imageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 
@@ -32,24 +35,33 @@
     return self;
 }
 
+- (void)refreshWithOption:(WIBGameOption *)option;
+{
+    self.gameOption = option;
+    [self configureViews];
+}
+
 - (void)configureViews {
     [self configureImageView];
     [self configureLabel];
     [self configureConstraints];
 }
 
+- (void)configureImageView {
+    [self.imageView removeFromSuperview];
+    self.imageView = [[WIBImageView alloc] initWithGameItem:self.gameOption.item];
+    self.imageView.delegate = self;
+    [self addSubview:self.imageView];
+}
+
 - (void)configureLabel {
+    [self.nameLabel removeFromSuperview];
     self.nameLabel = [UILabel new];
-    self.nameLabel.text = [self.gameItem.name capitalizedString];
+    self.nameLabel.text = [NSString stringWithFormat:@"%d %@",self.gameOption.multiplier,self.gameItem.name.capitalizedString];
     self.nameLabel.font = [UIFont fontWithName:HELVETICA_NEUE_LIGHT size:18];
     self.nameLabel.textColor = [UIColor whiteColor];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.nameLabel];
-}
-
-- (void)configureImageView {
-    self.imageView = [[WIBImageView alloc] initWithGameItem:self.gameItem];
-    [self addSubview:self.imageView];
 }
 
 - (void)configureConstraints {
@@ -64,6 +76,12 @@
 
 - (WIBGameItem *)gameItem {
     return self.gameOption.item;
+}
+
+# pragma mark - OptionView Delegate
+- (void)imageViewWasSelected:(WIBImageView *)imageView
+{
+    [self.delegate optionView:self didSelectOption:self.gameOption];
 }
 
 @end

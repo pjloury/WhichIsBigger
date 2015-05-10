@@ -8,26 +8,47 @@
 
 #import "WIBGameViewController.h"
 
+//Deprecated
 #import "WIBGameView.h"
-#import "WIBQuestionView.h"
-#import "WIBGameQuestion.h"
 #import "WIBGameItem.h"
-#import "WIBGamePlayManager.h"
+
+// Views
+#import "WIBQuestionView.h"
 #import "UIView+AutoLayout.h"
 #import "UIColor+Additions.h"
+
+// Models
+#import "WIBGameQuestion.h"
+
+// Controller
+#import "WIBGameCompleteViewController.h"
+
+// Managers
+#import "WIBGamePlayManager.h"
+
+// Frameworks
 #import <Parse/Parse.h>
 
+// Constants
+#import "WIBConstants.h"
+
 @interface WIBGameViewController ()
+
+// Deprecated
 @property (weak, nonatomic) IBOutlet WIBGameView *gameView1;
 @property (weak, nonatomic) IBOutlet WIBGameView *gameView2;
-@property (strong, nonatomic) WIBGameQuestion *question;
-@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) UILabel *timerLabel;
 @property (strong, atomic) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UIButton *pausePlayButton;
 - (IBAction)pressedPausePlay:(id)sender;
 @property int currSeconds;
 
+// Model
+@property (strong, nonatomic) WIBGameQuestion *question;
+
+// View
 @property (nonatomic, strong) WIBQuestionView *questionView;
+
 
 @end
 
@@ -39,16 +60,15 @@
     // Do any additional setup after loading the view, typically from a nib.
     [[WIBGamePlayManager sharedInstance] generateQuestions];
     [self loadQuestion];
+    
     UITapGestureRecognizer *gameView1TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gameView1Tapped:)];
     [self.gameView1 addGestureRecognizer:gameView1TapGestureRecognizer];
     
     UITapGestureRecognizer *gameView2TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gameView2Tapped:)];
     [self.gameView2 addGestureRecognizer:gameView2TapGestureRecognizer];
     
-    
     [self configureBackground];
-    [self configureOptionViews];
-    
+    [self configureQuestionView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,31 +84,43 @@
 
 - (void)loadQuestion
 {
-    if([[WIBGamePlayManager sharedInstance] questionsRemaining])
+    if([[WIBGamePlayManager sharedInstance] questionIndexIsInBounds])
     {
         self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
-        [self.gameView1 setupUI:self.question.option1];
-        [self.gameView2 setupUI:self.question.option2];
+        [self.questionView refreshWithQuestion:self.question];
+        //[self.questionView setNeedsLayout];
+//        [self.gameView1 setupUI:self.question.option1];
+//        [self.gameView2 setupUI:self.question.option2];
+        [self startTimer];
     }
     else
     {
-        [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
+        WIBGameCompleteViewController *vc = [[WIBGameCompleteViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+        //[self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
     }
-    //[self startTimer];
 }
 
-- (void)configureOptionViews {
+- (void)configureQuestionView
+{
     [[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     WIBGameQuestion *question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
     
     self.questionView = [[WIBQuestionView alloc] initWithGameQuestion:question];
+    self.questionView.delegate = self;
     
     [self.view addSubview:self.questionView];
     [self.questionView ic_pinViewToAllSidesOfSuperViewWithPadding:0];
+    
+    self.timerLabel = [UILabel new];
+    self.timerLabel.frame = CGRectMake(50,50,50,50);
+    self.timerLabel.text = @"10";
+    [self.view insertSubview:self.timerLabel aboveSubview:self.questionView];
 }
 
-- (void)configureBackground {
+- (void)configureBackground
+{
     CAGradientLayer *gradient = [UIColor gradientLayerWithColor:[UIColor sexyRedColor]];
     gradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:gradient atIndex:0];
@@ -96,11 +128,11 @@
 
 - (void)startTimer
 {
+    _currSeconds = SECONDS_PER_QUESTION;
+    [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
     if(!self.timer)
     {
-    _currSeconds = 3;
-    [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
-    self.timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+        self.timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     }
 }
 
@@ -115,7 +147,8 @@
     {
         [self.timer invalidate];
         self.timer = nil;
-        [self revealAnswer];
+        //TODO: Used to reveal answer!!
+        [self loadQuestion];
     }
 }
 
@@ -133,7 +166,6 @@
     }
     [self.timer invalidate];
     [self revealAnswer];
-    
 }
 
 - (void)gameView2Tapped:(UITapGestureRecognizer *)recognizer
@@ -187,13 +219,13 @@
     }];
 }
 
-- (IBAction)next:(id)sender {
+- (IBAction)next:(id)sender
+{
     [self loadQuestion];
 }
 
-
-
-- (IBAction)pressedPausePlay:(id)sender {
+- (IBAction)pressedPausePlay:(id)sender
+{
     UIButton *button = (UIButton *)sender;
     
     if ([button.titleLabel.text isEqualToString:@"Pause"])
@@ -210,6 +242,15 @@
         [self startTimer];
         self.pausePlayButton.titleLabel.text = @"Pause";
     }
-    
 }
+
+# pragma mark - WIBGamePlayDelegate
+- (void)questionView:(WIBQuestionView *)questionView didTapNextButton:(UIButton *)nextButton
+{
+    [self loadQuestion];
+}
+
+
+    
+
 @end

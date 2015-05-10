@@ -8,12 +8,21 @@
 
 #import "WIBHomeViewController.h"
 #import "WIBGamePlayManager.h"
+#import "WIBParseManager.h"
+
+@interface WIBHomeViewController()
+@property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
+@end
 
 @implementation WIBHomeViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    self.startNewGameButton.enabled = NO;
+    __weak WIBHomeViewController *weakSelf = self;
+    [[WIBParseManager sharedInstance] generateDataModelWithCompletion:^{
+        weakSelf.startNewGameButton.enabled = YES;
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

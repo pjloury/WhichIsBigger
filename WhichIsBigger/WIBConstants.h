@@ -13,6 +13,10 @@
 #define HELVETICA_NEUE_LIGHT    @"HelveticaNeue-Light"
 #define HELVETICA_NEUE_MEDIUM   @"HelveticaNeue-Medium"
 
+#define SECONDS_PER_QUESTION 5
+#define NUMBER_OF_QUESTIONS 10
+#define QUERY_LIMIT_PER_CATEGORY 100
+
 #define ARC4RANDOM_MAX      0x100000000
 
 @interface WIBConstants : NSObject

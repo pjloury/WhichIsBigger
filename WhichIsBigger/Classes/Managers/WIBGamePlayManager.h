@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WIBGameQuestion.h"
+@class WIBGameQuestion;
 
 @interface WIBGamePlayManager : NSObject
 
 - (void)generateQuestions;
 + (WIBGamePlayManager *)sharedInstance;
 - (WIBGameQuestion *)nextGameQuestion;
-- (BOOL)questionsRemaining;
+- (BOOL)questionIndexIsInBounds;
+- (NSInteger)numberCorrectAnswers;
 
 @end

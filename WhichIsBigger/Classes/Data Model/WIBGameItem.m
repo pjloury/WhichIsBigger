@@ -20,7 +20,7 @@ NSString *kAge = @"age";
     self = [super init];
     if (self)
     {
-        self.usedAlready = NO;
+        self.alreadyUsed = NO;
     }
     return self;
 }

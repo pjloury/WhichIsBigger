@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3319095B1D690B4993D93C4A /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2005668DEDACBC0BB1D9B915 /* libPods-WhichIsBigger.a */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
 		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
@@ -15,17 +14,6 @@
 		7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */; };
 		7D0CC6F91AD4E7D400BB65BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F71AD4E7D400BB65BB /* LaunchScreen.xib */; };
 		7D0CC7051AD4E7D400BB65BB /* WhichIsBiggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */; };
-		7D0CC7181AD4EA5A00BB65BB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */; };
-		7D0CC7191AD4EA5A00BB65BB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7171AD4EA5A00BB65BB /* Parse.framework */; };
-		7D0CC71B1AD4EA7500BB65BB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */; };
-		7D0CC71D1AD4EA7A00BB65BB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC71C1AD4EA7A00BB65BB /* CFNetwork.framework */; };
-		7D0CC71F1AD4EA7F00BB65BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC71E1AD4EA7F00BB65BB /* CoreGraphics.framework */; };
-		7D0CC7211AD4EA8400BB65BB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7201AD4EA8400BB65BB /* CoreLocation.framework */; };
-		7D0CC7231AD4EA8900BB65BB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7221AD4EA8900BB65BB /* MobileCoreServices.framework */; };
-		7D0CC7251AD4EA8E00BB65BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7241AD4EA8E00BB65BB /* QuartzCore.framework */; };
-		7D0CC7271AD4EA9300BB65BB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7261AD4EA9300BB65BB /* Security.framework */; };
-		7D0CC7291AD4EA9700BB65BB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC7281AD4EA9700BB65BB /* StoreKit.framework */; };
-		7D0CC72B1AD4EA9C00BB65BB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */; };
 		7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72C1AD4EAA200BB65BB /* libz.dylib */; };
 		7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */; };
 		7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */; };
@@ -58,7 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2005668DEDACBC0BB1D9B915 /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhichIsBigger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,17 +58,6 @@
 		7D0CC6FE1AD4E7D400BB65BB /* WhichIsBiggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhichIsBiggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0CC7031AD4E7D400BB65BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhichIsBiggerTests.m; sourceTree = "<group>"; };
-		7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		7D0CC7171AD4EA5A00BB65BB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		7D0CC71C1AD4EA7A00BB65BB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		7D0CC71E1AD4EA7F00BB65BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		7D0CC7201AD4EA8400BB65BB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		7D0CC7221AD4EA8900BB65BB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		7D0CC7241AD4EA8E00BB65BB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		7D0CC7261AD4EA9300BB65BB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		7D0CC7281AD4EA9700BB65BB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7D0CC72C1AD4EAA200BB65BB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDataModel.h; path = "Classes/Data Model/WIBDataModel.h"; sourceTree = "<group>"; };
@@ -128,18 +104,6 @@
 			files = (
 				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
 				7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */,
-				7D0CC72B1AD4EA9C00BB65BB /* SystemConfiguration.framework in Frameworks */,
-				7D0CC7291AD4EA9700BB65BB /* StoreKit.framework in Frameworks */,
-				7D0CC7271AD4EA9300BB65BB /* Security.framework in Frameworks */,
-				7D0CC7251AD4EA8E00BB65BB /* QuartzCore.framework in Frameworks */,
-				7D0CC7231AD4EA8900BB65BB /* MobileCoreServices.framework in Frameworks */,
-				7D0CC7211AD4EA8400BB65BB /* CoreLocation.framework in Frameworks */,
-				7D0CC71F1AD4EA7F00BB65BB /* CoreGraphics.framework in Frameworks */,
-				7D0CC71D1AD4EA7A00BB65BB /* CFNetwork.framework in Frameworks */,
-				7D0CC71B1AD4EA7500BB65BB /* AudioToolbox.framework in Frameworks */,
-				7D0CC7191AD4EA5A00BB65BB /* Parse.framework in Frameworks */,
-				7D0CC7181AD4EA5A00BB65BB /* Bolts.framework in Frameworks */,
-				3319095B1D690B4993D93C4A /* libPods-WhichIsBigger.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,18 +197,6 @@
 			children = (
 				7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */,
 				7D0CC72C1AD4EAA200BB65BB /* libz.dylib */,
-				7D0CC72A1AD4EA9C00BB65BB /* SystemConfiguration.framework */,
-				7D0CC7281AD4EA9700BB65BB /* StoreKit.framework */,
-				7D0CC7261AD4EA9300BB65BB /* Security.framework */,
-				7D0CC7241AD4EA8E00BB65BB /* QuartzCore.framework */,
-				7D0CC7221AD4EA8900BB65BB /* MobileCoreServices.framework */,
-				7D0CC7201AD4EA8400BB65BB /* CoreLocation.framework */,
-				7D0CC71E1AD4EA7F00BB65BB /* CoreGraphics.framework */,
-				7D0CC71C1AD4EA7A00BB65BB /* CFNetwork.framework */,
-				7D0CC71A1AD4EA7500BB65BB /* AudioToolbox.framework */,
-				7D0CC7161AD4EA5A00BB65BB /* Bolts.framework */,
-				7D0CC7171AD4EA5A00BB65BB /* Parse.framework */,
-				2005668DEDACBC0BB1D9B915 /* libPods-WhichIsBigger.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -280,10 +232,10 @@
 			children = (
 				7D943FAA1AF0C7160061387B /* AsyncImageView.h */,
 				7D943FAB1AF0C7160061387B /* AsyncImageView.m */,
-				7D943FAC1AF0C7160061387B /* WIBImageView.h */,
-				7D943FAD1AF0C7160061387B /* WIBImageView.m */,
 				F30117851AF09BC300F1D854 /* WIBGameView.h */,
 				F30117861AF09BC300F1D854 /* WIBGameView.m */,
+				7D943FAC1AF0C7160061387B /* WIBImageView.h */,
+				7D943FAD1AF0C7160061387B /* WIBImageView.m */,
 				F301177C1AF0993D00F1D854 /* WIBOptionView.h */,
 				F301177D1AF0993D00F1D854 /* WIBOptionView.m */,
 				F30117891AF0A68200F1D854 /* WIBQuestionView.h */,
@@ -295,10 +247,10 @@
 		F30117811AF099C300F1D854 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */,
 				7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */,
 				7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */,
 				7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */,
+				7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */,
 				7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */,
 				7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */,
 			);
@@ -601,6 +553,43 @@
 				);
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-l\"Parse\"",
+					"-l\"Pods-WhichIsBigger-Bolts\"",
+					"-l\"Pods-WhichIsBigger-Parse\"",
+					"-l\"Pods-WhichIsBigger-ParseUI\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"Social\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -618,6 +607,43 @@
 				);
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-l\"Parse\"",
+					"-l\"Pods-WhichIsBigger-Bolts\"",
+					"-l\"Pods-WhichIsBigger-Parse\"",
+					"-l\"Pods-WhichIsBigger-ParseUI\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"Social\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
