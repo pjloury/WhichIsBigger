@@ -9,6 +9,7 @@
 #import "WIBImageView.h"
 #import "WIBGameItem.h"
 #import "AsyncImageView.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface WIBImageView ()
 
@@ -31,14 +32,27 @@
     //[self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateNormal];
     //[self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateHighlighted];
     
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedLoading:) name:AsyncImageLoadDidFinish object:nil];
+    
     [self addTarget:self action:@selector(actionDidPressButton:) forControlEvents:UIControlEventTouchDown];
     [self addTarget:self action:@selector(actionDidReleaseButton:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     self.showsTouchWhenHighlighted = NO;
     
-    self.backgroundColor = [UIColor blueColor];
+    self.backgroundColor = [UIColor blueColor];   
     
     self.subImageView = [[AsyncImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
-    self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
+    
+    if(![self.gameItem.photoURL containsString:@"http://"])
+    {
+        self.subImageView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@",self.gameItem.photoURL]];
+    }
+    else
+    {
+        self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
+    }
+    
+    self.subImageView.frame = CGRectMake(self.subImageView.frame.origin.x, self.subImageView.frame.origin.x, 100, 100);
+    
     self.subImageView.userInteractionEnabled = NO;
     self.subImageView.exclusiveTouch = NO;
     self.subImageView.center = self.center;
@@ -58,6 +72,11 @@
 //    self.contentMode = UIViewContentModeScaleAspectFill;
     [self configureConstraints];
 }
+
+//- (void)finishedLoading:(NSNotification *)note
+//{
+//    
+//}
 
 - (void)configureConstraints {
     NSLayoutConstraint *aspectRatioConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0];

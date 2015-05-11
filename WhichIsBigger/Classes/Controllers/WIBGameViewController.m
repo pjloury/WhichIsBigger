@@ -16,6 +16,7 @@
 #import "WIBQuestionView.h"
 #import "UIView+AutoLayout.h"
 #import "UIColor+Additions.h"
+#import "UIView+Helpers.h"
 
 // Models
 #import "WIBGameQuestion.h"
@@ -96,6 +97,7 @@
     else
     {
         WIBGameCompleteViewController *vc = [[WIBGameCompleteViewController alloc] init];
+        //[self.navigationController pushViewController:vc animated:YES];
         [self presentViewController:vc animated:YES completion:nil];
         //[self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
     }

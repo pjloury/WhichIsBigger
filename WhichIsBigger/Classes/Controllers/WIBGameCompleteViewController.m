@@ -7,6 +7,7 @@
 //
 
 #import "WIBGameCompleteViewController.h"
+#import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
 
 @implementation WIBGameCompleteViewController
@@ -28,6 +29,8 @@
 - (void)didPressNewGame:(id)sender
 {
     NSLog(@"New game pressed!");
+//    [self.navigationController popViewControllerAnimated:NO];
+    [self presentViewController:[[WIBGameViewController alloc] init] animated:NO completion:nil];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "WIBHomeViewController.h"
+#import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
 #import "WIBParseManager.h"
 
@@ -23,6 +24,11 @@
     [[WIBParseManager sharedInstance] generateDataModelWithCompletion:^{
         weakSelf.startNewGameButton.enabled = YES;
     }];
+}
+- (IBAction)didPressNewGame:(id)sender {
+    //UINavigationController *nvc = [[UINavigationController alloc] init];
+    //[nvc pushViewController:[[WIBGameViewController alloc] init ]animated:YES];
+    [self presentViewController:[[WIBGameViewController alloc] init] animated:NO completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
