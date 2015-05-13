@@ -17,6 +17,6 @@
 @end
 
 @interface WIBGameViewController : UIViewController<WIBGamePlayDelegate>
-- (void)questionView:(WIBQuestionView *)questionView didTapNextButton:(UIButton *)nextButton;;
+
 
 @end
