@@ -162,6 +162,7 @@
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+            [self.nextButton sizeToFit];
         }
         //TODO: Used to reveal answer!!
     }
