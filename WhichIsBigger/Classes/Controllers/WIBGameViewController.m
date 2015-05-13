@@ -105,9 +105,10 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
     
     self.nextButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    self.nextButton.frame = CGRectMake(0,0,100,50);
     [self.nextButton setTitle:@"next" forState:UIControlStateNormal];
     [self.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchDown];
+    [self.nextButton sizeToFit];
+    self.nextButton.center = self.view.center;
     //self.nextButton.hidden = YES;
     [self.view insertSubview:self.nextButton aboveSubview:self.questionView];
     

@@ -77,12 +77,16 @@
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
     [self.optionView1 refreshWithOption:self.question.option1];
     [self.optionView2 refreshWithOption:self.question.option2];
+    self.optionView1.backgroundColor = [UIColor clearColor];
+    self.optionView2.backgroundColor = [UIColor clearColor];
+    
 }
 
 # pragma mark - WIBQuestionViewDelegate
 - (void)optionView:(WIBOptionView *)optionView didSelectOption:(WIBGameOption *)option
 {
-    if(option == self.question.answer)
+    NSLog(@"Selected: %@ vs Answer: %@",option.item.name, self.question.answer.item.name);
+    if([option.item.name isEqualToString:self.question.answer.item.name])
     {
         NSLog(@"CORRECT OPTION CHOSEN");
         self.question.answeredCorrectly = YES;
@@ -91,6 +95,19 @@
     {
         NSLog(@"Wrong Answer Chosen!");
         self.question.answeredCorrectly = NO;
+    }
+    [self revealAnswer];
+}
+
+- (void)revealAnswer
+{
+    if(self.question.option1.total.doubleValue > self.question.option2.total.doubleValue)
+    {
+        self.optionView1.backgroundColor = [UIColor greenColor];
+    }
+    else
+    {
+        self.optionView2.backgroundColor = [UIColor greenColor];
     }
 }
 

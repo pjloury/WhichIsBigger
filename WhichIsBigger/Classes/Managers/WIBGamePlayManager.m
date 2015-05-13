@@ -48,6 +48,7 @@ double difficulty = 80; // 1 to 100
 - (void)beginGame
 {
     self.questionIndex = 0;
+    self.gameQuestions = nil;
     [self generateQuestions];
 }
 
@@ -58,7 +59,6 @@ double difficulty = 80; // 1 to 100
         question.option1.item.alreadyUsed = NO;
         question.option2.item.alreadyUsed = NO;
     }
-    self.gameQuestions = nil;
 }
 
 - (void)generateQuestions
@@ -100,11 +100,19 @@ double difficulty = 80; // 1 to 100
         {
             gameQuestion.option1.multiplier = multiplier;
             gameQuestion.option2.multiplier = 1;
+            if(gameQuestion.option1.total.doubleValue == gameQuestion.option2.total.doubleValue)
+            {
+                gameQuestion.option2.multiplier++;
+            }
         }
         else
         {
             gameQuestion.option1.multiplier = 1;
             gameQuestion.option2.multiplier = multiplier;
+            if(gameQuestion.option1.total.doubleValue == gameQuestion.option2.total.doubleValue)
+            {
+                gameQuestion.option1.multiplier++;
+            }
         }
         
         [self.gameQuestions addObject:gameQuestion];

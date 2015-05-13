@@ -49,13 +49,16 @@
 
 - (WIBGameOption *)answer
 {
+    NSLog(@"Option 1 Total: %@ Option 2 Total: %@", self.option1.total, self.option2.total);
     NSAssert(self.option1.total!=self.option2.total,@"Totals cannot be equal!");
-    if (self.option1.total > self.option2.total)
+    if (self.option1.total.doubleValue > self.option2.total.doubleValue)
     {
+        NSLog(@"This is option 1: %@",self.option1.item.name);
         return self.option1;
     }
     else
     {
+        NSLog(@"This is option 2: %@",self.option2.item.name);
         return self.option2;
     }
 }
