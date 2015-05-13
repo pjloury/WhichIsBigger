@@ -16,7 +16,6 @@
 #import "WIBQuestionView.h"
 #import "UIView+AutoLayout.h"
 #import "UIColor+Additions.h"
-#import "UIView+Helpers.h"
 
 // Models
 #import "WIBGameQuestion.h"
@@ -60,14 +59,15 @@
     [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
     // Do any additional setup after loading the view, typically from a nib.
     [[WIBGamePlayManager sharedInstance] generateQuestions];
-    [self loadQuestion];
+
     
     UITapGestureRecognizer *gameView1TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gameView1Tapped:)];
     [self.gameView1 addGestureRecognizer:gameView1TapGestureRecognizer];
     
     UITapGestureRecognizer *gameView2TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gameView2Tapped:)];
     [self.gameView2 addGestureRecognizer:gameView2TapGestureRecognizer];
-    
+
+    [self loadQuestion];
     [self configureBackground];
     [self configureQuestionView];
 }
@@ -85,7 +85,7 @@
 
 - (void)loadQuestion
 {
-    if([[WIBGamePlayManager sharedInstance] questionIndexIsInBounds])
+    if( ![WIBGamePlayManager sharedInstance].gameComplete)
     {
         self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
         [self.questionView refreshWithQuestion:self.question];

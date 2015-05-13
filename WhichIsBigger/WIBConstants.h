@@ -17,6 +17,9 @@
 #define NUMBER_OF_QUESTIONS 10
 #define QUERY_LIMIT_PER_CATEGORY 100
 
+#define GAME_ITEM_FETCH_LIMIT 200
+
+
 #define ARC4RANDOM_MAX      0x100000000
 
 @interface WIBConstants : NSObject

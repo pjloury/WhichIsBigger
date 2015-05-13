@@ -24,7 +24,8 @@
         _option1 = [[WIBGameOption alloc] initWithItem:item1];
         _option2 = [[WIBGameOption alloc] initWithItem:item2];
         
-        NSAssert(item1.categoryType == item2.categoryType, @"GameItems are not the same type");
+        //NSAssert([item1.categoryString isEqualToString:item2.categoryString], @"GameItems are not the same type");
+        //NSAssert(item1.categoryType == item2.categoryType, @"GameItems are not the same type");
     }
     
     return self;

@@ -22,7 +22,10 @@
     self.startNewGameButton.enabled = NO;
     __weak WIBHomeViewController *weakSelf = self;
     [[WIBParseManager sharedInstance] generateDataModelWithCompletion:^{
-        weakSelf.startNewGameButton.enabled = YES;
+        dispatch_async(dispatch_get_main_queue(),
+        ^{
+            weakSelf.startNewGameButton.enabled = YES;
+        });
     }];
 }
 - (IBAction)didPressNewGame:(id)sender {

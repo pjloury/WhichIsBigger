@@ -33,8 +33,9 @@ NSString *kAge = @"age";
 //        return WIBCategoryTypeWeight;
 //    else if ([self.categoryString isEqualToString:kAge])
 //        return WIBCategoryTypeAge;
-//    else return 0;
-//
+//    else
+//        NSAssert(0,@"No categoryString!");
+//    return 0;
 //}
 
 + (NSString *)categoryValueForCategoryType:(WIBCategoryType)type

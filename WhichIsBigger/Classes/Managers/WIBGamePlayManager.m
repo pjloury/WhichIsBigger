@@ -46,6 +46,7 @@ double difficulty = 80; // 1 to 100
     if (self)
     {
         self.gameQuestions = [[NSMutableArray alloc] init];
+        self.gameComplete = NO;
     }
     return self;
 }
@@ -60,7 +61,6 @@ double difficulty = 80; // 1 to 100
 //        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
 //        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
         WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
-        
         WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
         
         WIBGameQuestion *gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
@@ -111,20 +111,25 @@ double difficulty = 80; // 1 to 100
     WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
     if(self.questionIndex == NUMBER_OF_QUESTIONS-1) //When you hit 9
     {
-        [self gameComplete];
+        [self completeGame];
     }
-    self.questionIndex++;
+    else
+    {
+        self.questionIndex++;
+    }
     return question;
 }
 
 // Who should determine that the game is over???
-- (void)gameComplete
+- (void)completeGame
 {
     for (WIBGameQuestion *question in self.gameQuestions)
     {
         question.option1.item.alreadyUsed = NO;
         question.option2.item.alreadyUsed = NO;
     }
+    self.questionIndex = 0;
+    self.gameComplete = YES;
 }
 
 - (NSInteger)numberCorrectAnswers

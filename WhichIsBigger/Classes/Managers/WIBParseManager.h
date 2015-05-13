@@ -12,7 +12,6 @@
 @interface WIBParseManager : NSObject
 
 + (WIBParseManager *)sharedInstance;
-- (void)fetchGameItemForCategoryType:(WIBCategoryType)type;
 - (void)generateDataModelWithCompletion:(void (^)())completion;
 
 @end

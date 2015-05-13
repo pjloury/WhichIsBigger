@@ -17,4 +17,6 @@
 - (BOOL)questionIndexIsInBounds;
 - (NSInteger)numberCorrectAnswers;
 
+@property BOOL gameComplete;
+
 @end

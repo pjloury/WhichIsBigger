@@ -9,7 +9,6 @@
 #import "WIBImageView.h"
 #import "WIBGameItem.h"
 #import "AsyncImageView.h"
-#import "UIImageView+AFNetworking.h"
 
 @interface WIBImageView ()
 
