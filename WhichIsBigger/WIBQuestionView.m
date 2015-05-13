@@ -23,7 +23,6 @@
 @property (nonatomic, strong) WIBOptionView *optionView1;
 @property (nonatomic, strong) WIBOptionView *optionView2;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIButton *nextButton;
 
 @end
 
@@ -39,16 +38,6 @@
 }
 
 - (void)setup {
-    self.nextButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    self.nextButton.frame = CGRectMake(0,0,100,50);
-    [self.nextButton setTitle:@"next" forState:UIControlStateNormal];
-    
-    [self.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchDown];
-    
-    [self addSubview:self.nextButton];
-    self.nextButton.userInteractionEnabled = YES;
-    [self.nextButton sendActionsForControlEvents:UIControlEventTouchDown];
-    
     self.optionView1 = [[WIBOptionView alloc] initWithGameOption:self.question.option1];
     self.optionView1.delegate = self;
     
@@ -88,13 +77,6 @@
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
     [self.optionView1 refreshWithOption:self.question.option1];
     [self.optionView2 refreshWithOption:self.question.option2];
-}
-
-
-- (void)nextButtonPressed:(id)sender
-{
-    NSLog(@"NextPressed!");
-    [self.delegate questionView:self didTapNextButton:self.nextButton];
 }
 
 # pragma mark - WIBQuestionViewDelegate
