@@ -63,7 +63,7 @@
 {
     [super viewWillAppear:animated];
     // Set Game State
-    [WIBGamePlayManager beginGame];
+    [[WIBGamePlayManager sharedInstance] beginGame];
     
     // Set Model
     self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
@@ -122,6 +122,7 @@
     NSLog(@"NextPressed!");
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {
+        [[WIBGamePlayManager sharedInstance] completeGame];
         WIBGameCompleteViewController *vc = [[WIBGameCompleteViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
     }

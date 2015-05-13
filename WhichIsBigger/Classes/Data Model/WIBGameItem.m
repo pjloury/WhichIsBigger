@@ -20,23 +20,23 @@ NSString *kAge = @"age";
     self = [super init];
     if (self)
     {
-        self.alreadyUsed = NO;
+        //self.alreadyUsed = NO;
     }
     return self;
 }
 
-//- (WIBCategoryType)categoryType
-//{
-//    if ([self.categoryString isEqualToString:kHeight])
-//        return WIBCategoryTypeHeight;
-//    else if ([self.categoryString isEqualToString:kWeight])
-//        return WIBCategoryTypeWeight;
-//    else if ([self.categoryString isEqualToString:kAge])
-//        return WIBCategoryTypeAge;
-//    else
-//        NSAssert(0,@"No categoryString!");
-//    return 0;
-//}
+- (WIBCategoryType)categoryType
+{
+    if ([self.categoryString isEqualToString:kHeight])
+        return WIBCategoryTypeHeight;
+    else if ([self.categoryString isEqualToString:kWeight])
+        return WIBCategoryTypeWeight;
+    else if ([self.categoryString isEqualToString:kAge])
+        return WIBCategoryTypeAge;
+    else
+        NSAssert(0,@"No categoryString!");
+    return 0;
+}
 
 + (NSString *)categoryValueForCategoryType:(WIBCategoryType)type
 {

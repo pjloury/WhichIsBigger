@@ -11,6 +11,7 @@
 #import "WIBParseManager.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
+#import "WIBHomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -33,8 +34,37 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    
+    [self.window setRootViewController:[[WIBHomeViewController alloc]init]];
+    [self.window setBackgroundColor:[UIColor whiteColor]];
+    [self.window makeKeyAndVisible];
     return YES;
 }
+
+//-(void)loadInitialViewController
+//{
+//    //Create first view controller
+//    NewLoginViewController* ipadLoginViewController = [[NewLoginViewController alloc]initWithNibName:@"NewLoginViewController" bundle:[NSBundle mainBundle]];
+//    
+//    //if you want a nav controller do this
+//    UINavigationController *navController =  [[UINavigationController alloc]initWithRootViewController:ipadLoginViewController];
+//    
+//    //add them to window
+//    [self.window addSubview:self.navController.view];
+//    [self.window setRootViewController:self.navController];
+//    
+//    
+//    if([standardUserDefaults objectForKey:@"PassCorrect"])
+//    {
+//        //push the next view controller on the stack inside the initial view
+//        [ipadLoginViewController bypassLoginView];
+//    }
+//    
+//}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

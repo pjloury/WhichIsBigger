@@ -42,24 +42,31 @@ double difficulty = 80; // 1 to 100
 
 - (id)init
 {
-    self = [super init];
-    if (self)
-    {
-        self.gameQuestions = [[NSMutableArray alloc] init];
-    }
-    return self;
+    return [super init];
 }
 
-+ (void)beginGame
+- (void)beginGame
 {
-    [WIBGamePlayManager sharedInstance].questionIndex = 0;
-    [[WIBGamePlayManager sharedInstance] generateQuestions];
+    self.questionIndex = 0;
+    [self generateQuestions];
+}
+
+- (void)completeGame
+{
+    for (WIBGameQuestion *question in self.gameQuestions)
+    {
+        question.option1.item.alreadyUsed = NO;
+        question.option2.item.alreadyUsed = NO;
+    }
+    self.gameQuestions = nil;
 }
 
 - (void)generateQuestions
 {
+    self.gameQuestions = [[NSMutableArray alloc] init];
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
+        
         // Pick a random category
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
         
@@ -67,6 +74,8 @@ double difficulty = 80; // 1 to 100
 //        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
         WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
         WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
+        
+        NSAssert(![item1 isEqual:item2], @"ITEMS SHOULD NOT BE IDENTICAL");
         
         WIBGameQuestion *gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
         
@@ -100,14 +109,16 @@ double difficulty = 80; // 1 to 100
         
         [self.gameQuestions addObject:gameQuestion];
     }
+    [self printQuestions];
 }
 
-- (BOOL)questionIndexIsInBounds
+- (void)printQuestions
 {
-    if(self.questionIndex <= NUMBER_OF_QUESTIONS-1)
-        return YES;
-    else
-        return NO;
+    for(WIBGameQuestion *question in self.gameQuestions)
+    {
+        NSString *string = [NSString stringWithFormat:@"%@ vs. %@", question.option1.item.name, question.option2.item.name];
+        NSLog(string);
+    }
 }
 
 - (WIBGameQuestion *)nextGameQuestion
@@ -116,16 +127,6 @@ double difficulty = 80; // 1 to 100
     WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
     self.questionIndex++;
     return question;
-}
-
-// Who should determine that the game is over???
-- (void)completeGame
-{
-    for (WIBGameQuestion *question in self.gameQuestions)
-    {
-        question.option1.item.alreadyUsed = NO;
-        question.option2.item.alreadyUsed = NO;
-    }
 }
 
 - (NSInteger)numberCorrectAnswers

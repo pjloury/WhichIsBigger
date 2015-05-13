@@ -21,8 +21,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *photoURL;
 @property (nonatomic, copy) NSString *unit;
 @property (nonatomic, strong) NSNumber *baseQuantity;
-@property (nonatomic, readonly) WIBCategoryType categoryType;
-@property (nonatomic, assign) NSString *categoryString;
+@property (nonatomic, assign) WIBCategoryType categoryType;
+@property (nonatomic, copy) NSString *categoryString;
 @property (nonatomic, assign) BOOL alreadyUsed;
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;

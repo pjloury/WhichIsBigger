@@ -12,13 +12,20 @@
 #import "WIBParseManager.h"
 
 @interface WIBHomeViewController()
-@property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
+@property (weak, nonatomic) UIButton *startNewGameButton;
 @end
 
 @implementation WIBHomeViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.startNewGameButton =  [UIButton buttonWithType:UIButtonTypeSystem];
+    self.startNewGameButton.frame = CGRectMake(0,0,100,50);
+    [self.startNewGameButton setTitle:@"New Game" forState:UIControlStateNormal];
+    [self.startNewGameButton addTarget:self action:@selector(didPressNewGame:) forControlEvents:UIControlEventTouchDown];
+    self.startNewGameButton.enabled = NO;
+    [self.view addSubview:self.startNewGameButton];
+
     self.startNewGameButton.enabled = NO;
     __weak WIBHomeViewController *weakSelf = self;
     [[WIBParseManager sharedInstance] generateDataModelWithCompletion:^{

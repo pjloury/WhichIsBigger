@@ -7,6 +7,7 @@
 //
 
 #import "WIBDataModel.h"
+#import "WIBConstants.h"
 
 @interface WIBDataModel()
 @property (nonatomic, strong) NSMutableDictionary *gameItemsDictionary;
@@ -53,21 +54,27 @@
     return NO;
 }
 
-- (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
+- (WIBGameItem*) gameItemForCategoryType2:(WIBCategoryType)categoryType
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     
+    NSLog(@"%ld",gameItemsWithSameCategory.count);
+    NSAssert(gameItemsWithSameCategory.count > NUMBER_OF_QUESTIONS*2, @"NOT ENOUGH GAME ITEMS FROM SERVER");
+    
     int r = arc4random() % [gameItemsWithSameCategory count];
-    WIBGameItem* gameItem = gameItemsWithSameCategory[r];
+    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
+    //NSLog(gameItem.name);
     if(!gameItem.alreadyUsed)
     {
+        //NSLog(@"not used yet");
         gameItem.alreadyUsed = YES;
         return gameItem;
     }
     else
     {
+        //NSLog(@"already used");
         NSAssert([self unusedItemsAvailableForCategory:categoryType],@"DUDE YOU RAN OUT OF GAME ITEMS!!");
-        return [self gameItemForCategoryType:categoryType];
+       gameItem =  [self gameItemForCategoryType:categoryType];
     }
     
      //TODO: Implement repeat prevention
@@ -83,6 +90,36 @@
     
     //return nil;
     // TODO: Add the Item back in at the end of the game
+    return gameItem;
 }
+
+- (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
+{
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
+    
+    int r = arc4random() % [gameItemsWithSameCategory count];
+    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
+    
+    if(!gameItem.alreadyUsed)
+    {
+        //NSLog(@"not used yet");
+        gameItem.alreadyUsed = YES;
+        return gameItem;
+    }
+    else
+    {
+        for(WIBGameItem *item in gameItemsWithSameCategory)
+        {
+            if (!item.alreadyUsed)
+            {
+                item.alreadyUsed = YES;
+                return item;
+            }
+        }
+    }
+    return nil;
+}
+
+
 
 @end
