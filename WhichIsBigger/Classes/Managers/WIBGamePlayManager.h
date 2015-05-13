@@ -11,12 +11,13 @@
 
 @interface WIBGamePlayManager : NSObject
 
-- (void)generateQuestions;
++ (void)beginGame;
+
 + (WIBGamePlayManager *)sharedInstance;
 - (WIBGameQuestion *)nextGameQuestion;
 - (BOOL)questionIndexIsInBounds;
 - (NSInteger)numberCorrectAnswers;
 
-@property BOOL gameComplete;
+@property (readonly) NSInteger questionIndex;
 
 @end

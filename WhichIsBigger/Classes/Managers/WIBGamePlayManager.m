@@ -46,9 +46,14 @@ double difficulty = 80; // 1 to 100
     if (self)
     {
         self.gameQuestions = [[NSMutableArray alloc] init];
-        self.gameComplete = NO;
     }
     return self;
+}
+
++ (void)beginGame
+{
+    [WIBGamePlayManager sharedInstance].questionIndex = 0;
+    [[WIBGamePlayManager sharedInstance] generateQuestions];
 }
 
 - (void)generateQuestions
@@ -109,14 +114,7 @@ double difficulty = 80; // 1 to 100
 {
     NSLog(@"QUESTION %ld",self.questionIndex+1);
     WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
-    if(self.questionIndex == NUMBER_OF_QUESTIONS-1) //When you hit 9
-    {
-        [self completeGame];
-    }
-    else
-    {
-        self.questionIndex++;
-    }
+    self.questionIndex++;
     return question;
 }
 
@@ -128,8 +126,6 @@ double difficulty = 80; // 1 to 100
         question.option1.item.alreadyUsed = NO;
         question.option2.item.alreadyUsed = NO;
     }
-    self.questionIndex = 0;
-    self.gameComplete = YES;
 }
 
 - (NSInteger)numberCorrectAnswers
