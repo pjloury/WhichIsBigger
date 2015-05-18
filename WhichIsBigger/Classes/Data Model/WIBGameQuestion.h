@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WIBGameOption.h"
 
 @class WIBGameItem;
-@class WIBGameOption;
 @interface WIBGameQuestion : NSObject
 
 @property (nonatomic, strong) WIBGameOption *option1;

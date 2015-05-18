@@ -10,13 +10,8 @@
 
 @class WIBQuestionView;
 @protocol WIBGamePlayDelegate <NSObject>
-
-@required
-- (void)questionView:(WIBQuestionView *)questionView didTapNextButton:(UIButton *)nextButton;
-
 @end
 
 @interface WIBGameViewController : UIViewController<WIBGamePlayDelegate>
-
 
 @end

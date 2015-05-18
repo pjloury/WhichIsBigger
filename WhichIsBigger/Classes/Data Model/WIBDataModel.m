@@ -54,45 +54,6 @@
     return NO;
 }
 
-- (WIBGameItem*) gameItemForCategoryType2:(WIBCategoryType)categoryType
-{
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
-    
-    NSLog(@"%ld",gameItemsWithSameCategory.count);
-    NSAssert(gameItemsWithSameCategory.count > NUMBER_OF_QUESTIONS*2, @"NOT ENOUGH GAME ITEMS FROM SERVER");
-    
-    int r = arc4random() % [gameItemsWithSameCategory count];
-    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
-    //NSLog(gameItem.name);
-    if(!gameItem.alreadyUsed)
-    {
-        //NSLog(@"not used yet");
-        gameItem.alreadyUsed = YES;
-        return gameItem;
-    }
-    else
-    {
-        //NSLog(@"already used");
-        NSAssert([self unusedItemsAvailableForCategory:categoryType],@"DUDE YOU RAN OUT OF GAME ITEMS!!");
-       gameItem =  [self gameItemForCategoryType:categoryType];
-    }
-    
-     //TODO: Implement repeat prevention
-//    if (!gameItem.usedAlready)
-//    {
-//        gameItem.usedAlready = YES;
-//        return gameItem;
-//    }
-//    else //TODO: Potential for Infinite Loop!
-//    {
-//        [self gameItemForCategoryType:categoryType];
-//    }
-    
-    //return nil;
-    // TODO: Add the Item back in at the end of the game
-    return gameItem;
-}
-
 - (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];

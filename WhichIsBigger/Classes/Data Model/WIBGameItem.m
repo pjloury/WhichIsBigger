@@ -25,6 +25,28 @@ NSString *kAge = @"age";
     return self;
 }
 
+- (BOOL)isPerson
+{
+// Need to verify that each tag becomes an object in the array
+    
+//        return [self.tags containsObject:@"Person"];
+    
+//    if(self.tags)
+//    {
+//
+//        for(NSString *tag in self.tags)
+//        {
+//            if([tag isEqualToString:@"Pesron"])
+//                return YES;
+//        }
+//        return NO;
+//    
+//    }
+//    return NO;
+
+    return YES;
+}
+
 - (WIBCategoryType)categoryType
 {
     if ([self.categoryString isEqualToString:kHeight])

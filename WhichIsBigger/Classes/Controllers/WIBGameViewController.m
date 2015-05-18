@@ -149,16 +149,22 @@
 
 - (void)timerFired
 {
-    if(_currSeconds>0)
+    if(_currSeconds>1)
     {
         _currSeconds-=1;
         [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
     }
     else
     {
+        _currSeconds-=1;
+        [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
+        
         [self.timer invalidate];
         self.timer = nil;
         self.nextButton.hidden = NO;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
+        
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];

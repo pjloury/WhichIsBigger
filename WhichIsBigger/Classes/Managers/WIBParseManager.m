@@ -33,11 +33,6 @@
 
 - (void)generateDataModelWithCompletion:(void (^)())completion
 {
-    [self fetchGameItemsWithCompletion:completion];
-}
-
-- (void)fetchGameItemsWithCompletion:(void (^)())completion
-{
     PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
     query.limit = GAME_ITEM_FETCH_LIMIT;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -55,6 +50,8 @@
                 gameItem.photoURL = object[@"photoURL"];
                 gameItem.baseQuantity = object[@"quantity"];
                 gameItem.categoryString = object[@"category"];
+                gameItem.tags = object[@"tags"];
+                gameItem.tagsArray = object[@"tagsArray"];
                 [[WIBDataModel sharedInstance] insertGameItem: gameItem];
             }
             completion();
@@ -66,33 +63,4 @@
         }
     }];
 }
-
-// Currently not used
-- (void)fetchGameItemForCategoryType:(WIBCategoryType)type
-{
-    PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
-    [query whereKey:@"category" equalTo:[WIBGameItem categoryValueForCategoryType:type]];
-    query.limit = QUERY_LIMIT_PER_CATEGORY;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %lu GameItems.", (unsigned long)objects.count);
-            // Do something with the found objects
-            for (PFObject *object in objects) {
-                //NSLog(@"%@", object.objectId);
-                WIBGameItem *gameItem = [[WIBGameItem alloc] init];
-                gameItem.name = object[@"name"];
-                gameItem.photoURL = object[@"photoURL"];
-                gameItem.baseQuantity = object[@"quantity"];
-                gameItem.categoryString = object[@"category"];
-                //gameItem.categoryType = type;
-                [[WIBDataModel sharedInstance] insertGameItem: gameItem];
-            }
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-}
-
 @end

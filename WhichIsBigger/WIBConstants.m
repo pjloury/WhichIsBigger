@@ -9,4 +9,6 @@
 
 @implementation WIBConstants
 
+NSString *kGameQuestionTimeUpNotification = @"gameQuestionTimeUpNotification";
+
 @end
