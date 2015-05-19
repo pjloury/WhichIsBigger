@@ -47,6 +47,25 @@ NSString *kAge = @"age";
     return YES;
 }
 
+- (NSNumber *)baseQuantity
+{
+    if([self.unit isEqualToString:@"meters"])
+    {
+        return [NSNumber numberWithDouble:[_baseQuantity doubleValue] * 39.3701];
+    }
+    else if([self.unit isEqualToString:@"date"])
+    {
+        NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
+        NSTimeInterval age = currentEpoch - _baseQuantity.doubleValue;
+        return [NSNumber numberWithDouble:age];
+    }
+    else
+    {
+        return _baseQuantity;
+    }
+
+}
+
 - (WIBCategoryType)categoryType
 {
     if ([self.categoryString isEqualToString:kHeight])

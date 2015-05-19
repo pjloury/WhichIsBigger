@@ -15,6 +15,8 @@
 @interface WIBOptionView : UIView
 - (instancetype)initWithGameOption:(WIBGameOption *)option;
 - (void)refreshWithOption:(WIBGameOption *)option;
+- (void)revealAnswerLabel;
+
 @property (nonatomic, weak) id<WIBQuestionViewDelegate> delegate;
 
 @end

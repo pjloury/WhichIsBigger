@@ -49,6 +49,7 @@
                 gameItem.name = object[@"name"];
                 gameItem.photoURL = object[@"photoURL"];
                 gameItem.baseQuantity = object[@"quantity"];
+                gameItem.unit = object[@"unit"];
                 gameItem.categoryString = object[@"category"];
                 gameItem.tags = object[@"tags"];
                 gameItem.tagsArray = object[@"tagsArray"];

@@ -64,6 +64,11 @@
     [self addSubview:self.nameLabel];
 }
 
+- (void)revealAnswerLabel {
+    self.nameLabel.text = self.gameOption.totalString;
+}
+
+
 - (void)configureConstraints {
     self.clipsToBounds = YES;
     [self.imageView ic_centerHorizontallyInSuperView];

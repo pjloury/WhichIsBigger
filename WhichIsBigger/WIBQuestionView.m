@@ -109,6 +109,9 @@
     {
         self.optionView2.backgroundColor = [UIColor greenColor];
     }
+    
+    [self.optionView1 revealAnswerLabel];
+    [self.optionView2 revealAnswerLabel];
 }
 
 @end

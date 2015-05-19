@@ -66,6 +66,8 @@
 		78A8586BC466D2E111F8EEA8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7415A78825A7B8EA15A1FB6B /* StoreKit.framework */; };
 		7CBEA5444241DBCB9071B2C5 /* PFImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 944ACCFB08DCCDF86F9DC359 /* PFImageView.h */; };
 		7D87B557845B4DECA9F9FF61 /* PFTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C598000CE941D94E692172E /* PFTextField.h */; };
+		7D8B9B601B0B107300B4E5B1 /* WIBAgeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8B9B5F1B0B107300B4E5B1 /* WIBAgeItem.m */; };
+		7D8B9B631B0B115300B4E5B1 /* WIBHeightItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8B9B621B0B115300B4E5B1 /* WIBHeightItem.m */; };
 		7F255AD6EE98BB435FD8C6F0 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 301ECA889B66AA3ABFC595A2 /* BFTaskCompletionSource.h */; };
 		8023FC03679588CEB3D8CD2E /* PFSubclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 7443A10365C85001B843B558 /* PFSubclassing.h */; };
 		806D524AFF1013D6A66D8B50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535AD0E312CBAEDF9AE25821 /* CoreLocation.framework */; };
@@ -222,6 +224,10 @@
 		7933C22569E643C978C85E4F /* PFActionButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFActionButton.h; path = ParseUI/Classes/Internal/Views/Buttons/PFActionButton.h; sourceTree = "<group>"; };
 		7AA4A5F74E29687696C6DC81 /* PFRelation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFRelation.h; path = Parse.framework/Headers/PFRelation.h; sourceTree = "<group>"; };
 		7CEC17179734C58965CA0437 /* libPods-WhichIsBigger-Bolts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger-Bolts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D8B9B5E1B0B107300B4E5B1 /* WIBAgeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBAgeItem.h; path = "../WhichIsBigger/Classes/Data Model/WIBAgeItem.h"; sourceTree = "<group>"; };
+		7D8B9B5F1B0B107300B4E5B1 /* WIBAgeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBAgeItem.m; path = "../WhichIsBigger/Classes/Data Model/WIBAgeItem.m"; sourceTree = "<group>"; };
+		7D8B9B611B0B115300B4E5B1 /* WIBHeightItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHeightItem.h; path = "../WhichIsBigger/Classes/Data Model/WIBHeightItem.h"; sourceTree = "<group>"; };
+		7D8B9B621B0B115300B4E5B1 /* WIBHeightItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHeightItem.m; path = "../WhichIsBigger/Classes/Data Model/WIBHeightItem.m"; sourceTree = "<group>"; };
 		8086B5043FCF07E24631700F /* PF_Twitter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PF_Twitter.h; path = Parse.framework/Headers/PF_Twitter.h; sourceTree = "<group>"; };
 		814D34C55655EBB780CAF8B8 /* PFPurchase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFPurchase.h; path = Parse.framework/Headers/PFPurchase.h; sourceTree = "<group>"; };
 		83DC7FC6FAE728417125041F /* PFPurchaseTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFPurchaseTableViewCell.h; path = ParseUI/Classes/Cells/PFPurchaseTableViewCell.h; sourceTree = "<group>"; };
@@ -461,6 +467,10 @@
 		7D0C786FA2B99E69C604C650 = {
 			isa = PBXGroup;
 			children = (
+				7D8B9B5E1B0B107300B4E5B1 /* WIBAgeItem.h */,
+				7D8B9B5F1B0B107300B4E5B1 /* WIBAgeItem.m */,
+				7D8B9B611B0B115300B4E5B1 /* WIBHeightItem.h */,
+				7D8B9B621B0B115300B4E5B1 /* WIBHeightItem.m */,
 				1BF5540561CFB63370706EF6 /* Podfile */,
 				A4544290B46CA0A2A4C6E3D5 /* Frameworks */,
 				C645500E13C7ECD89FDE690E /* Pods */,
@@ -818,7 +828,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D8B9B631B0B115300B4E5B1 /* WIBHeightItem.m in Sources */,
 				286549937775F6680B6AF73D /* Pods-WhichIsBigger-dummy.m in Sources */,
+				7D8B9B601B0B107300B4E5B1 /* WIBAgeItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

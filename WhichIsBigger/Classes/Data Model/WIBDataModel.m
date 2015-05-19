@@ -9,6 +9,9 @@
 #import "WIBDataModel.h"
 #import "WIBConstants.h"
 
+// GamePlayManager keeps track of used names
+#import "WIBGamePlayManager.h"
+
 @interface WIBDataModel()
 @property (nonatomic, strong) NSMutableDictionary *gameItemsDictionary;
 @end
@@ -54,6 +57,11 @@
     return NO;
 }
 
+- (BOOL)itemNameAlreadyUsed:(NSString *)name
+{
+    return [[WIBGamePlayManager sharedInstance].usedNames containsObject:name];
+}
+
 - (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
@@ -61,10 +69,11 @@
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(!gameItem.alreadyUsed)
+    if(!gameItem.alreadyUsed && ![self itemNameAlreadyUsed:gameItem.name])
     {
         //NSLog(@"not used yet");
         gameItem.alreadyUsed = YES;
+        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
         return gameItem;
     }
     else

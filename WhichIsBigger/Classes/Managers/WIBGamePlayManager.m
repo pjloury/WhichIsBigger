@@ -45,6 +45,7 @@
     self.questionIndex = 0;
     self.difficulty = 100;
     self.gameQuestions = nil;
+    self.usedNames = nil;
     [self generateQuestions];
 }
 
@@ -60,6 +61,8 @@
 - (void)generateQuestions
 {
     self.gameQuestions = [[NSMutableArray alloc] init];
+    self.usedNames = [[NSMutableSet alloc] init];
+    
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
