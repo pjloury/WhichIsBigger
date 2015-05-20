@@ -12,5 +12,5 @@
 @interface WIBDataModel : NSObject 
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
-- (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType;
+- (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity;
 @end

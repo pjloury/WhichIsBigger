@@ -38,6 +38,8 @@
 }
 
 - (void)setup {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(revealAnswer) name:kGameQuestionTimeUpNotification object:nil];
+    
     self.optionView1 = [[WIBOptionView alloc] initWithGameOption:self.question.option1];
     self.optionView1.delegate = self;
     
@@ -85,6 +87,7 @@
 # pragma mark - WIBQuestionViewDelegate
 - (void)optionView:(WIBOptionView *)optionView didSelectOption:(WIBGameOption *)option
 {
+    [self.delegate questionView:self didSelectOption:option];
     NSLog(@"Selected: %@ vs Answer: %@",option.item.name, self.question.answer.item.name);
     if([option.item.name isEqualToString:self.question.answer.item.name])
     {
@@ -112,6 +115,7 @@
     
     [self.optionView1 revealAnswerLabel];
     [self.optionView2 revealAnswerLabel];
+    [self.delegate questionViewDidFinishRevealingAnswer:self];
 }
 
 @end

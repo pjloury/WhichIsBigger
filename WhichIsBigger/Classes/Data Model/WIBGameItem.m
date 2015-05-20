@@ -63,7 +63,6 @@ NSString *kAge = @"age";
     {
         return _baseQuantity;
     }
-
 }
 
 - (WIBCategoryType)categoryType

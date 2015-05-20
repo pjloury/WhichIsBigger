@@ -67,8 +67,8 @@
     {
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
         
-        WIBGameItem *item1 = [[WIBDataModel sharedInstance ]gameItemForCategoryType:randomCategory];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance  ]gameItemForCategoryType:randomCategory];
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:randomCategory withUniqueBaseQuantity:nil];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:randomCategory withUniqueBaseQuantity:item1.baseQuantity];
         
 //        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
 //        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];

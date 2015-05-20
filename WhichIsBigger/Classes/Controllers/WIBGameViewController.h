@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class WIBQuestionView;
+@class WIBGameOption;
 @protocol WIBGamePlayDelegate <NSObject>
+- (void)questionView:(WIBQuestionView *)questionView didSelectOption:(WIBGameOption *)option;
+- (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView;
+
 @end
 
 @interface WIBGameViewController : UIViewController<WIBGamePlayDelegate>
