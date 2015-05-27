@@ -33,7 +33,7 @@ __person_height_re = re.compile(r"""(\d+)\'\s+(\d+)""")
 
 __weight_re = re.compile("""(.*)\s+(lb)""")
 
-__image_re = re.compile("""src=\"//(\S+)\"""")
+__image_re = re.compile("""src=\"//(\S+)\?""")
 
 
 
@@ -65,7 +65,42 @@ query_string = ""
 multiple_query_string = ""
 
 pickled_objects = []
-PICKLE_FILE = 'objects.pkl'
+PICKLE_FILE = '/Users/admin/Documents/WhichIsBigger/BackendServices/Data/objects.pkl'
+
+
+def correct():
+
+    all_items = GameItem.Query.all()
+
+    for item in all_items:
+
+
+        if hasattr(item,'tags') and item.tags != None:
+
+            tag_cs = item.tags
+
+            tag_array = tag_cs.split(',')
+
+            item.tagArray = tag_array
+
+            item.tags = None
+
+
+        image_url = item.photoURL
+
+
+        if 'http://' not in image_url and image_url != None and image_url != "":
+
+            item.photoURL = 'http://'+image_url
+
+
+        if image_url == 'http://':
+            item.photoURL = None
+
+        item.save()
+
+        # break
+
 
 def main():
 
@@ -165,7 +200,22 @@ def main():
 
                 pickled_objects.append(OBJECT)
 
-                for CATEGORY in ["age","height","weight"]:
+                print TAGS
+
+                TAGS = TAGS.split(',')
+
+                if "person" in TAGS.lower():
+
+                    categories = ["age","height","weight"]
+
+                elif "tall structure" in TAGS.lower():
+
+                    categories = ["height"]
+
+
+
+
+                for CATEGORY in categories:
 
                     #gracefully catch exception and move to next query
                     try:
@@ -176,9 +226,10 @@ def main():
                     except:
                         pass
 
+                pickle.dump(pickled_objects,file=open(PICKLE_FILE,'w+'))
 
 
-        pickle.dump(pickled_objects,file=open(PICKLE_FILE,'w'))
+
 
 
 
@@ -269,7 +320,7 @@ def image_query(object):
     else:
         return None
 
-def single_query(object,CATEGORY,TAGS=''):
+def single_query(object,CATEGORY,TAGS=[]):
 
     #ensure all non-ascii characters are converted to html entities
     #OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
@@ -282,7 +333,7 @@ def single_query(object,CATEGORY,TAGS=''):
     image_url = image_query(object)
 
     if image_url:
-        PHOTO = image_url
+        PHOTO = "http://"+image_url
 
     QUERY = urllib.quote(query_string % object)
 
@@ -320,7 +371,7 @@ def single_query(object,CATEGORY,TAGS=''):
         m = __image_re.search(value)
 
         if m:
-            PHOTO = m.group(1)
+            PHOTO = "http://"+m.group(1)
 
 
     elif CATEGORY == Category.age:
@@ -453,10 +504,10 @@ def single_query(object,CATEGORY,TAGS=''):
 
 
 
-    kv = GameItem(category=CATEGORY, tags=TAGS, name=TOPIC, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
+    kv = GameItem(category=CATEGORY, tagArray=TAGS, name=TOPIC, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
 
     kv.save()
 
 
 if __name__ == "__main__":
-    main()
+    correct()

@@ -1,0 +1,158 @@
+(lp0
+S'Yao Ming'
+p1
+aS"Shaquille O'Neal"
+p2
+aS'Michael Jordan'
+p3
+aS'Manny Pacquiao'
+p4
+aS'Lionel Messi'
+p5
+aS'Cristiano Ronaldo'
+p6
+aS'Angelina Jolie'
+p7
+aS'Brad Pitt'
+p8
+aS'Kevin Hart'
+p9
+aS'Tom Cruise'
+p10
+aS'Scarlet Johansen'
+p11
+aS'Leonardo DiCaprio'
+p12
+aS'Justin Timberlake'
+p13
+aS'Kanye West'
+p14
+aS'Justin Bieber'
+p15
+aS'Lil Wayne'
+p16
+aS'Britney Spears'
+p17
+aS'Kim Kardashian'
+p18
+aS'Barack Obama'
+p19
+aS'Donald Trump'
+p20
+aS'Jay-Z'
+p21
+aS'Mark Zuckerberg'
+p22
+aS'Bill Gates'
+p23
+aS'Elon Musk'
+p24
+aS'Tim Cook'
+p25
+aS''
+p26
+aS'Vern Troyer'
+p27
+aS'Peter Dinklage'
+p28
+aS'George Clooney'
+p29
+aS'Ashton Kutcher'
+p30
+aS'Ryan Reynolds'
+p31
+aS'Bruce Willis'
+p32
+aS'Ryan Gosling'
+p33
+aS'Jamie Foxx'
+p34
+aS'Jennifer Lawrence'
+p35
+aS'Megan Fox'
+p36
+aS'Beyonce'
+p37
+aS'Mila Kunis'
+p38
+aS'Miley Cyrus'
+p39
+aS'Kendall Jenner'
+p40
+aS'Snooki'
+p41
+aS'Ke$ha'
+p42
+aS'Eminem'
+p43
+aS'Selena Gomez'
+p44
+aS'Jason Derulo'
+p45
+aS'Chris Brown'
+p46
+aS'Rihanna'
+p47
+aS'Lady Gaga'
+p48
+aS'Iggy Azalea'
+p49
+aS'Lil Jon'
+p50
+aS'Bruno Mars'
+p51
+aS'Usher'
+p52
+aS'Oprah Winfrey'
+p53
+aS'Dr. Oz'
+p54
+aS'Judge Judy'
+p55
+aS'J.K. Rowling'
+p56
+aS'The Queen of England'
+p57
+aS'Ellen DeGeneres'
+p58
+aS"Conan O'Brien"
+p59
+aS'Kate Middleton'
+p60
+aS'Steph Curry'
+p61
+aS'Kevin Durant'
+p62
+aS'Colin Kaepernick'
+p63
+aS'Taylor Swift'
+p64
+aS'Eiffel Tower'
+p65
+aS'Washington Monument'
+p66
+aS'Space Needle'
+p67
+aS'Pyramid Giza'
+p68
+aS'Statue of Liberty'
+p69
+aS'Capitol Building'
+p70
+aS"Vatican St. Mark's"
+p71
+aS'Taj Mahal'
+p72
+aS'Leaning Tower of Pisa'
+p73
+aS'Big Ben'
+p74
+aS'General Sherman Tree'
+p75
+aS'Niagra Falls'
+p76
+aS'Machu Picchu'
+p77
+aS'Mt. Kilimanjaro'
+p78
+a.
