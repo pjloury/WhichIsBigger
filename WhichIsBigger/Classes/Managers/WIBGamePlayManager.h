@@ -20,5 +20,7 @@
 - (NSInteger)numberCorrectAnswers;
 
 @property (readonly) NSInteger questionIndex;
+@property (nonatomic, assign) double difficulty;
+@property (nonatomic, strong) NSMutableSet *usedNames;
 
 @end

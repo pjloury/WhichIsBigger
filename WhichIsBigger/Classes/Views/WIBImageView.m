@@ -9,6 +9,7 @@
 #import "WIBImageView.h"
 #import "WIBGameItem.h"
 #import "AsyncImageView.h"
+#import "WIBConstants.h"
 
 @interface WIBImageView ()
 
@@ -27,11 +28,8 @@
     return self;
 }
 
-- (void)setup {
-    //[self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateNormal];
-    //[self setImage:[UIImage imageNamed:@"sample"] forState:UIControlStateHighlighted];
-    
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedLoading:) name:AsyncImageLoadDidFinish object:nil];
+- (void)setup {    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     
     [self addTarget:self action:@selector(actionDidPressButton:) forControlEvents:UIControlEventTouchDown];
     [self addTarget:self action:@selector(actionDidReleaseButton:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
@@ -72,10 +70,10 @@
     [self configureConstraints];
 }
 
-//- (void)finishedLoading:(NSNotification *)note
-//{
-//    
-//}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)configureConstraints {
     NSLayoutConstraint *aspectRatioConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
@@ -91,6 +89,11 @@
     self.subImageView.center = self.center;
     [super layoutSubviews];
     [self roundViewEdges];
+}
+
+- (void)gameQuestionTimeUpHandler:(NSNotification *)note
+{
+    self.userInteractionEnabled = NO;
 }
 
 - (void)actionDidPressButton:(id)sender {

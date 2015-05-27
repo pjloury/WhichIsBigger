@@ -57,12 +57,17 @@
 - (void)configureLabel {
     [self.nameLabel removeFromSuperview];
     self.nameLabel = [UILabel new];
-    self.nameLabel.text = [NSString stringWithFormat:@"%d %@",self.gameOption.multiplier,self.gameItem.name.capitalizedString];
+    self.nameLabel.text = self.gameOption.multiplier > 1 ? [NSString stringWithFormat:@"%d %@",self.gameOption.multiplier,self.gameItem.name.capitalizedString]: self.gameItem.name.capitalizedString;
     self.nameLabel.font = [UIFont fontWithName:HELVETICA_NEUE_LIGHT size:18];
     self.nameLabel.textColor = [UIColor whiteColor];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.nameLabel];
 }
+
+- (void)revealAnswerLabel {
+    self.nameLabel.text = self.gameOption.totalString;
+}
+
 
 - (void)configureConstraints {
     self.clipsToBounds = YES;

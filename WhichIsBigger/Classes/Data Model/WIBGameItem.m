@@ -25,6 +25,46 @@ NSString *kAge = @"age";
     return self;
 }
 
+- (BOOL)isPerson
+{
+// Need to verify that each tag becomes an object in the array
+    
+//        return [self.tags containsObject:@"Person"];
+    
+//    if(self.tags)
+//    {
+//
+//        for(NSString *tag in self.tags)
+//        {
+//            if([tag isEqualToString:@"Pesron"])
+//                return YES;
+//        }
+//        return NO;
+//    
+//    }
+//    return NO;
+
+    return YES;
+}
+
+- (NSNumber *)baseQuantity
+{
+    if([self.unit isEqualToString:@"meters"])
+    {
+        return [NSNumber numberWithDouble:[_baseQuantity doubleValue] * 39.3701];
+    }
+    else if([self.unit isEqualToString:@"date"])
+    {
+        NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
+        NSTimeInterval age = currentEpoch - _baseQuantity.doubleValue;
+        return [NSNumber numberWithDouble:age];
+    }
+    else
+    {
+        return _baseQuantity;
+    }
+}
+
 - (WIBCategoryType)categoryType
 {
     if ([self.categoryString isEqualToString:kHeight])

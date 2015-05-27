@@ -16,5 +16,6 @@
 @property (nonatomic, strong) WIBGameItem *item;
 @property (nonatomic) int multiplier;
 @property (nonatomic, readonly) NSNumber *total;
+@property (nonatomic, copy) NSString *totalString;
 
 @end

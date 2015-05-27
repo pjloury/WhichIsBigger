@@ -9,6 +9,9 @@
 #import "WIBDataModel.h"
 #import "WIBConstants.h"
 
+// GamePlayManager keeps track of used names
+#import "WIBGamePlayManager.h"
+
 @interface WIBDataModel()
 @property (nonatomic, strong) NSMutableDictionary *gameItemsDictionary;
 @end
@@ -54,63 +57,31 @@
     return NO;
 }
 
-- (WIBGameItem*) gameItemForCategoryType2:(WIBCategoryType)categoryType
+- (BOOL)itemNameAlreadyUsed:(NSString *)name
 {
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
-    
-    NSLog(@"%ld",gameItemsWithSameCategory.count);
-    NSAssert(gameItemsWithSameCategory.count > NUMBER_OF_QUESTIONS*2, @"NOT ENOUGH GAME ITEMS FROM SERVER");
-    
-    int r = arc4random() % [gameItemsWithSameCategory count];
-    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
-    //NSLog(gameItem.name);
-    if(!gameItem.alreadyUsed)
-    {
-        //NSLog(@"not used yet");
-        gameItem.alreadyUsed = YES;
-        return gameItem;
-    }
-    else
-    {
-        //NSLog(@"already used");
-        NSAssert([self unusedItemsAvailableForCategory:categoryType],@"DUDE YOU RAN OUT OF GAME ITEMS!!");
-       gameItem =  [self gameItemForCategoryType:categoryType];
-    }
-    
-     //TODO: Implement repeat prevention
-//    if (!gameItem.usedAlready)
-//    {
-//        gameItem.usedAlready = YES;
-//        return gameItem;
-//    }
-//    else //TODO: Potential for Infinite Loop!
-//    {
-//        [self gameItemForCategoryType:categoryType];
-//    }
-    
-    //return nil;
-    // TODO: Add the Item back in at the end of the game
-    return gameItem;
+    return [[WIBGamePlayManager sharedInstance].usedNames containsObject:name];
 }
 
-- (WIBGameItem*) gameItemForCategoryType:(WIBCategoryType)categoryType
+- (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(!gameItem.alreadyUsed)
+    if(!gameItem.alreadyUsed && ![self itemNameAlreadyUsed:gameItem.name] &&
+       [gameItem.baseQuantity doubleValue] != [baseQuantity doubleValue])
     {
         //NSLog(@"not used yet");
         gameItem.alreadyUsed = YES;
+        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
         return gameItem;
     }
     else
     {
         for(WIBGameItem *item in gameItemsWithSameCategory)
         {
-            if (!item.alreadyUsed)
+            if (!item.alreadyUsed && [item.baseQuantity doubleValue] != [baseQuantity doubleValue])
             {
                 item.alreadyUsed = YES;
                 return item;

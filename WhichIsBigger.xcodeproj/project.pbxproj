@@ -27,6 +27,7 @@
 		7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB11AF0C73A0061387B /* WIBGameItem.m */; };
 		7D943FB61AF0C8CA0061387B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D943FB51AF0C8CA0061387B /* Info.plist */; };
 		7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */; };
+		7DD20E171B0981B5002ED286 /* WIBHumanComparisonQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */; };
 		9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */; };
 		F301177F1AF0993D00F1D854 /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F301177D1AF0993D00F1D854 /* WIBOptionView.m */; };
 		F30117871AF09BC300F1D854 /* WIBGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30117861AF09BC300F1D854 /* WIBGameView.m */; };
@@ -84,6 +85,8 @@
 		7D943FB11AF0C73A0061387B /* WIBGameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameItem.m; path = "Classes/Data Model/WIBGameItem.m"; sourceTree = "<group>"; };
 		7D943FB51AF0C8CA0061387B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameViewController.m; path = Classes/Controllers/WIBGameViewController.m; sourceTree = "<group>"; };
+		7DD20E151B0981B5002ED286 /* WIBHumanComparisonQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHumanComparisonQuestion.h; path = "Classes/Data Model/WIBHumanComparisonQuestion.h"; sourceTree = "<group>"; };
+		7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHumanComparisonQuestion.m; path = "Classes/Data Model/WIBHumanComparisonQuestion.m"; sourceTree = "<group>"; };
 		97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.debug.xcconfig"; sourceTree = "<group>"; };
 		F301177C1AF0993D00F1D854 /* WIBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBOptionView.h; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				7DD20E151B0981B5002ED286 /* WIBHumanComparisonQuestion.h */,
+				7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */,
 				7D943FB01AF0C73A0061387B /* WIBGameItem.h */,
 				7D943FB11AF0C73A0061387B /* WIBGameItem.m */,
 				7D70EE691AEF507D002E1565 /* WIBGameOption.h */,
@@ -409,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
+				7DD20E171B0981B5002ED286 /* WIBHumanComparisonQuestion.m in Sources */,
 				7D943FAE1AF0C7160061387B /* AsyncImageView.m in Sources */,
 				F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,

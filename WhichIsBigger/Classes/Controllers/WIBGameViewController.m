@@ -109,7 +109,7 @@
     [self.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self.nextButton sizeToFit];
     self.nextButton.center = self.view.center;
-    //self.nextButton.hidden = YES;
+    self.nextButton.hidden = YES;
     [self.view insertSubview:self.nextButton aboveSubview:self.questionView];
     
     self.questionNumberLabel =  [UILabel new];
@@ -133,13 +133,14 @@
         [self.questionView refreshWithQuestion:self.question];
         self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld",[WIBGamePlayManager sharedInstance].questionIndex];
         [self startTimer];
-        //self.nextButton.hidden = YES;
-    }    
+        self.nextButton.hidden = YES;
+    }
 }
 
 - (void)startTimer
 {
     _currSeconds = SECONDS_PER_QUESTION;
+    self.timerLabel.hidden = NO;
     [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
     if(!self.timer)
     {
@@ -149,22 +150,46 @@
 
 - (void)timerFired
 {
-    if(_currSeconds>0)
+    if(_currSeconds>1)
     {
         _currSeconds-=1;
         [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
     }
     else
     {
+        _currSeconds-=1;
+        [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
+        
         [self.timer invalidate];
         self.timer = nil;
-        self.nextButton.hidden = NO;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
+        
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
             [self.nextButton sizeToFit];
         }
         //TODO: Used to reveal answer!!
+    }
+}
+
+# pragma mark - WIBGamePlayDelegate
+- (void)questionView:(WIBQuestionView *)questionView didSelectOption:(WIBGameOption *)option
+{
+    [self.timer invalidate];
+    self.timer = nil;
+    self.timerLabel.hidden = YES;
+}
+
+
+- (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
+{
+    self.nextButton.hidden = NO;
+    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+    {
+        [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+        [self.nextButton sizeToFit];
     }
 }
 
