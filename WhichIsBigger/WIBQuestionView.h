@@ -9,13 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "WIBGameViewController.h"
 
-// WIBQuestionView
 @class WIBGameQuestion;
 @protocol WIBGamePlayDelegate;
 @interface WIBQuestionView : UIView
-- (instancetype)initWithGameQuestion:(WIBGameQuestion *)question;
 - (void)refreshWithQuestion:(WIBGameQuestion *)question;
 @property (nonatomic, weak) id<WIBGamePlayDelegate> delegate;
+
+// Newly exposed
+@property (nonatomic, weak) WIBGameQuestion *question;
+- (void)setup;
+
 @end
 
 // WIBQuestionViewDelegate

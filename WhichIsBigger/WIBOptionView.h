@@ -17,6 +17,10 @@
 - (void)refreshWithOption:(WIBGameOption *)option;
 - (void)revealAnswerLabel;
 
+// Newly exposed
+@property (nonatomic, weak) WIBGameOption *gameOption;
+- (void)configureViews;
+
 @property (nonatomic, weak) id<WIBQuestionViewDelegate> delegate;
 
 @end

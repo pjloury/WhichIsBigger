@@ -13,20 +13,11 @@
 
 @interface WIBImageView ()
 
-@property (nonatomic, weak) WIBGameItem *gameItem;
 @property (nonatomic, strong) AsyncImageView *subImageView;
 
 @end
 
 @implementation WIBImageView
-
-- (instancetype)initWithGameItem:(WIBGameItem *)item {
-    if (self = [super init]) {
-        _gameItem = item;
-        [self setup];
-    }
-    return self;
-}
 
 - (void)setup {    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
@@ -34,10 +25,11 @@
     [self addTarget:self action:@selector(actionDidPressButton:) forControlEvents:UIControlEventTouchDown];
     [self addTarget:self action:@selector(actionDidReleaseButton:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     self.showsTouchWhenHighlighted = NO;
-    
     self.backgroundColor = [UIColor blueColor];   
     
-    self.subImageView = [[AsyncImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
+    self.clipsToBounds = YES;
+    
+    self.subImageView = [[AsyncImageView alloc] initWithFrame:self.bounds];
     
     if(![self.gameItem.photoURL containsString:@"http://"])
     {
@@ -48,16 +40,14 @@
         self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
     }
     
-    self.subImageView.frame = CGRectMake(self.subImageView.frame.origin.x, self.subImageView.frame.origin.x, 100, 100);
-    
+    self.subImageView.contentMode = UIViewContentModeCenter;
     self.subImageView.userInteractionEnabled = NO;
     self.subImageView.exclusiveTouch = NO;
-    self.subImageView.center = self.center;
     self.subImageView.showActivityIndicator = YES;
     self.subImageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    [self insertSubview:self.subImageView atIndex:0];
-    //self.subImageView.backgroundColor = [UIColor greenColor];
+    [self addSubview:self.subImageView];
+
     
 //    self.layer.shadowColor = [UIColor blackColor].CGColor;
 //    self.layer.shadowOpacity = .3;
@@ -67,7 +57,8 @@
 //    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
 //    self.imageView.layer.borderWidth = 2;
 //    self.contentMode = UIViewContentModeScaleAspectFill;
-    [self configureConstraints];
+    
+    //[self configureConstraints];
 }
 
 - (void)dealloc
@@ -121,7 +112,5 @@
     animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
     [self.layer addAnimation:animation forKey:@"scale1"];
 }
-
-
 
 @end

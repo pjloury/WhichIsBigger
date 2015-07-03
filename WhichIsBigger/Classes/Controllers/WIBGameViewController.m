@@ -35,7 +35,7 @@
 @interface WIBGameViewController ()
 
 // Deprecated
-@property (strong, nonatomic) UILabel *timerLabel;
+
 @property (strong, atomic) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UIButton *pausePlayButton;
 - (IBAction)pressedPausePlay:(id)sender;
@@ -45,9 +45,10 @@
 @property int currSeconds;
 
 // Views
-@property (nonatomic, strong) WIBQuestionView *questionView;
-@property (nonatomic, strong) UIButton *nextButton;
-@property (nonatomic, strong) UILabel *questionNumberLabel;
+@property (nonatomic, strong) IBOutlet WIBQuestionView *questionView;
+@property (nonatomic, strong) IBOutlet UIButton *nextButton;
+@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (nonatomic, strong) IBOutlet UILabel *questionNumberLabel;
 
 @end
 
@@ -84,41 +85,21 @@
 
 - (void)configureQuestionView
 {
-    [[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    self.questionView = [[WIBQuestionView alloc] initWithGameQuestion:self.question];
+    self.questionView.question = self.question;
     self.questionView.delegate = self;
+    [self.questionView setup];
     
-    [self.view addSubview:self.questionView];
-    [self.questionView ic_pinViewToAllSidesOfSuperViewWithPadding:75];
-    
-    self.timerLabel = [UILabel new];
-    self.timerLabel.frame = CGRectMake(50,50,50,50);
     self.timerLabel.text = @"10";
-    [self.view insertSubview:self.timerLabel aboveSubview:self.questionView];
+    [self.view bringSubviewToFront:self.timerLabel];
 }
 
 - (void)configureBackground
 {
-    CAGradientLayer *gradient = [UIColor gradientLayerWithColor:[UIColor sexyRedColor]];
-    gradient.frame = self.view.bounds;
-    [self.view.layer insertSublayer:gradient atIndex:0];
-    
-    self.nextButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.nextButton setTitle:@"next" forState:UIControlStateNormal];
-    [self.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchDown];
-    [self.nextButton sizeToFit];
-    self.nextButton.center = self.view.center;
     self.nextButton.hidden = YES;
-    [self.view insertSubview:self.nextButton aboveSubview:self.questionView];
-    
-    self.questionNumberLabel =  [UILabel new];
-    self.questionNumberLabel.frame = CGRectMake(0,100,100,50);
     self.questionNumberLabel.text = @"1";
-    [self.view insertSubview:self.questionNumberLabel aboveSubview:self.questionView];
 }
 
-- (void)nextButtonPressed:(id)sender
+- (IBAction)nextButtonPressed:(id)sender
 {
     NSLog(@"NextPressed!");
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)

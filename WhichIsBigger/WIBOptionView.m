@@ -15,13 +15,9 @@
 
 @interface WIBOptionView ()<WIBOptionViewDelegate>
 
-// Models
-@property (nonatomic, weak) WIBGameOption *gameOption;
-//@property (nonatomic, weak, readonly) WIBGameItem *gameItem;
-
 // Views
-@property (nonatomic, strong) WIBImageView *imageView;
-@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet WIBImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -44,39 +40,24 @@
 - (void)configureViews {
     [self configureImageView];
     [self configureLabel];
-    [self configureConstraints];
 }
 
 - (void)configureImageView {
-    [self.imageView removeFromSuperview];
-    self.imageView = [[WIBImageView alloc] initWithGameItem:self.gameOption.item];
+    //[self.imageView removeFromSuperview];
+
+    self.imageView.gameItem = self.gameOption.item;
+    
     self.imageView.delegate = self;
-    [self addSubview:self.imageView];
+    [self.imageView setup];
+    //[self addSubview:self.imageView];
 }
 
 - (void)configureLabel {
-    [self.nameLabel removeFromSuperview];
-    self.nameLabel = [UILabel new];
     self.nameLabel.text = self.gameOption.multiplier > 1 ? [NSString stringWithFormat:@"%d %@",self.gameOption.multiplier,self.gameItem.name.capitalizedString]: self.gameItem.name.capitalizedString;
-    self.nameLabel.font = [UIFont fontWithName:HELVETICA_NEUE_LIGHT size:18];
-    self.nameLabel.textColor = [UIColor whiteColor];
-    self.nameLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:self.nameLabel];
 }
 
 - (void)revealAnswerLabel {
     self.nameLabel.text = self.gameOption.totalString;
-}
-
-
-- (void)configureConstraints {
-    self.clipsToBounds = YES;
-    [self.imageView ic_centerHorizontallyInSuperView];
-    [self.imageView ic_constraintForHeightAttributeEqualtToView:self multiplier:.5];
-    [self.imageView ic_equalRelationConstraintForAttribute:NSLayoutAttributeCenterY toView:self multiplier:1 constant:-10];
-    
-    [self.nameLabel ic_centerHorizontallyInSuperView];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.nameLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.imageView attribute:NSLayoutAttributeBottom multiplier:1 constant:20]];
 }
 
 - (WIBGameItem *)gameItem {

@@ -9,6 +9,12 @@
 #import "WIBGameCompleteViewController.h"
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
+#import "WIBConstants.h"
+@interface WIBGameCompleteViewController ()<UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *answersCollectionView;
+
+@end
+
 
 @implementation WIBGameCompleteViewController
 
@@ -24,6 +30,20 @@
     playAgainButton.backgroundColor = [UIColor greenColor];
     [self.view addSubview:playAgainButton];
     NSLog(@"%ld Questions Answered Correctly!",[[WIBGamePlayManager sharedInstance] numberCorrectAnswers]);
+}
+
+#pragma mark - UICollectionViewDelegate
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return NUMBER_OF_QUESTIONS;
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"answer" forIndexPath:indexPath];
+    [cell.contentView addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenCheck"]]];
+    return cell;
 }
 
 - (void)didPressNewGame:(id)sender
