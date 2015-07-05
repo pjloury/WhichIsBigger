@@ -80,6 +80,10 @@ alpha:1.0]
     return UIColorFromRGB(0xFF5722);
 }
 
++ (UIColor *)sexyLightPurpleColor {
+    return [UIColor colorWithRed:175 green:68 blue:255 alpha:.17];
+}
+
 + (NSArray *)colorArray {
     return @[
              [UIColor sexyRedColor],

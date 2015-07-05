@@ -14,7 +14,6 @@
 // Models
 #import "WIBGameOption.h"
 #import "WIBGameQuestion.h"
-#import "WIBConstants.h"
 #import "UIView+AutoLayout.h"
 
 @interface WIBQuestionView ()<WIBQuestionViewDelegate>
@@ -39,12 +38,6 @@
     self.optionView2.delegate = self;
     
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.font = [UIFont fontWithName:HELVETICA_NEUE_LIGHT size:24];
-    self.titleLabel.textColor = [UIColor whiteColor];
-    [self.titleLabel sizeToFit];
-    
-    [self addSubview:self.titleLabel];
 }
 
 - (void)refreshWithQuestion:(WIBGameQuestion *)question
@@ -53,8 +46,6 @@
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
     [self.optionView1 refreshWithOption:self.question.option1];
     [self.optionView2 refreshWithOption:self.question.option2];
-    self.optionView1.backgroundColor = [UIColor clearColor];
-    self.optionView2.backgroundColor = [UIColor clearColor];
 }
 
 # pragma mark - WIBQuestionViewDelegate
@@ -71,6 +62,7 @@
     {
         NSLog(@"Wrong Answer Chosen!");
         self.question.answeredCorrectly = NO;
+        optionView.backgroundColor = [UIColor redColor];
     }
     [self revealAnswer];
 }

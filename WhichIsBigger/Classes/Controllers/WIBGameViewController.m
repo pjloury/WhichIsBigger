@@ -8,17 +8,14 @@
 
 #import "WIBGameViewController.h"
 
-//Deprecated
-#import "WIBGameView.h"
-#import "WIBGameItem.h"
-
 // Views
 #import "WIBQuestionView.h"
+#import "WIBPopButton.h"
 #import "UIView+AutoLayout.h"
-#import "UIColor+Additions.h"
 
 // Models
 #import "WIBGameQuestion.h"
+#import "WIBGameItem.h"
 
 // Controller
 #import "WIBGameCompleteViewController.h"
@@ -26,39 +23,24 @@
 // Managers
 #import "WIBGamePlayManager.h"
 
-// Frameworks
-#import <Parse/Parse.h>
-
-// Constants
-#import "WIBConstants.h"
-
 @interface WIBGameViewController ()
-
-// Deprecated
-
-@property (strong, atomic) NSTimer *timer;
-@property (weak, nonatomic) IBOutlet UIButton *pausePlayButton;
-- (IBAction)pressedPausePlay:(id)sender;
 
 // Model
 @property (strong, nonatomic) WIBGameQuestion *question;
+@property (strong, atomic) NSTimer *timer;
+@property (strong, atomic) NSDate *startDate;
 @property int currSeconds;
 
 // Views
 @property (nonatomic, strong) IBOutlet WIBQuestionView *questionView;
-@property (nonatomic, strong) IBOutlet UIButton *nextButton;
-@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (nonatomic, strong) IBOutlet WIBPopButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIView *timerBar;
 @property (nonatomic, strong) IBOutlet UILabel *questionNumberLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timerLengthConstraint;
 
 @end
 
 @implementation WIBGameViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor colorWithWhite:.8 alpha:1]];
-    // Do any additional setup after loading the view, typically from a nib.
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -72,15 +54,13 @@
     // Configure View using Model
     [self configureQuestionView];
     [self configureBackground];
-    
-    // Kick off the first question's timer
-    [self startTimer];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // Kick off the first question's timer
+    [super viewDidAppear:animated];
+    [self startTimer];
 }
 
 - (void)configureQuestionView
@@ -88,15 +68,12 @@
     self.questionView.question = self.question;
     self.questionView.delegate = self;
     [self.questionView setup];
-    
-    self.timerLabel.text = @"10";
-    [self.view bringSubviewToFront:self.timerLabel];
 }
 
 - (void)configureBackground
 {
     self.nextButton.hidden = YES;
-    self.questionNumberLabel.text = @"1";
+    self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
 }
 
 - (IBAction)nextButtonPressed:(id)sender
@@ -104,28 +81,38 @@
     NSLog(@"NextPressed!");
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {
-        [[WIBGamePlayManager sharedInstance] completeGame];
-        WIBGameCompleteViewController *vc = [[WIBGameCompleteViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
+        [[WIBGamePlayManager sharedInstance] completeGame];        
+        [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
     }
     else
     {
-        self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
-        [self.questionView refreshWithQuestion:self.question];
-        self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld",[WIBGamePlayManager sharedInstance].questionIndex];
-        [self startTimer];
-        self.nextButton.hidden = YES;
+        double delayInSeconds = 0.3;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
+            [self.questionView refreshWithQuestion:self.question];
+            self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
+            [self resumeLayer:self.timerBar.layer];
+            self.timerLengthConstraint.constant = self.view.frame.size.width;
+            [self.timerBar layoutIfNeeded];
+            [self startTimer];
+            self.nextButton.hidden = YES;
+        });
     }
 }
 
 - (void)startTimer
 {
     _currSeconds = SECONDS_PER_QUESTION;
-    self.timerLabel.hidden = NO;
-    [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
+    self.startDate = [NSDate date];
+    self.timerLengthConstraint.constant = 0;
+    [UIView animateWithDuration:5
+                     animations:^{
+                         [self.timerBar layoutIfNeeded];
+                     }];
     if(!self.timer)
     {
-        self.timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     }
 }
 
@@ -134,13 +121,10 @@
     if(_currSeconds>1)
     {
         _currSeconds-=1;
-        [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
     }
     else
     {
         _currSeconds-=1;
-        [self.timerLabel setText:[NSString stringWithFormat:@"%d",_currSeconds]];
-        
         [self.timer invalidate];
         self.timer = nil;
         
@@ -151,7 +135,7 @@
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
             [self.nextButton sizeToFit];
         }
-        //TODO: Used to reveal answer!!
+        //TODO: Kick off "reveal" animation!
     }
 }
 
@@ -160,18 +144,38 @@
 {
     [self.timer invalidate];
     self.timer = nil;
-    self.timerLabel.hidden = YES;
+    [self pauseLayer:self.timerBar.layer];
+    self.question.answerTime = fabs([self.startDate timeIntervalSinceNow]);
 }
 
+- (void)pauseLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    layer.speed = 0.0;
+    layer.timeOffset = pausedTime;
+}
+
+-(void)resumeLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer timeOffset];
+    layer.speed = 1.0;
+    layer.timeOffset = 0.0;
+    layer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    layer.beginTime = timeSincePause;
+}
 
 - (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
 {
-    self.nextButton.hidden = NO;
-    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
-    {
-        [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
-        [self.nextButton sizeToFit];
-    }
+    void (^revealButton)() = ^void() {
+        self.nextButton.hidden = NO;
+        if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+        {
+            [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+            [self.nextButton sizeToFit];
+        }
+    };
+    [UIView animateWithDuration:0.5 animations:revealButton];
 }
 
 @end

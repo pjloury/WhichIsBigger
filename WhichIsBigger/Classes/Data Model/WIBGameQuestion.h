@@ -15,6 +15,7 @@
 @property (nonatomic, strong) WIBGameOption *option1;
 @property (nonatomic, strong) WIBGameOption *option2;
 @property (nonatomic, readonly) NSString *questionText;
+@property (nonatomic, assign) NSTimeInterval answerTime;
 @property double answerQuantity;
 @property BOOL answeredCorrectly;
 

@@ -14,11 +14,14 @@
 #import "WIBGameQuestion.h"
 #import "WIBGameOption.h"
 #import "WIBGameItem.h"
-#import "WIBConstants.h"
+
+// Managers
+#import "WIBNetworkManager.h"
 
 @interface WIBGamePlayManager()
 @property (nonatomic, strong) NSMutableArray *gameQuestions;
-@property NSInteger questionIndex;
+@property (nonatomic, assign) NSInteger questionIndex;
+@property (nonatomic, assign) NSInteger score;
 @end
 
 @implementation WIBGamePlayManager
@@ -56,6 +59,36 @@
         question.option1.item.alreadyUsed = NO;
         question.option2.item.alreadyUsed = NO;
     }
+}
+
+- (NSInteger)score
+{
+    _score = 0;
+    for (WIBGameQuestion *question in self.gameQuestions)
+    {
+        if (question.answeredCorrectly)
+        {
+            _score += round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * question.answerTime / SECONDS_PER_QUESTION));
+        }
+    }
+
+    if (_score > self.highScore)
+    {
+        self.highScore = _score;
+    }
+    
+    return _score;
+    
+}
+
+- (NSInteger)highScore
+{
+    return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"]).integerValue;
+}
+
+- (void)setHighScore:(NSInteger)highScore
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
 }
 
 - (void)generateQuestions
@@ -96,6 +129,8 @@
         [self.gameQuestions addObject:gameQuestion];
     }
     [self printQuestions];
+    [[WIBNetworkManager sharedInstance] preloadImages:self.gameQuestions];
+    
 }
 
 - (void)printQuestions

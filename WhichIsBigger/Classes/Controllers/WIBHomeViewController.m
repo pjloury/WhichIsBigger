@@ -9,7 +9,7 @@
 #import "WIBHomeViewController.h"
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
-#import "WIBParseManager.h"
+#import "WIBNetworkManager.h"
 
 @interface WIBHomeViewController()
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
@@ -21,19 +21,20 @@
 {
     self.startNewGameButton.enabled = NO;
     __weak WIBHomeViewController *weakSelf = self;
-    [[WIBParseManager sharedInstance] generateDataModelWithCompletion:^{
+    [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
         dispatch_async(dispatch_get_main_queue(),
         ^{
             weakSelf.startNewGameButton.enabled = YES;
         });
     }];
 }
-- (IBAction)didPressNewGame:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    
-    WIBGameViewController *gameViewController = [storyboard instantiateViewControllerWithIdentifier:@"GameViewController"];
-    
-    [self presentViewController:gameViewController animated:NO completion:nil];
+- (IBAction)didPressNewGameButton:(id)sender
+{
+    double delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+    });
 }
 
 @end

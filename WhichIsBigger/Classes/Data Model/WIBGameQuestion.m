@@ -9,7 +9,6 @@
 #import "WIBGamePlayManager.h"
 #import "WIBGameQuestion.h"
 #import "WIBGameItem.h"
-#import "WIBConstants.h"
 
 @interface WIBGameQuestion ()
 

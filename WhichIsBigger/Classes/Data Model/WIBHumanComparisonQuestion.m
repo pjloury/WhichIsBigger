@@ -8,7 +8,6 @@
 
 #import "WIBHumanComparisonQuestion.h"
 #import "WIBGameItem.h"
-#import "WIBConstants.h"
 
 @implementation WIBHumanComparisonQuestion
 

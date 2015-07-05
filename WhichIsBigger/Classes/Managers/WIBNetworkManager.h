@@ -1,5 +1,5 @@
 //
-//  WIBParseManager.h
+//  WIBNetworkManager.h
 //  WhichIsBigger
 //
 //  Created by PJ Loury on 4/7/15.
@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "WIBGameItem.h"
+#import "AsyncImageView.h"
 
-@interface WIBParseManager : NSObject
+@interface WIBNetworkManager : NSObject
 
-+ (WIBParseManager *)sharedInstance;
++ (WIBNetworkManager *)sharedInstance;
 - (void)generateDataModelWithCompletion:(void (^)())completion;
+- (void)preloadImages:(NSMutableArray *)gameQuestions;
 
 @end

@@ -13,6 +13,7 @@
 + (UIColor *)sexyRedColor;
 + (UIColor *)sexyPinkColor;
 + (UIColor *)sexyPurpleColor;
++ (UIColor *)sexyLightPurpleColor;
 + (UIColor *)sexyDeepPurpleColor;
 + (UIColor *)sexyIndigoColor;
 + (UIColor *)sexyBlueColor;
@@ -26,6 +27,7 @@
 + (UIColor *)sexyAmberColor;
 + (UIColor *)sexyOrangeColor;
 + (UIColor *)sexyDeepOrangeColor;
+
 
 + (CAGradientLayer *)gradientLayerWithColor:(UIColor *)color;
 

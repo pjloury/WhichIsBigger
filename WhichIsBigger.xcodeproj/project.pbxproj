@@ -12,25 +12,32 @@
 		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
 		7D0CC6F41AD4E7D400BB65BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F21AD4E7D400BB65BB /* Main.storyboard */; };
 		7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */; };
-		7D0CC6F91AD4E7D400BB65BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F71AD4E7D400BB65BB /* LaunchScreen.xib */; };
 		7D0CC7051AD4E7D400BB65BB /* WhichIsBiggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */; };
 		7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72C1AD4EAA200BB65BB /* libz.dylib */; };
 		7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */; };
 		7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */; };
 		7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */; };
 		7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */; };
+		7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */; };
+		7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */; };
+		7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */; };
+		7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */; };
+		7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */; };
+		7D8E8D7F1B47C4D4005B4AA2 /* NSNumber+Separated.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */; };
+		7D8E8D821B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E8D811B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m */; };
+		7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */; };
 		7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */; };
-		7D943FA51AF0C6B90061387B /* WIBParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA31AF0C6B90061387B /* WIBParseManager.m */; };
+		7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */; };
 		7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */; };
 		7D943FAE1AF0C7160061387B /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAB1AF0C7160061387B /* AsyncImageView.m */; };
 		7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAD1AF0C7160061387B /* WIBImageView.m */; };
 		7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB11AF0C73A0061387B /* WIBGameItem.m */; };
 		7D943FB61AF0C8CA0061387B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D943FB51AF0C8CA0061387B /* Info.plist */; };
 		7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */; };
-		7DD20E171B0981B5002ED286 /* WIBHumanComparisonQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */; };
+		7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */; };
+		7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */; };
 		9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */; };
 		F301177F1AF0993D00F1D854 /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F301177D1AF0993D00F1D854 /* WIBOptionView.m */; };
-		F30117871AF09BC300F1D854 /* WIBGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30117861AF09BC300F1D854 /* WIBGameView.m */; };
 		F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE631AEF3CE8002E1565 /* WIBConstants.m */; };
 		F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F301178A1AF0A68200F1D854 /* WIBQuestionView.m */; };
 		F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */; };
@@ -56,7 +63,6 @@
 		7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7D0CC6F31AD4E7D400BB65BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7D0CC6F81AD4E7D400BB65BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7D0CC6FE1AD4E7D400BB65BB /* WhichIsBiggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhichIsBiggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0CC7031AD4E7D400BB65BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhichIsBiggerTests.m; sourceTree = "<group>"; };
@@ -70,10 +76,21 @@
 		7D70EE631AEF3CE8002E1565 /* WIBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBConstants.m; path = WhichIsBigger/WIBConstants.m; sourceTree = "<group>"; };
 		7D70EE691AEF507D002E1565 /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
 		7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
+		7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Blogger_Sans.otf; sourceTree = "<group>"; };
+		7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium.otf"; sourceTree = "<group>"; };
+		7D8E8D7D1B47C4D4005B4AA2 /* NSNumber+Separated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Separated.h"; sourceTree = "<group>"; };
+		7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Separated.m"; sourceTree = "<group>"; };
+		7D8E8D801B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHumanComparisonQuestion.h; path = "Classes/Data Model/WIBHumanComparisonQuestion.h"; sourceTree = "<group>"; };
+		7D8E8D811B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHumanComparisonQuestion.m; path = "Classes/Data Model/WIBHumanComparisonQuestion.m"; sourceTree = "<group>"; };
+		7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Classes/Views/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WIB-Prefix.pch"; sourceTree = "<group>"; };
 		7D943FA01AF0C6B90061387B /* WIBGamePlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGamePlayManager.h; path = Classes/Managers/WIBGamePlayManager.h; sourceTree = "<group>"; };
 		7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGamePlayManager.m; path = Classes/Managers/WIBGamePlayManager.m; sourceTree = "<group>"; };
-		7D943FA21AF0C6B90061387B /* WIBParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBParseManager.h; path = Classes/Managers/WIBParseManager.h; sourceTree = "<group>"; };
-		7D943FA31AF0C6B90061387B /* WIBParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBParseManager.m; path = Classes/Managers/WIBParseManager.m; sourceTree = "<group>"; };
+		7D943FA21AF0C6B90061387B /* WIBNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBNetworkManager.h; path = Classes/Managers/WIBNetworkManager.h; sourceTree = "<group>"; };
+		7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBNetworkManager.m; path = Classes/Managers/WIBNetworkManager.m; sourceTree = "<group>"; };
 		7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteViewController.h; path = Classes/Controllers/WIBGameCompleteViewController.h; sourceTree = "<group>"; };
 		7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameCompleteViewController.m; path = Classes/Controllers/WIBGameCompleteViewController.m; sourceTree = "<group>"; };
 		7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameViewController.h; path = Classes/Controllers/WIBGameViewController.h; sourceTree = "<group>"; };
@@ -87,12 +104,13 @@
 		7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameViewController.m; path = Classes/Controllers/WIBGameViewController.m; sourceTree = "<group>"; };
 		7DD20E151B0981B5002ED286 /* WIBHumanComparisonQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHumanComparisonQuestion.h; path = "Classes/Data Model/WIBHumanComparisonQuestion.h"; sourceTree = "<group>"; };
 		7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHumanComparisonQuestion.m; path = "Classes/Data Model/WIBHumanComparisonQuestion.m"; sourceTree = "<group>"; };
+		7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBPopButton.h; path = WhichIsBigger/Classes/Views/WIBPopButton.h; sourceTree = "<group>"; };
+		7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBPopButton.m; path = WhichIsBigger/Classes/Views/WIBPopButton.m; sourceTree = "<group>"; };
+		7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium_Italic.otf"; sourceTree = "<group>"; };
 		97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.debug.xcconfig"; sourceTree = "<group>"; };
 		F301177C1AF0993D00F1D854 /* WIBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBOptionView.h; sourceTree = "<group>"; };
 		F301177D1AF0993D00F1D854 /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBOptionView.m; sourceTree = "<group>"; };
-		F30117851AF09BC300F1D854 /* WIBGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameView.h; path = Classes/Views/WIBGameView.h; sourceTree = "<group>"; };
-		F30117861AF09BC300F1D854 /* WIBGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameView.m; path = Classes/Views/WIBGameView.m; sourceTree = "<group>"; };
 		F30117891AF0A68200F1D854 /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBQuestionView.h; sourceTree = "<group>"; };
 		F301178A1AF0A68200F1D854 /* WIBQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBQuestionView.m; sourceTree = "<group>"; };
 		F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
@@ -137,6 +155,9 @@
 			children = (
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
 				7D70EE631AEF3CE8002E1565 /* WIBConstants.m */,
+				7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */,
+				7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */,
+				7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */,
 				7D0CC7301AD4EAC400BB65BB /* Frameworks */,
 				7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */,
 				7D0CC7011AD4E7D400BB65BB /* WhichIsBiggerTests */,
@@ -159,15 +180,16 @@
 			children = (
 				7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */,
 				7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */,
-				F30117801AF0997200F1D854 /* Views */,
+				F37659221ADE3B9600932FC9 /* Categories */,
 				7D0CC73B1AD4F30000BB65BB /* Data Model */,
 				7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */,
-				7D0CC6F71AD4E7D400BB65BB /* LaunchScreen.xib */,
+				7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */,
 				7D0CC6F21AD4E7D400BB65BB /* Main.storyboard */,
-				F30117811AF099C300F1D854 /* ViewControllers */,
 				7D0CC73A1AD4F2EE00BB65BB /* Managers */,
+				7D8E8D5E1B4741A6005B4AA2 /* Resources */,
 				7D0CC6E81AD4E7D400BB65BB /* Supporting Files */,
-				F37659221ADE3B9600932FC9 /* Categories */,
+				F30117811AF099C300F1D854 /* ViewControllers */,
+				F30117801AF0997200F1D854 /* Views */,
 			);
 			path = WhichIsBigger;
 			sourceTree = "<group>";
@@ -213,8 +235,8 @@
 			children = (
 				7D943FA01AF0C6B90061387B /* WIBGamePlayManager.h */,
 				7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */,
-				7D943FA21AF0C6B90061387B /* WIBParseManager.h */,
-				7D943FA31AF0C6B90061387B /* WIBParseManager.m */,
+				7D943FA21AF0C6B90061387B /* WIBNetworkManager.h */,
+				7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -222,6 +244,8 @@
 		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				7D8E8D801B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.h */,
+				7D8E8D811B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m */,
 				7DD20E151B0981B5002ED286 /* WIBHumanComparisonQuestion.h */,
 				7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */,
 				7D943FB01AF0C73A0061387B /* WIBGameItem.h */,
@@ -236,13 +260,48 @@
 			name = "Data Model";
 			sourceTree = "<group>";
 		};
+		7D8E8D5E1B4741A6005B4AA2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7D8E8D5F1B4741EF005B4AA2 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7D8E8D5F1B4741EF005B4AA2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7D8E8D751B479BA6005B4AA2 /* BloggerSans */,
+				7D8E8D741B479B9B005B4AA2 /* OpenSans */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		7D8E8D741B479B9B005B4AA2 /* OpenSans */ = {
+			isa = PBXGroup;
+			children = (
+				7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */,
+				7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */,
+				7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */,
+			);
+			name = OpenSans;
+			sourceTree = "<group>";
+		};
+		7D8E8D751B479BA6005B4AA2 /* BloggerSans */ = {
+			isa = PBXGroup;
+			children = (
+				7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */,
+				7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */,
+				7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */,
+			);
+			name = BloggerSans;
+			sourceTree = "<group>";
+		};
 		F30117801AF0997200F1D854 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				7D943FAA1AF0C7160061387B /* AsyncImageView.h */,
 				7D943FAB1AF0C7160061387B /* AsyncImageView.m */,
-				F30117851AF09BC300F1D854 /* WIBGameView.h */,
-				F30117861AF09BC300F1D854 /* WIBGameView.m */,
 				7D943FAC1AF0C7160061387B /* WIBImageView.h */,
 				7D943FAD1AF0C7160061387B /* WIBImageView.m */,
 				F301177C1AF0993D00F1D854 /* WIBOptionView.h */,
@@ -269,6 +328,8 @@
 		F37659221ADE3B9600932FC9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				7D8E8D7D1B47C4D4005B4AA2 /* NSNumber+Separated.h */,
+				7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */,
 				F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */,
 				F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */,
 				F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */,
@@ -359,10 +420,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */,
 				7D943FB61AF0C8CA0061387B /* Info.plist in Resources */,
 				7D0CC6F41AD4E7D400BB65BB /* Main.storyboard in Resources */,
-				7D0CC6F91AD4E7D400BB65BB /* LaunchScreen.xib in Resources */,
+				7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */,
+				7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */,
 				7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */,
+				7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */,
+				7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */,
+				7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */,
+				7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,25 +481,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
-				7DD20E171B0981B5002ED286 /* WIBHumanComparisonQuestion.m in Sources */,
 				7D943FAE1AF0C7160061387B /* AsyncImageView.m in Sources */,
 				F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				F301177F1AF0993D00F1D854 /* WIBOptionView.m in Sources */,
-				7D943FA51AF0C6B90061387B /* WIBParseManager.m in Sources */,
+				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
 				7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */,
 				F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */,
-				F30117871AF09BC300F1D854 /* WIBGameView.m in Sources */,
 				7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */,
 				7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */,
 				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
 				7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */,
 				7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */,
+				7D8E8D821B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m in Sources */,
 				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
+				7D8E8D7F1B47C4D4005B4AA2 /* NSNumber+Separated.m in Sources */,
 				7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */,
 				F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */,
+				7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,14 +529,6 @@
 				7D0CC6F31AD4E7D400BB65BB /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		7D0CC6F71AD4E7D400BB65BB /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7D0CC6F81AD4E7D400BB65BB /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -561,6 +621,8 @@
 					"/Users/ploury/Downloads/parse-library-1.7.1",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -615,6 +677,8 @@
 					"/Users/ploury/Downloads/parse-library-1.7.1",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

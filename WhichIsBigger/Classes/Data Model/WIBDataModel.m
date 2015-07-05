@@ -7,7 +7,6 @@
 //
 
 #import "WIBDataModel.h"
-#import "WIBConstants.h"
 
 // GamePlayManager keeps track of used names
 #import "WIBGamePlayManager.h"

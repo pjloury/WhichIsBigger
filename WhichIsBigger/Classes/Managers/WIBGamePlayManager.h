@@ -16,11 +16,12 @@
 
 + (WIBGamePlayManager *)sharedInstance;
 - (WIBGameQuestion *)nextGameQuestion;
-- (BOOL)questionIndexIsInBounds;
 - (NSInteger)numberCorrectAnswers;
 
 @property (readonly) NSInteger questionIndex;
 @property (nonatomic, assign) double difficulty;
 @property (nonatomic, strong) NSMutableSet *usedNames;
-
+@property (nonatomic, strong, readonly) NSMutableArray *gameQuestions;
+@property (nonatomic, assign, readonly) NSInteger score;
+@property (nonatomic, assign, readonly) NSInteger highScore;
 @end

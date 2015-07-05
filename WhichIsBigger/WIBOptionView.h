@@ -13,11 +13,9 @@
 @class WIBImageView;
 
 @interface WIBOptionView : UIView
-- (instancetype)initWithGameOption:(WIBGameOption *)option;
 - (void)refreshWithOption:(WIBGameOption *)option;
 - (void)revealAnswerLabel;
 
-// Newly exposed
 @property (nonatomic, weak) WIBGameOption *gameOption;
 - (void)configureViews;
 

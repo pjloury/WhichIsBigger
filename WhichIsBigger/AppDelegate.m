@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "WIBParseManager.h"
+#import "WIBNetworkManager.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
 #import "WIBHomeViewController.h"
@@ -33,6 +33,7 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+        
     return YES;
 }
 

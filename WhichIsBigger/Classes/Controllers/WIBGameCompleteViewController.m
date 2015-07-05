@@ -9,27 +9,45 @@
 #import "WIBGameCompleteViewController.h"
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
-#import "WIBConstants.h"
+
+// Models
+#import "WIBGameQuestion.h"
+
 @interface WIBGameCompleteViewController ()<UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *answersCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *highScoreLabel;
+@property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
+@property (weak, nonatomic) NSTimer *scoreLabelTimer;
+@property (assign, nonatomic) NSInteger incrementedScore;
+
 
 @end
 
-
 @implementation WIBGameCompleteViewController
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    NSLog(@"GAME COMPLETE!");
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.incrementedScore = 0;
+    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
+    self.highScoreLabel.hidden = YES;
+}
 
-    UIButton *playAgainButton = [[UIButton alloc]initWithFrame:CGRectMake(50,50,200,50)];
-    [playAgainButton setTitle:@"Play Again!" forState:UIControlStateNormal];
-    playAgainButton.titleLabel.textColor = [UIColor blueColor];
-    [playAgainButton addTarget:self action:@selector(didPressNewGame:) forControlEvents:UIControlEventTouchDown];
-    playAgainButton.backgroundColor = [UIColor greenColor];
-    [self.view addSubview:playAgainButton];
-    NSLog(@"%ld Questions Answered Correctly!",[[WIBGamePlayManager sharedInstance] numberCorrectAnswers]);
+- (void)incrementScore
+{
+    if (self.incrementedScore <= [WIBGamePlayManager sharedInstance].score)
+    {
+        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
+        self.incrementedScore++;
+    }
+    else
+    {
+        [self.scoreLabelTimer invalidate];
+        if([WIBGamePlayManager sharedInstance].score == [WIBGamePlayManager sharedInstance].highScore)
+        {
+            self.highScoreLabel.hidden = NO;
+        }
+    }
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -41,16 +59,13 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
+    WIBGameQuestion *question = [WIBGamePlayManager sharedInstance].gameQuestions[indexPath.row];
+    NSString *imageName = question.answeredCorrectly ? @"greenCheck" : @"redX";
+    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"answer" forIndexPath:indexPath];
-    [cell.contentView addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenCheck"]]];
+    UIImageView *answerImageView = (UIImageView *)[cell viewWithTag:10];
+    answerImageView.image = [UIImage imageNamed:imageName];
     return cell;
-}
-
-- (void)didPressNewGame:(id)sender
-{
-    NSLog(@"New game pressed!");
-//    [self.navigationController popViewControllerAnimated:NO];
-    [self presentViewController:[[WIBGameViewController alloc] init] animated:NO completion:nil];
 }
 
 @end

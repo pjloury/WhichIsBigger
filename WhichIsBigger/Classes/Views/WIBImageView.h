@@ -14,10 +14,8 @@
 
 @interface WIBImageView : UIButton
 
-// Newly Exposed
 - (void)setup;
 @property (nonatomic, weak) WIBGameItem *gameItem;
-
 @property (nonatomic, weak) id<WIBOptionViewDelegate> delegate;
 
 @end

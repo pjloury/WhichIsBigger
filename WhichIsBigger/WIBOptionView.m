@@ -10,8 +10,8 @@
 #import "WIBImageView.h"
 #import "WIBGameOption.h"
 #import "WIBGameItem.h"
-#import "WIBConstants.h"
 #import "UIView+AutoLayout.h"
+    
 
 @interface WIBOptionView ()<WIBOptionViewDelegate>
 
@@ -19,17 +19,10 @@
 @property (nonatomic, strong) IBOutlet WIBImageView *imageView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 
+
 @end
 
 @implementation WIBOptionView
-
-- (instancetype)initWithGameOption:(WIBGameOption *)option {
-    if (self = [super init]) {
-        _gameOption = option;
-        [self configureViews];
-    }
-    return self;
-}
 
 - (void)refreshWithOption:(WIBGameOption *)option;
 {
@@ -37,19 +30,18 @@
     [self configureViews];
 }
 
-- (void)configureViews {
+- (void)configureViews
+{
+    self.backgroundColor = [UIColor sexyLightPurpleColor];
     [self configureImageView];
     [self configureLabel];
 }
 
-- (void)configureImageView {
-    //[self.imageView removeFromSuperview];
-
+- (void)configureImageView
+{
     self.imageView.gameItem = self.gameOption.item;
-    
     self.imageView.delegate = self;
     [self.imageView setup];
-    //[self addSubview:self.imageView];
 }
 
 - (void)configureLabel {

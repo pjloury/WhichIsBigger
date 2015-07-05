@@ -1,31 +1,28 @@
 //
-//  WIBParseManager.m
+//  WIBNetworkManager.m
 //  WhichIsBigger
 //
 //  Created by PJ Loury on 4/7/15.
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
-#import "WIBParseManager.h"
+#import "WIBNetworkManager.h"
 
 #import <Parse/Parse.h>
 
-// Constants
-#import "WIBConstants.h"
-
 // Data Model
+#import "WIBGameQuestion.h"
 #import "WIBDataModel.h"
 
-@implementation WIBParseManager
+@implementation WIBNetworkManager
 
-+ (WIBParseManager *)sharedInstance
++ (WIBNetworkManager *)sharedInstance
 {
     static dispatch_once_t pred;
-    static WIBParseManager *shared = nil;
+    static WIBNetworkManager *shared = nil;
     
     dispatch_once(&pred, ^{
-        shared = [[WIBParseManager alloc] init];
-        
+        shared = [[WIBNetworkManager alloc] init];
     });
     
     return shared;
@@ -47,12 +44,12 @@
                 //NSLog(@"%@", object.objectId);
                 WIBGameItem *gameItem = [[WIBGameItem alloc] init];
                 gameItem.name = object[@"name"];
-                gameItem.photoURL = object[@"photoURL"];
                 gameItem.baseQuantity = object[@"quantity"];
                 gameItem.unit = object[@"unit"];
                 gameItem.categoryString = object[@"category"];
                 gameItem.tags = object[@"tags"];
                 gameItem.tagsArray = object[@"tagsArray"];
+                gameItem.photoURL = object[@"photoURL"];
                 [[WIBDataModel sharedInstance] insertGameItem: gameItem];
             }
             completion();
@@ -64,4 +61,16 @@
         }
     }];
 }
+
+- (void)preloadImages:(NSMutableArray *)gameQuestions
+{
+    for (WIBGameQuestion *question in gameQuestions)
+    {
+        NSString *urlString1 = question.option1.item.photoURL;
+        NSString *urlString2 = question.option2.item.photoURL;
+        [[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString1]];
+        [[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString2]];
+    }
+}
+
 @end
