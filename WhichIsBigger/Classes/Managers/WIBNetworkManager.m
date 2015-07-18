@@ -47,8 +47,7 @@
                 gameItem.baseQuantity = object[@"quantity"];
                 gameItem.unit = object[@"unit"];
                 gameItem.categoryString = object[@"category"];
-                gameItem.tags = object[@"tags"];
-                gameItem.tagsArray = object[@"tagsArray"];
+                gameItem.tagArray = object[@"tagArray"];
                 gameItem.photoURL = object[@"photoURL"];
                 [[WIBDataModel sharedInstance] insertGameItem: gameItem];
             }

@@ -15,36 +15,9 @@ NSString *kAge = @"age";
 
 @implementation WIBGameItem
 
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        //self.alreadyUsed = NO;
-    }
-    return self;
-}
-
 - (BOOL)isPerson
 {
-// Need to verify that each tag becomes an object in the array
-    
-//        return [self.tags containsObject:@"Person"];
-    
-//    if(self.tags)
-//    {
-//
-//        for(NSString *tag in self.tags)
-//        {
-//            if([tag isEqualToString:@"Pesron"])
-//                return YES;
-//        }
-//        return NO;
-//    
-//    }
-//    return NO;
-
-    return YES;
+	return [self.tagArray containsObject:@"Person"];
 }
 
 - (NSNumber *)baseQuantity

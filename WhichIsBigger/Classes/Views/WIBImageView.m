@@ -36,14 +36,11 @@
         
     }
     
-     self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
-//    self.layer.shadowColor = [UIColor blackColor].CGColor;
-//    self.layer.shadowOpacity = .3;
-//    self.layer.shadowRadius = 2;
-//    self.layer.shadowOffset = CGSizeZero;
-//    
-//    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-//    self.imageView.layer.borderWidth = 2;
+	self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowOpacity = .4;
+    self.layer.shadowRadius = 4;
+    self.layer.shadowOffset = CGSizeZero;
 }
 
 - (void)dealloc

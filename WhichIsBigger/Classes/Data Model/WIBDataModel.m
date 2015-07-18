@@ -46,7 +46,7 @@
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     for( WIBGameItem *gameItem in gameItemsWithSameCategory)
     {
-        if(!gameItem.alreadyUsed)
+        if(![self itemNameAlreadyUsed:gameItem.name])
             return YES;
         else
         {
@@ -68,22 +68,20 @@
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(!gameItem.alreadyUsed && ![self itemNameAlreadyUsed:gameItem.name] &&
+    if(![self itemNameAlreadyUsed:gameItem.name] &&
        [gameItem.baseQuantity doubleValue] != [baseQuantity doubleValue])
     {
-        //NSLog(@"not used yet");
-        gameItem.alreadyUsed = YES;
-        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+		[[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
         return gameItem;
     }
     else
     {
         for(WIBGameItem *item in gameItemsWithSameCategory)
         {
-            if (!item.alreadyUsed && [item.baseQuantity doubleValue] != [baseQuantity doubleValue])
+            if (![self itemNameAlreadyUsed:gameItem.name] && [item.baseQuantity doubleValue] != [baseQuantity doubleValue])
             {
-                item.alreadyUsed = YES;
-                return item;
+				[[WIBGamePlayManager sharedInstance].usedNames addObject:item.name];
+				return item;
             }
         }
     }

@@ -17,6 +17,7 @@
 		7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */; };
 		7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */; };
 		7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */; };
+		7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */; };
 		7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */; };
 		7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */; };
 		7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */; };
@@ -32,7 +33,6 @@
 		7D943FAE1AF0C7160061387B /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAB1AF0C7160061387B /* AsyncImageView.m */; };
 		7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAD1AF0C7160061387B /* WIBImageView.m */; };
 		7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB11AF0C73A0061387B /* WIBGameItem.m */; };
-		7D943FB61AF0C8CA0061387B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D943FB51AF0C8CA0061387B /* Info.plist */; };
 		7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */; };
 		7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */; };
 		7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */; };
@@ -72,6 +72,9 @@
 		7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDataModel.m; path = "Classes/Data Model/WIBDataModel.m"; sourceTree = "<group>"; };
 		7D0CC73F1AD4F37700BB65BB /* WIBGameQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameQuestion.h; path = "Classes/Data Model/WIBGameQuestion.h"; sourceTree = "<group>"; };
 		7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameQuestion.m; path = "Classes/Data Model/WIBGameQuestion.m"; sourceTree = "<group>"; };
+		7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoginViewController.h; path = WhichIsBigger/Classes/Controllers/WIBLoginViewController.h; sourceTree = "<group>"; };
+		7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoginViewController.m; path = WhichIsBigger/Classes/Controllers/WIBLoginViewController.m; sourceTree = "<group>"; };
+		7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-WhichIsBigger-Parse.a"; path = "Pods/../build/Debug-iphoneos/libPods-WhichIsBigger-Parse.a"; sourceTree = "<group>"; };
 		7D70EE621AEF3CE8002E1565 /* WIBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBConstants.h; path = WhichIsBigger/WIBConstants.h; sourceTree = "<group>"; };
 		7D70EE631AEF3CE8002E1565 /* WIBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBConstants.m; path = WhichIsBigger/WIBConstants.m; sourceTree = "<group>"; };
 		7D70EE691AEF507D002E1565 /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */,
+				7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */,
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
 				7D70EE631AEF3CE8002E1565 /* WIBConstants.m */,
 				7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */,
@@ -223,6 +228,7 @@
 		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */,
 				7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */,
 				7D0CC72C1AD4EAA200BB65BB /* libz.dylib */,
 				97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */,
@@ -421,7 +427,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */,
-				7D943FB61AF0C8CA0061387B /* Info.plist in Resources */,
 				7D0CC6F41AD4E7D400BB65BB /* Main.storyboard in Resources */,
 				7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */,
 				7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */,
@@ -485,6 +490,7 @@
 				F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
+				7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				F301177F1AF0993D00F1D854 /* WIBOptionView.m in Sources */,
 				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
@@ -620,11 +626,16 @@
 					"$(PROJECT_DIR)/WhichIsBigger",
 					"/Users/ploury/Downloads/parse-library-1.7.1",
 					"$(PROJECT_DIR)",
+					/Users/ploury/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-undefined",
@@ -676,11 +687,16 @@
 					"$(PROJECT_DIR)/WhichIsBigger",
 					"/Users/ploury/Downloads/parse-library-1.7.1",
 					"$(PROJECT_DIR)",
+					/Users/ploury/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
 				INFOPLIST_FILE = WhichIsBigger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-undefined",

@@ -10,8 +10,9 @@
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
 #import "WIBNetworkManager.h"
+#import "WIBLoginViewController.h"
 
-@interface WIBHomeViewController()
+@interface WIBHomeViewController()<PFLogInViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @end
 
@@ -28,6 +29,41 @@
         });
     }];
 }
+
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+#ifdef FACEBOOK_LOGIN
+	// Check if user is logged in
+	if (![PFUser currentUser]) {
+		// Instantiate our custom log in view controller
+		WIBLoginViewController *logInViewController = [[WIBLoginViewController alloc] init];
+		[logInViewController setDelegate:self];
+		[logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
+		[logInViewController setFields:PFLogInFieldsUsernameAndPassword
+		 | PFLogInFieldsTwitter
+		 | PFLogInFieldsFacebook
+		 | PFLogInFieldsSignUpButton
+		 | PFLogInFieldsDismissButton];
+
+		/*
+		// Instantiate our custom sign up view controller
+		WIBLoginViewController *signUpViewController = [[WIBLoginViewController alloc] init];
+		[signUpViewController setDelegate:self];
+		[signUpViewController setFields:PFSignUpFieldsDefault | PFSignUpFieldsAdditional];
+		// Link the sign up view controller
+		[logInViewController setSignUpController:signUpViewController];
+		*/
+		 
+		// Present log in view controller
+		[self presentViewController:logInViewController animated:YES completion:NULL];
+	}
+#endif
+	
+}
+
+
 - (IBAction)didPressNewGameButton:(id)sender
 {
     double delayInSeconds = 0.1;

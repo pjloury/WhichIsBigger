@@ -12,7 +12,7 @@
 @class WIBGameOption;
 @class WIBImageView;
 
-@interface WIBOptionView : UIView
+@interface WIBOptionView : CSAnimationView
 - (void)refreshWithOption:(WIBGameOption *)option;
 - (void)revealAnswerLabel;
 

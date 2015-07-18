@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-@class WIBGameQuestion;
 
-@interface WIBGamePlayManager : NSObject
+@protocol WIBScoringDelegate
+- (void)didAnswerQuestionCorrectly;
+- (void)didAnswerQuestionIncorrectly;
+@end
+
+@class WIBGameQuestion;
+@interface WIBGamePlayManager : NSObject<WIBScoringDelegate>
 
 - (void)beginGame;
 - (void)completeGame;
@@ -24,4 +29,7 @@
 @property (nonatomic, strong, readonly) NSMutableArray *gameQuestions;
 @property (nonatomic, assign, readonly) NSInteger score;
 @property (nonatomic, assign, readonly) NSInteger highScore;
+@property (nonatomic, assign, readonly) NSInteger currentStreak;
+@property (nonatomic, assign, readonly) NSInteger longestStreak;
+
 @end

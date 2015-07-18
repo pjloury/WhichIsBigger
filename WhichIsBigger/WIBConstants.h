@@ -13,9 +13,12 @@
 #define HELVETICA_NEUE_LIGHT    @"HelveticaNeue-Light"
 #define HELVETICA_NEUE_MEDIUM   @"HelveticaNeue-Medium"
 
-#define SECONDS_PER_QUESTION 5
+// Game Play Constants
 #define NUMBER_OF_QUESTIONS 5
+#define SECONDS_PER_QUESTION 5
 #define POINTS_PER_QUESTION 40
+
+// Data Model Constants
 #define GAME_ITEM_FETCH_LIMIT 200
 #define ARC4RANDOM_MAX      0x100000000
 

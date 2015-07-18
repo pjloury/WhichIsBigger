@@ -22,6 +22,9 @@
 @property (nonatomic, strong) NSMutableArray *gameQuestions;
 @property (nonatomic, assign) NSInteger questionIndex;
 @property (nonatomic, assign) NSInteger score;
+@property (nonatomic, assign) NSInteger currentStreak;
+@property (nonatomic, assign) NSInteger longestStreak;
+
 @end
 
 @implementation WIBGamePlayManager
@@ -38,10 +41,7 @@
     return shared;
 }
 
-- (id)init
-{
-    return [super init];
-}
+# pragma mark - Game State
 
 - (void)beginGame
 {
@@ -61,6 +61,24 @@
     }
 }
 
+- (WIBGameQuestion *)nextGameQuestion
+{
+    NSLog(@"QUESTION %ld",self.questionIndex+1);
+    WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
+    self.questionIndex++;
+    return question;
+}
+
+- (void)printQuestions
+{
+    for(WIBGameQuestion *question in self.gameQuestions)
+    {
+        NSString *string = [NSString stringWithFormat:@"%@ vs. %@", question.option1.item.name, question.option2.item.name];
+        NSLog(@"%@",string);
+    }
+}
+
+# pragma mark - Accessors
 - (NSInteger)score
 {
     _score = 0;
@@ -71,14 +89,18 @@
             _score += round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * question.answerTime / SECONDS_PER_QUESTION));
         }
     }
-
+    
     if (_score > self.highScore)
     {
         self.highScore = _score;
     }
     
     return _score;
-    
+}
+
+- (void)setHighScore:(NSInteger)highScore
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
 }
 
 - (NSInteger)highScore
@@ -86,9 +108,26 @@
     return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"]).integerValue;
 }
 
-- (void)setHighScore:(NSInteger)highScore
+- (void)setCurrentStreak:(NSInteger)currentStreak
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
+    [[NSUserDefaults standardUserDefaults] setObject:@(currentStreak) forKey:@"currentStreak"];
+}
+
+- (NSInteger)currentStreak
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentStreak"];
+    return (num) ? num.integerValue: 0;
+}
+
+- (void)setLongestStreak:(NSInteger)longestStreak
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(longestStreak) forKey:@"longestStreak"];
+}
+
+- (NSInteger)longestStreak
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"longestStreak"];
+    return (num) ? num.integerValue: 0;
 }
 
 - (void)generateQuestions
@@ -102,9 +141,7 @@
         
         WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:randomCategory withUniqueBaseQuantity:nil];
         WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:randomCategory withUniqueBaseQuantity:item1.baseQuantity];
-        
-//        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
-//        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:WIBCategoryTypeHeight];
+		
         NSAssert(![item1 isEqual:item2], @"ITEMS SHOULD NOT BE IDENTICAL");
         
         WIBGameQuestion *gameQuestion = nil;
@@ -117,37 +154,11 @@
         {
             gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
         }
-//        if(item1.isPerson && item2.isPerson)
-//        {
-//            gameQuestion = [[WIBHumanComparisonQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
-//        }
-//        else
-//        {
-//            gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
-//        }
-        
+		
         [self.gameQuestions addObject:gameQuestion];
     }
     [self printQuestions];
     [[WIBNetworkManager sharedInstance] preloadImages:self.gameQuestions];
-    
-}
-
-- (void)printQuestions
-{
-    for(WIBGameQuestion *question in self.gameQuestions)
-    {
-        NSString *string = [NSString stringWithFormat:@"%@ vs. %@", question.option1.item.name, question.option2.item.name];
-        NSLog(string);
-    }
-}
-
-- (WIBGameQuestion *)nextGameQuestion
-{
-    NSLog(@"QUESTION %ld",self.questionIndex+1);
-    WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
-    self.questionIndex++;
-    return question;
 }
 
 - (NSInteger)numberCorrectAnswers
@@ -159,6 +170,22 @@
             correctAnswers++;
     }
     return correctAnswers;
+}
+
+# pragma mark - WIBScoringDelegate
+
+- (void)didAnswerQuestionCorrectly
+{
+    self.currentStreak++;
+    if(self.currentStreak > self.longestStreak)
+    {
+        self.longestStreak = self.currentStreak;
+    }
+}
+
+- (void)didAnswerQuestionIncorrectly
+{
+    self.currentStreak = 0;
 }
 
 @end

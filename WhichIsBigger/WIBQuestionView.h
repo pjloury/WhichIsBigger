@@ -11,23 +11,24 @@
 
 @class WIBGameQuestion;
 @protocol WIBGamePlayDelegate;
-@interface WIBQuestionView : UIView
-- (void)refreshWithQuestion:(WIBGameQuestion *)question;
-@property (nonatomic, weak) id<WIBGamePlayDelegate> delegate;
 
-// Newly exposed
+@interface WIBQuestionView : CSAnimationView
+
 @property (nonatomic, weak) WIBGameQuestion *question;
+@property (nonatomic, weak) id<WIBGamePlayDelegate> gamePlayDelegate;
 - (void)setup;
+- (void)refreshWithQuestion:(WIBGameQuestion *)question;
+- (void)startQuestionEntranceAnimationWithCompletion:(void (^)(BOOL finished))completion;
+- (void)startQuestionExitAnimationWithCompletion:(void (^)(BOOL finished))completion;
 
 @end
 
-// WIBQuestionViewDelegate
+
+#pragma mark - WIBQuestionViewDelegate
 @class WIBOptionView;
 @class WIBGameOption;
 @protocol WIBQuestionViewDelegate
 
-@required
 - (void)optionView:(WIBOptionView *)optionView didSelectOption:(WIBGameOption *)option;
-
 
 @end

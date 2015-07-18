@@ -26,7 +26,9 @@
 
 - (void)refreshWithOption:(WIBGameOption *)option;
 {
-    self.gameOption = option;
+	self.alpha = 1.0;
+	self.gameOption = option;
+    self.userInteractionEnabled = YES;
     [self configureViews];
 }
 

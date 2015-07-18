@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIView *timerBar;
 @property (nonatomic, strong) IBOutlet UILabel *questionNumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timerLengthConstraint;
+@property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -66,8 +67,15 @@
 - (void)configureQuestionView
 {
     self.questionView.question = self.question;
-    self.questionView.delegate = self;
+    self.questionView.gamePlayDelegate = self;
     [self.questionView setup];
+    self.questionView.type = CSAnimationTypeShake;
+    self.questionView.duration = 0.5;
+	self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nextButtonPressed:)];
+	[self.questionView addGestureRecognizer:self.tapRecognizer];
+	self.tapRecognizer.enabled = NO;
+    [self.questionView startQuestionEntranceAnimationWithCompletion:
+     ^(BOOL finished){}];
 }
 
 - (void)configureBackground
@@ -78,7 +86,8 @@
 
 - (IBAction)nextButtonPressed:(id)sender
 {
-    NSLog(@"NextPressed!");
+	self.tapRecognizer.enabled = NO;
+	NSLog(@"NextPressed!");
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {
         [[WIBGamePlayManager sharedInstance] completeGame];        
@@ -86,18 +95,23 @@
     }
     else
     {
-        double delayInSeconds = 0.3;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
-            [self.questionView refreshWithQuestion:self.question];
-            self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
-            [self resumeLayer:self.timerBar.layer];
-            self.timerLengthConstraint.constant = self.view.frame.size.width;
-            [self.timerBar layoutIfNeeded];
-            [self startTimer];
-            self.nextButton.hidden = YES;
-        });
+        [self.questionView startQuestionExitAnimationWithCompletion:
+         ^(BOOL finished){
+            double delayInSeconds = 0.3;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
+                [self.questionView refreshWithQuestion:self.question];
+                self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
+                [self.questionView startQuestionEntranceAnimationWithCompletion:
+                 ^(BOOL finished){}];
+                [self resumeLayer:self.timerBar.layer];
+                self.timerLengthConstraint.constant = self.view.frame.size.width;
+                [self.timerBar layoutIfNeeded];
+                [self startTimer];
+                self.nextButton.hidden = YES;
+            });
+        }];
     }
 }
 
@@ -129,6 +143,7 @@
         self.timer = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
+        [self.questionView startCanvasAnimation];
         
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
@@ -167,8 +182,11 @@
 
 - (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
 {
-    void (^revealButton)() = ^void() {
+	self.tapRecognizer.enabled = YES;
+	
+	void (^revealButton)() = ^void() {
         self.nextButton.hidden = NO;
+        self.nextButton.transform = CGAffineTransformMakeScale(1.5,1.5);
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
@@ -176,6 +194,10 @@
         }
     };
     [UIView animateWithDuration:0.5 animations:revealButton];
+	
+    [UIView animateWithDuration:0.5 animations:revealButton completion:^(BOOL finished){
+        self.nextButton.transform = CGAffineTransformMakeScale(1.0,1.0);
+    }];
 }
 
 @end

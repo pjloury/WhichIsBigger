@@ -35,7 +35,7 @@
             if(feet < 10)
             {
                 NSInteger inches = [self.total integerValue]%12;
-                return [NSString stringWithFormat:@"%lu\' %lu\"", feet, inches];
+                return [NSString stringWithFormat:@"%lu\' %lu\"", (long)feet, inches];
             }
             else
             {
@@ -54,11 +54,10 @@
             NSDate *date2 = [[NSDate alloc] initWithTimeInterval:theTimeInterval sinceDate:date1];
             
             // Get conversion to months, days, hours, minutes
-            NSCalendarUnit unitFlags = NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit;
+            NSCalendarUnit unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
             NSDateComponents *breakdownInfo = [sysCalendar components:unitFlags fromDate:date1  toDate:date2  options:0];
-
             
-            return [NSString stringWithFormat:@"%ld years %ld months", [breakdownInfo year],[breakdownInfo month]];
+            return [NSString stringWithFormat:@"%ld years %ld months", (long)[breakdownInfo year],[breakdownInfo month]];
         }
         case WIBCategoryTypeWeight:
         {
@@ -66,7 +65,7 @@
             return [NSString stringWithFormat:@"%@ lbs", @(pounds).description];
         }
         default:
-            return @"iono";
+            return @"";
     }
 }
 
