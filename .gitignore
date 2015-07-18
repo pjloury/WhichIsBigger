@@ -92,3 +92,9 @@ BFAppLinkNavigation.h
 BFAppLink.h
 BFAppLink_Internal.h
 iOS
+Pods-WhichIsBigger-FBSDKShareKit
+Pods-WhichIsBigger-FBSDKLoginKit
+Pods-WhichIsBigger-FBSDKCoreKit
+FBSDKShareKit
+FBSDKLoginKit
+FBSDKCoreKit
