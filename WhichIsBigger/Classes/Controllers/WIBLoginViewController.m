@@ -10,6 +10,8 @@
 
 @interface WIBLoginViewController ()
 
+//@property (nonatomic, strong, readwrite) PFLogInView *logInView;
+
 @end
 
 @implementation WIBLoginViewController
@@ -17,11 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)_loginWithFacebook
+{
+//	[PFFacebookUtils initializeFacebook];
+//	[super _loginWithFacebook];
 }
 
 /*
@@ -33,5 +42,33 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+/*
+# pragma mark - PFLogInViewControllerDelegate
+- (BOOL)logInViewController:(PFLogInViewController *)logInController
+shouldBeginLogInWithUsername:(NSString *)username
+				   password:(NSString *)password
+{
+	return YES;
+}
+
+
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
+{
+	
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController
+	didFailToLogInWithError:(PFUI_NULLABLE NSError *)error
+{
+	
+}
+
+
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController;
+{
+	
+}
+ */
 
 @end

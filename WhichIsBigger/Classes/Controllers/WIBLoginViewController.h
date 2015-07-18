@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WIBLoginViewController : UIViewController
+@interface WIBLoginViewController : PFLogInViewController
 
 @end

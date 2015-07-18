@@ -54,11 +54,7 @@
 
 - (void)completeGame
 {
-    for (WIBGameQuestion *question in self.gameQuestions)
-    {
-        question.option1.item.alreadyUsed = NO;
-        question.option2.item.alreadyUsed = NO;
-    }
+
 }
 
 - (WIBGameQuestion *)nextGameQuestion
