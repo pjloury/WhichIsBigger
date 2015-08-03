@@ -13,4 +13,8 @@
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
 - (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity;
+
+- (WIBGameItem*)firstGameItemForCategoryType:(WIBCategoryType)categoryType;
+- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item;
+
 @end

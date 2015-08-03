@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "WIBGameOption.h"
 
+typedef enum : NSUInteger {
+    WIBQuestionTypeSimilarHeight,
+    WIBQuestionTypeDifferentHeight,
+    WIBQuestionTypeSimilarWeight,
+    WIBQuestionTypeDifferentWeight,
+    WIBQuestionTypeAge,
+    WIBQuestionTypeCount
+} WIBQuestionType;
+
 @class WIBGameItem;
 @interface WIBGameQuestion : NSObject
 

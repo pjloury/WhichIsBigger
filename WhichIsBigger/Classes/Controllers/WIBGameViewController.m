@@ -89,8 +89,7 @@
 	self.tapRecognizer.enabled = NO;
 	NSLog(@"NextPressed!");
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
-    {
-        [[WIBGamePlayManager sharedInstance] completeGame];        
+    {    
         [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
     }
     else

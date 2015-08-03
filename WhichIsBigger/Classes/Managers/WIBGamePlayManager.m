@@ -52,11 +52,6 @@
     [self generateQuestions];
 }
 
-- (void)completeGame
-{
-
-}
-
 - (WIBGameQuestion *)nextGameQuestion
 {
     NSLog(@"QUESTION %ld",self.questionIndex+1);
@@ -133,10 +128,11 @@
     
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
+        // TODO: accomodate different question types
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
         
-        WIBGameItem *item1 = [[WIBDataModel sharedInstance] gameItemForCategoryType:randomCategory withUniqueBaseQuantity:nil];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance] gameItemForCategoryType:randomCategory withUniqueBaseQuantity:item1.baseQuantity];
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategoryType:randomCategory];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategoryType:randomCategory withRespectToItem:item1];
 		
         NSAssert(![item1 isEqual:item2], @"ITEMS SHOULD NOT BE IDENTICAL");
         

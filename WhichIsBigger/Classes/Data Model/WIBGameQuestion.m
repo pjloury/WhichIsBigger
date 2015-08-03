@@ -54,6 +54,8 @@
     // random # normalized to correct answer, adjusted with difficulty (low number means easier)
     double skew = r * self.answerQuantity * ([WIBGamePlayManager sharedInstance].difficulty)/100;
     
+    NSLog(@"%f",skew);
+    
     // multiplier that will be associated with smaller item
     int multiplier = (int)ceil(self.answerQuantity + skew);
     

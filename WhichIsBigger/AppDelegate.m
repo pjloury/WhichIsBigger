@@ -26,7 +26,7 @@
     // https://parse.com/docs/ios_guide#localdatastore/iOS
     
     // Do not cache PF Objects unless we know that they contain all the required properties
-    //[Parse enableLocalDatastore];
+    [Parse enableLocalDatastore];
     
     // Initialize Parse.
     [Parse setApplicationId:@"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd"

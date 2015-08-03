@@ -76,17 +76,82 @@
     }
     else
     {
-        for(WIBGameItem *item in gameItemsWithSameCategory)
-        {
-            if (![self itemNameAlreadyUsed:gameItem.name] && [item.baseQuantity doubleValue] != [baseQuantity doubleValue])
-            {
-				[[WIBGamePlayManager sharedInstance].usedNames addObject:item.name];
-				return item;
-            }
-        }
+        return [self gameItemForCategoryType:categoryType withUniqueBaseQuantity:baseQuantity];
     }
     return nil;
 }
+
+
+
+
+
+
+- (WIBGameItem*)firstGameItemForCategoryType:(WIBCategoryType)categoryType
+{
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
+    
+    int r = arc4random() % [gameItemsWithSameCategory count];
+    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
+    
+    if(![self itemNameAlreadyUsed:gameItem.name])
+    {
+        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+        return gameItem;
+    }
+    else
+    {
+        return [self firstGameItemForCategoryType:categoryType];
+    }
+}
+
+- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item
+{
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
+    
+    int r = arc4random() % [gameItemsWithSameCategory count];
+    NSLog(@"%d",r);
+    
+    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
+    
+    BOOL regulated = arc4random_uniform(1); // 0 or 1
+    
+    NSLog(@"Used Names Count:%ld",[WIBGamePlayManager sharedInstance].usedNames.count);
+    
+    switch(categoryType)
+    {
+            // The database only has humans currently
+        case WIBCategoryTypeAge:
+        case WIBCategoryTypeWeight:
+            
+            if(![self itemNameAlreadyUsed:gameItem.name] &&
+               [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] )
+            {
+                [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+                return gameItem;
+            }
+            else
+            {
+                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item];
+            }
+        case WIBCategoryTypeHeight:
+            
+            if(![self itemNameAlreadyUsed:gameItem.name] &&
+               [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] &&
+               item.isPerson != gameItem.isPerson)
+            {
+                [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+                return gameItem;
+            }
+            else
+            {
+                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item];
+            }
+        default:
+            return nil;
+    }
+}
+
+
 
 
 
