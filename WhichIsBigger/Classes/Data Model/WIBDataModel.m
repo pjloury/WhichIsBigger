@@ -61,7 +61,7 @@
     return [[WIBGamePlayManager sharedInstance].usedNames containsObject:name];
 }
 
-- (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity
+- (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity withDifficulty:(NSNumber *)difficulty
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     
@@ -104,7 +104,7 @@
     }
 }
 
-- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item
+- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item withDifficulty:(double)difficulty
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];
     
@@ -121,8 +121,11 @@
     {
             // The database only has humans currently
         case WIBCategoryTypeAge:
-        case WIBCategoryTypeWeight:
+        {
+            double percentDifference = ABS((gameItem.baseQuantity.doubleValue - item.baseQuantity.doubleValue)/item.baseQuantity.doubleValue);
+            BOOL closeEnough = (percentDifference < difficulty); //percent difficulty
             
+            // if it's close enough
             if(![self itemNameAlreadyUsed:gameItem.name] &&
                [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] )
             {
@@ -131,10 +134,25 @@
             }
             else
             {
-                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item];
+                // tried
+                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item withDifficulty:difficulty];
             }
+        }
+        case WIBCategoryTypeWeight:
+        {
+            if(![self itemNameAlreadyUsed:gameItem.name] &&
+               [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] )
+            {
+                [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+                return gameItem;
+            }
+            else
+            {
+                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item withDifficulty:difficulty];
+            }
+        }
         case WIBCategoryTypeHeight:
-            
+        {
             if(![self itemNameAlreadyUsed:gameItem.name] &&
                [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] &&
                item.isPerson != gameItem.isPerson)
@@ -144,8 +162,9 @@
             }
             else
             {
-                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item];
+                return [self secondGameItemForCategoryType:categoryType withRespectToItem:item withDifficulty:difficulty];
             }
+        }
         default:
             return nil;
     }

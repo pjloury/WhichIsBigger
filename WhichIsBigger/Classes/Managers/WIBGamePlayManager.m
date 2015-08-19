@@ -132,8 +132,9 @@
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
         
         WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategoryType:randomCategory];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategoryType:randomCategory withRespectToItem:item1];
-		
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategoryType:randomCategory withRespectToItem:item1 withDifficulty:[WIBGamePlayManager sharedInstance].difficulty];
+        // Encapsulate game item cache into the method call!
+                              
         NSAssert(![item1 isEqual:item2], @"ITEMS SHOULD NOT BE IDENTICAL");
         
         WIBGameQuestion *gameQuestion = nil;

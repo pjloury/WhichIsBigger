@@ -685,7 +685,7 @@
     </scenes>
     <resources>
         <image name="greenCheck" width="300" height="300"/>
-        <image name="questionMark" width="512" height="512"/>
+        <image name="questionMark" width="2916" height="2916"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hGw-iH-1wp"/>

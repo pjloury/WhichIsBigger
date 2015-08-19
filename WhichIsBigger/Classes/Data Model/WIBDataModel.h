@@ -15,6 +15,6 @@
 - (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity;
 
 - (WIBGameItem*)firstGameItemForCategoryType:(WIBCategoryType)categoryType;
-- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item;
+- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item withDifficulty:(double)difficulty;
 
 @end
