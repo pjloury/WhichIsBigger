@@ -27,6 +27,10 @@
 
 - (NSString *)totalString
 {
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setNumberStyle:NSNumberFormatterDecimalStyle]; // to get commas (or locale equivalent)
+    [fmt setMaximumFractionDigits:0]; // to avoid any decimal
+    
     switch(self.item.categoryType)
     {
         case WIBCategoryTypeHeight:
@@ -35,11 +39,11 @@
             if(feet < 10)
             {
                 NSInteger inches = [self.total integerValue]%12;
-                return [NSString stringWithFormat:@"%lu\' %lu\"", (long)feet, inches];
+                return [NSString stringWithFormat:@"%lu\' %lu\"", (long)feet, (long)inches];
             }
             else
             {
-                return [NSString stringWithFormat:@"%@ ft", @(feet).description];
+                return [NSString stringWithFormat:@"%@ ft", [fmt stringFromNumber:@(feet)]];
             }
         }
         case WIBCategoryTypeAge:
@@ -57,12 +61,11 @@
             NSCalendarUnit unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
             NSDateComponents *breakdownInfo = [sysCalendar components:unitFlags fromDate:date1  toDate:date2  options:0];
             
-            return [NSString stringWithFormat:@"%ld years %ld months", (long)[breakdownInfo year],[breakdownInfo month]];
+            return [NSString stringWithFormat:@"%ld years %ld months", (long)[breakdownInfo year],(long)[breakdownInfo month]];
         }
         case WIBCategoryTypeWeight:
         {
-            NSInteger pounds = [self.total integerValue];
-            return [NSString stringWithFormat:@"%@ lbs", @(pounds).description];
+            return [NSString stringWithFormat:@"%@ lbs", [fmt stringFromNumber:self.total]];
         }
         default:
             return @"";

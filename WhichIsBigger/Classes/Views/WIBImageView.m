@@ -2,17 +2,17 @@
 //  WIBImageView.m
 //  WhichIsBigger
 //
-//  Created by Christopher Echanique on 4/7/15.
+//  Created PJ Loury on 8/19/15.
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
 #import "WIBImageView.h"
 #import "WIBGameItem.h"
-#import "AsyncImageView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface WIBImageView ()
 
-@property (nonatomic, strong) AsyncImageView *subImageView;
+@property (nonatomic, strong) UIImageView *subImageView;
 
 @end
 
@@ -24,10 +24,9 @@
     
     if(!self.subImageView)
     {
-        self.subImageView = [[AsyncImageView alloc] initWithFrame:self.bounds];
+        self.subImageView = [[UIImageView alloc] initWithFrame:self.bounds];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
-        self.subImageView.showActivityIndicator = YES;
         self.subImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self addTarget:self action:@selector(actionDidPressButton:) forControlEvents:UIControlEventTouchDown];
@@ -36,7 +35,9 @@
         
     }
     
-	self.subImageView.imageURL = [NSURL URLWithString:self.gameItem.photoURL];
+    [self.subImageView sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
+                      placeholderImage:[UIImage imageNamed:@"questionMark"]];
+    
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOpacity = .4;
     self.layer.shadowRadius = 4;

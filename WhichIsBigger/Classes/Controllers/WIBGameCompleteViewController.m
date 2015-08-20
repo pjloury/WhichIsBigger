@@ -29,11 +29,12 @@
 
 @implementation WIBGameCompleteViewController
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
     self.incrementedScore = 0;
     self.streakLabel.hidden = YES;
     self.highScoreLabel.hidden = YES;
+    self.playAgainButton.enabled = NO;
     self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
     self.highScoreLabel.alpha = 0.0;
 }
@@ -49,23 +50,36 @@
     else
     {
         [self.scoreLabelTimer invalidate];
-
-        if([WIBGamePlayManager sharedInstance].score == [WIBGamePlayManager sharedInstance].highScore)
-        {
-            self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
-            self.highScoreLabel.hidden = NO;
-            [self fadeHighScoreLabel];
-        }
-        
-        if([WIBGamePlayManager sharedInstance].currentStreak == [WIBGamePlayManager sharedInstance].longestStreak || [WIBGamePlayManager sharedInstance].currentStreak >= 5)
-        {
-            self.streakLabel.hidden = NO;
-            self.streakLabel.text = [NSString stringWithFormat:@"%ld Question Streak!",(long)[WIBGamePlayManager sharedInstance].currentStreak];
-        }
+        [self didFinishIncrementingScore];
     }
 }
 
-- (void)fadeHighScoreLabel
+- (void)didFinishIncrementingScore
+{
+    if([WIBGamePlayManager sharedInstance].score == [WIBGamePlayManager sharedInstance].highScore)
+    {
+        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
+        self.highScoreLabel.hidden = NO;
+        [self throbHighScoreLabel];
+    }
+    
+    if(([WIBGamePlayManager sharedInstance].currentStreak == [WIBGamePlayManager sharedInstance].longestStreak && [WIBGamePlayManager sharedInstance].currentStreak >= 3) || [WIBGamePlayManager sharedInstance].currentStreak >= 5)
+    {
+        self.streakLabel.hidden = NO;
+        self.streakLabel.text = [NSString stringWithFormat:@"%ld Question Streak!",(long)[WIBGamePlayManager sharedInstance].currentStreak];
+    }
+
+    if([WIBGamePlayManager sharedInstance].score == 0)
+    {
+        self.highScoreLabel.hidden = NO;
+        self.highScoreLabel.text = @"LOL!";
+        [self throbHighScoreLabel];
+    }
+    
+    self.playAgainButton.enabled = YES;
+}
+
+- (void)throbHighScoreLabel
 {
     [UIView animateWithDuration:0.6
                           delay:0.0
@@ -74,6 +88,12 @@
                          self.highScoreLabel.alpha = 1.0;
                      }
                      completion:nil];
+}
+
+- (IBAction)didPressPlayAgain:(id)sender
+{
+    [[WIBGamePlayManager sharedInstance] beginGame];
+    [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
 }
 
 #pragma mark - UICollectionViewDelegate

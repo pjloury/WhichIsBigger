@@ -33,6 +33,7 @@
 
 // Views
 @property (nonatomic, strong) IBOutlet WIBQuestionView *questionView;
+@property (weak, nonatomic) IBOutlet CSAnimationView *nextButtonParentView;
 @property (nonatomic, strong) IBOutlet WIBPopButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIView *timerBar;
 @property (nonatomic, strong) IBOutlet UILabel *questionNumberLabel;
@@ -46,8 +47,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // Set Game State
-    [[WIBGamePlayManager sharedInstance] beginGame];
     
     // Set Model
     self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
@@ -55,6 +54,7 @@
     // Configure View using Model
     [self configureQuestionView];
     [self configureBackground];
+    self.timerBar.alpha = 0.0;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -62,6 +62,9 @@
     // Kick off the first question's timer
     [super viewDidAppear:animated];
     [self startTimer];
+    [UIView animateWithDuration:0.1 animations:^{
+        self.timerBar.alpha = 1.0;
+    }];
 }
 
 - (void)configureQuestionView
@@ -69,8 +72,8 @@
     self.questionView.question = self.question;
     self.questionView.gamePlayDelegate = self;
     [self.questionView setup];
-    self.questionView.type = CSAnimationTypeShake;
-    self.questionView.duration = 0.5;
+    self.questionView.type = CSAnimationTypeFadeIn;
+    self.questionView.duration = 0.75;
 	self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nextButtonPressed:)];
 	[self.questionView addGestureRecognizer:self.tapRecognizer];
 	self.tapRecognizer.enabled = NO;
@@ -80,14 +83,15 @@
 
 - (void)configureBackground
 {
-    self.nextButton.hidden = YES;
+    self.nextButton.alpha = 0.0;
     self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
 }
 
 - (IBAction)nextButtonPressed:(id)sender
 {
 	self.tapRecognizer.enabled = NO;
-	NSLog(@"NextPressed!");
+    self.nextButton.enabled = NO;
+    self.nextButton.alpha = 0.0;
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {    
         [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
@@ -96,20 +100,15 @@
     {
         [self.questionView startQuestionExitAnimationWithCompletion:
          ^(BOOL finished){
-            double delayInSeconds = 0.3;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
-                [self.questionView refreshWithQuestion:self.question];
-                self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
-                [self.questionView startQuestionEntranceAnimationWithCompletion:
-                 ^(BOOL finished){}];
-                [self resumeLayer:self.timerBar.layer];
-                self.timerLengthConstraint.constant = self.view.frame.size.width;
-                [self.timerBar layoutIfNeeded];
-                [self startTimer];
-                self.nextButton.hidden = YES;
-            });
+            self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
+            [self.questionView refreshWithQuestion:self.question];
+            self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
+            [self.questionView startQuestionEntranceAnimationWithCompletion:
+             ^(BOOL finished){}];
+            [self resumeLayer:self.timerBar.layer];
+            self.timerLengthConstraint.constant = self.view.frame.size.width;
+            [self.timerBar layoutIfNeeded];
+            [self startTimer];
         }];
     }
 }
@@ -181,21 +180,25 @@
 
 - (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
 {
-	self.tapRecognizer.enabled = YES;
-	
-	void (^revealButton)() = ^void() {
-        self.nextButton.hidden = NO;
-        self.nextButton.transform = CGAffineTransformMakeScale(1.5,1.5);
+    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+    {
+        [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+    }
+    
+    void (^revealButton)() = ^void() {
+        self.nextButton.alpha = 1.0;
+    };
+    
+    [UIView animateWithDuration:0.2 animations:revealButton completion:^(BOOL finished){
+        self.nextButton.enabled = YES;
+        self.tapRecognizer.enabled = YES;
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
-            [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
-            [self.nextButton sizeToFit];
+            self.nextButtonParentView.type = CSAnimationTypePop;
+            self.nextButtonParentView.delay = 0.5;
+            self.nextButtonParentView.duration = 0.8;
+            [self.nextButtonParentView startCanvasAnimation];
         }
-    };
-    [UIView animateWithDuration:0.5 animations:revealButton];
-	
-    [UIView animateWithDuration:0.5 animations:revealButton completion:^(BOOL finished){
-        self.nextButton.transform = CGAffineTransformMakeScale(1.0,1.0);
     }];
 }
 

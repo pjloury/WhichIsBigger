@@ -14,6 +14,7 @@
 
 @interface WIBQuestionView : CSAnimationView
 
+
 @property (nonatomic, weak) WIBGameQuestion *question;
 @property (nonatomic, weak) id<WIBGamePlayDelegate> gamePlayDelegate;
 - (void)setup;

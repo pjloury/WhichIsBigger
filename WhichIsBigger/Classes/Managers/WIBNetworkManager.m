@@ -13,6 +13,7 @@
 // Data Model
 #import "WIBGameQuestion.h"
 #import "WIBDataModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation WIBNetworkManager
 
@@ -63,13 +64,49 @@
 
 - (void)preloadImages:(NSMutableArray *)gameQuestions
 {
-    for (WIBGameQuestion *question in gameQuestions)
-    {
-        NSString *urlString1 = question.option1.item.photoURL;
-        NSString *urlString2 = question.option2.item.photoURL;
-        [[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString1]];
-        [[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString2]];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        dispatch_group_t downloadGroup = dispatch_group_create();
+        
+        for (WIBGameQuestion *question in gameQuestions)
+        {
+            NSString *urlString1 = question.option1.item.photoURL;
+            NSString *urlString2 = question.option2.item.photoURL;
+            //[[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString1]];
+            //[[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString2]];
+
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            dispatch_group_enter(downloadGroup);
+            [manager downloadImageWithURL:[NSURL URLWithString:urlString1]
+                                  options:0
+                                 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                     // progression tracking code
+                                 }
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                    if (image) {
+                                        // do something with image
+                                        dispatch_group_leave(downloadGroup);
+                                    }
+                                }];
+            
+            dispatch_group_enter(downloadGroup);
+            [manager downloadImageWithURL:[NSURL URLWithString:urlString2]
+                                  options:0
+                                 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                     // progression tracking code
+                                 }
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                    if (image) {
+                                        // do something with image
+                                        dispatch_group_leave(downloadGroup);
+                                    }
+                                }];
+        }
+        
+        dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:kGroupImageDownloadCompleteNotification object:nil];
+        });
+    });
 }
 
 @end

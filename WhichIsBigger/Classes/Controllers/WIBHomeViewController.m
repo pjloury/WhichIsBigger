@@ -20,6 +20,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.startNewGameButton.enabled = NO;
     __weak WIBHomeViewController *weakSelf = self;
     [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
@@ -29,7 +30,6 @@
         });
     }];
 }
-
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
@@ -63,14 +63,12 @@
 	
 }
 
-
 - (IBAction)didPressNewGameButton:(id)sender
 {
-    double delayInSeconds = 0.1;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
-    });
+    // Set Game State
+    [[WIBGamePlayManager sharedInstance] beginGame];
+    
+    [self performSegueWithIdentifier:@"newGameSegue" sender:self];
 }
 
 @end

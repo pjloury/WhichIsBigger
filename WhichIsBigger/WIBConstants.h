@@ -23,6 +23,7 @@
 #define ARC4RANDOM_MAX      0x100000000
 
 extern NSString * kGameQuestionTimeUpNotification;
+extern NSString *kGroupImageDownloadCompleteNotification;
 
 @interface WIBConstants : NSObject
 

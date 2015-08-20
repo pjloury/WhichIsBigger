@@ -10,5 +10,6 @@
 @implementation WIBConstants
 
 NSString *kGameQuestionTimeUpNotification = @"gameQuestionTimeUpNotification";
+NSString *kGroupImageDownloadCompleteNotification = @"groupImageDownloadCompleteNotification";
 
 @end
