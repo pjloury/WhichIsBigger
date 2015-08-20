@@ -8,12 +8,6 @@
       location = "group:WhichIsBigger/Classes/Data Model/WIBHumanComparisonQuestion.m">
    </FileRef>
    <FileRef
-      location = "group:WhichIsBigger/NSNumber+Separated.h">
-   </FileRef>
-   <FileRef
-      location = "group:WhichIsBigger/NSNumber+Separated.m">
-   </FileRef>
-   <FileRef
       location = "group:WhichIsBigger.xcodeproj">
    </FileRef>
    <FileRef

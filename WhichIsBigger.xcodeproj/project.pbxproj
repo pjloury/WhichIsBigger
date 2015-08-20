@@ -31,7 +31,6 @@
 		7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */; };
 		7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */; };
 		7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */; };
-		7D943FAE1AF0C7160061387B /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAB1AF0C7160061387B /* AsyncImageView.m */; };
 		7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAD1AF0C7160061387B /* WIBImageView.m */; };
 		7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB11AF0C73A0061387B /* WIBGameItem.m */; };
 		7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */; };
@@ -100,8 +99,6 @@
 		7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteViewController.h; path = Classes/Controllers/WIBGameCompleteViewController.h; sourceTree = "<group>"; };
 		7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameCompleteViewController.m; path = Classes/Controllers/WIBGameCompleteViewController.m; sourceTree = "<group>"; };
 		7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameViewController.h; path = Classes/Controllers/WIBGameViewController.h; sourceTree = "<group>"; };
-		7D943FAA1AF0C7160061387B /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncImageView.h; path = Classes/Views/AsyncImageView.h; sourceTree = "<group>"; };
-		7D943FAB1AF0C7160061387B /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncImageView.m; path = Classes/Views/AsyncImageView.m; sourceTree = "<group>"; };
 		7D943FAC1AF0C7160061387B /* WIBImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBImageView.h; path = Classes/Views/WIBImageView.h; sourceTree = "<group>"; };
 		7D943FAD1AF0C7160061387B /* WIBImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBImageView.m; path = Classes/Views/WIBImageView.m; sourceTree = "<group>"; };
 		7D943FB01AF0C73A0061387B /* WIBGameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameItem.h; path = "Classes/Data Model/WIBGameItem.h"; sourceTree = "<group>"; };
@@ -309,8 +306,6 @@
 			children = (
 				7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */,
 				7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */,
-				7D943FAA1AF0C7160061387B /* AsyncImageView.h */,
-				7D943FAB1AF0C7160061387B /* AsyncImageView.m */,
 				7D943FAC1AF0C7160061387B /* WIBImageView.h */,
 				7D943FAD1AF0C7160061387B /* WIBImageView.m */,
 				F301177C1AF0993D00F1D854 /* WIBOptionView.h */,
@@ -491,7 +486,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
-				7D943FAE1AF0C7160061387B /* AsyncImageView.m in Sources */,
 				F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
