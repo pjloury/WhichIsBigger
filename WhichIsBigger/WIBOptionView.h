@@ -26,5 +26,5 @@
 @protocol WIBOptionViewDelegate
 
 @required
-- (void)imageViewWasSelected:(WIBImageView *)imageView;
+- (void)optionWasSelected:(id)sender;
 @end

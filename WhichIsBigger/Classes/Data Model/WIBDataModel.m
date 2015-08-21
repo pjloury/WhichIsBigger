@@ -81,11 +81,6 @@
     return nil;
 }
 
-
-
-
-
-
 - (WIBGameItem*)firstGameItemForCategoryType:(WIBCategoryType)categoryType
 {
     NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:@(categoryType)];

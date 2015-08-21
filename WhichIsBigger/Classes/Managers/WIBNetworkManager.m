@@ -71,8 +71,6 @@
         {
             NSString *urlString1 = question.option1.item.photoURL;
             NSString *urlString2 = question.option2.item.photoURL;
-            //[[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString1]];
-            //[[AsyncImageLoader sharedLoader] loadImageWithURL:[NSURL URLWithString:urlString2]];
 
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             dispatch_group_enter(downloadGroup);

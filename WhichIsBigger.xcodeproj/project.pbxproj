@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
 		60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
@@ -25,7 +26,6 @@
 		7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */; };
 		7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */; };
 		7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */; };
-		7D8E8D7F1B47C4D4005B4AA2 /* NSNumber+Separated.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */; };
 		7D8E8D821B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E8D811B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m */; };
 		7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */; };
 		7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */; };
@@ -55,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		604014671B87006100E2C5D6 /* WIBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionButton.h; path = WhichIsBigger/Classes/Views/WIBOptionButton.h; sourceTree = "<group>"; };
+		604014681B87006100E2C5D6 /* WIBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionButton.m; path = WhichIsBigger/Classes/Views/WIBOptionButton.m; sourceTree = "<group>"; };
 		60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoadingViewController.h; path = Classes/Controllers/WIBLoadingViewController.h; sourceTree = "<group>"; };
 		60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoadingViewController.m; path = Classes/Controllers/WIBLoadingViewController.m; sourceTree = "<group>"; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -156,6 +158,8 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				604014671B87006100E2C5D6 /* WIBOptionButton.h */,
+				604014681B87006100E2C5D6 /* WIBOptionButton.m */,
 				7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */,
 				7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */,
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
@@ -486,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
+				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
 				F301178B1AF0A68200F1D854 /* WIBQuestionView.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
@@ -503,7 +508,6 @@
 				7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */,
 				7D8E8D821B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m in Sources */,
 				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
-				7D8E8D7F1B47C4D4005B4AA2 /* NSNumber+Separated.m in Sources */,
 				7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */,
 				F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */,
 				7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */,

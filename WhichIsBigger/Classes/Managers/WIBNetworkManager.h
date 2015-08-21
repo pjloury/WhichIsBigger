@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "WIBGameItem.h"
-#import "AsyncImageView.h"
 
 @interface WIBNetworkManager : NSObject
 

@@ -117,9 +117,10 @@
 {
     _currSeconds = SECONDS_PER_QUESTION;
     self.startDate = [NSDate date];
-    self.timerLengthConstraint.constant = 0;
+
     [UIView animateWithDuration:5
                      animations:^{
+                         self.timerLengthConstraint.constant = 0;
                          [self.timerBar layoutIfNeeded];
                      }];
     if(!self.timer)
@@ -183,6 +184,7 @@
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {
         [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+        self.nextButton.enabled = YES;
     }
     
     void (^revealButton)() = ^void() {
@@ -195,8 +197,8 @@
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             self.nextButtonParentView.type = CSAnimationTypePop;
-            self.nextButtonParentView.delay = 0.5;
-            self.nextButtonParentView.duration = 0.8;
+            self.nextButtonParentView.delay = 0.2;
+            self.nextButtonParentView.duration = 0.3;
             [self.nextButtonParentView startCanvasAnimation];
         }
     }];

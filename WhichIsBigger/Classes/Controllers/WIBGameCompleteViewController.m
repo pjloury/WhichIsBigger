@@ -31,14 +31,20 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.incrementedScore = 0;
     self.streakLabel.hidden = YES;
+    self.scoreLabel.text = @"";
     self.highScoreLabel.hidden = YES;
     self.playAgainButton.enabled = NO;
-    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
     self.highScoreLabel.alpha = 0.0;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
+}
 
 - (void)incrementScore
 {
