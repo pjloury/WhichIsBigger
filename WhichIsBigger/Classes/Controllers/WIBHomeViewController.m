@@ -42,11 +42,12 @@
 		[logInViewController setDelegate:self];
 		[logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
 		[logInViewController setFields:PFLogInFieldsUsernameAndPassword
-		 | PFLogInFieldsTwitter
 		 | PFLogInFieldsFacebook
-		 | PFLogInFieldsSignUpButton
 		 | PFLogInFieldsDismissButton];
 
+        // Present log-in view controller
+        [self presentViewController:logInViewController animated:YES completion:NULL];
+        
 		/*
 		// Instantiate our custom sign up view controller
 		WIBLoginViewController *signUpViewController = [[WIBLoginViewController alloc] init];
@@ -55,9 +56,6 @@
 		// Link the sign up view controller
 		[logInViewController setSignUpController:signUpViewController];
 		*/
-		 
-		// Present log in view controller
-		[self presentViewController:logInViewController animated:YES completion:NULL];
 	}
 #endif
 	

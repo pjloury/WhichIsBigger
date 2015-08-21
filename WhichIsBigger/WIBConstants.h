@@ -12,6 +12,7 @@
 #define HELVETICA_NEUE_BOLD     @"HelveticaNeue-Bold"
 #define HELVETICA_NEUE_LIGHT    @"HelveticaNeue-Light"
 #define HELVETICA_NEUE_MEDIUM   @"HelveticaNeue-Medium"
+#define FACEBOOK_LOGIN
 
 // Game Play Constants
 #define NUMBER_OF_QUESTIONS 5
