@@ -72,7 +72,7 @@
     
     // random # normalized to correct answer, adjusted with difficulty (low number means easier)
     double skew = r * self.answerQuantity;
-    NSLog(@"Options are %f percent different",skew/self.answerQuantity);
+    NSLog(@"Before multipliers: options are %.2f%% different",skew/self.answerQuantity*100);
     
     // multiplier that will be associated with smaller item
     int multiplier = (int)ceil(self.answerQuantity + skew);
@@ -108,6 +108,7 @@
             self.option1.multiplier++;
         }
     }
+    NSLog(@"Scaling Question: %@ vs. %@ with %.2f%% skew",self.option1.item.name, self.option2.item.name, (float)((multiplier-self.answerQuantity)/self.answerQuantity)*100);
 }
 
 - (NSString *)questionText
