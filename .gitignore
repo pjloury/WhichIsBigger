@@ -99,3 +99,10 @@ FBSDKShareKit
 FBSDKLoginKit
 FBSDKCoreKit
 Pods/
+PFAlertView.h
+Empty.m
+PFProductTableViewController.m
+PFSignUpViewController.m
+PFImageView.m
+Pods-WhichIsBigger-ParseUI.xcconfig
+Pods-WhichIsBigger-resources.sh
