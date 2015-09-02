@@ -8,6 +8,7 @@
 
 #import "WIBGamePlayManager.h"
 #import "WIBGameQuestion.h"
+#import "WIBDataModel.h"
 #import "WIBGameItem.h"
 
 @interface WIBGameQuestion ()
@@ -16,14 +17,28 @@
 
 @implementation WIBGameQuestion
 
-- (id)initWithGameItem:(WIBGameItem *)item1 gameItem2:(WIBGameItem *)item2
+- (instancetype)initOneToOneQuestion:(WIBCategoryType)categoryType
 {
     self = [super init];
     if (self)
     {
-        _option1 = [[WIBGameOption alloc] initWithItem:item1];
-        _option2 = [[WIBGameOption alloc] initWithItem:item2];
-        
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategoryType:categoryType];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategoryType:categoryType withRespectToItem:item1 withQuestionCeiling:[WIBGamePlayManager sharedInstance].questionCeiling];
+        _option1 = [[WIBGameOption alloc] initWithItem:item1 multiplier:1];
+        _option2 = [[WIBGameOption alloc] initWithItem:item2 multiplier:1];
+    }
+    return self;
+}
+
+- (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1 dissimilargameItem2:(WIBGameItem *)item2
+{
+    self = [super init];
+    if (self)
+    {
+        // Pass Zeros temporarily
+        _option1 = [[WIBGameOption alloc] initWithItem:item1 multiplier:0];
+        _option2 = [[WIBGameOption alloc] initWithItem:item2 multiplier:0];
+        // Determine challenging
         [self setupOptions];
     }
     
@@ -32,32 +47,46 @@
 
 - (void)setupOptions
 {
+
     WIBGameItem *largerItem = [WIBGameItem maxOfItem:self.option1.item item2:self.option2.item];
     WIBGameItem *smallerItem = [WIBGameItem minOfItem:self.option1.item item2:self.option2.item];
     
     // it actually takes 230.3 Kanyes...
     self.answerQuantity = largerItem.baseQuantity.doubleValue / smallerItem.baseQuantity.doubleValue;
-    
-    // We need to know
-    if(self.answerQuantity < 2 && self.option1.item.categoryType == WIBCategoryTypeHeight)
-    {
-        self.option1.multiplier = 1;
-        self.option2.multiplier = 1;
-        return;
-    }
-    
-    
+        
     // random # between 0 and 1
     double val = ((double)arc4random() / ARC4RANDOM_MAX);
-    // random # between -1 and 1
-    double r = val * 2 -1;
-    // random # normalized to correct answer, adjusted with difficulty (low number means easier)
-    double skew = r * self.answerQuantity * ([WIBGamePlayManager sharedInstance].difficulty)/100;
     
-    NSLog(@"%f",skew);
+    double r;
+    if (val <= 0.5)
+    {
+        r = val -.75;
+    }
+    else
+    {
+        r = val + .75;
+    }
+    
+    // random # between -1 and 1
+    //double r = val * 2 -1;
+    
+    // random # normalized to correct answer, adjusted with difficulty (low number means easier)
+    double skew = r * self.answerQuantity;
+    NSLog(@"Options are %f percent different",skew/self.answerQuantity);
     
     // multiplier that will be associated with smaller item
     int multiplier = (int)ceil(self.answerQuantity + skew);
+    
+    // round to the nearest 100
+    if (multiplier > 100)
+    {
+        multiplier = 100.0 * floor((multiplier/100.0)+0.5);
+    }
+    // round to the nearest 10
+    else
+    {
+        multiplier = 10.0 * floor((multiplier/10.0)+0.5);
+    }
     
     if(smallerItem == self.option1.item)
     {
@@ -65,6 +94,7 @@
         self.option2.multiplier = 1;
         if(self.option1.total.doubleValue == self.option2.total.doubleValue)
         {
+            NSAssert(NO,@"Why are the totals equal?");
             self.option2.multiplier++;
         }
     }
@@ -74,6 +104,7 @@
         self.option2.multiplier = multiplier;
         if(self.option1.total.doubleValue == self.option2.total.doubleValue)
         {
+            NSAssert(NO,@"Why are the totals equal?");
             self.option1.multiplier++;
         }
     }
@@ -100,10 +131,12 @@
         case(WIBCategoryTypeAge):
             categoryQuestionString = @"is Older?";
             break;
+        case(WIBCategoryTypeDissimilarHeight):
+            categoryQuestionString = @"is DIFFERENT Taller?";
+            break;
         default:
             break;
     }
-    
     return [NSString stringWithFormat:@"%@ %@",questionVerb, categoryQuestionString];
 }
 
@@ -113,12 +146,10 @@
     NSAssert(self.option1.total!=self.option2.total,@"Totals cannot be equal!");
     if (self.option1.total.doubleValue > self.option2.total.doubleValue)
     {
-        NSLog(@"This is option 1: %@",self.option1.item.name);
         return self.option1;
     }
     else
     {
-        NSLog(@"This is option 2: %@",self.option2.item.name);
         return self.option2;
     }
 }

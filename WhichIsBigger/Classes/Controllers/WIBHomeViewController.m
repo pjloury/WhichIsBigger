@@ -14,6 +14,7 @@
 
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
+@property (weak, nonatomic) IBOutlet UILabel *footerLabel;
 @end
 
 @implementation WIBHomeViewController
@@ -33,10 +34,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-#ifdef FACEBOOK_LOGIN
+/*
 	// Check if user is logged in
-	if (![PFUser currentUser]) {
+	if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
 		// Instantiate our custom log in view controller
 		WIBLoginViewController *logInViewController = [[WIBLoginViewController alloc] init];
 		[logInViewController setDelegate:self];
@@ -47,18 +47,37 @@
 
         // Present log-in view controller
         [self presentViewController:logInViewController animated:YES completion:NULL];
-        
-		/*
-		// Instantiate our custom sign up view controller
-		WIBLoginViewController *signUpViewController = [[WIBLoginViewController alloc] init];
-		[signUpViewController setDelegate:self];
-		[signUpViewController setFields:PFSignUpFieldsDefault | PFSignUpFieldsAdditional];
-		// Link the sign up view controller
-		[logInViewController setSignUpController:signUpViewController];
-		*/
 	}
-#endif
-	
+    else
+    {
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                // result is a dictionary with the user's Facebook data
+                NSDictionary *userData = (NSDictionary *)result;
+                
+                NSString *facebookID = userData[@"id"];
+                NSString *name = userData[@"name"];
+                //NSString *location = userData[@"location"][@"name"];
+
+                NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+                
+                NSString *firstName = [name componentsSeparatedByString:@" "].firstObject;
+                
+                self.footerLabel.text = [NSString stringWithFormat:@"Welcome back, %@", firstName];
+                
+                // Now add the data to the UI elements
+                // ...
+            }
+            else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
+                NSLog(@"The facebook session was invalidated");
+                [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
+            } else {
+                NSLog(@"Some other error: %@", error);
+            }
+        }];
+    }
+*/
 }
 
 - (IBAction)didPressNewGameButton:(id)sender

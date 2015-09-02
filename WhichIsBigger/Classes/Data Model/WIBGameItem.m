@@ -64,7 +64,7 @@ NSString *kAge = @"age";
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2
 {
-    if (item1.baseQuantity > item2.baseQuantity)
+    if (item1.baseQuantity.doubleValue > item2.baseQuantity.doubleValue)
     {
         return item1;
     }
@@ -76,7 +76,7 @@ NSString *kAge = @"age";
 
 + (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2
 {
-    if (item1.baseQuantity > item2.baseQuantity)
+    if (item1.baseQuantity.doubleValue > item2.baseQuantity.doubleValue)
     {
         return item2;
     }

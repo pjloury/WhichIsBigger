@@ -11,10 +11,11 @@
 
 @interface WIBGameOption : NSObject
 
-- (id)initWithItem:(WIBGameItem *)item;
+- (id)initWithItem:(WIBGameItem *)item multiplier:(int)multiplier;
 
 @property (nonatomic, strong) WIBGameItem *item;
 @property (nonatomic) int multiplier;
+@property (nonatomic, readonly) NSString *multiplierString;
 @property (nonatomic, readonly) NSNumber *total;
 @property (nonatomic, copy) NSString *totalString;
 

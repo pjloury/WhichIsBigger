@@ -59,8 +59,8 @@
 }
 
 - (void)configureLabel
-{
-    self.nameLabel.text = self.gameOption.multiplier > 1 ? [NSString stringWithFormat:@"%d %@",self.gameOption.multiplier,self.gameItem.name.capitalizedString]: self.gameItem.name;
+{    
+    self.nameLabel.text = self.gameOption.multiplier > 1 ? [NSString stringWithFormat:@"%@ %@",self.gameOption.multiplierString,self.gameItem.name]: self.gameItem.name;
 }
 
 - (void)revealAnswerLabel

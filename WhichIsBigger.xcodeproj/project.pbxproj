@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
 		6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */; };
-		6040146E1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6040146D1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.m */; };
+		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
+		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
+		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
+		60BE9A2D1B8ACEFF000D57C6 /* WIBDissimilarHeightQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2C1B8ACEFF000D57C6 /* WIBDissimilarHeightQuestion.m */; };
 		60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
@@ -56,11 +59,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		604014671B87006100E2C5D6 /* WIBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionButton.h; path = WhichIsBigger/Classes/Views/WIBOptionButton.h; sourceTree = "<group>"; };
-		604014681B87006100E2C5D6 /* WIBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionButton.m; path = WhichIsBigger/Classes/Views/WIBOptionButton.m; sourceTree = "<group>"; };
-		6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WIBLogo.xib; sourceTree = "<group>"; };
-		6040146C1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHumanComparisonQuestion.h; path = "WhichIsBigger/Classes/Data Model/WIBHumanComparisonQuestion.h"; sourceTree = "<group>"; };
-		6040146D1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHumanComparisonQuestion.m; path = "WhichIsBigger/Classes/Data Model/WIBHumanComparisonQuestion.m"; sourceTree = "<group>"; };
+		604014671B87006100E2C5D6 /* WIBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionButton.h; path = Classes/Views/WIBOptionButton.h; sourceTree = "<group>"; };
+		604014681B87006100E2C5D6 /* WIBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionButton.m; path = Classes/Views/WIBOptionButton.m; sourceTree = "<group>"; };
+		6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WIBLogo.xib; path = ../WIBLogo.xib; sourceTree = "<group>"; };
+		6040146F1B87E13900E2C5D6 /* WIBTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialViewController.h; path = Classes/Controllers/WIBTutorialViewController.h; sourceTree = "<group>"; };
+		604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialViewController.m; path = Classes/Controllers/WIBTutorialViewController.m; sourceTree = "<group>"; };
+		604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDismissSegue.h; path = WhichIsBigger/Classes/WIBDismissSegue.h; sourceTree = "<group>"; };
+		604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDismissSegue.m; path = WhichIsBigger/Classes/WIBDismissSegue.m; sourceTree = "<group>"; };
+		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
+		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
+		60BE9A2C1B8ACEFF000D57C6 /* WIBDissimilarHeightQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBDissimilarHeightQuestion.m; sourceTree = SOURCE_ROOT; };
+		60BE9A2E1B8ACF11000D57C6 /* WIBDissimilarHeightQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBDissimilarHeightQuestion.h; sourceTree = SOURCE_ROOT; };
 		60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoadingViewController.h; path = Classes/Controllers/WIBLoadingViewController.h; sourceTree = "<group>"; };
 		60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoadingViewController.m; path = Classes/Controllers/WIBLoadingViewController.m; sourceTree = "<group>"; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -76,12 +85,12 @@
 		7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhichIsBiggerTests.m; sourceTree = "<group>"; };
 		7D0CC72C1AD4EAA200BB65BB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDataModel.h; path = "Classes/Data Model/WIBDataModel.h"; sourceTree = "<group>"; };
+		7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBDataModel.h; path = "Classes/Data Model/WIBDataModel.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDataModel.m; path = "Classes/Data Model/WIBDataModel.m"; sourceTree = "<group>"; };
-		7D0CC73F1AD4F37700BB65BB /* WIBGameQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameQuestion.h; path = "Classes/Data Model/WIBGameQuestion.h"; sourceTree = "<group>"; };
-		7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameQuestion.m; path = "Classes/Data Model/WIBGameQuestion.m"; sourceTree = "<group>"; };
-		7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoginViewController.h; path = WhichIsBigger/Classes/Controllers/WIBLoginViewController.h; sourceTree = "<group>"; };
-		7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoginViewController.m; path = WhichIsBigger/Classes/Controllers/WIBLoginViewController.m; sourceTree = "<group>"; };
+		7D0CC73F1AD4F37700BB65BB /* WIBGameQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBGameQuestion.h; path = "Classes/Data Model/WIBGameQuestion.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBGameQuestion.m; path = "Classes/Data Model/WIBGameQuestion.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoginViewController.h; path = Classes/Controllers/WIBLoginViewController.h; sourceTree = "<group>"; };
+		7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoginViewController.m; path = Classes/Controllers/WIBLoginViewController.m; sourceTree = "<group>"; };
 		7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-WhichIsBigger-Parse.a"; path = "Pods/../build/Debug-iphoneos/libPods-WhichIsBigger-Parse.a"; sourceTree = "<group>"; };
 		7D70EE621AEF3CE8002E1565 /* WIBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBConstants.h; path = WhichIsBigger/WIBConstants.h; sourceTree = "<group>"; };
 		7D70EE631AEF3CE8002E1565 /* WIBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBConstants.m; path = WhichIsBigger/WIBConstants.m; sourceTree = "<group>"; };
@@ -94,25 +103,21 @@
 		7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium.otf"; sourceTree = "<group>"; };
 		7D8E8D7D1B47C4D4005B4AA2 /* NSNumber+Separated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Separated.h"; sourceTree = "<group>"; };
 		7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Separated.m"; sourceTree = "<group>"; };
-		7D8E8D801B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHumanComparisonQuestion.h; path = "Classes/Data Model/WIBHumanComparisonQuestion.h"; sourceTree = "<group>"; };
-		7D8E8D811B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHumanComparisonQuestion.m; path = "Classes/Data Model/WIBHumanComparisonQuestion.m"; sourceTree = "<group>"; };
 		7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Classes/Views/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WIB-Prefix.pch"; sourceTree = "<group>"; };
 		7D943FA01AF0C6B90061387B /* WIBGamePlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGamePlayManager.h; path = Classes/Managers/WIBGamePlayManager.h; sourceTree = "<group>"; };
-		7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGamePlayManager.m; path = Classes/Managers/WIBGamePlayManager.m; sourceTree = "<group>"; };
+		7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBGamePlayManager.m; path = Classes/Managers/WIBGamePlayManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D943FA21AF0C6B90061387B /* WIBNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBNetworkManager.h; path = Classes/Managers/WIBNetworkManager.h; sourceTree = "<group>"; };
 		7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBNetworkManager.m; path = Classes/Managers/WIBNetworkManager.m; sourceTree = "<group>"; };
 		7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteViewController.h; path = Classes/Controllers/WIBGameCompleteViewController.h; sourceTree = "<group>"; };
 		7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameCompleteViewController.m; path = Classes/Controllers/WIBGameCompleteViewController.m; sourceTree = "<group>"; };
 		7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameViewController.h; path = Classes/Controllers/WIBGameViewController.h; sourceTree = "<group>"; };
 		7D943FAC1AF0C7160061387B /* WIBImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBImageView.h; path = Classes/Views/WIBImageView.h; sourceTree = "<group>"; };
-		7D943FAD1AF0C7160061387B /* WIBImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBImageView.m; path = Classes/Views/WIBImageView.m; sourceTree = "<group>"; };
-		7D943FB01AF0C73A0061387B /* WIBGameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameItem.h; path = "Classes/Data Model/WIBGameItem.h"; sourceTree = "<group>"; };
+		7D943FAD1AF0C7160061387B /* WIBImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBImageView.m; path = Classes/Views/WIBImageView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D943FB01AF0C73A0061387B /* WIBGameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBGameItem.h; path = "Classes/Data Model/WIBGameItem.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D943FB11AF0C73A0061387B /* WIBGameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameItem.m; path = "Classes/Data Model/WIBGameItem.m"; sourceTree = "<group>"; };
 		7D943FB51AF0C8CA0061387B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameViewController.m; path = Classes/Controllers/WIBGameViewController.m; sourceTree = "<group>"; };
-		7DD20E151B0981B5002ED286 /* WIBHumanComparisonQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBHumanComparisonQuestion.h; path = "Classes/Data Model/WIBHumanComparisonQuestion.h"; sourceTree = "<group>"; };
-		7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBHumanComparisonQuestion.m; path = "Classes/Data Model/WIBHumanComparisonQuestion.m"; sourceTree = "<group>"; };
 		7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBPopButton.h; path = Classes/Views/WIBPopButton.h; sourceTree = "<group>"; };
 		7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBPopButton.m; path = Classes/Views/WIBPopButton.m; sourceTree = "<group>"; };
 		7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium_Italic.otf"; sourceTree = "<group>"; };
@@ -162,13 +167,8 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
-				6040146C1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.h */,
-				6040146D1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.m */,
-				6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */,
-				604014671B87006100E2C5D6 /* WIBOptionButton.h */,
-				604014681B87006100E2C5D6 /* WIBOptionButton.m */,
-				7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */,
-				7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */,
+				604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */,
+				604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */,
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
 				7D70EE631AEF3CE8002E1565 /* WIBConstants.m */,
 				7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */,
@@ -259,10 +259,6 @@
 		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				7D8E8D801B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.h */,
-				7D8E8D811B47C4DE005B4AA2 /* WIBHumanComparisonQuestion.m */,
-				7DD20E151B0981B5002ED286 /* WIBHumanComparisonQuestion.h */,
-				7DD20E161B0981B5002ED286 /* WIBHumanComparisonQuestion.m */,
 				7D943FB01AF0C73A0061387B /* WIBGameItem.h */,
 				7D943FB11AF0C73A0061387B /* WIBGameItem.m */,
 				7D70EE691AEF507D002E1565 /* WIBGameOption.h */,
@@ -271,6 +267,8 @@
 				7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */,
 				7D0CC73F1AD4F37700BB65BB /* WIBGameQuestion.h */,
 				7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */,
+				60BE9A2E1B8ACF11000D57C6 /* WIBDissimilarHeightQuestion.h */,
+				60BE9A2C1B8ACEFF000D57C6 /* WIBDissimilarHeightQuestion.m */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -315,12 +313,15 @@
 		F30117801AF0997200F1D854 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */,
-				7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */,
 				7D943FAC1AF0C7160061387B /* WIBImageView.h */,
 				7D943FAD1AF0C7160061387B /* WIBImageView.m */,
+				6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */,
+				604014671B87006100E2C5D6 /* WIBOptionButton.h */,
+				604014681B87006100E2C5D6 /* WIBOptionButton.m */,
 				F301177C1AF0993D00F1D854 /* WIBOptionView.h */,
 				F301177D1AF0993D00F1D854 /* WIBOptionView.m */,
+				7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */,
+				7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */,
 				F30117891AF0A68200F1D854 /* WIBQuestionView.h */,
 				F301178A1AF0A68200F1D854 /* WIBQuestionView.m */,
 			);
@@ -330,14 +331,20 @@
 		F30117811AF099C300F1D854 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */,
-				60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */,
 				7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */,
 				7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */,
 				7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */,
 				7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */,
 				7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */,
 				7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */,
+				60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */,
+				60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */,
+				60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */,
+				60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */,
+				7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */,
+				7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */,
+				6040146F1B87E13900E2C5D6 /* WIBTutorialViewController.h */,
+				604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -505,6 +512,7 @@
 				7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				F301177F1AF0993D00F1D854 /* WIBOptionView.m in Sources */,
+				60BE9A2D1B8ACEFF000D57C6 /* WIBDissimilarHeightQuestion.m in Sources */,
 				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
 				7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */,
 				60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */,
@@ -516,9 +524,11 @@
 				7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */,
 				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
 				7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */,
+				604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */,
 				F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */,
 				7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */,
-				6040146E1B87A2DC00E2C5D6 /* WIBHumanComparisonQuestion.m in Sources */,
+				60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */,
+				604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

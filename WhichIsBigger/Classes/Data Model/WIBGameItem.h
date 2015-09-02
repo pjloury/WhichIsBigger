@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
+    WIBCategoryTypeDissimilarHeight,
+    WIBCategoryTypeAge,
     WIBCategoryTypeHeight,
     WIBCategoryTypeWeight,
-    WIBCategoryTypeAge,
     WIBCategoryTypeCount
 } WIBCategoryType;
 

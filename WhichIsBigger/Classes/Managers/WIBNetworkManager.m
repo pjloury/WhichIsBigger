@@ -58,6 +58,7 @@
         {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            // If you get code 100, then use the local storage
         }
     }];
 }

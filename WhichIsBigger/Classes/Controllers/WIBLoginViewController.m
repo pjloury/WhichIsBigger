@@ -22,7 +22,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     UIView *logo = [[[NSBundle mainBundle] loadNibNamed:@"WIBLogo" owner:self options:nil] firstObject];
     self.logInView.logo = logo;
-	//self.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,24 +30,22 @@
 }
 
 - (void)_loginWithFacebook {
-    
-//    Class fbUtils = NSClassFromString(@"PFFacebookUtils");
-//    [fbUtils initializeFacebook];
-//    
-//    // Set permissions required from the facebook user account
-//    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
-//    
-//    // Login PFUser using Facebook
-//    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-//        if (!user) {
-//            NSLog(@"Uh oh. The user cancelled the Facebook login.");
-//        } else if (user.isNew) {
-//            NSLog(@"User signed up and logged in through Facebook!");
-//        } else {
-//            NSLog(@"User logged in through Facebook!");
-//        }
-//    }];
+    // Set permissions required from the facebook user account
+    NSArray *permissionsArray = @[ @"email", @"user_friends"];//@"user_location"];
+       
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in through Facebook!");
+            [self performSegueWithIdentifier:@"tutorialSegue" sender:self];
+        } else {
+            NSLog(@"User logged in through Facebook!");
+        }
+    }];
 }
+
 
 /*
 #pragma mark - Navigation

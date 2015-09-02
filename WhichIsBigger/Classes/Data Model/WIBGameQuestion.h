@@ -28,7 +28,11 @@ typedef enum : NSUInteger {
 @property double answerQuantity;
 @property BOOL answeredCorrectly;
 
-- (id)initWithGameItem:(WIBGameItem *)item1 gameItem2:(WIBGameItem *)item2;
 - (WIBGameOption *)answer;
+
+// Initializers
+- (instancetype)initOneToOneQuestion:(WIBCategoryType)categoryType;
+- (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1 dissimilargameItem2:(WIBGameItem *)item2;
+
 
 @end

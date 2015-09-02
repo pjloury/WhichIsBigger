@@ -34,7 +34,9 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-        
+
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 									didFinishLaunchingWithOptions:launchOptions];
 }

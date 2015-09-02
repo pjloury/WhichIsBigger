@@ -114,7 +114,6 @@
     NSLog(@"Selected: %@ vs Answer: %@",option.item.name, self.question.answer.item.name);
     if([option.item.name isEqualToString:self.question.answer.item.name])
     {
-        NSLog(@"CORRECT OPTION CHOSEN");
         self.question.answeredCorrectly = YES;
 		optionView.backgroundColor = [UIColor greenColor];
         [self animateCorrectOptionView:optionView];
@@ -122,7 +121,6 @@
     }
     else
     {
-        NSLog(@"Wrong Answer Chosen!");
         self.question.answeredCorrectly = NO;
         optionView.backgroundColor = [UIColor redColor];
         [self animateIncorrectOptionView:optionView];
@@ -134,10 +132,21 @@
 
 - (void)timeUp
 {
-	self.optionView1.alpha = 0.5;
-	self.optionView2.alpha = 0.5;
+    self.optionView1.type = CSAnimationTypeFadeIn;
+    self.optionView1.duration = 0.75;
+    
+    self.optionView2.type = CSAnimationTypeFadeIn;
+    self.optionView2.duration = 0.75;
+    
+    [self.optionView1 startCanvasAnimation];
+    [self.optionView2 startCanvasAnimation];
+    
+    self.optionView1.alpha = 0.5;
+    self.optionView2.alpha = 0.5;
+    
 	[self.optionView1 revealAnswerLabel];
 	[self.optionView2 revealAnswerLabel];
+    [self.scoringDelegate didFailToAnswerQuestion];
     [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];
 }
 

@@ -28,6 +28,7 @@
 // Model
 @property (strong, nonatomic) WIBGameQuestion *question;
 @property (strong, atomic) NSTimer *timer;
+@property (strong, atomic) NSTimer *nextButtonTimer;
 @property (strong, atomic) NSDate *startDate;
 @property int currSeconds;
 
@@ -61,10 +62,10 @@
 {
     // Kick off the first question's timer
     [super viewDidAppear:animated];
-    [self startTimer];
     [UIView animateWithDuration:0.1 animations:^{
         self.timerBar.alpha = 1.0;
     }];
+    [self startTimer];
 }
 
 - (void)configureQuestionView
@@ -72,8 +73,6 @@
     self.questionView.question = self.question;
     self.questionView.gamePlayDelegate = self;
     [self.questionView setup];
-    self.questionView.type = CSAnimationTypeFadeIn;
-    self.questionView.duration = 0.75;
 	self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nextButtonPressed:)];
 	[self.questionView addGestureRecognizer:self.tapRecognizer];
 	self.tapRecognizer.enabled = NO;
@@ -90,10 +89,12 @@
 - (IBAction)nextButtonPressed:(id)sender
 {
 	self.tapRecognizer.enabled = NO;
+    [self.nextButtonTimer invalidate];
     self.nextButton.enabled = NO;
     self.nextButton.alpha = 0.0;
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {    
+        [[WIBGamePlayManager sharedInstance] endGame];
         [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
     }
     else
@@ -118,11 +119,10 @@
     _currSeconds = SECONDS_PER_QUESTION;
     self.startDate = [NSDate date];
 
-    [UIView animateWithDuration:5
-                     animations:^{
+    [UIView animateWithDuration:SECONDS_PER_QUESTION delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
                          self.timerLengthConstraint.constant = 0;
                          [self.timerBar layoutIfNeeded];
-                     }];
+    } completion:^(BOOL finished){}];
     if(!self.timer)
     {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
@@ -142,8 +142,6 @@
         self.timer = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
-        [self.questionView startCanvasAnimation];
-        
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
@@ -181,19 +179,27 @@
 
 - (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
 {
+    self.tapRecognizer.enabled = YES;
+    
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {
         [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
         self.nextButton.enabled = YES;
     }
-    
+    else
+    {
+        self.nextButtonTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(revealNext) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)revealNext
+{
     void (^revealButton)() = ^void() {
         self.nextButton.alpha = 1.0;
     };
     
     [UIView animateWithDuration:0.2 animations:revealButton completion:^(BOOL finished){
         self.nextButton.enabled = YES;
-        self.tapRecognizer.enabled = YES;
         if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
         {
             self.nextButtonParentView.type = CSAnimationTypePop;

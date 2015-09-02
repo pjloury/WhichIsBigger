@@ -12,9 +12,9 @@
 @interface WIBDataModel : NSObject 
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
-- (WIBGameItem*)gameItemForCategoryType:(WIBCategoryType)categoryType withUniqueBaseQuantity:(NSNumber *)baseQuantity;
 
 - (WIBGameItem*)firstGameItemForCategoryType:(WIBCategoryType)categoryType;
-- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item withDifficulty:(double)difficulty;
+- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
+- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude;
 
 @end

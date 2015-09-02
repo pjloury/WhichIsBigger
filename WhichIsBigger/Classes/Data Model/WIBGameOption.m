@@ -8,16 +8,23 @@
 
 #import "WIBGameOption.h"
 
-
 @implementation WIBGameOption
 
-- (id)initWithItem:(WIBGameItem *)item
+- (id)initWithItem:(WIBGameItem *)item multiplier:(int)multiplier
 {
     if (self = [super init]) {
         _item = item;
+        _multiplier = multiplier;
     }
-    
     return self;
+}
+
+- (NSString *)multiplierString
+{
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setNumberStyle:NSNumberFormatterDecimalStyle]; // to get commas (or locale equivalent)
+    [fmt setMaximumFractionDigits:0]; // to avoid any decimal
+    return [fmt stringFromNumber:@(self.multiplier)];
 }
 
 - (NSNumber *)total

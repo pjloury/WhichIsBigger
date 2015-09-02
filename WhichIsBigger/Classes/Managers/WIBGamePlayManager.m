@@ -10,10 +10,10 @@
 #import "WIBDataModel.h"
 
 // Models
-#import "WIBHumanComparisonQuestion.h"
 #import "WIBGameQuestion.h"
 #import "WIBGameOption.h"
 #import "WIBGameItem.h"
+#import "WIBDissimilarHeightQuestion.h"
 
 // Managers
 #import "WIBNetworkManager.h"
@@ -36,7 +36,10 @@
     
     dispatch_once(&pred, ^{
         shared = [[WIBGamePlayManager alloc] init];
-
+        shared.questionCeiling = 40;
+        shared.questionFloor = 10;
+        shared.skewFactor = 50;
+        
     });
     return shared;
 }
@@ -46,15 +49,38 @@
 - (void)beginGame
 {
     self.questionIndex = 0;
-    self.difficulty = 100;
+
     self.gameQuestions = nil;
     self.usedNames = nil;
     [self generateQuestions];
 }
 
+- (void)endGame
+{
+    if (self.currentStreak > 3 && self.questionCeiling - 5 > self.questionFloor)
+    {
+        self.questionCeiling -= 5;
+        if (self.questionFloor > 5)
+        {
+            self.questionFloor -=5;
+        }
+        else if (self.questionFloor > 1)
+        {
+            self.questionFloor --;
+        }
+    }
+    else if ( self.accuracy <= 0.55)
+    {
+        self.questionCeiling += 5;
+        if (self.questionFloor < (self.questionCeiling - 5) )
+        {
+            self.questionFloor +=5;
+        }
+    }
+}
+
 - (WIBGameQuestion *)nextGameQuestion
 {
-    NSLog(@"QUESTION %ld",self.questionIndex+1);
     WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
     self.questionIndex++;
     return question;
@@ -121,6 +147,34 @@
     return (num) ? num.integerValue: 0;
 }
 
+- (NSUInteger)totalCorrectAnswers
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalCorrectAnswers"];
+    return (num) ? num.integerValue: 0;
+}
+
+- (void)setTotalCorrectAnswers:(NSUInteger)totalCorrectAnswers
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(totalCorrectAnswers) forKey:@"totalCorrectAnswers"];
+}
+
+- (NSUInteger)totalAnswers
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalAnswers"];
+    return (num) ? num.integerValue: 0;
+}
+
+- (void)setTotalAnswers:(NSUInteger)totalAnswers
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(totalAnswers) forKey:@"totalAnswers"];
+}
+
+- (float)accuracy
+{
+    return (float)self.totalCorrectAnswers / (float)self.totalAnswers;
+}
+
+
 - (void)generateQuestions
 {
     self.gameQuestions = [[NSMutableArray alloc] init];
@@ -128,29 +182,29 @@
     
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
-        // TODO: accomodate different question types
+        // TODO: Server driven # of categories .. (future looking)
         WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
+        //WIBCategoryType randomCategory = WIBCategoryTypeDissimilarHeight;
         
-        WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategoryType:randomCategory];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategoryType:randomCategory withRespectToItem:item1 withDifficulty:[WIBGamePlayManager sharedInstance].difficulty];
-        // Encapsulate game item cache into the method call!
-                              
-        NSAssert(![item1 isEqual:item2], @"ITEMS SHOULD NOT BE IDENTICAL");
+        WIBGameQuestion *question;
         
-        WIBGameQuestion *gameQuestion = nil;
-        
-        if(randomCategory == WIBCategoryTypeAge)
+        switch (randomCategory)
         {
-            gameQuestion = [[WIBHumanComparisonQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1
+            case (WIBCategoryTypeDissimilarHeight):
+            {
+                question = [[WIBDissimilarHeightQuestion alloc] init];
+                break;
+            }
+            default:
+            {
+                question = [[WIBGameQuestion alloc] initOneToOneQuestion:randomCategory];
+                break;
+            }
         }
-        else
-        {
-            gameQuestion = [[WIBGameQuestion alloc]initWithGameItem:item1 gameItem2:item2]; //pass mult 1 mult2
-        }
-		
-        [self.gameQuestions addObject:gameQuestion];
+        [self.gameQuestions addObject:question];
+        
     }
-    [self printQuestions];
+    //[self printQuestions];
     [[WIBNetworkManager sharedInstance] preloadImages:self.gameQuestions];
 }
 
@@ -174,11 +228,20 @@
     {
         self.longestStreak = self.currentStreak;
     }
+    self.totalCorrectAnswers++;
+    self.totalAnswers++;
 }
 
 - (void)didAnswerQuestionIncorrectly
 {
     self.currentStreak = 0;
+    self.totalAnswers++;
+}
+
+- (void)didFailToAnswerQuestion
+{
+    self.currentStreak = 0;
+    self.totalAnswers++;
 }
 
 @end

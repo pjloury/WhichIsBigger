@@ -12,12 +12,13 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [super touchesBegan:touches withEvent:event]; // you need this
+    [super touchesBegan:touches withEvent:event]; 
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint touchPoint = [[touches anyObject] locationInView:self];
+    // Only message the delegate if touch up occurs inside
     if (CGRectContainsPoint(self.bounds, touchPoint))
     {
         [self.delegate optionWasSelected:self];
