@@ -125,7 +125,6 @@ def main():
         OBJECT = ' '.join(args.object)
     csvfile = args.csvfile
 
-
     if category and MODE and OBJECT:
 
         if category == "age":
@@ -141,20 +140,15 @@ def main():
         query_string = QUERY_STRINGS[category]
         multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
 
-
         #what is multiple vs aggregate?
         if MODE == "multiple":
             objects = collection_query(OBJECT)
-
             for obj in objects:
                 single_query(obj,CATEGORY)
-
         elif MODE == "aggregate":
-
             for CATEGORY in ["age","height"]:
                 query_string = QUERY_STRINGS[CATEGORY]
                 single_query(OBJECT,CATEGORY)
-
         else:
             single_query(OBJECT,CATEGORY)
 
@@ -299,11 +293,8 @@ def single_query(object,CATEGORY,TAGS=[]):
     #OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
 
     PHOTO = ''
-
     object = object.encode('utf-8')
-
     image_url = image_query(object)
-
     if image_url:
         PHOTO = "http://"+image_url
 
@@ -337,9 +328,7 @@ def single_query(object,CATEGORY,TAGS=[]):
     if CATEGORY == Category.none:
 
         value = root.find("./pod[@title='Image']").find('markup').text
-
         m = __image_re.search(value)
-
         if m:
             PHOTO = "http://"+m.group(1)
 
