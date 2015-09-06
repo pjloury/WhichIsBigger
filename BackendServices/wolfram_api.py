@@ -96,7 +96,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='wolfram to parse backend service')
 
-    parser.add_argument('--mode', type=int, dest='mode',
+    parser.add_argument('--mode', dest='mode',
                        help='script mode')
     parser.add_argument('--category', dest='category',
                        help='category [age, weight, height]')
@@ -120,6 +120,8 @@ def main():
 
     category = args.category
     MODE = args.mode
+
+    OBJECT = ''
 
     if args.object:
         OBJECT = ' '.join(args.object)
@@ -149,9 +151,10 @@ def main():
             for obj in objects:
                 single_query(obj,CATEGORY)
 
+        #aggregate -> get age and height for specificed object
         elif MODE == "aggregate":
 
-            for CATEGORY in ["age","height"]:
+            for CATEGORY in ["age","weight","height"]:
                 query_string = QUERY_STRINGS[CATEGORY]
                 single_query(OBJECT,CATEGORY)
 
@@ -186,7 +189,7 @@ def main():
 
                 TAGS = TAGS.split(',')
 
-                if "person" in TAGS.lower():
+                if "person" in [t.lower() for t in TAGS]:
 
                     categories = ["age","height","weight"]
 
@@ -211,6 +214,7 @@ def main():
     else:
         raise ValueError('Please refer to commandline arguments')
 
+#
 def collection_query(TOPIC):
 
     QUERY = multiple_query_string % TOPIC

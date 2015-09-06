@@ -155,4 +155,14 @@ aS'Machu Picchu'
 p77
 aS'Mt. Kilimanjaro'
 p78
+aS'Lorde'
+p79
+aS'Weird Al Yankovic'
+p80
+aS'Jennifer Aniston'
+p81
+aS'Arnold Schwarzenegger'
+p82
+aS'Dave Chapelle'
+p83
 a.
