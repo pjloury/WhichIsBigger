@@ -148,19 +148,33 @@ def main():
             OBJECT = row[0]
             TAGS = row[1]
 
+            #check for existing parse entry
+            exists = GameItem.Query.all().filter(name=OBJECT)
+
+            if len(exists) > 0:
+                continue
+
             if OBJECT not in pickled_objects:
 
                 pickled_objects.append(OBJECT)
 
                 print TAGS
 
-                TAGS = TAGS.split(',')
+                TAGS = [t.lower() for t in TAGS.split(',')]
 
-                if "person" in [t.lower() for t in TAGS]:
+                if "celebrity" in TAGS:
+
+                    categories = ["age","height"]
+
+                elif "athlete" in TAGS:
 
                     categories = ["age","height","weight"]
 
-                elif "tall structure" in TAGS.lower():
+                elif "person" in TAGS:
+
+                    categories = ["age","weight"]
+
+                elif "tall structure" in TAGS:
 
                     categories = ["height"]
 
