@@ -20,7 +20,7 @@
 #define POINTS_PER_QUESTION 40
 
 // Data Model Constants
-#define GAME_ITEM_FETCH_LIMIT 200
+#define GAME_ITEM_FETCH_LIMIT 1000
 #define ARC4RANDOM_MAX      0x100000000
 
 extern NSString * kGameQuestionTimeUpNotification;

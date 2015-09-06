@@ -291,7 +291,6 @@ def image_query(object):
     node = root.find("./pod[@title='Image']")
 
     if not node:
-
         node = root.find("./pod[@title='Flag']")
 
         if not node:
@@ -312,22 +311,9 @@ def single_query(object,CATEGORY,TAGS=[]):
     #ensure all non-ascii characters are converted to html entities
     #OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
 
-    PHOTO = ''
-    object = object.encode('utf-8')
-    image_url = image_query(object)
-    if image_url:
-        PHOTO = "http://"+image_url
-
     QUERY = urllib.quote(query_string % object)
 
     BUILT_QUERY = QUERYSTRING % (QUERY,APP_ID)
-
-    # if os.path.exists(PICKLE_PATH):
-    #     xml = pickle.load(open(PICKLE_PATH,'rb'))
-    #
-    # else:
-    #     xml = urllib2.urlopen(BUILT_QUERY).read()
-    #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
     #print xml
@@ -335,15 +321,32 @@ def single_query(object,CATEGORY,TAGS=[]):
     root = ElementTree.fromstring(xml)
 
     # print ElementTree.tostring(root)
-
     # for child in root:
     #     print child.tag, child.attrib
 
+    #use City, Country format (exclude province)
     TOPIC = get_topic(root)
+    topicItems = [x.strip() for x in TOPIC.split(',')]
+    if len(topicItems)>2:
+        TOPIC = topicItems[0] + ", " + topicItems[-1]
+
+    PHOTO = ''
+    object = object.encode('utf-8')
+    image_url = image_query(object)
+    if image_url:
+        PHOTO = "http://"+image_url
+
+    elif "city" in TAGS and not PHOTO:
+        country = [x.strip() for x in TOPIC.split(',')][-1]
+        countryItems  = GameItem.Query.filter(name=country).limit(1)
+        for countryItem in countryItems:
+            if (countryItem.photoURL):
+                PHOTO = countryItem.photoURL
+                print "FOUND THE URL! " + PHOTO
+                break
 
     UNIT = ''
     QUANTITY = -1
-
 
     if CATEGORY == Category.none:
 
