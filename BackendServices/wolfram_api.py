@@ -166,24 +166,24 @@ def main():
 
                 categories = ["height"]
 
+            elif "country" in TAGS:
+
+                categories = ["population"]
+
+            elif "city" in TAGS:
+
+                categories = ["population"]
+
+            elif "state" in TAGS:
+
+                categories = ["population"]
+
             for CATEGORY in categories:
 
                 #gracefully catch exception and move to next query
                 try:
-
-                elif "country" in TAGS:
-
-                    categories = ["population"]
-
-                elif "city" in TAGS:
-
-                    categories = ["population"]
-
-
-                elif "state" in TAGS:
-
-                    categories = ["population"]
-
+                    query_string = QUERY_STRINGS[CATEGORY]
+                    single_query(OBJECT,CATEGORY,TAGS)
                 except:
                     pass
 
