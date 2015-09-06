@@ -189,6 +189,11 @@ def main():
 
                     categories = ["population"]
 
+
+                elif "state" in TAGS:
+
+                    categories = ["population"]
+
                 for CATEGORY in categories:
 
                     #gracefully catch exception and move to next query
