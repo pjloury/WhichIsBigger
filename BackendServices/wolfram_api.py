@@ -96,7 +96,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='wolfram to parse backend service')
 
-    parser.add_argument('--mode', type=int, dest='mode',
+    parser.add_argument('--mode', dest='mode',
                        help='script mode')
     parser.add_argument('--category', dest='category',
                        help='category [age, weight, height]')
@@ -121,38 +121,14 @@ def main():
     category = args.category
     MODE = args.mode
 
+    OBJECT = ''
+
     if args.object:
         OBJECT = ' '.join(args.object)
     csvfile = args.csvfile
 
-    if category and MODE and OBJECT:
+    if csvfile:
 
-        if category == "age":
-            CATEGORY = Category.age
-        elif category == "weight":
-            CATEGORY = Category.weight
-        elif category == "height":
-            CATEGORY = Category.height
-        elif category == "none":
-            CATEGORY = Category.none
-
-        #query_string = %s string
-        query_string = QUERY_STRINGS[category]
-        multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
-
-        #what is multiple vs aggregate?
-        if MODE == "multiple":
-            objects = collection_query(OBJECT)
-            for obj in objects:
-                single_query(obj,CATEGORY)
-        elif MODE == "aggregate":
-            for CATEGORY in ["age","height"]:
-                query_string = QUERY_STRINGS[CATEGORY]
-                single_query(OBJECT,CATEGORY)
-        else:
-            single_query(OBJECT,CATEGORY)
-
-    elif csvfile:
 
         if os.path.exists(PICKLE_FILE):
             pickled_objects = pickle.load(open(PICKLE_FILE,'r'))
@@ -172,19 +148,33 @@ def main():
             OBJECT = row[0]
             TAGS = row[1]
 
+            #check for existing parse entry
+            exists = GameItem.Query.all().filter(name=OBJECT)
+
+            if len(exists) > 0:
+                continue
+
             if OBJECT not in pickled_objects:
 
                 pickled_objects.append(OBJECT)
 
                 print TAGS
 
-                TAGS = TAGS.split(',')
+                TAGS = [t.lower() for t in TAGS.split(',')]
 
-                if "person" in TAGS.lower():
+                if "celebrity" in TAGS:
+
+                    categories = ["age","height"]
+
+                elif "athlete" in TAGS:
 
                     categories = ["age","height","weight"]
 
-                elif "tall structure" in TAGS.lower():
+                elif "person" in TAGS:
+
+                    categories = ["age","weight"]
+
+                elif "tall structure" in TAGS:
 
                     categories = ["height"]
 
@@ -202,9 +192,46 @@ def main():
 
                 pickle.dump(pickled_objects,file=open(PICKLE_FILE,'w+'))
 
+
+    elif category and MODE and OBJECT:
+
+        if category == "age":
+            CATEGORY = Category.age
+        elif category == "weight":
+            CATEGORY = Category.weight
+        elif category == "height":
+            CATEGORY = Category.height
+        elif category == "none":
+            CATEGORY = Category.none
+
+        #query_string = %s string
+        query_string = QUERY_STRINGS[category]
+        multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
+
+
+        #what is multiple vs aggregate?
+        if MODE == "multiple":
+            objects = collection_query(OBJECT)
+
+            for obj in objects:
+                single_query(obj,CATEGORY)
+
+        #aggregate -> get age and height for specificed object
+        elif MODE == "aggregate":
+
+            for CATEGORY in ["age","weight","height"]:
+                query_string = QUERY_STRINGS[CATEGORY]
+                single_query(OBJECT,CATEGORY)
+
+        else:
+            single_query(OBJECT,CATEGORY)
+
+
+
     else:
         raise ValueError('Please refer to commandline arguments')
 
+#
 def collection_query(TOPIC):
 
     QUERY = multiple_query_string % TOPIC

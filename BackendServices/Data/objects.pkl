@@ -155,4 +155,30 @@ aS'Machu Picchu'
 p77
 aS'Mt. Kilimanjaro'
 p78
+aS'Lorde'
+p79
+aS'Weird Al Yankovic'
+p80
+aS'Jennifer Aniston'
+p81
+aS'Arnold Schwarzenegger'
+p82
+aS'Dave Chapelle'
+p83
+aS'Johnny Depp'
+p84
+aS'Robert Downey Jr.'
+p85
+aS'Tom Hanks'
+p86
+aS'Jack Nicholson'
+p87
+aS'Christian Bale'
+p88
+aS'Will Smith'
+p89
+aS'Denzel Washington'
+p90
+aS'Rober De Niro'
+p91
 a.
