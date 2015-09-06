@@ -316,20 +316,26 @@ def image_query(object):
     root = ElementTree.fromstring(xml)
 
 
-    image_node = root.find("./pod[@title='Image']")
+    node = root.find("./pod[@title='Image']")
 
-    if image_node:
-        value = image_node.find('markup').text
 
-        m = __image_re.search(value)
 
-        if m:
-            return m.group(1)
-        else:
+    if not node:
+
+        node = root.find("./pod[@title='Flag']")
+
+        if not node:
             return None
 
+    value = node.find('markup').text
+
+    m = __image_re.search(value)
+
+    if m:
+        return m.group(1)
     else:
         return None
+
 
 def single_query(object,CATEGORY,TAGS=[]):
 
