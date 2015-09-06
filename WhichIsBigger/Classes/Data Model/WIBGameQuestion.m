@@ -120,7 +120,7 @@
     else
         questionVerb = @"Which";
 
-    NSString *categoryQuestionString = nil;
+    NSString *categoryQuestionString = @"is Bigger?";
     switch (self.option1.item.categoryType)
     {
         case(WIBCategoryTypeHeight):
@@ -134,6 +134,9 @@
             break;
         case(WIBCategoryTypeDissimilarHeight):
             categoryQuestionString = @"is DIFFERENT Taller?";
+            break;
+        case(WIBCategoryTypePopulation):
+            categoryQuestionString = @"has more People";
             break;
         default:
             break;

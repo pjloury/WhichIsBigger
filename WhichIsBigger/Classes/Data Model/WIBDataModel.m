@@ -52,7 +52,7 @@
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(![self itemNameAlreadyUsed:gameItem.name])
+    if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.photoURL.length > 0)
     {
         [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
         return gameItem;
@@ -87,7 +87,7 @@
     static int tries = 0;
     
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough && gameItem.photoURL.length > 0)
     {
         [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
         return gameItem;
@@ -114,14 +114,14 @@
 
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    double percentDifference = (fabs((gameItem.baseQuantity.doubleValue - item.baseQuantity.doubleValue)/item.baseQuantity.doubleValue)) * 100;
+    double percentDifference = (fabs((gameItem.baseQuantity.doubleValue - item.baseQuantity.doubleValue)/fmin(item.baseQuantity.doubleValue,gameItem.baseQuantity.doubleValue))) * 100;
     BOOL closeEnough = (percentDifference < questionCeiling && percentDifference > [WIBGamePlayManager sharedInstance].questionFloor);
     
     static int tries = 0;
     
     // Cannot, be already used name, cannot be a tie, must be close enough
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.photoURL.length > 0)
     {
         [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);

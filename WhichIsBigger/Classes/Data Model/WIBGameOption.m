@@ -74,6 +74,10 @@
         {
             return [NSString stringWithFormat:@"%@ lbs", [fmt stringFromNumber:self.total]];
         }
+        case WIBCategoryTypePopulation:
+        {
+            return [NSString stringWithFormat:@"%@ people", [fmt stringFromNumber:self.total]];
+        }
         default:
             return @"";
     }

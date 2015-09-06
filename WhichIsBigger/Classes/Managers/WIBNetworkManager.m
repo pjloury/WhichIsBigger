@@ -72,8 +72,11 @@
         {
             NSString *urlString1 = question.option1.item.photoURL;
             NSString *urlString2 = question.option2.item.photoURL;
-
+            
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            
+            if([urlString1 length] >0)
+            {
             dispatch_group_enter(downloadGroup);
             [manager downloadImageWithURL:[NSURL URLWithString:urlString1]
                                   options:0
@@ -86,7 +89,10 @@
                                         dispatch_group_leave(downloadGroup);
                                     }
                                 }];
+            }
             
+            if([urlString2 length] >0)
+            {
             dispatch_group_enter(downloadGroup);
             [manager downloadImageWithURL:[NSURL URLWithString:urlString2]
                                   options:0
@@ -99,6 +105,7 @@
                                         dispatch_group_leave(downloadGroup);
                                     }
                                 }];
+            }
         }
         
         dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER);

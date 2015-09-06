@@ -11,13 +11,13 @@
 NSString *kHeight = @"height";
 NSString *kWeight = @"weight";
 NSString *kAge = @"age";
-
+NSString *kPopulation = @"population";
 
 @implementation WIBGameItem
 
 - (BOOL)isPerson
 {
-	return [self.tagArray containsObject:@"Person"];
+	return [self.tagArray containsObject:@"Person" ] || [self.tagArray containsObject:@"person"];
 }
 
 - (NSNumber *)baseQuantity
@@ -46,20 +46,12 @@ NSString *kAge = @"age";
         return WIBCategoryTypeWeight;
     else if ([self.categoryString isEqualToString:kAge])
         return WIBCategoryTypeAge;
-    else
+    else if ([self.categoryString isEqualToString:kPopulation])
+        return WIBCategoryTypePopulation;
+    else // TODO: need to have
         NSAssert(0,@"No categoryString!");
+        // return WIBCategoryTypeDefault;
     return 0;
-}
-
-+ (NSString *)categoryValueForCategoryType:(WIBCategoryType)type
-{
-    switch(type)
-    {
-        case(WIBCategoryTypeHeight): return kHeight;
-        case(WIBCategoryTypeWeight): return kWeight;
-        case(WIBCategoryTypeAge): return kAge;
-        default: return nil;
-    }
 }
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2
