@@ -181,4 +181,70 @@ aS'Denzel Washington'
 p90
 aS'Rober De Niro'
 p91
+aS'Meghan Trainor'
+p92
+aS'Ellie Goulding'
+p93
+aS'Flo Rida'
+p94
+aS'Ariana Grande'
+p95
+aS'Big Sean'
+p96
+aS'Skrillex'
+p97
+aS'David Guetta'
+p98
+aS'Diplo'
+p99
+aS'Calvin Harris'
+p100
+aS'Kelly Clarkson'
+p101
+aS'Kid Cudi'
+p102
+aS'Ne-Yo'
+p103
+aS'Ed Sheeran'
+p104
+aS'Bono'
+p105
+aS'Elton John'
+p106
+aS'Wiz Khalifa'
+p107
+aS'Ice Cube'
+p108
+aS'Tiesto'
+p109
+aS'Avril Lavigne'
+p110
+aS'Common'
+p111
+aS'Lana Del Rey'
+p112
+aS'Katy Perry'
+p113
+aS'Bradley Cooper'
+p114
+aS'Zach Galifianakis'
+p115
+aS'Morgan Freeman'
+p116
+aS'Jimmy Fallon'
+p117
+aS'Aziz Ansari'
+p118
+aS'Jimmy Kimmel'
+p119
+aS'Jon Stewart'
+p120
+aS'Stephen Colbert'
+p121
+aS'Jim Carey'
+p122
+aS'Tinay Fey'
+p123
+aS'Amy Poehler'
+p124
 a.

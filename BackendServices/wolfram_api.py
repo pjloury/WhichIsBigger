@@ -55,7 +55,7 @@ query_string = ""
 multiple_query_string = ""
 
 pickled_objects = []
-PICKLE_FILE = '/Users/admin/Documents/WhichIsBigger/BackendServices/Data/objects.pkl'
+PICKLE_FILE = './Data/objects.pkl'
 
 def correct():
     print "In the 'correct' method"
@@ -82,10 +82,8 @@ def correct():
         if image_url == 'http://':
             item.photoURL = None
 
-
         print item
         item.save()
-        # break
 
 
 def main():
@@ -129,19 +127,12 @@ def main():
 
     if csvfile:
 
-
-        if os.path.exists(PICKLE_FILE):
-            pickled_objects = pickle.load(open(PICKLE_FILE,'r'))
-
-        else:
-            pickled_objects = []
-
         print "loading csv"
 
         reader = csv.reader(csvfile)
 
         for row in reader:
-
+            print "reading a row"
             if len(row) < 2:
                 continue
 
@@ -150,48 +141,38 @@ def main():
 
             #check for existing parse entry
             exists = GameItem.Query.all().filter(name=OBJECT)
-
             if len(exists) > 0:
+                print "Duplicate found"
                 continue
 
-            if OBJECT not in pickled_objects:
+            TAGS = [t.lower() for t in TAGS.split(',')]
 
-                pickled_objects.append(OBJECT)
+            if "celebrity" in TAGS:
 
-                print TAGS
+                categories = ["age","height"]
 
-                TAGS = [t.lower() for t in TAGS.split(',')]
+            elif "athlete" in TAGS:
 
-                if "celebrity" in TAGS:
+                categories = ["age","height","weight"]
 
-                    categories = ["age","height"]
+            elif "person" in TAGS:
 
-                elif "athlete" in TAGS:
+                categories = ["age","weight"]
 
-                    categories = ["age","height","weight"]
+            elif "tall structure" in TAGS:
 
-                elif "person" in TAGS:
+                categories = ["height"]
 
-                    categories = ["age","weight"]
+            for CATEGORY in categories:
 
-                elif "tall structure" in TAGS:
+                #gracefully catch exception and move to next query
+                try:
 
-                    categories = ["height"]
+                    query_string = QUERY_STRINGS[CATEGORY]
+                    single_query(OBJECT,CATEGORY,TAGS)
 
-
-                for CATEGORY in categories:
-
-                    #gracefully catch exception and move to next query
-                    try:
-
-                        query_string = QUERY_STRINGS[CATEGORY]
-                        single_query(OBJECT,CATEGORY,TAGS)
-
-                    except:
-                        pass
-
-                pickle.dump(pickled_objects,file=open(PICKLE_FILE,'w+'))
-
+                except:
+                    pass
 
     elif category and MODE and OBJECT:
 
@@ -207,7 +188,6 @@ def main():
         #query_string = %s string
         query_string = QUERY_STRINGS[category]
         multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
-
 
         #what is multiple vs aggregate?
         if MODE == "multiple":
@@ -225,8 +205,6 @@ def main():
 
         else:
             single_query(OBJECT,CATEGORY)
-
-
 
     else:
         raise ValueError('Please refer to commandline arguments')
@@ -292,12 +270,9 @@ def image_query(object):
     #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
-
-
-    print xml
+    #print xml
 
     root = ElementTree.fromstring(xml)
-
 
     image_node = root.find("./pod[@title='Image']")
 
@@ -337,7 +312,7 @@ def single_query(object,CATEGORY,TAGS=[]):
     #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
-    print xml
+    #print xml
 
     root = ElementTree.fromstring(xml)
 
@@ -384,10 +359,7 @@ def single_query(object,CATEGORY,TAGS=[]):
 
     elif CATEGORY == Category.height:
 
-
         result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
-
-
         print result
 
         m = __person_height_re.match(result)
@@ -472,7 +444,6 @@ def single_query(object,CATEGORY,TAGS=[]):
                         else:
                             raise NameError('No match for weight query')
 
-
             else:
                 raise NameError('No results found for query: %s' % QUERY)
 
@@ -482,6 +453,7 @@ def single_query(object,CATEGORY,TAGS=[]):
     ############## PARSE API ##############
 
     kv = GameItem(category=CATEGORY, tagArray=TAGS, name=TOPIC, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
+    print "Finished " + TOPIC
     kv.save()
 
 if __name__ == "__main__":
