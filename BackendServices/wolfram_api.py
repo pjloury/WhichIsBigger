@@ -128,40 +128,7 @@ def main():
     csvfile = args.csvfile
 
 
-    if category and MODE and OBJECT:
-
-        if category == "age":
-            CATEGORY = Category.age
-        elif category == "weight":
-            CATEGORY = Category.weight
-        elif category == "height":
-            CATEGORY = Category.height
-        elif category == "none":
-            CATEGORY = Category.none
-
-        #query_string = %s string
-        query_string = QUERY_STRINGS[category]
-        multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
-
-
-        #what is multiple vs aggregate?
-        if MODE == "multiple":
-            objects = collection_query(OBJECT)
-
-            for obj in objects:
-                single_query(obj,CATEGORY)
-
-        #aggregate -> get age and height for specificed object
-        elif MODE == "aggregate":
-
-            for CATEGORY in ["age","weight","height"]:
-                query_string = QUERY_STRINGS[CATEGORY]
-                single_query(OBJECT,CATEGORY)
-
-        else:
-            single_query(OBJECT,CATEGORY)
-
-    elif csvfile:
+    if csvfile:
 
         if os.path.exists(PICKLE_FILE):
             pickled_objects = pickle.load(open(PICKLE_FILE,'r'))
@@ -210,6 +177,42 @@ def main():
                         pass
 
                 pickle.dump(pickled_objects,file=open(PICKLE_FILE,'w+'))
+
+
+    elif category and MODE and OBJECT:
+
+        if category == "age":
+            CATEGORY = Category.age
+        elif category == "weight":
+            CATEGORY = Category.weight
+        elif category == "height":
+            CATEGORY = Category.height
+        elif category == "none":
+            CATEGORY = Category.none
+
+        #query_string = %s string
+        query_string = QUERY_STRINGS[category]
+        multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
+
+
+        #what is multiple vs aggregate?
+        if MODE == "multiple":
+            objects = collection_query(OBJECT)
+
+            for obj in objects:
+                single_query(obj,CATEGORY)
+
+        #aggregate -> get age and height for specificed object
+        elif MODE == "aggregate":
+
+            for CATEGORY in ["age","weight","height"]:
+                query_string = QUERY_STRINGS[CATEGORY]
+                single_query(OBJECT,CATEGORY)
+
+        else:
+            single_query(OBJECT,CATEGORY)
+
+
 
     else:
         raise ValueError('Please refer to commandline arguments')

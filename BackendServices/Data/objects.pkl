@@ -165,4 +165,20 @@ aS'Arnold Schwarzenegger'
 p82
 aS'Dave Chapelle'
 p83
+aS'Johnny Depp'
+p84
+aS'Robert Downey Jr.'
+p85
+aS'Tom Hanks'
+p86
+aS'Jack Nicholson'
+p87
+aS'Christian Bale'
+p88
+aS'Will Smith'
+p89
+aS'Denzel Washington'
+p90
+aS'Rober De Niro'
+p91
 a.
