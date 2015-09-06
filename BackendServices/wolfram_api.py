@@ -7,24 +7,18 @@ import os
 import pickle
 import argparse
 import re
-
 import csv
-
 import sys
+import time
 
 from parse_rest.connection import register
 from parse_rest.datatypes import Object
 
-
 from api_keys import *
-
-
-import time
 
 pattern = '%m/%d/%Y'
 
 __topic_re = re.compile("""(.*)\s+\|""")
-
 __topic_re1 = re.compile("""(.*)\s+\(""")
 
 __birthday_re = re.compile("""(\d+/\d+/\d+)""")
@@ -35,14 +29,10 @@ __weight_re = re.compile("""(.*)\s+(lb)""")
 
 __image_re = re.compile("""src=\"//(\S+)\?""")
 
-
-
-
 __list_re = re.compile("""\d+\s+\|\s+([^\|]*)\s+\|""")
 
 
 QUERYSTRING_IMAGE = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s&format=plaintext,html"
-
 QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
 
 
@@ -67,13 +57,11 @@ multiple_query_string = ""
 pickled_objects = []
 PICKLE_FILE = '/Users/admin/Documents/WhichIsBigger/BackendServices/Data/objects.pkl'
 
-
 def correct():
-
+    print "In the 'correct' method"
     all_items = GameItem.Query.all()
 
     for item in all_items:
-
 
         if hasattr(item,'tags') and item.tags != None:
 
@@ -85,24 +73,23 @@ def correct():
 
             item.tags = None
 
-
         image_url = item.photoURL
-
 
         if 'http://' not in image_url and image_url != None and image_url != "":
 
             item.photoURL = 'http://'+image_url
 
-
         if image_url == 'http://':
             item.photoURL = None
 
-        item.save()
 
+        print item
+        item.save()
         # break
 
 
 def main():
+    print "In the main method"
 
     global query_string
     global multiple_query_string
@@ -119,6 +106,8 @@ def main():
                        help='csv file to parse')
 
     args = parser.parse_args()
+    
+    print args
 
     # category = sys.argv[1]
     #
@@ -128,7 +117,6 @@ def main():
 
     QUERY_STRINGS = {"age":'%s birthday',"weight":'%s weight',"height":'%s height',"none":'%s'}
     MULTIPLE_QUERY_STRINGS = {"age":'oldest %s',"weight":'heaviest %s',"height":'tallest %s',"none":'%s'}
-
 
     category = args.category
     MODE = args.mode
@@ -149,12 +137,13 @@ def main():
         elif category == "none":
             CATEGORY = Category.none
 
+        #query_string = %s string
         query_string = QUERY_STRINGS[category]
         multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
 
 
+        #what is multiple vs aggregate?
         if MODE == "multiple":
-
             objects = collection_query(OBJECT)
 
             for obj in objects:
@@ -166,11 +155,8 @@ def main():
                 query_string = QUERY_STRINGS[CATEGORY]
                 single_query(OBJECT,CATEGORY)
 
-
-
         else:
             single_query(OBJECT,CATEGORY)
-
 
     elif csvfile:
 
@@ -180,20 +166,16 @@ def main():
         else:
             pickled_objects = []
 
-
         print "loading csv"
 
         reader = csv.reader(csvfile)
-
 
         for row in reader:
 
             if len(row) < 2:
                 continue
 
-
             OBJECT = row[0]
-
             TAGS = row[1]
 
             if OBJECT not in pickled_objects:
@@ -213,8 +195,6 @@ def main():
                     categories = ["height"]
 
 
-
-
                 for CATEGORY in categories:
 
                     #gracefully catch exception and move to next query
@@ -228,16 +208,10 @@ def main():
 
                 pickle.dump(pickled_objects,file=open(PICKLE_FILE,'w+'))
 
-
-
-
-
-
     else:
         raise ValueError('Please refer to commandline arguments')
 
 def collection_query(TOPIC):
-
 
     QUERY = multiple_query_string % TOPIC
 
@@ -261,7 +235,6 @@ def collection_query(TOPIC):
             results.append(m.group(1))
 
     return results
-
 
 
 def get_topic(root):
@@ -327,7 +300,6 @@ def single_query(object,CATEGORY,TAGS=[]):
 
     PHOTO = ''
 
-
     object = object.encode('utf-8')
 
     image_url = image_query(object)
@@ -347,8 +319,6 @@ def single_query(object,CATEGORY,TAGS=[]):
     #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
-
-
     print xml
 
     root = ElementTree.fromstring(xml)
@@ -376,7 +346,6 @@ def single_query(object,CATEGORY,TAGS=[]):
 
     elif CATEGORY == Category.age:
 
-
         value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
 
         if "month/day/year" in value:
@@ -393,10 +362,8 @@ def single_query(object,CATEGORY,TAGS=[]):
             else:
                 raise NameError('No match for birthday query')
 
-
         else:
             raise NameError('No results found for query: %s' % QUERY)
-
 
 
     elif CATEGORY == Category.height:
@@ -421,9 +388,7 @@ def single_query(object,CATEGORY,TAGS=[]):
             result_found = False
 
             if subpods:
-
                 for subpod in subpods:
-
                     value = subpod.find('plaintext').text
 
                     if " meters" in value:
@@ -445,7 +410,6 @@ def single_query(object,CATEGORY,TAGS=[]):
 
             else:
                 raise NameError('No results found for query: %s' % QUERY)
-
             if not result_found:
                 raise NameError('No match for height query')
 
@@ -501,13 +465,8 @@ def single_query(object,CATEGORY,TAGS=[]):
 
     ############## PARSE API ##############
 
-
-
-
     kv = GameItem(category=CATEGORY, tagArray=TAGS, name=TOPIC, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
-
     kv.save()
 
-
 if __name__ == "__main__":
-    correct()
+    main()

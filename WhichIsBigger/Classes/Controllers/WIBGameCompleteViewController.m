@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 @property (weak, nonatomic) IBOutlet UILabel *highScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accuracyLabel;
 @property (weak, nonatomic) IBOutlet WIBPopButton *playAgainButton;
 @property (weak, nonatomic) NSTimer *scoreLabelTimer;
 @property (assign, nonatomic) NSInteger incrementedScore;
@@ -35,6 +36,7 @@
     self.incrementedScore = 0;
     self.streakLabel.hidden = YES;
     self.scoreLabel.text = @"";
+    self.accuracyLabel.text = @"";
     self.highScoreLabel.hidden = YES;
     self.playAgainButton.enabled = NO;
     self.highScoreLabel.alpha = 0.0;
@@ -81,6 +83,8 @@
         self.highScoreLabel.text = @"LOL!";
         [self throbHighScoreLabel];
     }
+    
+    self.accuracyLabel.text = [NSString stringWithFormat:@"%g%%",floorf([WIBGamePlayManager sharedInstance].accuracy*100.0)];
     
     self.playAgainButton.enabled = YES;
 }

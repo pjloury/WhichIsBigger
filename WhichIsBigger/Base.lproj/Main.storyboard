@@ -25,6 +25,7 @@
             <string>BloggerSans-Medium</string>
             <string>BloggerSans-Medium</string>
             <string>BloggerSans-Medium</string>
+            <string>BloggerSans-Medium</string>
         </mutableArray>
         <mutableArray key="Blogger_Sans-Medium_Italic.otf">
             <string>BloggerSans-MediumItalic</string>
@@ -1136,6 +1137,25 @@
                                     <rect key="frame" x="44" y="695" width="250" height="30"/>
                                 </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="67%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lp-5T-6R7">
+                                <rect key="frame" x="16" y="40" width="80" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="RiR-oU-sd0"/>
+                                    <constraint firstAttribute="width" constant="80" id="cSf-C9-4ag"/>
+                                    <constraint firstAttribute="height" constant="50" id="wUd-sO-e1J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="30"/>
+                                <color key="textColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="RiR-oU-sd0"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="49" y="70" width="300" height="50"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1144,6 +1164,7 @@
                             </constraint>
                             <constraint firstItem="gOc-y8-brm" firstAttribute="leading" secondItem="YdS-3B-qjr" secondAttribute="leading" id="2lS-T2-iEp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qzd-3D-wBb" secondAttribute="trailing" constant="140" id="7Zq-dS-Int"/>
+                            <constraint firstItem="9lp-5T-6R7" firstAttribute="leading" secondItem="YdS-3B-qjr" secondAttribute="leadingMargin" id="9w5-V8-kcM"/>
                             <constraint firstItem="Qzd-3D-wBb" firstAttribute="leading" secondItem="QE3-yh-DJ5" secondAttribute="leading" id="A7V-8O-gE4">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-10"/>
                             </constraint>
@@ -1162,6 +1183,7 @@
                             <constraint firstItem="ZqU-dm-zIJ" firstAttribute="centerY" secondItem="Qzd-3D-wBb" secondAttribute="centerY" id="oIH-yF-0lp"/>
                             <constraint firstAttribute="trailing" secondItem="gOc-y8-brm" secondAttribute="trailing" id="qX4-oK-BD6"/>
                             <constraint firstItem="gcN-nJ-ykV" firstAttribute="top" secondItem="gOc-y8-brm" secondAttribute="bottom" id="qwQ-M2-Kr5"/>
+                            <constraint firstItem="9lp-5T-6R7" firstAttribute="centerY" secondItem="xpp-Jy-MS3" secondAttribute="centerY" id="sUY-gT-JiW"/>
                             <constraint firstItem="Qzd-3D-wBb" firstAttribute="leading" secondItem="1Ol-DP-q5Y" secondAttribute="leading" id="tSZ-nD-TyK"/>
                         </constraints>
                         <variation key="default">
@@ -1177,6 +1199,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="accuracyLabel" destination="9lp-5T-6R7" id="mDL-Nn-ZfE"/>
                         <outlet property="answersCollectionView" destination="QE3-yh-DJ5" id="DBa-FB-nn3"/>
                         <outlet property="highScoreLabel" destination="ZqU-dm-zIJ" id="Ihk-MF-pYV"/>
                         <outlet property="playAgainButton" destination="P2T-YJ-iq0" id="Unf-mg-yhV"/>
@@ -1285,7 +1308,7 @@
         <image name="smallQuestionMark" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2o8-4F-rux"/>
         <segue reference="WIg-kr-G07"/>
-        <segue reference="Rpg-X4-sLs"/>
     </inferredMetricsTieBreakers>
 </document>
