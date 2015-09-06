@@ -25,6 +25,9 @@ __birthday_re = re.compile("""(\d+/\d+/\d+)""")
 __height_re = re.compile("""(.*)\s+(meters)""")
 __person_height_re = re.compile(r"""(\d+)\'\s+(\d+)""")
 
+__population_re = re.compile(r"""([0-9.]+)\s+(\w+)\s+people""")
+
+
 __weight_re = re.compile("""(.*)\s+(lb)""")
 
 __image_re = re.compile("""src=\"//(\S+)\?""")
@@ -49,7 +52,7 @@ class Enum(set):
             return name
         raise AttributeError
 
-Category = Enum(["age", "weight", "height","none"])
+Category = Enum(["age", "weight", "height", "population", "none"])
 
 query_string = ""
 multiple_query_string = ""
@@ -113,8 +116,8 @@ def main():
     #
     # OBJECT = " ".join(sys.argv[3:])
 
-    QUERY_STRINGS = {"age":'%s birthday',"weight":'%s weight',"height":'%s height',"none":'%s'}
-    MULTIPLE_QUERY_STRINGS = {"age":'oldest %s',"weight":'heaviest %s',"height":'tallest %s',"none":'%s'}
+    QUERY_STRINGS = {"age":'%s birthday',"weight":'%s weight',"height":'%s height',"none":'%s',"population":'%s population'}
+    MULTIPLE_QUERY_STRINGS = {"age":'oldest %s',"weight":'heaviest %s',"height":'tallest %s',"none":'%s',"population":"none"}
 
     category = args.category
     MODE = args.mode
@@ -168,8 +171,18 @@ def main():
                 #gracefully catch exception and move to next query
                 try:
 
-                    query_string = QUERY_STRINGS[CATEGORY]
-                    single_query(OBJECT,CATEGORY,TAGS)
+                elif "country" in TAGS:
+
+                    categories = ["population"]
+
+                elif "city" in TAGS:
+
+                    categories = ["population"]
+
+
+                elif "state" in TAGS:
+
+                    categories = ["population"]
 
                 except:
                     pass
@@ -182,6 +195,8 @@ def main():
             CATEGORY = Category.weight
         elif category == "height":
             CATEGORY = Category.height
+        elif category == "population":
+            CATEGORY = Category.population
         elif category == "none":
             CATEGORY = Category.none
 
@@ -273,21 +288,24 @@ def image_query(object):
     #print xml
 
     root = ElementTree.fromstring(xml)
+    node = root.find("./pod[@title='Image']")
 
-    image_node = root.find("./pod[@title='Image']")
+    if not node:
 
-    if image_node:
-        value = image_node.find('markup').text
+        node = root.find("./pod[@title='Flag']")
 
-        m = __image_re.search(value)
-
-        if m:
-            return m.group(1)
-        else:
+        if not node:
             return None
 
+    value = node.find('markup').text
+
+    m = __image_re.search(value)
+
+    if m:
+        return m.group(1)
     else:
         return None
+
 
 def single_query(object,CATEGORY,TAGS=[]):
 
@@ -356,6 +374,31 @@ def single_query(object,CATEGORY,TAGS=[]):
         else:
             raise NameError('No results found for query: %s' % QUERY)
 
+    elif CATEGORY == Category.population:
+
+        value = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+
+        if "people" in value:
+
+            m = __population_re.match(value)
+
+            if m:
+                QUANTITY = float(m.group(1))
+
+                modifier = m.group(2)
+
+                if modifier == "million":
+                    QUANTITY = QUANTITY*float(10**6)
+                elif modifier == "billion":
+                    QUANTITY = QUANTITY*float(10**9)
+
+                #convert scientifc notation to number
+                UNIT = "people"
+            else:
+                raise NameError('No match for population query')
+
+        else:
+            raise NameError('No results found for query: %s' % QUERY)
 
     elif CATEGORY == Category.height:
 
