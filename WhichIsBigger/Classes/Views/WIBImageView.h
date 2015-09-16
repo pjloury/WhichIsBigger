@@ -16,5 +16,6 @@
 
 - (void)setup;
 @property (nonatomic, weak) WIBGameItem *gameItem;
-
+@property (nonatomic, assign) int multiplier;
+@property (weak, nonatomic) IBOutlet UILabel *multiplierLabel;
 @end

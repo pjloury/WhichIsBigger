@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet WIBOptionView *optionView1;
 @property (nonatomic, strong) IBOutlet WIBOptionView *optionView2;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+
 @property (nonatomic, weak) id<WIBScoringDelegate> scoringDelegate;
 
 @end
@@ -112,17 +113,20 @@
     
     [self.gamePlayDelegate questionView:self didSelectOption:option];
     NSLog(@"Selected: %@ vs Answer: %@",option.item.name, self.question.answer.item.name);
+    
     if([option.item.name isEqualToString:self.question.answer.item.name])
     {
         self.question.answeredCorrectly = YES;
-		optionView.backgroundColor = [UIColor greenColor];
+        [optionView correctResponse];
+		//optionView.backgroundColor = [UIColor greenColor];
         [self animateCorrectOptionView:optionView];
         [self.scoringDelegate didAnswerQuestionCorrectly];
     }
     else
     {
         self.question.answeredCorrectly = NO;
-        optionView.backgroundColor = [UIColor redColor];
+        [optionView incorrectResponse];
+        //optionView.backgroundColor = [UIColor redColor];
         [self animateIncorrectOptionView:optionView];
         [self.scoringDelegate didAnswerQuestionIncorrectly];
     }
@@ -138,16 +142,31 @@
     self.optionView2.type = CSAnimationTypeFadeIn;
     self.optionView2.duration = 0.75;
     
+    self.comparsionSymbolAnimationView.type = CSAnimationTypeFadeIn;
+    self.comparsionSymbolAnimationView.duration = 0.75;
+    
     [self.optionView1 startCanvasAnimation];
     [self.optionView2 startCanvasAnimation];
+    [self.comparsionSymbolAnimationView startCanvasAnimation];
     
     self.optionView1.alpha = 0.5;
     self.optionView2.alpha = 0.5;
+    self.comparsionSymbol.hidden = NO;
+    self.comparsionSymbol.alpha = 0.5;
     
 	[self.optionView1 revealAnswerLabel];
 	[self.optionView2 revealAnswerLabel];
     [self.scoringDelegate didFailToAnswerQuestion];
     [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];
+
+    if([self.optionView1.gameOption.item.name isEqualToString:self.question.answer.item.name])
+    {
+        self.comparsionSymbol.text = @">";
+    }
+    else
+    {
+        self.comparsionSymbol.text = @"<";
+    }
 }
 
 - (void)revealAnswer

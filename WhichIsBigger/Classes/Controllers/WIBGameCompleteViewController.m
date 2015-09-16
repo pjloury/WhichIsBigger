@@ -15,8 +15,9 @@
 
 // Views
 #import "WIBPopButton.h"
+#import "HMSegmentedControl.h"
 
-@interface WIBGameCompleteViewController ()<UICollectionViewDataSource>
+@interface WIBGameCompleteViewController ()<UICollectionViewDataSource, FBSDKAppInviteDialogDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *answersCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
@@ -24,11 +25,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *accuracyLabel;
 @property (weak, nonatomic) IBOutlet WIBPopButton *playAgainButton;
 @property (weak, nonatomic) NSTimer *scoreLabelTimer;
+@property (weak, nonatomic) IBOutlet HMSegmentedControl *segmentedControl;
 @property (assign, nonatomic) NSInteger incrementedScore;
 
 @end
 
 @implementation WIBGameCompleteViewController
+
+- (void)viewDidLoad
+{
+    self.segmentedControl.sectionTitles = @[@"This Game",@"High Scores"];
+    self.segmentedControl.selectionIndicatorColor = [UIColor purpleColor];
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -104,6 +113,40 @@
 {
     [[WIBGamePlayManager sharedInstance] beginGame];
     [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
+}
+
+- (IBAction)didPressChallengeAFriend:(id)sender
+{
+    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+    
+    // Should be a link to the app store!
+    content.appLinkURL = [NSURL URLWithString:@"https://www.mydomain.com/myapplink"];
+    //optionally set previewImageURL
+    content.appInvitePreviewImageURL = [NSURL URLWithString:@"https://www.mydomain.com/my_invite_image.jpg"];
+    
+    // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+    [FBSDKAppInviteDialog showWithContent:content
+                                 delegate:self];
+
+}
+
+/*!
+ @abstract Sent to the delegate when the app invite completes without error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param results The results from the dialog.  This may be nil or empty.
+ */
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
+{
+    
+}
+/*!
+ @abstract Sent to the delegate when the app invite encounters an error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param error The error.
+ */
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
+{
+    
 }
 
 #pragma mark - UICollectionViewDelegate

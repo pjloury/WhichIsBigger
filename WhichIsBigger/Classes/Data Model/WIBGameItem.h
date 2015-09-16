@@ -31,4 +31,5 @@ typedef enum : NSUInteger {
 + (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
 - (WIBCategoryType)categoryType;
 - (BOOL)isPerson;
+- (BOOL)isSupported;
 @end

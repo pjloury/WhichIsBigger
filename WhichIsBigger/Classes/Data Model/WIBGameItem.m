@@ -7,6 +7,7 @@
 //
 
 #import "WIBGameItem.h"
+#import "WIBGamePlayManager.h"
 
 NSString *kHeight = @"height";
 NSString *kWeight = @"weight";
@@ -18,6 +19,30 @@ NSString *kPopulation = @"population";
 - (BOOL)isPerson
 {
 	return [self.tagArray containsObject:@"Person" ] || [self.tagArray containsObject:@"person"];
+}
+
+- (BOOL)isSupported
+{
+    for (NSString *tag in self.tagArray)
+    {
+        if ([[WIBGamePlayManager sharedInstance].tagBlacklist containsObject:tag.lowercaseString])
+        {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (void)setTagArray:(NSArray *)tagArray
+{
+    NSMutableArray *tags = [[NSMutableArray alloc] init];
+    for (NSString *tag in tagArray)
+    {
+        NSString *trimmedString = [tag stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceCharacterSet]];
+        [tags addObject:trimmedString.lowercaseString];
+    }
+    _tagArray = tags;
 }
 
 - (NSNumber *)baseQuantity

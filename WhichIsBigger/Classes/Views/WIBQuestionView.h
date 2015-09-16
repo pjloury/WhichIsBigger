@@ -14,7 +14,8 @@
 
 @interface WIBQuestionView : CSAnimationView
 
-
+@property (nonatomic, strong) IBOutlet CSAnimationView *comparsionSymbolAnimationView;
+@property (nonatomic, strong) IBOutlet UILabel *comparsionSymbol;
 @property (nonatomic, weak) WIBGameQuestion *question;
 @property (nonatomic, weak) id<WIBGamePlayDelegate> gamePlayDelegate;
 - (void)setup;

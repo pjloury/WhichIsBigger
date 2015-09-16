@@ -14,6 +14,7 @@
 #import "WIBGameQuestion.h"
 #import "WIBDataModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "WIBGamePlayManager.h"
 
 @implementation WIBNetworkManager
 
@@ -27,6 +28,27 @@
     });
     
     return shared;
+}
+
+- (void)getConfigurationWithCompletion:(void (^)())completion
+{
+    PFQuery *query =  [PFQuery queryWithClassName:@"Configuration"];
+    query.limit = 1;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             PFObject *configuration = [objects firstObject];
+             [WIBGamePlayManager sharedInstance].tagBlacklist = configuration[@"tagBlacklist"];
+             completion();
+         }
+         else
+         {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+             // If you get code 100, then use the local storage
+         }
+     }];
 }
 
 - (void)generateDataModelWithCompletion:(void (^)())completion
@@ -50,7 +72,10 @@
                 gameItem.categoryString = object[@"category"];
                 gameItem.tagArray = object[@"tagArray"];
                 gameItem.photoURL = object[@"photoURL"];
-                [[WIBDataModel sharedInstance] insertGameItem: gameItem];
+                if(gameItem.name && gameItem.baseQuantity)
+                {
+                    [[WIBDataModel sharedInstance] insertGameItem: gameItem];
+                }
             }
             completion();
         }
@@ -86,8 +111,14 @@
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                     if (image) {
                                         // do something with image
-                                        dispatch_group_leave(downloadGroup);
+                                        NSLog(@"Photo 1");
+
                                     }
+                                    else
+                                    {
+                                        NSLog(@"Photo 1 done goofed");
+                                    }
+                                    dispatch_group_leave(downloadGroup);
                                 }];
             }
             
@@ -102,8 +133,13 @@
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                     if (image) {
                                         // do something with image
-                                        dispatch_group_leave(downloadGroup);
+                                        NSLog(@"Photo 2");
                                     }
+                                    else
+                                    {
+                                        NSLog(@"Photo 2 done goofed");
+                                    }
+                                    dispatch_group_leave(downloadGroup);
                                 }];
             }
         }

@@ -15,6 +15,8 @@
 @interface WIBOptionView : CSAnimationView
 - (void)refreshWithOption:(WIBGameOption *)option;
 - (void)revealAnswerLabel;
+- (void)correctResponse;
+- (void)incorrectResponse;
 
 @property (nonatomic, weak) WIBGameOption *gameOption;
 - (void)configureViews;

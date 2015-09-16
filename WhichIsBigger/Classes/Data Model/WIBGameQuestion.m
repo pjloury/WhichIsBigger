@@ -136,7 +136,7 @@
             categoryQuestionString = @"is DIFFERENT Taller?";
             break;
         case(WIBCategoryTypePopulation):
-            categoryQuestionString = @"has more People";
+            categoryQuestionString = @"has more People?";
             break;
         default:
             break;

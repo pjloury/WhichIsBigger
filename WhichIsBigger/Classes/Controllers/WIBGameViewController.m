@@ -73,6 +73,7 @@
     self.questionView.question = self.question;
     self.questionView.gamePlayDelegate = self;
     [self.questionView setup];
+    self.questionView.comparsionSymbol.hidden = YES;
 	self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nextButtonPressed:)];
 	[self.questionView addGestureRecognizer:self.tapRecognizer];
 	self.tapRecognizer.enabled = NO;
@@ -92,6 +93,7 @@
     [self.nextButtonTimer invalidate];
     self.nextButton.enabled = NO;
     self.nextButton.alpha = 0.0;
+    self.questionView.comparsionSymbol.hidden = YES;
     if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
     {    
         [[WIBGamePlayManager sharedInstance] endGame];

@@ -20,11 +20,14 @@
 - (void)beginGame;
 - (void)endGame;
 
+- (void)setupGamePlay;
+
 + (WIBGamePlayManager *)sharedInstance;
 - (WIBGameQuestion *)nextGameQuestion;
 - (NSInteger)numberCorrectAnswers;
 
 @property (readonly) NSInteger questionIndex;
+@property (nonatomic, strong) NSArray *tagBlacklist;
 @property (nonatomic, assign) double questionCeiling;
 @property (nonatomic, assign) double questionFloor;
 @property (nonatomic, assign) double skewFactor;

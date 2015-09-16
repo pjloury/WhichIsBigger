@@ -12,6 +12,7 @@
 @interface WIBNetworkManager : NSObject
 
 + (WIBNetworkManager *)sharedInstance;
+- (void)getConfigurationWithCompletion:(void (^)())completion;
 - (void)generateDataModelWithCompletion:(void (^)())completion;
 - (void)preloadImages:(NSMutableArray *)gameQuestions;
 

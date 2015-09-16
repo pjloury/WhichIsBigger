@@ -79,6 +79,12 @@
     }
 }
 
+- (void)setupGamePlay
+{
+    self.highScore = [[PFUser currentUser] objectForKey:@"highScore"];
+    self.longestStreak = [[PFUser currentUser] objectForKey:@"longestStreak"];
+}
+
 - (WIBGameQuestion *)nextGameQuestion
 {
     WIBGameQuestion *question = [self.gameQuestions objectAtIndex:self.questionIndex];
@@ -183,8 +189,8 @@
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
         // TODO: Server driven # of categories .. (future looking)
-        WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
-        //WIBCategoryType randomCategory = WIBCategoryTypeDissimilarHeight;
+        //WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
+        WIBCategoryType randomCategory = WIBCategoryTypeDissimilarHeight;
         
         WIBGameQuestion *question;
         

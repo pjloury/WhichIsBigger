@@ -12,5 +12,5 @@
 @interface WIBOptionButton : WIBPopButton
 
 @property (nonatomic, weak) id<WIBOptionViewDelegate> delegate;
-
+@property (weak, nonatomic) IBOutlet UILabel *multiplierLabel;
 @end
