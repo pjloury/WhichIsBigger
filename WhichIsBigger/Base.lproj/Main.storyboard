@@ -194,7 +194,7 @@
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3,000 ft" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="VQQ-AC-83B">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="VQQ-AC-83B">
                                                         <rect key="frame" x="0.0" y="170" width="200" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Mvo-V9-gzs"/>
@@ -309,7 +309,7 @@
                                                             <constraint firstAttribute="height" constant="140" id="0ul-4h-p5g"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3,000 ft" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CSS-zX-CSD">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="CSS-zX-CSD">
                                                         <rect key="frame" x="0.0" y="170" width="200" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="FcB-MW-XdY"/>
