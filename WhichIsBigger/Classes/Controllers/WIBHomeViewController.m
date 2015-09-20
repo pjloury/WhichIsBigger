@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *footerLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginButtonWidth;
 @end
 
 @implementation WIBHomeViewController
@@ -41,70 +42,65 @@
             });
         }];
     }];
+    
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+        self.loginButton.hidden = YES;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 
+    //if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
 //    if(![PFUser currentUser].objectId)
 //    {
 //        // show the link to Facebook button
 //    }
-    
-    
-	// Check if user is logged in
-	if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-		// Instantiate our custom log in view controller
-		
-        self.loginButton.hidden = NO;
-        
-//        WIBLoginViewController *logInViewController = [[WIBLoginViewController alloc] init];
-//		[logInViewController setDelegate:self];
-//		[logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
-//		[logInViewController setFields:PFLogInFieldsUsernameAndPassword
-//		 | PFLogInFieldsFacebook
-//		 | PFLogInFieldsDismissButton];
+//    NSArray *permissions = @[@"friends_about_me"];
+//    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissions
+//                                                    block:^(PFUser *user, NSError *error){
+//                                                        
+//                                                    }];
 //
-//        // Present log-in view controller
-//        [self presentViewController:logInViewController animated:YES completion:NULL];
-	}
-    else
-    {
-        self.loginButton.hidden = YES;
-        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-            if (!error) {
-                // result is a dictionary with the user's Facebook data
-                NSDictionary *userData = (NSDictionary *)result;
-                
-                NSString *facebookID = userData[@"id"];
-                NSString *name = userData[@"name"];
-                //NSString *location = userData[@"location"][@"name"];
 
-                NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-                
-                NSString *firstName = [name componentsSeparatedByString:@" "].firstObject;
-                
-                self.footerLabel.text = [NSString stringWithFormat:@"Welcome back, %@", firstName];
-                
-                // Now add the data to the UI elements
-                // ...
-            }
-            else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
-                NSLog(@"The facebook session was invalidated");
-                [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
-            } else {
-                NSLog(@"Some other error: %@", error);
+/*
+        if ([FBSDKAccessToken currentAccessToken]) {
+            NSLog(@"already a token");
+        }
+        
+        [PFFacebookUtils linkUserInBackground:[PFUser currentUser] withReadPermissions:permissions block:
+         ^(BOOL succeeded, NSError *error){
+            NSLog(@(succeeded));
+            if(error)
+            {
+                NSLog(error.description);
             }
         }];
-    }
-
+*/
+    
 }
 
 # pragma mark - FBSDKLoginButtonDelegate
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error
 {
+    // Once the user authenticates facebook, we can actually pull down their correct PFUser
+    // by querying based on facebook ID
+    
     self.loginButton.hidden = YES;
+    
+    /*
+    NSArray *permissions =     @[@"public_profile", @"email", @"user_friends"];//
+    [PFFacebookUtils linkUserInBackground:[PFUser currentUser] withReadPermissions:permissions block:
+     ^(BOOL succeeded, NSError *error){
+         
+         NSLog(@(succeeded));
+         if(error)
+         {
+             NSLog(error.description);
+         }
+     }];
+     */
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -116,14 +112,16 @@
             NSString *name = userData[@"name"];
             //NSString *location = userData[@"location"][@"name"];
             
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-            
+            NSString *picURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
             NSString *firstName = [name componentsSeparatedByString:@" "].firstObject;
             
             self.footerLabel.text = [NSString stringWithFormat:@"Welcome back, %@", firstName];
             
-            // Now add the data to the UI elements
-            // ...
+            [[PFUser currentUser] setObject:facebookID forKey:@"facebookID"];
+            [[PFUser currentUser] setObject:name forKey:@"name"];
+            [[PFUser currentUser] setObject:picURLString forKey:@"picURLString"];
+            
+            [[PFUser currentUser] saveInBackground];
         }
         else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
             NSLog(@"The facebook session was invalidated");
@@ -132,8 +130,10 @@
             NSLog(@"Some other error: %@", error);
         }
     }];
+}
 
-    
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
+{
     
 }
 

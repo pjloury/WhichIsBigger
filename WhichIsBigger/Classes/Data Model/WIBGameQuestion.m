@@ -60,17 +60,33 @@
     double r;
     if (val <= 0.5)
     {
-        r = val -.75;
+        //r = val -.75;
     }
     else
     {
-        r = val + .75;
+        //r = val + .75;
     }
+    
+    // skew should start as 1/2 entire building away
+    // 30 kanyes to 1 tank
+    
+    // range from 15 kanyes to 45 kanyes
+    
+    
+    
+    // -.75 to -.25
+    // 1.25 to 1.75
     
     // random # between -1 and 1
     //double r = val * 2 -1;
     
     // random # normalized to correct answer, adjusted with difficulty (low number means easier)
+    
+    
+    // add random amount to the current answer.
+    // skew = random + scaling
+    
+    
     double skew = r * self.answerQuantity;
     NSLog(@"Before multipliers: options are %.2f%% different",skew/self.answerQuantity*100);
     
