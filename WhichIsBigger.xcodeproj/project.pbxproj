@@ -19,7 +19,6 @@
 		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
 		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
-		60A125C31BB13C5900563331 /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125C21BB13C5900563331 /* WIBReachability.m */; };
 		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
 		60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
@@ -86,8 +85,6 @@
 		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
 		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
 		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		60A125C11BB13C5900563331 /* WIBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBReachability.h; path = "../../Downloads/Reachability-master/WIBReachability.h"; sourceTree = "<group>"; };
-		60A125C21BB13C5900563331 /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = "../../Downloads/Reachability-master/WIBReachability.m"; sourceTree = "<group>"; };
 		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
 		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
 		60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoadingViewController.h; path = Classes/Controllers/WIBLoadingViewController.h; sourceTree = "<group>"; };
@@ -186,8 +183,6 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
-				60A125C11BB13C5900563331 /* WIBReachability.h */,
-				60A125C21BB13C5900563331 /* WIBReachability.m */,
 				601172961BAA99A300EE8182 /* WIBTopScoresViewController.h */,
 				601172971BAA99A300EE8182 /* WIBTopScoresViewController.m */,
 				601172991BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.h */,
@@ -552,7 +547,6 @@
 				60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */,
 				F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */,
 				7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */,
-				60A125C31BB13C5900563331 /* WIBReachability.m in Sources */,
 				7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */,
 				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
 				7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */,
