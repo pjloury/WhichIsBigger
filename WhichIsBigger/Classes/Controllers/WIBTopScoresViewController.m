@@ -41,6 +41,7 @@
                 NSLog(tuple.description);
                 [facebookIDs addObject:tuple[@"id"]];
             }
+            [facebookIDs addObject:[[PFUser currentUser] objectForKey:@"facebookID"]];
             
             PFQuery *friendQuery = [PFUser query];
             [friendQuery whereKey:@"facebookID" containedIn:facebookIDs];

@@ -17,6 +17,9 @@
 		6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */; };
 		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
 		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
+		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
+		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
+		60A125C31BB13C5900563331 /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125C21BB13C5900563331 /* WIBReachability.m */; };
 		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
 		60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
@@ -80,6 +83,11 @@
 		604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialViewController.m; path = Classes/Controllers/WIBTutorialViewController.m; sourceTree = "<group>"; };
 		604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDismissSegue.h; path = WhichIsBigger/Classes/WIBDismissSegue.h; sourceTree = "<group>"; };
 		604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDismissSegue.m; path = WhichIsBigger/Classes/WIBDismissSegue.m; sourceTree = "<group>"; };
+		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
+		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
+		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60A125C11BB13C5900563331 /* WIBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBReachability.h; path = "../../Downloads/Reachability-master/WIBReachability.h"; sourceTree = "<group>"; };
+		60A125C21BB13C5900563331 /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = "../../Downloads/Reachability-master/WIBReachability.m"; sourceTree = "<group>"; };
 		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
 		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
 		60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoadingViewController.h; path = Classes/Controllers/WIBLoadingViewController.h; sourceTree = "<group>"; };
@@ -148,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */,
 				601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */,
 				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
 				7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */,
@@ -177,6 +186,8 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				60A125C11BB13C5900563331 /* WIBReachability.h */,
+				60A125C21BB13C5900563331 /* WIBReachability.m */,
 				601172961BAA99A300EE8182 /* WIBTopScoresViewController.h */,
 				601172971BAA99A300EE8182 /* WIBTopScoresViewController.m */,
 				601172991BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.h */,
@@ -251,6 +262,7 @@
 		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				60A125BF1BB13C0100563331 /* SystemConfiguration.framework */,
 				601172941BA6A19E00EE8182 /* AVFoundation.framework */,
 				60D811691BA4262800B2DA78 /* QuartzCore.framework */,
 				7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */,
@@ -361,6 +373,8 @@
 				7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */,
 				6040146F1B87E13900E2C5D6 /* WIBTutorialViewController.h */,
 				604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */,
+				60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */,
+				60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -529,6 +543,7 @@
 				6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
 				7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */,
+				60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				6033C7891B98235100C592CC /* WIBDissimilarHeightQuestion.m in Sources */,
 				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
@@ -537,6 +552,7 @@
 				60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */,
 				F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */,
 				7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */,
+				60A125C31BB13C5900563331 /* WIBReachability.m in Sources */,
 				7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */,
 				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
 				7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */,

@@ -14,8 +14,14 @@
 
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate, FBSDKLoginButtonDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
+@property (weak, nonatomic) IBOutlet UIButton *highScoresButton;
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *footerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *nameButton;
+
+@property (weak, nonatomic) IBOutlet UIView *highScoresUnderscore;
+@property (weak, nonatomic) IBOutlet UIView *highScoresBackground;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginButtonWidth;
 @end
 
@@ -24,32 +30,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.loginButton.readPermissions =
-    @[@"public_profile", @"email", @"user_friends"];
+    self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    self.loginButton.loginBehavior = FBSDKLoginBehaviorSystemAccount;
+    self.startNewGameButton.userInteractionEnabled = NO;
+    self.loginButton.delegate = self;
+    
+//    [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
+//        dispatch_async(dispatch_get_main_queue(),
+//                       ^{
+//                           self.startNewGameButton.userInteractionEnabled = YES;
+//                       });
+//    }];
+    
+    [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
+        [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
+            dispatch_async(dispatch_get_main_queue(),
+                           ^{
+                                self.startNewGameButton.userInteractionEnabled = YES;
+                           });
+        }];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.startNewGameButton.enabled = NO;
-    __weak WIBHomeViewController *weakSelf = self;
+  
+    self.loginButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? YES: NO;
+    self.highScoresButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    self.highScoresUnderscore.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    self.highScoresBackground.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    self.nameButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    [self.nameButton setTitle:[[PFUser currentUser] objectForKey:@"name"] forState:UIControlStateNormal];
     
-    [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
-        [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
-            dispatch_async(dispatch_get_main_queue(),
-            ^{
-                weakSelf.startNewGameButton.enabled = YES;
-            });
-        }];
-    }];
-    
-    if ([FBSDKAccessToken currentAccessToken])
-    {
-        self.loginButton.hidden = YES;
-    }
+//    if ([FBSDKAccessToken currentAccessToken])
+//    {
+//        [self _scrapeFacebook];
+//    }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
 	[super viewDidAppear:animated];
 
     //if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
@@ -78,7 +99,6 @@
             }
         }];
 */
-    
 }
 
 # pragma mark - FBSDKLoginButtonDelegate
@@ -88,6 +108,7 @@
     // by querying based on facebook ID
     
     self.loginButton.hidden = YES;
+    [self _scrapeFacebook];
     
     /*
     NSArray *permissions =     @[@"public_profile", @"email", @"user_friends"];//
@@ -102,6 +123,11 @@
      }];
      */
     
+
+}
+
+- (void)_scrapeFacebook
+{
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
@@ -119,6 +145,7 @@
             
             [[PFUser currentUser] setObject:facebookID forKey:@"facebookID"];
             [[PFUser currentUser] setObject:name forKey:@"name"];
+            [[PFUser currentUser] setObject:name forKey:@"firstName"];
             [[PFUser currentUser] setObject:picURLString forKey:@"picURLString"];
             
             [[PFUser currentUser] saveInBackground];

@@ -45,6 +45,65 @@
     return self;
 }
 
+double generateGaussianNoise(const double mean, const double variance)
+{
+    static bool hasSpare = false;
+    static double spare;
+    
+    if(hasSpare)
+    {
+        hasSpare = false;
+        return mean + variance * spare;
+    }
+    
+    hasSpare = true;
+    static double u, v, s;
+    do
+    {
+        u = (rand() / ((double) RAND_MAX)) * 2.0 - 1.0;
+        v = (rand() / ((double) RAND_MAX)) * 2.0 - 1.0;
+        s = u * u + v * v;
+    }
+    while( (s >= 1.0) || (s == 0.0) );
+    
+    s = sqrt(-2.0 * log(s) / s);
+    spare = v * s;
+    return mean + variance * u * s;
+}
+
+- (void)setupOptions2
+{
+    WIBGameItem *largerItem = [WIBGameItem maxOfItem:self.option1.item item2:self.option2.item];
+    WIBGameItem *smallerItem = [WIBGameItem minOfItem:self.option1.item item2:self.option2.item];
+    
+    // it actually takes 230.3 Kanyes...
+    self.answerQuantity = largerItem.baseQuantity.doubleValue / smallerItem.baseQuantity.doubleValue;
+    
+    double multiplier = generateGaussianNoise(self.answerQuantity, 0.2*self.answerQuantity);
+    
+    if(smallerItem == self.option1.item)
+    {
+        self.option1.multiplier = multiplier;
+        self.option2.multiplier = 1;
+        if(self.option1.total.doubleValue == self.option2.total.doubleValue)
+        {
+            NSAssert(NO,@"Why are the totals equal?");
+            self.option2.multiplier++;
+        }
+    }
+    else
+    {
+        self.option1.multiplier = 1;
+        self.option2.multiplier = multiplier;
+        if(self.option1.total.doubleValue == self.option2.total.doubleValue)
+        {
+            NSAssert(NO,@"Why are the totals equal?");
+            self.option1.multiplier++;
+        }
+    }
+    NSLog(@"Scaling Question: %@ vs. %@ with %.2f%% skew",self.option1.item.name, self.option2.item.name, (float)((multiplier-self.answerQuantity)/self.answerQuantity)*100);
+}
+
 - (void)setupOptions
 {
 
@@ -56,23 +115,20 @@
         
     // random # between 0 and 1
     double val = ((double)arc4random() / ARC4RANDOM_MAX);
-    
     double r;
     if (val <= 0.5)
     {
-        //r = val -.75;
+        r = val - [WIBGamePlayManager sharedInstance].skewFactor;
     }
     else
     {
-        //r = val + .75;
+        r = val + [WIBGamePlayManager sharedInstance].skewFactor;
     }
     
     // skew should start as 1/2 entire building away
     // 30 kanyes to 1 tank
     
     // range from 15 kanyes to 45 kanyes
-    
-    
     
     // -.75 to -.25
     // 1.25 to 1.75
@@ -82,10 +138,8 @@
     
     // random # normalized to correct answer, adjusted with difficulty (low number means easier)
     
-    
     // add random amount to the current answer.
     // skew = random + scaling
-    
     
     double skew = r * self.answerQuantity;
     NSLog(@"Before multipliers: options are %.2f%% different",skew/self.answerQuantity*100);

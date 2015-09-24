@@ -36,10 +36,20 @@
     
     dispatch_once(&pred, ^{
         shared = [[WIBGamePlayManager alloc] init];
+        
+        if ([[PFUser currentUser] objectForKey:@"skewFactor"])
+        {
+            NSNumber *skewFactor = [[PFUser currentUser] objectForKey:@"skewFactor"];
+            shared.skewFactor = skewFactor.doubleValue;
+        }
+        else
+        {
+            shared.skewFactor = 0.75;
+        }
+        
         shared.questionCeiling = 40;
         shared.questionFloor = 10;
-        shared.skewFactor = 50;
-        
+
     });
     return shared;
 }
@@ -57,7 +67,7 @@
 
 - (void)endGame
 {
-    if (self.currentStreak > 3 && self.questionCeiling - 5 > self.questionFloor)
+    if (self.numberCorrectAnswers > 4 && self.questionCeiling - 5 > self.questionFloor)
     {
         self.questionCeiling -= 5;
         if (self.questionFloor > 5)
@@ -68,6 +78,11 @@
         {
             self.questionFloor --;
         }
+        
+        if (self.skewFactor > 0.1)
+        {
+            self.skewFactor -= 0.1;
+        }
     }
     else if ( self.accuracy <= 0.55)
     {
@@ -76,6 +91,8 @@
         {
             self.questionFloor +=5;
         }
+        
+        self.skewFactor += 0.1;
     }
 }
 
@@ -124,6 +141,8 @@
 - (void)setHighScore:(NSInteger)highScore
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
+    [[PFUser currentUser] setObject:@(highScore) forKey:@"highScore"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (NSInteger)highScore
@@ -145,6 +164,8 @@
 - (void)setLongestStreak:(NSInteger)longestStreak
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(longestStreak) forKey:@"longestStreak"];
+    [[PFUser currentUser] setObject:@(longestStreak) forKey:@"longestStreak"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (NSInteger)longestStreak
@@ -175,11 +196,21 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(totalAnswers) forKey:@"totalAnswers"];
 }
 
+- (BOOL)localStorage
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"localStorage"];
+    return (num) ? num.integerValue: 0;
+}
+
+- (void)setLocalStorage:(BOOL)localStorage
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(localStorage) forKey:@"localStorage"];
+}
+
 - (float)accuracy
 {
     return (float)self.totalCorrectAnswers / (float)self.totalAnswers;
 }
-
 
 - (void)generateQuestions
 {
@@ -189,7 +220,7 @@
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
         // TODO: Server driven # of categories .. (future looking)
-        //WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount);
+        //WIBCategoryType randomCategory = arc4random_uniform(WIBCategoryTypeCount-1);
         WIBCategoryType randomCategory = WIBCategoryTypeDissimilarHeight;
         
         WIBGameQuestion *question;

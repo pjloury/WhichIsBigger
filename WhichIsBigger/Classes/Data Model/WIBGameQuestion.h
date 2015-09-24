@@ -13,9 +13,9 @@ typedef enum : NSUInteger {
     WIBQuestionTypeSimilarHeight,
     WIBQuestionTypeDifferentHeight,
     WIBQuestionTypeSimilarWeight,
-    WIBQuestionTypeDifferentWeight,
     WIBQuestionTypeAge,
     WIBQuestionTypePopulation,
+    WIBQuestionTypeDifferentWeight,
     WIBQuestionTypeCount
 } WIBQuestionType;
 

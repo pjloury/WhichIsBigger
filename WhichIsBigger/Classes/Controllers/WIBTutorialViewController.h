@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WIBTutorialViewController : UIViewController
+@interface WIBTutorialViewController : UIPageViewController
+@property (weak, nonatomic) IBOutlet UILabel *centerLabel;
+@property NSUInteger pageIndex;
+@property NSString *centerTitle;
 
 @end

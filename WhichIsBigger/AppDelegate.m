@@ -63,6 +63,10 @@
     
     [[PFUser currentUser] setObject:@([WIBGamePlayManager sharedInstance].highScore) forKey:@"highScore"];
     [[PFUser currentUser] setObject:@([WIBGamePlayManager sharedInstance].longestStreak) forKey:@"longestStreak"];
+    [[PFUser currentUser] setObject:@([WIBGamePlayManager sharedInstance].skewFactor) forKey:@"skewFactor"];
+    [[PFUser currentUser] setObject:@([WIBGamePlayManager sharedInstance].questionFloor) forKey:@"questionFloor"];
+    [[PFUser currentUser] setObject:@([WIBGamePlayManager sharedInstance].questionCeiling) forKey:@"questionCeiling"];
+    
     [[PFUser currentUser] saveInBackground];
 }
 

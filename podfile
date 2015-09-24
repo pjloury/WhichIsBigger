@@ -1,0 +1,18 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'
+
+target 'WhichIsBigger' do
+pod 'ParseUI'
+pod 'ParseFacebookUtilsV4', '~> 1.8'
+pod 'Canvas'
+pod 'Shimmer'
+pod 'SDWebImage', '~>3.7'
+pod 'UIActivityIndicator-for-SDWebImage'
+pod 'FBSDKShareKit'
+pod 'FBSDKLoginKit'
+pod 'HMSegmentedControl'
+end
+
+target 'WhichIsBiggerTests' do
+
+end

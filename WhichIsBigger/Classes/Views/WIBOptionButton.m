@@ -19,9 +19,10 @@
 {
     CGPoint touchPoint = [[touches anyObject] locationInView:self];
     // Only message the delegate if touch up occurs inside
-    if (CGRectContainsPoint(self.bounds, touchPoint))
-    {
-        [self.delegate optionWasSelected:self];
+    if (CGRectContainsPoint(self.bounds, touchPoint)) {
+        if (self.userInteractionEnabled) {
+            [self.delegate optionWasSelected:self];
+        }
     }
     [super touchesEnded:touches withEvent:event];
 }

@@ -25,6 +25,7 @@
     
     dispatch_once(&pred, ^{
         shared = [[WIBNetworkManager alloc] init];
+        shared.reachability = [WIBReachability reachabilityForInternetConnection];
     });
     
     return shared;
@@ -32,6 +33,7 @@
 
 - (void)getConfigurationWithCompletion:(void (^)())completion
 {
+    /*
     PFQuery *query =  [PFQuery queryWithClassName:@"Configuration"];
     query.limit = 1;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -47,24 +49,59 @@
              // Log details of the failure
              NSLog(@"Error: %@ %@", error, [error userInfo]);
              // If you get code 100, then use the local storage
+             if (error.code == 100)
+             {
+                 completion();
+             }
          }
      }];
+     */
+    
+    if ([self.reachability isReachable])
+    {
+        [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+            if (!error) {
+                NSLog(@"Yay! Config was fetched from the server.");
+                [WIBGamePlayManager sharedInstance].tagBlacklist = config[@"tagBlacklist"];
+            } else {
+                NSLog(@"Failed to fetch. Using Cached Config.");
+                [WIBGamePlayManager sharedInstance].tagBlacklist = [PFConfig currentConfig][@"tagBlacklist"];
+            }
+            
+            if (completion) {
+                completion();
+            }
+        }];
+    }
+    else {
+        [WIBGamePlayManager sharedInstance].tagBlacklist = [PFConfig currentConfig][@"tagBlacklist"];
+        if (completion)
+        {
+            completion();
+        }
+    }
 }
 
 - (void)generateDataModelWithCompletion:(void (^)())completion
 {
     PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
     query.limit = GAME_ITEM_FETCH_LIMIT;
+    
+    if ([WIBGamePlayManager sharedInstance].localStorage && ![self.reachability isReachable])
+    {
+        [query fromLocalDatastore];
+    }
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
         if (!error)
         {
+            [WIBGamePlayManager sharedInstance].localStorage = YES;
             // The find succeeded.
             NSLog(@"Successfully retrieved %lu GameItems.", (unsigned long)objects.count);
             // Do something with the found objects
             for (PFObject *object in objects)
             {
-                //NSLog(@"%@", object.objectId);
                 WIBGameItem *gameItem = [[WIBGameItem alloc] init];
                 gameItem.name = object[@"name"];
                 gameItem.baseQuantity = object[@"quantity"];
@@ -78,6 +115,7 @@
                 }
             }
             completion();
+            [PFObject pinAllInBackground:objects];
         }
         else
         {
@@ -100,47 +138,42 @@
             
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             
-            if([urlString1 length] >0)
-            {
-            dispatch_group_enter(downloadGroup);
-            [manager downloadImageWithURL:[NSURL URLWithString:urlString1]
-                                  options:0
-                                 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                     // progression tracking code
-                                 }
-                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                    if (image) {
-                                        // do something with image
-                                        NSLog(@"Photo 1");
-
-                                    }
-                                    else
-                                    {
-                                        NSLog(@"Photo 1 done goofed");
-                                    }
-                                    dispatch_group_leave(downloadGroup);
-                                }];
+            if([urlString1 length] >0) {
+                dispatch_group_enter(downloadGroup);
+                [manager downloadImageWithURL:[NSURL URLWithString:urlString1]
+                                      options:0
+                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                         // progression tracking code
+                                     }
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                        if (image) {
+                                            // do something with image
+                                            NSLog(@"Photo 1");
+                                        }
+                                        else {
+                                            NSLog(@"Photo 1 done goofed: %@", error.description);
+                                        }
+                                        dispatch_group_leave(downloadGroup);
+                                    }];
             }
             
-            if([urlString2 length] >0)
-            {
-            dispatch_group_enter(downloadGroup);
-            [manager downloadImageWithURL:[NSURL URLWithString:urlString2]
-                                  options:0
-                                 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                     // progression tracking code
-                                 }
-                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                    if (image) {
-                                        // do something with image
-                                        NSLog(@"Photo 2");
-                                    }
-                                    else
-                                    {
-                                        NSLog(@"Photo 2 done goofed");
-                                    }
-                                    dispatch_group_leave(downloadGroup);
-                                }];
+            if([urlString2 length] >0) {
+                dispatch_group_enter(downloadGroup);
+                [manager downloadImageWithURL:[NSURL URLWithString:urlString2]
+                                      options:0
+                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                         // progression tracking code
+                                     }
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                        if (image) {
+                                            // do something with image
+                                            NSLog(@"Photo 2");
+                                        }
+                                        else {
+                                            NSLog(@"Photo 2 done goofed: %@", error.description);
+                                        }
+                                        dispatch_group_leave(downloadGroup);
+                                    }];
             }
         }
         

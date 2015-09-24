@@ -40,6 +40,6 @@
 @property (nonatomic, assign, readonly) NSUInteger totalCorrectAnswers;
 @property (nonatomic, assign, readonly) NSUInteger totalAnswers;
 @property (nonatomic, assign, readonly) float accuracy;
-
+@property (nonatomic, assign) BOOL localStorage;
 
 @end

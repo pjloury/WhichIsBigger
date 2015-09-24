@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WIBGameItem.h"
+#import "WIBReachability.h"
 
 @interface WIBNetworkManager : NSObject
 
@@ -15,5 +16,7 @@
 - (void)getConfigurationWithCompletion:(void (^)())completion;
 - (void)generateDataModelWithCompletion:(void (^)())completion;
 - (void)preloadImages:(NSMutableArray *)gameQuestions;
+
+@property WIBReachability *reachability;
 
 @end
