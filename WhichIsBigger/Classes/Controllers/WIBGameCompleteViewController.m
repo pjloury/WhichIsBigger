@@ -59,7 +59,7 @@
 
 - (void)incrementScore
 {
-    if (self.incrementedScore <= [WIBGamePlayManager sharedInstance].score)
+    if (self.incrementedScore < [WIBGamePlayManager sharedInstance].score)
     {
         self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
         self.incrementedScore++;

@@ -19,12 +19,10 @@
 
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,13 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return 2;
-    NSLog(self.friendUsers.description);
-    
-    if (!self.friendUsers)
-        return 0;
-    else
-        return self.friendUsers.count;
+    return self.friendUsers.count;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:

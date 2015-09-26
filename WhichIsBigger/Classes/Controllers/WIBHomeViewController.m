@@ -19,10 +19,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *footerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *nameButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *parseLoginButton;
+
 @property (weak, nonatomic) IBOutlet UIView *highScoresUnderscore;
 @property (weak, nonatomic) IBOutlet UIView *highScoresBackground;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginButtonWidth;
+@property (nonatomic) NSArray *readPermissions;
+
 @end
 
 @implementation WIBHomeViewController
@@ -30,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    self.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    self.loginButton.readPermissions = self.readPermissions;
     self.loginButton.loginBehavior = FBSDKLoginBehaviorSystemAccount;
     self.startNewGameButton.userInteractionEnabled = NO;
     self.loginButton.delegate = self;
@@ -52,7 +57,7 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear2:(BOOL)animated
 {
     [super viewWillAppear:animated];
   
@@ -63,11 +68,59 @@
     self.nameButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
     [self.nameButton setTitle:[[PFUser currentUser] objectForKey:@"name"] forState:UIControlStateNormal];
     
-//    if ([FBSDKAccessToken currentAccessToken])
-//    {
-//        [self _scrapeFacebook];
-//    }
+    // do I need to set the currentUser by checking the token?
+    
+    // the Token is always the same for a given FB user
+    
+    //once you've linked, you want to
+    
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+       // [self _scrapeFacebook];
+        [PFFacebookUtils linkUserInBackground:[PFUser currentUser] withAccessToken:[FBSDKAccessToken currentAccessToken] block:^(BOOL succeeded, NSError *error){
+            if(error)
+            {
+                NSLog(error.description);
+            }
+        }];
+    }
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // a) If its not linked then the user is anonymous
+    if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        // a) the user is linked, don't show facebook
+        self.parseLoginButton.hidden = YES;
+        [self.nameButton setTitle:[[PFUser currentUser] objectForKey:@"name"] forState:UIControlStateNormal];
+    }
+    
+    else {
+        
+    }
+    
+    self.loginButton.userInteractionEnabled = NO;
+    
+    self.loginButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? YES: NO;
+    self.highScoresButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    self.highScoresUnderscore.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    self.highScoresBackground.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    self.nameButton.hidden = ([FBSDKAccessToken currentAccessToken]) ? NO: YES;
+    
+    // do I need to set the currentUser by checking the token?
+    
+    // the Token is always the same for a given FB user
+    
+    //once you've linked, you want to
+    
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+        // [self _scrapeFacebook];
+    }
+}
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -162,6 +215,20 @@
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {
     
+}
+
+
+- (IBAction)didPressParseLogin:(id)sender
+{
+    // need to protect against the case where another user is already linked to the ID
+    // 
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:self.readPermissions block:^(PFUser *user, NSError *error){
+        if(error) {
+            NSLog(error.description);
+        }
+        [[PFUser currentUser] setObject:@"ParseLogin" forKey:@"firstName"];
+        [self _scrapeFacebook];
+    }];
 }
 
 - (IBAction)didPressNewGameButton:(id)sender

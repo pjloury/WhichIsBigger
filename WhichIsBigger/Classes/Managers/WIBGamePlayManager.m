@@ -98,8 +98,8 @@
 
 - (void)setupGamePlay
 {
-    self.highScore = [[PFUser currentUser] objectForKey:@"highScore"];
-    self.longestStreak = [[PFUser currentUser] objectForKey:@"longestStreak"];
+    self.highScore = ((NSNumber *)[[PFUser currentUser] objectForKey:@"highScore"]).integerValue;
+    self.longestStreak = ((NSNumber *)[[PFUser currentUser] objectForKey:@"longestStreak"]).integerValue;
 }
 
 - (WIBGameQuestion *)nextGameQuestion
