@@ -76,6 +76,7 @@ typedef enum : NSUInteger {
     
     // Create a new view controller and pass suitable data.
     WIBTutorialViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"WIBTutorialViewController"];
+    viewController.view.backgroundColor = [UIColor purpleColor];
     viewController.pageIndex = index;
     
     switch (viewController.pageIndex)

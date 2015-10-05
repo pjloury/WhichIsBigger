@@ -17,15 +17,16 @@
 
 @implementation WIBGameQuestion
 
-- (instancetype)initOneToOneQuestion:(WIBCategoryType)categoryType
+- (instancetype)initOneToOneQuestion:(WIBQuestionType *)questionType
 {
     self = [super init];
     if (self)
     {
-        WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategoryType:categoryType];
-        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategoryType:categoryType withRespectToItem:item1 withQuestionCeiling:[WIBGamePlayManager sharedInstance].questionCeiling];
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategory:questionType.category];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategory:questionType.category withRespectToItem:item1 withQuestionCeiling:[WIBGamePlayManager sharedInstance].questionCeiling];
         _option1 = [[WIBGameOption alloc] initWithItem:item1 multiplier:1];
         _option2 = [[WIBGameOption alloc] initWithItem:item2 multiplier:1];
+        _questionType = questionType;
     }
     return self;
 }
@@ -36,72 +37,13 @@
     if (self)
     {
         // Pass Zeros temporarily
-        _option1 = [[WIBGameOption alloc] initWithItem:item1 multiplier:0];
-        _option2 = [[WIBGameOption alloc] initWithItem:item2 multiplier:0];
-        // Determine challenging
+        self.option1 = [[WIBGameOption alloc] initWithItem:item1 multiplier:0];
+        self.option2 = [[WIBGameOption alloc] initWithItem:item2 multiplier:0];
+        // Determine challenging multipliers
         [self setupOptions];
     }
     
     return self;
-}
-
-double generateGaussianNoise(const double mean, const double variance)
-{
-    static bool hasSpare = false;
-    static double spare;
-    
-    if(hasSpare)
-    {
-        hasSpare = false;
-        return mean + variance * spare;
-    }
-    
-    hasSpare = true;
-    static double u, v, s;
-    do
-    {
-        u = (rand() / ((double) RAND_MAX)) * 2.0 - 1.0;
-        v = (rand() / ((double) RAND_MAX)) * 2.0 - 1.0;
-        s = u * u + v * v;
-    }
-    while( (s >= 1.0) || (s == 0.0) );
-    
-    s = sqrt(-2.0 * log(s) / s);
-    spare = v * s;
-    return mean + variance * u * s;
-}
-
-- (void)setupOptions2
-{
-    WIBGameItem *largerItem = [WIBGameItem maxOfItem:self.option1.item item2:self.option2.item];
-    WIBGameItem *smallerItem = [WIBGameItem minOfItem:self.option1.item item2:self.option2.item];
-    
-    // it actually takes 230.3 Kanyes...
-    self.answerQuantity = largerItem.baseQuantity.doubleValue / smallerItem.baseQuantity.doubleValue;
-    
-    double multiplier = generateGaussianNoise(self.answerQuantity, 0.2*self.answerQuantity);
-    
-    if(smallerItem == self.option1.item)
-    {
-        self.option1.multiplier = multiplier;
-        self.option2.multiplier = 1;
-        if(self.option1.total.doubleValue == self.option2.total.doubleValue)
-        {
-            NSAssert(NO,@"Why are the totals equal?");
-            self.option2.multiplier++;
-        }
-    }
-    else
-    {
-        self.option1.multiplier = 1;
-        self.option2.multiplier = multiplier;
-        if(self.option1.total.doubleValue == self.option2.total.doubleValue)
-        {
-            NSAssert(NO,@"Why are the totals equal?");
-            self.option1.multiplier++;
-        }
-    }
-    NSLog(@"Scaling Question: %@ vs. %@ with %.2f%% skew",self.option1.item.name, self.option2.item.name, (float)((multiplier-self.answerQuantity)/self.answerQuantity)*100);
 }
 
 - (void)setupOptions
@@ -183,35 +125,16 @@ double generateGaussianNoise(const double mean, const double variance)
 
 - (NSString *)questionText
 {
-    NSString *questionVerb = nil;
+    NSString *questionWord = @"";
     
     if(self.option1.item.isPerson && self.option2.item.isPerson)
-        questionVerb = @"Who";
+        questionWord = @"Who";
     else
-        questionVerb = @"Which";
-
-    NSString *categoryQuestionString = @"is Bigger?";
-    switch (self.option1.item.categoryType)
-    {
-        case(WIBCategoryTypeHeight):
-            categoryQuestionString = @"is Taller?";
-            break;
-        case(WIBCategoryTypeWeight):
-            categoryQuestionString = @"is Heavier?";
-            break;
-        case(WIBCategoryTypeAge):
-            categoryQuestionString = @"is Older?";
-            break;
-        case(WIBCategoryTypeDissimilarHeight):
-            categoryQuestionString = @"is DIFFERENT Taller?";
-            break;
-        case(WIBCategoryTypePopulation):
-            categoryQuestionString = @"has more People?";
-            break;
-        default:
-            break;
-    }
-    return [NSString stringWithFormat:@"%@ %@",questionVerb, categoryQuestionString];
+        questionWord = @"Which";
+    
+    NSString *baseString = self.questionType.questionString;
+    
+    return [NSString stringWithFormat:@"%@ %@",questionWord, baseString];
 }
 
 - (WIBGameOption *)answer
@@ -226,6 +149,36 @@ double generateGaussianNoise(const double mean, const double variance)
     {
         return self.option2;
     }
+}
+
+- (double)difficulty
+{
+    double total1 = self.option1.total.doubleValue;
+    double total2 = self.option2.total.doubleValue;
+    return fabs(total1-total2)/fmin(total1,total2) * 100;
+}
+
+- (void)saveInBackground
+{
+    PFObject *gameQuestion = [PFObject objectWithClassName:@"Question"];
+    
+    [gameQuestion setObject:@([WIBGamePlayManager sharedInstance].questionIndex) forKey:@"questionNumber"];
+    [gameQuestion setObject:self.questionType.name forKey:@"quesetionType"];
+    [gameQuestion setObject:@(self.answeredCorrectly) forKey:@"answeredCorrectly"];
+    [gameQuestion setObject:@(self.answerTime) forKey:@"answerTime"];
+    [gameQuestion setObject:[WIBGamePlayManager sharedInstance].roundUUID forKey:@"roundUUID"];
+    [gameQuestion setObject:@(self.points) forKey:@"points"];
+    
+    [gameQuestion setObject:@(self.option1.multiplier) forKey:@"multiplier1"];
+    [gameQuestion setObject:self.option1.item.objectId forKey:@"item1"];
+    
+    [gameQuestion setObject:self.option2.item.objectId forKey:@"multiplier2"];
+    [gameQuestion setObject:@(self.option2.multiplier) forKey:@"item2"];
+    
+    [gameQuestion setObject:[PFUser currentUser] forKey:@"user"];
+
+    [gameQuestion setObject:@(self.difficulty) forKey:@"difficulty"];
+    [gameQuestion saveInBackground];
 }
 
 @end

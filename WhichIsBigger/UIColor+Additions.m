@@ -16,6 +16,15 @@ alpha:1.0]
 
 @implementation UIColor (Additions)
 
++ (UIColor *)lighterGrayColor {
+    return[UIColor colorWithRed:175/255 green:68/255 blue:255/255 alpha:0.17];
+}
+//[UIColor colorWithRed:0.686 green:0.267 blue:1.0 alpha:1.0].CGColor;
+
++ (UIColor *)lightPurpleColor {
+    return UIColorFromRGB(0x9D1BFF);
+}
+
 + (UIColor *)sexyRedColor {
     return UIColorFromRGB(0xF44336);
 }

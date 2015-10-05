@@ -20,7 +20,7 @@
 - (void)setup
 {
     self.userInteractionEnabled = YES;
-    if (self.gameItem.categoryType == WIBCategoryTypePopulation)
+    if ([self.gameItem.categoryString isEqualToString:@"population"])
     {
         self.contentMode = UIViewContentModeCenter;
     }
@@ -32,8 +32,7 @@
     if (self.gameItem.photoURL)
     
     [self sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
-            placeholderImage:[UIImage imageNamed:@"questionMark"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                
+            placeholderImage:[UIImage imageNamed:@"smallQuestionMark"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                 if (!error)
                 {
                     NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
@@ -41,8 +40,10 @@
                 }
                 else
                 {
-                    self.image = [UIImage imageNamed:@"questionMark"];
+                    self.image = [UIImage imageNamed:@"smallQuestionMark"];
                 }
+                self.layer.borderColor = [UIColor lighterGrayColor].CGColor;
+                self.layer.borderWidth = 1;
             }];
     
     if (self.multiplier > 1)
@@ -60,26 +61,16 @@
     self.layer.shadowRadius = 4;
     self.layer.shadowOffset = CGSizeZero;
     
-    self.layer.cornerRadius = 20;
+    self.layer.cornerRadius = self.layer.frame.size.width/10;
     self.layer.masksToBounds = YES;
     
     //NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
-    
-    //self.backgroundColor = [UIColor colorWithRed:175/255 green:68/255 blue:255/255 alpha:0.17];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-// This is currently rounding the entire view not just the visible image..
-- (void)roundViewEdges
-{
-    self.layer.cornerRadius = self.frame.size.height/2;
-    self.layer.masksToBounds = YES;
-}
-
 
 
 @end

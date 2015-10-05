@@ -15,17 +15,15 @@
 
 // Views
 #import "WIBPopButton.h"
-#import "HMSegmentedControl.h"
 
 @interface WIBGameCompleteViewController ()<UICollectionViewDataSource, FBSDKAppInviteDialogDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *answersCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 @property (weak, nonatomic) IBOutlet UILabel *highScoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *accuracyLabel;
 @property (weak, nonatomic) IBOutlet WIBPopButton *playAgainButton;
+@property (weak, nonatomic) IBOutlet WIBPopButton *challengeAFriendButton;
 @property (weak, nonatomic) NSTimer *scoreLabelTimer;
-@property (weak, nonatomic) IBOutlet HMSegmentedControl *segmentedControl;
 @property (assign, nonatomic) NSInteger incrementedScore;
 
 @end
@@ -34,9 +32,7 @@
 
 - (void)viewDidLoad
 {
-    self.segmentedControl.sectionTitles = @[@"This Game",@"High Scores"];
-    self.segmentedControl.selectionIndicatorColor = [UIColor purpleColor];
-    self.segmentedControl.backgroundColor = [UIColor whiteColor];
+    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -45,24 +41,22 @@
     self.incrementedScore = 0;
     self.streakLabel.hidden = YES;
     self.scoreLabel.text = @"";
-    self.accuracyLabel.text = @"";
     self.highScoreLabel.hidden = YES;
     self.playAgainButton.enabled = NO;
     self.highScoreLabel.alpha = 0.0;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
+    
+    self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
+    self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
+    self.playAgainButton.layer.borderWidth = 1;
+    self.challengeAFriendButton.layer.borderWidth = 1;
 }
 
 - (void)incrementScore
 {
     if (self.incrementedScore < [WIBGamePlayManager sharedInstance].score)
     {
-        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
         self.incrementedScore++;
+        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
     }
     else
     {
@@ -92,9 +86,7 @@
         self.highScoreLabel.text = @"LOL!";
         [self throbHighScoreLabel];
     }
-    
-    self.accuracyLabel.text = [NSString stringWithFormat:@"%g%%",floorf([WIBGamePlayManager sharedInstance].accuracy*100.0)];
-    
+        
     self.playAgainButton.enabled = YES;
 }
 

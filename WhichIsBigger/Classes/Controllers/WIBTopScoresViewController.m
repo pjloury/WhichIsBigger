@@ -36,20 +36,17 @@
             NSMutableArray *facebookIDs = [[NSMutableArray alloc] init];
             for(NSDictionary *tuple in data)
             {
-                NSLog(tuple.description);
                 [facebookIDs addObject:tuple[@"id"]];
             }
             [facebookIDs addObject:[[PFUser currentUser] objectForKey:@"facebookID"]];
             
             PFQuery *friendQuery = [PFUser query];
             [friendQuery whereKey:@"facebookID" containedIn:facebookIDs];
+            [friendQuery whereKey:@"highScore" greaterThan:@(0)];
+            [friendQuery orderByDescending:@"highScore"];
             
             [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
-                    // The find succeeded.
-                    NSLog(@"Successfully retrieved %d scores.", objects.count);
-                    // Do something with the found objects
-                    
                     self.friendUsers = objects;
                     [self.tableView reloadData];
                     

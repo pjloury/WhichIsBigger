@@ -118,7 +118,6 @@
     {
         self.question.answeredCorrectly = YES;
         [optionView correctResponse];
-		//optionView.backgroundColor = [UIColor greenColor];
         [self animateCorrectOptionView:optionView];
         [self.scoringDelegate didAnswerQuestionCorrectly];
     }
@@ -126,7 +125,6 @@
     {
         self.question.answeredCorrectly = NO;
         [optionView incorrectResponse];
-        //optionView.backgroundColor = [UIColor redColor];
         [self animateIncorrectOptionView:optionView];
         [self.scoringDelegate didAnswerQuestionIncorrectly];
     }
@@ -147,26 +145,36 @@
     
     [self.optionView1 startCanvasAnimation];
     [self.optionView2 startCanvasAnimation];
-    [self.comparsionSymbolAnimationView startCanvasAnimation];
     
-    self.optionView1.alpha = 0.5;
-    self.optionView2.alpha = 0.5;
-    self.comparsionSymbol.hidden = NO;
-    self.comparsionSymbol.alpha = 0.5;
-    
-	[self.optionView1 revealAnswerLabel];
-	[self.optionView2 revealAnswerLabel];
-    [self.scoringDelegate didFailToAnswerQuestion];
-    [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];
-
-    if([self.optionView1.gameOption.item.name isEqualToString:self.question.answer.item.name])
+    if (self.optionView1.gameOption == self.question.answer)
     {
-        self.comparsionSymbol.text = @">";
+        [self.optionView1 animateTimeOutLarger];
     }
     else
     {
-        self.comparsionSymbol.text = @"<";
+        [self.optionView2 animateTimeOutLarger];
     }
+
+    self.optionView1.alpha = 0.5;
+    self.optionView2.alpha = 0.5;
+    [self.optionView1 revealAnswerLabel];
+    [self.optionView2 revealAnswerLabel];
+    
+    [self.scoringDelegate didFailToAnswerQuestion];
+    [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];
+    
+//    [self.comparsionSymbolAnimationView startCanvasAnimation];
+//    self.comparsionSymbol.hidden = NO;
+//    self.comparsionSymbol.alpha = 0.5;
+
+//    if([self.optionView1.gameOption.item.name isEqualToString:self.question.answer.item.name])
+//    {
+//        self.comparsionSymbol.text = @">";
+//    }
+//    else
+//    {
+//        self.comparsionSymbol.text = @"<";
+//    }
 }
 
 - (void)revealAnswer

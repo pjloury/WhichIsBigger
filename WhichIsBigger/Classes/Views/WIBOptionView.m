@@ -46,8 +46,9 @@
     [self configureLabels];
     
     self.layer.shadowColor = [UIColor clearColor].CGColor;
-    self.layer.cornerRadius = 20;
+    self.layer.cornerRadius = self.layer.frame.size.width/10;
     self.layer.masksToBounds = YES;
+    self.answerLabel.textColor = [UIColor lightPurpleColor];
     
 //    self.layer.shadowColor = [UIColor blackColor].CGColor;
 //    self.layer.shadowOpacity = .4;
@@ -57,16 +58,16 @@
 
 - (void)correctResponse
 {
-    self.layer.shadowColor = [UIColor greenColor].CGColor;
-    self.layer.shadowOpacity = 1.0;
-    self.layer.shadowRadius = 20;
+    self.imageView.layer.shadowColor = [UIColor greenColor].CGColor;
+    self.imageView.layer.shadowOpacity = 1.0;
+    self.imageView.layer.shadowRadius = 20;
 }
 
 - (void)incorrectResponse;
 {
-    self.layer.shadowColor = [UIColor redColor].CGColor;
-    self.layer.shadowOpacity = 1.0;
-    self.layer.shadowRadius = 20;
+    self.imageView.layer.shadowColor = [UIColor redColor].CGColor;
+    self.imageView.layer.shadowOpacity = 1.0;
+    self.imageView.layer.shadowRadius = 20;
 }
 
 - (void)gameQuestionTimeUpHandler:(NSNotification *)note
@@ -104,6 +105,16 @@
 {
     self.answerLabel.hidden = NO;
     self.answerLabel.text = self.gameOption.totalString;
+}
+
+- (void)animateTimeOutLarger
+{
+    self.answerLabel.textColor = [UIColor greenColor];
+}
+
+- (void)animateTimeOutSmaller
+{
+    self.answerLabel.textColor = [UIColor redColor];
 }
 
 - (WIBGameItem *)gameItem

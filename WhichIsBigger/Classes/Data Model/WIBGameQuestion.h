@@ -8,16 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WIBGameOption.h"
-
-typedef enum : NSUInteger {
-    WIBQuestionTypeSimilarHeight,
-    WIBQuestionTypeDifferentHeight,
-    WIBQuestionTypeSimilarWeight,
-    WIBQuestionTypeAge,
-    WIBQuestionTypePopulation,
-    WIBQuestionTypeDifferentWeight,
-    WIBQuestionTypeCount
-} WIBQuestionType;
+#import "WIBQuestionType.h"
 
 @class WIBGameItem;
 @interface WIBGameQuestion : NSObject
@@ -26,14 +17,20 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) WIBGameOption *option2;
 @property (nonatomic, readonly) NSString *questionText;
 @property (nonatomic, assign) NSTimeInterval answerTime;
-@property double answerQuantity;
-@property BOOL answeredCorrectly;
+@property (nonatomic, assign) NSInteger points;
+@property (nonatomic) WIBQuestionType *questionType;
+
+@property (nonatomic, assign) double answerQuantity;
+@property (nonatomic, assign) double difficulty;
+@property (nonatomic, assign) BOOL answeredCorrectly;
 
 - (WIBGameOption *)answer;
 
 // Initializers
-- (instancetype)initOneToOneQuestion:(WIBCategoryType)categoryType;
+- (instancetype)initOneToOneQuestion:(WIBQuestionType *)categoryString;
 - (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1 dissimilargameItem2:(WIBGameItem *)item2;
 
+// Save
+- (void)saveInBackground;
 
 @end

@@ -12,6 +12,7 @@
 
 // Data Model
 #import "WIBGameQuestion.h"
+#import "WIBQuestionType.h"
 #import "WIBDataModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WIBGamePlayManager.h"
@@ -32,54 +33,67 @@
 }
 
 - (void)getConfigurationWithCompletion:(void (^)())completion
-{
-    /*
-    PFQuery *query =  [PFQuery queryWithClassName:@"Configuration"];
-    query.limit = 1;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-     {
-         if (!error)
-         {
-             PFObject *configuration = [objects firstObject];
-             [WIBGamePlayManager sharedInstance].tagBlacklist = configuration[@"tagBlacklist"];
-             completion();
-         }
-         else
-         {
-             // Log details of the failure
-             NSLog(@"Error: %@ %@", error, [error userInfo]);
-             // If you get code 100, then use the local storage
-             if (error.code == 100)
-             {
-                 completion();
-             }
-         }
-     }];
-     */
-    
+{    
     if ([self.reachability isReachable])
     {
-        [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
-            if (!error) {
-                NSLog(@"Yay! Config was fetched from the server.");
-                [WIBGamePlayManager sharedInstance].tagBlacklist = config[@"tagBlacklist"];
-            } else {
-                NSLog(@"Failed to fetch. Using Cached Config.");
-                [WIBGamePlayManager sharedInstance].tagBlacklist = [PFConfig currentConfig][@"tagBlacklist"];
-            }
-            
-            if (completion) {
-                completion();
-            }
-        }];
+        [PFConfig getConfig];
     }
-    else {
-        [WIBGamePlayManager sharedInstance].tagBlacklist = [PFConfig currentConfig][@"tagBlacklist"];
-        if (completion)
-        {
-            completion();
-        }
+
+    if (completion)
+        completion();
+//    if ([self.reachability isReachable])
+//    {
+//        [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+//            if (!error) {
+//                NSLog(@"Yay! Config was fetched from the server.");
+//            } else {
+//                NSLog(@"Failed to fetch. Using Cached Config.");
+//            }
+//            
+//            if (completion) {
+//                completion();
+//            }
+//        }];
+//    }
+//    else {
+//        if (completion)
+//        {
+//            completion();
+//        }
+//    }
+}
+
+- (void)getCategoriesWithCompletion:(void (^)())completion
+{
+    PFQuery *query =  [PFQuery queryWithClassName:@"QuestionType"];
+    [query whereKey:@"name" containedIn:[[PFConfig currentConfig] objectForKey:@"questionTypeWhiteList"]];
+    
+    if ([WIBGamePlayManager sharedInstance].localStorage && ![self.reachability isReachable])
+    {
+        [query fromLocalDatastore];
     }
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         NSMutableArray *questionTypes = [NSMutableArray array];
+         for (PFObject *object in objects)
+         {
+             WIBQuestionType *questionType = [[WIBQuestionType alloc] init];
+             questionType.name = [object objectForKey:@"name"];
+             questionType.comparisonType = ((NSNumber *)[object objectForKey:@"comparisonType"]).integerValue;
+             questionType.category = [object objectForKey:@"category"];
+             questionType.questionString  = [object objectForKey:@"questionString"];
+             [questionTypes addObject:questionType];
+         }
+         
+         [WIBGamePlayManager sharedInstance].questionTypes = questionTypes;
+         
+         if (completion)
+         {
+             completion();
+         }
+         [PFObject pinAllInBackground:objects];
+     }];
 }
 
 - (void)generateDataModelWithCompletion:(void (^)())completion
@@ -109,6 +123,7 @@
                 gameItem.categoryString = object[@"category"];
                 gameItem.tagArray = object[@"tagArray"];
                 gameItem.photoURL = object[@"photoURL"];
+                gameItem.objectId = object.objectId;
                 if(gameItem.name && gameItem.baseQuantity)
                 {
                     [[WIBDataModel sharedInstance] insertGameItem: gameItem];

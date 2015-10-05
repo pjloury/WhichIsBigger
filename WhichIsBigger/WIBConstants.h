@@ -26,6 +26,11 @@
 extern NSString * kGameQuestionTimeUpNotification;
 extern NSString *kGroupImageDownloadCompleteNotification;
 
+extern NSString *kHeight;
+extern NSString *kWeight;
+extern NSString *kAge;
+extern NSString *kPopulation;
+
 @interface WIBConstants : NSObject
 
 @end

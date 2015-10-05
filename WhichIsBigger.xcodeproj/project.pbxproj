@@ -10,7 +10,6 @@
 		601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601172941BA6A19E00EE8182 /* AVFoundation.framework */; };
 		601172981BAA99A300EE8182 /* WIBTopScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 601172971BAA99A300EE8182 /* WIBTopScoresViewController.m */; };
 		6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6011729A1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m */; };
-		6033C7891B98235100C592CC /* WIBDissimilarHeightQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C7881B98235100C592CC /* WIBDissimilarHeightQuestion.m */; };
 		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
 		6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78D1B98238000C592CC /* WIBQuestionView.m */; };
 		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
@@ -18,10 +17,15 @@
 		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
 		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
 		604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0C81BB3DF8500595B2B /* WIBReachability.m */; };
+		604DF0CC1BB769F600595B2B /* WIBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0CB1BB769F600595B2B /* WIBProfileViewController.m */; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
 		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
 		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
+		60D39B861BC24D51008E06EF /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D39B851BC24D51008E06EF /* SidebarTableViewController.m */; };
+		60D39B891BC24D60008E06EF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D39B881BC24D60008E06EF /* SWRevealViewController.m */; };
 		60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */; };
+		60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DB38161BBF94C5001EC806 /* WIBDissimilarQuestion.m */; };
+		60DB381A1BBFB564001EC806 /* WIBQuestionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DB38191BBFB564001EC806 /* WIBQuestionType.m */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
 		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
@@ -70,8 +74,6 @@
 		601172971BAA99A300EE8182 /* WIBTopScoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTopScoresViewController.m; path = WhichIsBigger/Classes/Controllers/WIBTopScoresViewController.m; sourceTree = "<group>"; };
 		601172991BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTopScoreTableViewCell.h; path = WhichIsBigger/Classes/Views/WIBTopScoreTableViewCell.h; sourceTree = "<group>"; };
 		6011729A1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTopScoreTableViewCell.m; path = WhichIsBigger/Classes/Views/WIBTopScoreTableViewCell.m; sourceTree = "<group>"; };
-		6033C7871B98235100C592CC /* WIBDissimilarHeightQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDissimilarHeightQuestion.h; path = "Classes/Data Model/WIBDissimilarHeightQuestion.h"; sourceTree = "<group>"; };
-		6033C7881B98235100C592CC /* WIBDissimilarHeightQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDissimilarHeightQuestion.m; path = "Classes/Data Model/WIBDissimilarHeightQuestion.m"; sourceTree = "<group>"; };
 		6033C78A1B98238000C592CC /* WIBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionView.h; path = Classes/Views/WIBOptionView.h; sourceTree = "<group>"; };
 		6033C78B1B98238000C592CC /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionView.m; path = Classes/Views/WIBOptionView.m; sourceTree = "<group>"; };
 		6033C78C1B98238000C592CC /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionView.h; path = Classes/Views/WIBQuestionView.h; sourceTree = "<group>"; };
@@ -85,14 +87,24 @@
 		604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDismissSegue.m; path = WhichIsBigger/Classes/WIBDismissSegue.m; sourceTree = "<group>"; };
 		604DF0C71BB3DF8500595B2B /* WIBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBReachability.h; path = Classes/Managers/WIBReachability.h; sourceTree = "<group>"; };
 		604DF0C81BB3DF8500595B2B /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = Classes/Managers/WIBReachability.m; sourceTree = "<group>"; };
+		604DF0CA1BB769F600595B2B /* WIBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBProfileViewController.h; path = WhichIsBigger/Classes/Controllers/WIBProfileViewController.h; sourceTree = "<group>"; };
+		604DF0CB1BB769F600595B2B /* WIBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBProfileViewController.m; path = WhichIsBigger/Classes/Controllers/WIBProfileViewController.m; sourceTree = "<group>"; };
 		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
 		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
 		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
 		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
+		60D39B841BC24D51008E06EF /* SidebarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTableViewController.h; sourceTree = "<group>"; };
+		60D39B851BC24D51008E06EF /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTableViewController.m; sourceTree = "<group>"; };
+		60D39B871BC24D60008E06EF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		60D39B881BC24D60008E06EF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoadingViewController.h; path = Classes/Controllers/WIBLoadingViewController.h; sourceTree = "<group>"; };
 		60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoadingViewController.m; path = Classes/Controllers/WIBLoadingViewController.m; sourceTree = "<group>"; };
 		60D811691BA4262800B2DA78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		60DB38151BBF94C5001EC806 /* WIBDissimilarQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDissimilarQuestion.h; path = "Classes/Data Model/WIBDissimilarQuestion.h"; sourceTree = "<group>"; };
+		60DB38161BBF94C5001EC806 /* WIBDissimilarQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDissimilarQuestion.m; path = "Classes/Data Model/WIBDissimilarQuestion.m"; sourceTree = "<group>"; };
+		60DB38181BBFB564001EC806 /* WIBQuestionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionType.h; path = "Classes/Data Model/WIBQuestionType.h"; sourceTree = "<group>"; };
+		60DB38191BBFB564001EC806 /* WIBQuestionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionType.m; path = "Classes/Data Model/WIBQuestionType.m"; sourceTree = "<group>"; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhichIsBigger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +198,8 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				604DF0CA1BB769F600595B2B /* WIBProfileViewController.h */,
+				604DF0CB1BB769F600595B2B /* WIBProfileViewController.m */,
 				601172961BAA99A300EE8182 /* WIBTopScoresViewController.h */,
 				601172971BAA99A300EE8182 /* WIBTopScoresViewController.m */,
 				601172991BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.h */,
@@ -287,10 +301,12 @@
 		7D0CC73B1AD4F30000BB65BB /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				6033C7871B98235100C592CC /* WIBDissimilarHeightQuestion.h */,
-				6033C7881B98235100C592CC /* WIBDissimilarHeightQuestion.m */,
+				60DB38181BBFB564001EC806 /* WIBQuestionType.h */,
+				60DB38191BBFB564001EC806 /* WIBQuestionType.m */,
 				7D943FB01AF0C73A0061387B /* WIBGameItem.h */,
 				7D943FB11AF0C73A0061387B /* WIBGameItem.m */,
+				60DB38151BBF94C5001EC806 /* WIBDissimilarQuestion.h */,
+				60DB38161BBF94C5001EC806 /* WIBDissimilarQuestion.m */,
 				7D70EE691AEF507D002E1565 /* WIBGameOption.h */,
 				7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */,
 				7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */,
@@ -359,6 +375,10 @@
 		F30117811AF099C300F1D854 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				60D39B871BC24D60008E06EF /* SWRevealViewController.h */,
+				60D39B881BC24D60008E06EF /* SWRevealViewController.m */,
+				60D39B841BC24D51008E06EF /* SidebarTableViewController.h */,
+				60D39B851BC24D51008E06EF /* SidebarTableViewController.m */,
 				7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */,
 				7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */,
 				7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */,
@@ -537,15 +557,19 @@
 			files = (
 				6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */,
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
+				60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */,
 				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				601172981BAA99A300EE8182 /* WIBTopScoresViewController.m in Sources */,
 				6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
+				60D39B891BC24D60008E06EF /* SWRevealViewController.m in Sources */,
 				7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */,
 				60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
-				6033C7891B98235100C592CC /* WIBDissimilarHeightQuestion.m in Sources */,
+				604DF0CC1BB769F600595B2B /* WIBProfileViewController.m in Sources */,
+				60DB381A1BBFB564001EC806 /* WIBQuestionType.m in Sources */,
+				60D39B861BC24D51008E06EF /* SidebarTableViewController.m in Sources */,
 				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
 				7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */,
 				6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */,

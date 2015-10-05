@@ -9,23 +9,18 @@
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
 
-NSString *kHeight = @"height";
-NSString *kWeight = @"weight";
-NSString *kAge = @"age";
-NSString *kPopulation = @"population";
-
 @implementation WIBGameItem
 
 - (BOOL)isPerson
 {
-	return [self.tagArray containsObject:@"Person" ] || [self.tagArray containsObject:@"person"];
+	return [self.tagArray containsObject:@"person"];
 }
 
 - (BOOL)isSupported
 {
     for (NSString *tag in self.tagArray)
     {
-        if ([[WIBGamePlayManager sharedInstance].tagBlacklist containsObject:tag.lowercaseString])
+        if ([((NSArray *)[PFConfig currentConfig][@"tagBlackList"]) containsObject:tag.lowercaseString])
         {
             return NO;
         }
@@ -61,22 +56,6 @@ NSString *kPopulation = @"population";
     {
         return _baseQuantity;
     }
-}
-
-- (WIBCategoryType)categoryType
-{
-    if ([self.categoryString isEqualToString:kHeight])
-        return WIBCategoryTypeHeight;
-    else if ([self.categoryString isEqualToString:kWeight])
-        return WIBCategoryTypeWeight;
-    else if ([self.categoryString isEqualToString:kAge])
-        return WIBCategoryTypeAge;
-    else if ([self.categoryString isEqualToString:kPopulation])
-        return WIBCategoryTypePopulation;
-    else // TODO: need to have
-        NSAssert(0,@"No categoryString!");
-        // return WIBCategoryTypeDefault;
-    return 0;
 }
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2

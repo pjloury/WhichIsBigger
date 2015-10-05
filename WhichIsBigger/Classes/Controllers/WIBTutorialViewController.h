@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIBGameViewController.h"
 
-@interface WIBTutorialViewController : UIPageViewController
+@interface WIBTutorialViewController : WIBGameViewController
 @property (weak, nonatomic) IBOutlet UILabel *centerLabel;
 @property NSUInteger pageIndex;
 @property NSString *centerTitle;

@@ -13,8 +13,8 @@
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
 
-- (WIBGameItem*)firstGameItemForCategoryType:(WIBCategoryType)categoryType;
-- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
-- (WIBGameItem*)secondGameItemForCategoryType:(WIBCategoryType)categoryType dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude;
+- (WIBGameItem*)firstGameItemForCategory:(NSString *)category;
+- (WIBGameItem*)secondGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
+- (WIBGameItem*)secondGameItemForCategory:(NSString *)category dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude;
 
 @end

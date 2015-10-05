@@ -12,4 +12,9 @@
 NSString *kGameQuestionTimeUpNotification = @"gameQuestionTimeUpNotification";
 NSString *kGroupImageDownloadCompleteNotification = @"groupImageDownloadCompleteNotification";
 
+NSString *kHeight = @"height";
+NSString *kWeight = @"weight";
+NSString *kAge = @"age";
+NSString *kPopulation = @"population";
+
 @end

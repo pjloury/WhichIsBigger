@@ -9,9 +9,11 @@
 #import "WIBGameViewController.h"
 
 // Views
+#import "WIBPopButton.h"
 #import "WIBQuestionView.h"
 #import "WIBPopButton.h"
 #import "UIView+AutoLayout.h"
+#import "WIBOptionView.h"
 
 // Models
 #import "WIBGameQuestion.h"
@@ -84,7 +86,7 @@
 - (void)configureBackground
 {
     self.nextButton.alpha = 0.0;
-    self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
+    self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex+1, NUMBER_OF_QUESTIONS];
 }
 
 - (IBAction)nextButtonPressed:(id)sender
@@ -94,7 +96,7 @@
     self.nextButton.enabled = NO;
     self.nextButton.alpha = 0.0;
     self.questionView.comparsionSymbol.hidden = YES;
-    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS-1)
     {    
         [[WIBGamePlayManager sharedInstance] endGame];
         [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
@@ -120,8 +122,8 @@
 {
     _currSeconds = SECONDS_PER_QUESTION;
     self.startDate = [NSDate date];
-
-    [UIView animateWithDuration:SECONDS_PER_QUESTION delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+   
+    [UIView animateWithDuration:SECONDS_PER_QUESTION delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
                          self.timerLengthConstraint.constant = 0;
                          [self.timerBar layoutIfNeeded];
     } completion:^(BOOL finished){}];

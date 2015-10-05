@@ -15,23 +15,27 @@
 @end
 
 @class WIBGameQuestion;
+@class WIBQuestionType;
 @interface WIBGamePlayManager : NSObject<WIBScoringDelegate>
 
-- (void)beginGame;
-- (void)endGame;
++ (WIBGamePlayManager *)sharedInstance;
 
 - (void)setupGamePlay;
-
-+ (WIBGamePlayManager *)sharedInstance;
+- (void)beginGame;
+- (void)endGame;
 - (WIBGameQuestion *)nextGameQuestion;
+
 - (NSInteger)numberCorrectAnswers;
 
 @property (readonly) NSInteger questionIndex;
-@property (nonatomic, strong) NSArray *tagBlacklist;
+@property (readonly) NSString *roundUUID;
+@property (nonatomic) NSMutableArray *questionTypes;
 @property (nonatomic, assign) double questionCeiling;
 @property (nonatomic, assign) double questionFloor;
 @property (nonatomic, assign) double skewFactor;
 @property (nonatomic, strong) NSMutableSet *usedNames;
+@property (nonatomic, assign) BOOL localStorage;
+
 @property (nonatomic, strong, readonly) NSMutableArray *gameQuestions;
 @property (nonatomic, assign, readonly) NSInteger score;
 @property (nonatomic, assign, readonly) NSInteger highScore;
@@ -40,6 +44,5 @@
 @property (nonatomic, assign, readonly) NSUInteger totalCorrectAnswers;
 @property (nonatomic, assign, readonly) NSUInteger totalAnswers;
 @property (nonatomic, assign, readonly) float accuracy;
-@property (nonatomic, assign) BOOL localStorage;
 
 @end
