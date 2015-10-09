@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "WhichIsBigger": {
+      "applicationId": "mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd"
+    },
+    "_default": {
+      "link": "WhichIsBigger"
+    }
+  }
+}
