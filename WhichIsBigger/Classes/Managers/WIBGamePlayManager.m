@@ -239,6 +239,8 @@
     self.gameQuestions = [[NSMutableArray alloc] init];
     self.usedNames = [[NSMutableSet alloc] init];
     
+    WIBQuestionType *questionType = [self randomQuestionType];
+    
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
         // TODO: Server driven # of categories .. (future looking)
@@ -246,7 +248,6 @@
         // random number based on the number of categories
         // categories should be a set
         
-        WIBQuestionType *questionType = [self randomQuestionType];
         // can have a relation to another type of object
         // the send type of object is a category
         

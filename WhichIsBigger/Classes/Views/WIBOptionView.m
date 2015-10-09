@@ -13,7 +13,7 @@
 #import "WIBGameItem.h"
 #import "UIView+AutoLayout.h"
 
-@interface WIBOptionView ()<WIBOptionViewDelegate>
+@interface WIBOptionView ()<WIBOptionViewDelegate, WIBPopDelegate>
 
 // Views
 @property (nonatomic, strong) IBOutlet WIBImageView *imageView;
@@ -31,6 +31,7 @@
 	self.alpha = 1.0;
 	self.gameOption = option;
     self.userInteractionEnabled = YES;
+    self.popButton.popDelegate = self;
     self.popButton.userInteractionEnabled = YES;
     self.answerLabel.hidden = YES;
     [self configureViews];
@@ -41,7 +42,14 @@
     self.backgroundColor = [UIColor sexyLightPurpleColor];
     self.clipsToBounds = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
+    
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self.popButton action:@selector(longPressDetected:)];
+    longPressRecognizer.minimumPressDuration = 0.2;
+    longPressRecognizer.allowableMovement = 50.0f;
+    [self.popButton addGestureRecognizer:longPressRecognizer];
     self.popButton.delegate = self;
+    [self.popButton refresh];
+    
     [self configureImageView];
     [self configureLabels];
     
@@ -125,6 +133,30 @@
 - (void)optionWasSelected:(id)sender
 {
     [self.delegate optionView:self didSelectOption:self.gameOption];
+}
+
+# pragma mark - Pop Button Delegate
+- (void)popButtonPressed
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = .15f;
+    animation.fromValue = @(1);
+    animation.toValue = @(1.2f);
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
+    [self.layer addAnimation:animation forKey:@"scale"];
+
+}
+- (void)popButtonLetGo
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = .1f;
+    animation.toValue = @(1);
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
+    [self.layer addAnimation:animation forKey:@"scale1"];
 }
 
 @end

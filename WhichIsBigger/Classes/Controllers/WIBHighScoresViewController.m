@@ -8,8 +8,10 @@
 
 #import "WIBTopScoresViewController.h"
 #import "WIBTopScoreTableViewCell.h"
+#import "SWRevealViewController.h"
 
 @interface WIBTopScoresViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *friendUsers;
 
@@ -22,7 +24,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if ( revealViewController )
+    {
+        [self.sidebarButton setTarget: self.revealViewController];
+        [self.sidebarButton setAction: @selector( revealToggle: )];
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,6 +74,18 @@
         }
     }];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    {
+        
+        
+        
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -47,6 +47,11 @@
 
 @implementation WIBGameViewController
 
+- (void)viewDidLoad
+{
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

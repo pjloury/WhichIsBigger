@@ -9,8 +9,19 @@
 #import "WIBPopButton.h"
 #import "WIBOptionView.h"
 
-@interface WIBOptionButton : WIBPopButton
+@protocol WIBPopDelegate
+
+- (void)popButtonPressed;
+- (void)popButtonLetGo;
+
+@end
+
+@interface WIBOptionButton : UIButton
 
 @property (nonatomic, weak) id<WIBOptionViewDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *multiplierLabel;
+@property (nonatomic, weak) id<WIBPopDelegate> popDelegate;
+- (void)refresh;
+- (void)longPressDetected:(UILongPressGestureRecognizer *)sender;
+
 @end

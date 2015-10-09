@@ -95,14 +95,15 @@
 {
     optionView.type = CSAnimationTypePop;
     optionView.duration = 0.5;
-    [optionView startCanvasAnimation];
+    
+    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.25];
 }
 
 - (void)animateIncorrectOptionView:(WIBOptionView *)optionView
 {
     optionView.type = CSAnimationTypeShake;
     optionView.duration = 0.5;
-    [optionView startCanvasAnimation];
+    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.25];
 }
 
 # pragma mark - WIBQuestionViewDelegate
