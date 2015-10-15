@@ -13,23 +13,21 @@
 #import "WIBGameQuestion.h"
 #import "WIBGameOption.h"
 #import "WIBGameItem.h"
-#import "WIBDissimilarQuestion.h"
 
-// Managers
-#import "WIBNetworkManager.h"
 
 @interface WIBGamePlayManager()
-@property (nonatomic, strong) NSMutableArray *gameQuestions;
-@property (nonatomic, strong) WIBGameQuestion *currentQuestion;
-@property (nonatomic, assign) NSInteger questionIndex;
-@property (nonatomic, assign) NSInteger score;
+
+@property (nonatomic) WIBGameRound *gameRound;
+
 @property (nonatomic, assign) NSInteger currentStreak;
 @property (nonatomic, assign) NSInteger longestStreak;
+@property (nonatomic, assign) NSUInteger level;
 @property (nonatomic) NSString *roundUUID;
 
 @end
 
 @implementation WIBGamePlayManager
+
 
 + (WIBGamePlayManager *)sharedInstance
 {
@@ -60,11 +58,7 @@
 
 - (void)beginGame
 {
-    self.questionIndex = -1;
-    self.gameQuestions = nil;
-    self.usedNames = nil;
-    self.roundUUID = [[NSUUID UUID] UUIDString];
-    [self generateQuestions];
+    self.gameRound = [[WIBGameRound alloc] init];
 }
 
 - (void)endGame
@@ -73,11 +67,16 @@
     NSNumber *lifeTimeScore = [[PFUser currentUser] objectForKey:@"lifeTimeScore"];
     [[PFUser currentUser] setObject:@(lifeTimeScore.integerValue + self.score) forKey:@"lifeTimeScore"];
     [[PFUser currentUser] saveInBackground];
+    
+    if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
+    {
+        self.highScore = self.gameRound.score;
+    }
 }
 
 - (void)adjustDifficulty
 {
-    if (self.numberCorrectAnswers > 4 && self.questionCeiling - 5 > self.questionFloor)
+    if (self.gameRound.numberOfCorrectAnswers > 4 && self.questionCeiling - 5 > self.questionFloor)
     {
         self.questionCeiling -= 5;
         if (self.questionFloor > 5)
@@ -114,43 +113,7 @@
 
 - (WIBGameQuestion *)nextGameQuestion
 {
-    // always ask for next question. Manager should hold all of the state
-    if (self.currentQuestion)
-    {
-        [self.currentQuestion saveInBackground];
-    }
-    self.questionIndex++;
-    self.currentQuestion = [self.gameQuestions objectAtIndex:self.questionIndex];
-    return self.currentQuestion;
-}
-
-- (void)printQuestions
-{
-    for(WIBGameQuestion *question in self.gameQuestions)
-    {
-        NSString *string = [NSString stringWithFormat:@"%@ vs. %@", question.option1.item.name, question.option2.item.name];
-        NSLog(@"%@",string);
-    }
-}
-
-# pragma mark - Accessors
-- (NSInteger)score
-{
-    _score = 0;
-    for (WIBGameQuestion *question in self.gameQuestions)
-    {
-        if (question.answeredCorrectly)
-        {
-            _score += round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * question.answerTime / SECONDS_PER_QUESTION));
-        }
-    }
-    
-    if (_score > self.highScore)
-    {
-        self.highScore = _score;
-    }
-    
-    return _score;
+    return [self.gameRound nextGameQuestion];
 }
 
 - (void)setHighScore:(NSInteger)highScore
@@ -163,6 +126,11 @@
 - (NSInteger)highScore
 {
     return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"]).integerValue;
+}
+
+- (NSUInteger)score
+{
+    return self.gameRound.score;
 }
 
 - (void)setCurrentStreak:(NSInteger)currentStreak
@@ -202,6 +170,7 @@
 
 - (NSUInteger)totalAnswers
 {
+    //PFQuery *totalAnswersQuery [PFQuery queryWithClassName:@"Question"];
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalAnswers"];
     return (num) ? num.integerValue: 0;
 }
@@ -209,6 +178,11 @@
 - (void)setTotalAnswers:(NSUInteger)totalAnswers
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(totalAnswers) forKey:@"totalAnswers"];
+}
+
+- (NSUInteger)questionNumber
+{
+    return self.gameRound.questionIndex + 1;
 }
 
 - (BOOL)localStorage
@@ -225,63 +199,11 @@
 - (float)accuracy
 {
     return (float)self.totalCorrectAnswers / (float)self.totalAnswers;
-}
-
-- (WIBQuestionType *)randomQuestionType
-{
-    // categoryWhiteList
-    NSUInteger randomQuestionTypeIndex = arc4random_uniform((u_int32_t)_questionTypes.count);
-    return _questionTypes[randomQuestionTypeIndex];
-}
-
-- (void)generateQuestions
-{
-    self.gameQuestions = [[NSMutableArray alloc] init];
-    self.usedNames = [[NSMutableSet alloc] init];
-    
-    WIBQuestionType *questionType = [self randomQuestionType];
-    
-    for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
-    {
-        // TODO: Server driven # of categories .. (future looking)
-        
-        // random number based on the number of categories
-        // categories should be a set
-        
-        // can have a relation to another type of object
-        // the send type of object is a category
-        
-        WIBGameQuestion *question;
-        
-        switch(questionType.comparisonType)
-        {
-            case (WIBComparisonUnalikeType):
-            {
-                question = [[WIBDissimilarQuestion alloc] initWithQuestionType:questionType];
-                break;
-            }
-            default:
-            {
-                question = [[WIBGameQuestion alloc] initOneToOneQuestion:questionType];
-                break;
-            }
-        }
-        [self.gameQuestions addObject:question];
-        
-    }
-    //[self printQuestions];
-    [[WIBNetworkManager sharedInstance] preloadImages:self.gameQuestions];
-}
-
-- (NSInteger)numberCorrectAnswers
-{
-    NSInteger correctAnswers = 0;
-    for (WIBGameQuestion *question in self.gameQuestions)
-    {
-        if(question.answeredCorrectly)
-            correctAnswers++;
-    }
-    return correctAnswers;
+//    float accu;
+//    PFQuery *accuracyQuery = [PFQuery queryWithClassName:@"Question"];
+//    [accuracyQuery whereKey:@"user" equalTo: [PFUser currentUser]];
+//    return accu;
+    // can filter the questions for answeredCorrectly!
 }
 
 # pragma mark - WIBScoringDelegate
@@ -296,24 +218,21 @@
     self.totalCorrectAnswers++;
     self.totalAnswers++;
     
-    WIBGameQuestion *question = self.gameQuestions[self.questionIndex];
-    question.points = round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * question.answerTime / SECONDS_PER_QUESTION));
+    [self.gameRound questionAnsweredCorrectly];
 }
 
 - (void)didAnswerQuestionIncorrectly
 {
     self.currentStreak = 0;
     self.totalAnswers++;
-    WIBGameQuestion *question = self.gameQuestions[self.questionIndex];
-    question.points = 0;
+    [self.gameRound questionAnsweredInCorrectly];
 }
 
 - (void)didFailToAnswerQuestion
 {
     self.currentStreak = 0;
     self.totalAnswers++;
-    WIBGameQuestion *question = self.gameQuestions[self.questionIndex];
-    question.points = 0;
+    [self.gameRound questionAnsweredInCorrectly];
 }
 
 @end

@@ -22,8 +22,18 @@
 
 - (void)longPressDetected:(UILongPressGestureRecognizer *)sender
 {
-    [self.popDelegate popButtonPressed];
-    self.longPressed = YES;
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"Long press Ended");
+        [self.popDelegate popButtonLetGo];
+        CGPoint touchPoint = [sender locationInView:self];
+        if (CGRectContainsPoint(self.bounds, touchPoint)) {
+            if (self.userInteractionEnabled) {
+                [self.delegate optionWasSelected:self];
+            }
+        }
+    } else if (sender.state == UIGestureRecognizerStateBegan) {
+        [self.popDelegate popButtonPressed];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -40,10 +50,6 @@
         }
     }
     
-    if(self.longPressed) {
-        [self.popDelegate popButtonLetGo];
-        self.longPressed = NO;
-    }
     [super touchesEnded:touches withEvent:event];
 }
 

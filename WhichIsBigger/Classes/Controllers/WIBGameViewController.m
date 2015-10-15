@@ -91,7 +91,7 @@
 - (void)configureBackground
 {
     self.nextButton.alpha = 0.0;
-    self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex+1, NUMBER_OF_QUESTIONS];
+    self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionNumber+1, NUMBER_OF_QUESTIONS];
 }
 
 - (IBAction)nextButtonPressed:(id)sender
@@ -101,7 +101,7 @@
     self.nextButton.enabled = NO;
     self.nextButton.alpha = 0.0;
     self.questionView.comparsionSymbol.hidden = YES;
-    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS-1)
+    if([WIBGamePlayManager sharedInstance].questionNumber == NUMBER_OF_QUESTIONS)
     {    
         [[WIBGamePlayManager sharedInstance] endGame];
         [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
@@ -112,7 +112,7 @@
          ^(BOOL finished){
             self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
             [self.questionView refreshWithQuestion:self.question];
-            self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionIndex, NUMBER_OF_QUESTIONS];
+            self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionNumber, NUMBER_OF_QUESTIONS];
             [self.questionView startQuestionEntranceAnimationWithCompletion:
              ^(BOOL finished){}];
             [self resumeLayer:self.timerBar.layer];
@@ -151,7 +151,7 @@
         self.timer = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
-        if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+        if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS)
         {
             [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
             [self.nextButton sizeToFit];
@@ -190,7 +190,7 @@
 {
     self.tapRecognizer.enabled = YES;
     
-    if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+    if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS)
     {
         [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
         self.nextButton.enabled = YES;
@@ -209,7 +209,7 @@
     
     [UIView animateWithDuration:0.2 animations:revealButton completion:^(BOOL finished){
         self.nextButton.enabled = YES;
-        if([WIBGamePlayManager sharedInstance].questionIndex == NUMBER_OF_QUESTIONS)
+        if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS)
         {
             self.nextButtonParentView.type = CSAnimationTypePop;
             self.nextButtonParentView.delay = 0.2;

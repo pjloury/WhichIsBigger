@@ -162,11 +162,11 @@
 {
     PFObject *gameQuestion = [PFObject objectWithClassName:@"Question"];
     
-    [gameQuestion setObject:@([WIBGamePlayManager sharedInstance].questionIndex) forKey:@"questionNumber"];
+    [gameQuestion setObject:@([WIBGamePlayManager sharedInstance].gameRound.questionIndex) forKey:@"questionNumber"];
     [gameQuestion setObject:self.questionType.name forKey:@"quesetionType"];
     [gameQuestion setObject:@(self.answeredCorrectly) forKey:@"answeredCorrectly"];
     [gameQuestion setObject:@(self.answerTime) forKey:@"answerTime"];
-    [gameQuestion setObject:[WIBGamePlayManager sharedInstance].roundUUID forKey:@"roundUUID"];
+    [gameQuestion setObject:[WIBGamePlayManager sharedInstance].gameRound.roundUUID forKey:@"roundUUID"];
     [gameQuestion setObject:@(self.points) forKey:@"points"];
     
     [gameQuestion setObject:@(self.option1.multiplier) forKey:@"multiplier1"];

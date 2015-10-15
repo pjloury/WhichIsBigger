@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet WIBOptionView *optionView1;
 @property (nonatomic, strong) IBOutlet WIBOptionView *optionView2;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *pointsLabel;
 
 @property (nonatomic, weak) id<WIBScoringDelegate> scoringDelegate;
 
@@ -96,14 +97,15 @@
     optionView.type = CSAnimationTypePop;
     optionView.duration = 0.5;
     
-    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.25];
+    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.75];
+    //popAnimation
 }
 
 - (void)animateIncorrectOptionView:(WIBOptionView *)optionView
 {
     optionView.type = CSAnimationTypeShake;
     optionView.duration = 0.5;
-    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.25];
+    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.4];
 }
 
 # pragma mark - WIBQuestionViewDelegate
@@ -121,6 +123,7 @@
         [optionView correctResponse];
         [self animateCorrectOptionView:optionView];
         [self.scoringDelegate didAnswerQuestionCorrectly];
+        [self animatePointsView];
     }
     else
     {
@@ -176,6 +179,11 @@
 //    {
 //        self.comparsionSymbol.text = @"<";
 //    }
+}
+
+- (void)animatePointsView
+{
+    
 }
 
 - (void)revealAnswer

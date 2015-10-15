@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WIBGameRound.h"
 
 @protocol WIBScoringDelegate
 - (void)didAnswerQuestionCorrectly;
@@ -23,26 +24,26 @@
 - (void)setupGamePlay;
 - (void)beginGame;
 - (void)endGame;
+- (NSUInteger)score;
 - (WIBGameQuestion *)nextGameQuestion;
 
-- (NSInteger)numberCorrectAnswers;
-
-@property (readonly) NSInteger questionIndex;
-@property (readonly) NSString *roundUUID;
 @property (nonatomic) NSMutableArray *questionTypes;
+@property (nonatomic, readonly) WIBGameRound *gameRound;
+@property (nonatomic, assign, readonly) NSUInteger questionNumber;
+
+
 @property (nonatomic, assign) double questionCeiling;
 @property (nonatomic, assign) double questionFloor;
 @property (nonatomic, assign) double skewFactor;
-@property (nonatomic, strong) NSMutableSet *usedNames;
 @property (nonatomic, assign) BOOL localStorage;
 
-@property (nonatomic, strong, readonly) NSMutableArray *gameQuestions;
-@property (nonatomic, assign, readonly) NSInteger score;
 @property (nonatomic, assign, readonly) NSInteger highScore;
 @property (nonatomic, assign, readonly) NSInteger currentStreak;
 @property (nonatomic, assign, readonly) NSInteger longestStreak;
 @property (nonatomic, assign, readonly) NSUInteger totalCorrectAnswers;
 @property (nonatomic, assign, readonly) NSUInteger totalAnswers;
 @property (nonatomic, assign, readonly) float accuracy;
+
+@property (nonatomic, assign, readonly) NSUInteger level;
 
 @end

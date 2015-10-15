@@ -19,6 +19,33 @@ typedef enum : NSUInteger {
 
 @interface WIBTutorialPageViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
+// Welcome to Which is Bigger? The game where you compare the size of anyone and anything!
+// Rules
+// 1.
+// 2. Have fun!
+
+// Medium
+//
+
+// As you swipe, the options slide in from left and right
+// 0. Welcome to Which is Bigger? The game where you compare the size of anyone and anything! "Swipe to Get Started" CTA on bottom right
+// 1. "Choose which is bigger before the timer bar runs out!" (highlight uptions, then timer bar?
+// 2. "The quicker you respond, the more points you'll earn!"
+// 3. "Level up to unlock more categories!"
+// 4. "Connect to Facebook to challenge friends and compare scores!"
+
+//
+
+// Who is Taller?
+// Which has more People?
+// Who is Older?
+// Which is Taller?
+
+// Tap on an item
+
+// Answer Quickly to Earn more points!
+//
+
 
 
 @end
@@ -33,6 +60,8 @@ typedef enum : NSUInteger {
     WIBTutorialViewController *vc = [self viewControllerAtIndex:0];
     NSArray *viewControllers = @[vc];
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

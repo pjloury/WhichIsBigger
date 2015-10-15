@@ -25,6 +25,7 @@
 - (void)configureViews;
 - (void)animateTimeOutLarger;
 - (void)animateTimeOutSmaller;
+- (void)popAnimation;
 
 @end
 

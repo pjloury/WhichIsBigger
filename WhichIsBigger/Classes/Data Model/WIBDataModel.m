@@ -42,7 +42,7 @@
 
 - (BOOL)itemNameAlreadyUsed:(NSString *)name
 {
-    return [[WIBGamePlayManager sharedInstance].usedNames containsObject:name];
+    return [[WIBGamePlayManager sharedInstance].gameRound.usedNames containsObject:name];
 }
 
 - (WIBGameItem*)firstGameItemForCategory:(NSString *)category
@@ -54,7 +54,7 @@
     
     if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.photoURL.length > 0 && gameItem.isSupported)
     {
-        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+        [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
     }
     else
@@ -89,7 +89,7 @@
     if(![self itemNameAlreadyUsed:gameItem.name] &&
        [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough && gameItem.photoURL.length > 0 && gameItem.isSupported)
     {
-        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+        [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
     }
     else
@@ -124,7 +124,7 @@
     if(![self itemNameAlreadyUsed:gameItem.name] &&
        [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.photoURL.length > 0 && gameItem.isSupported)
     {
-        [[WIBGamePlayManager sharedInstance].usedNames addObject:gameItem.name];
+        [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);
         return gameItem;
     }

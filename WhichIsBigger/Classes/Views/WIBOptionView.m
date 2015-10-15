@@ -44,7 +44,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self.popButton action:@selector(longPressDetected:)];
-    longPressRecognizer.minimumPressDuration = 0.2;
+    longPressRecognizer.minimumPressDuration = 0.4;
     longPressRecognizer.allowableMovement = 50.0f;
     [self.popButton addGestureRecognizer:longPressRecognizer];
     self.popButton.delegate = self;
@@ -133,6 +133,12 @@
 - (void)optionWasSelected:(id)sender
 {
     [self.delegate optionView:self didSelectOption:self.gameOption];
+}
+
+- (void)popAnimation
+{
+    [self popButtonPressed];
+    [self performSelector:@selector(popButtonLetGo) withObject:nil afterDelay:0.2];
 }
 
 # pragma mark - Pop Button Delegate

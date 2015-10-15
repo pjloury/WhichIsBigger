@@ -149,7 +149,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    WIBGameQuestion *question = [WIBGamePlayManager sharedInstance].gameQuestions[indexPath.row];
+    WIBGameQuestion *question = [WIBGamePlayManager sharedInstance].gameRound.gameQuestions[indexPath.row];
     NSString *imageName = question.answeredCorrectly ? @"greenCheck" : @"redX";
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"answer" forIndexPath:indexPath];

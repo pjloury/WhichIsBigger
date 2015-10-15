@@ -38,29 +38,9 @@
     {
         [PFConfig getConfig];
     }
-
+    // TODO: Use promises here
     if (completion)
         completion();
-//    if ([self.reachability isReachable])
-//    {
-//        [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
-//            if (!error) {
-//                NSLog(@"Yay! Config was fetched from the server.");
-//            } else {
-//                NSLog(@"Failed to fetch. Using Cached Config.");
-//            }
-//            
-//            if (completion) {
-//                completion();
-//            }
-//        }];
-//    }
-//    else {
-//        if (completion)
-//        {
-//            completion();
-//        }
-//    }
 }
 
 - (void)getCategoriesWithCompletion:(void (^)())completion
