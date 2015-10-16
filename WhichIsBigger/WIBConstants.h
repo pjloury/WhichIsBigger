@@ -17,7 +17,7 @@
 // Game Play Constants
 #define NUMBER_OF_QUESTIONS 5
 #define SECONDS_PER_QUESTION 5
-#define POINTS_PER_QUESTION 40
+#define POINTS_PER_QUESTION 200
 
 // Data Model Constants
 #define GAME_ITEM_FETCH_LIMIT 1000

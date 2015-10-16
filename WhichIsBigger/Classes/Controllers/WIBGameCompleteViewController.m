@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet WIBPopButton *playAgainButton;
 @property (weak, nonatomic) IBOutlet WIBPopButton *challengeAFriendButton;
 @property (weak, nonatomic) NSTimer *scoreLabelTimer;
+// Level View (have a Circle Grow)
+//@property (weak,nonatomic) IBOutlet WIBLevelUpView *levelUpView;
 @property (assign, nonatomic) NSInteger incrementedScore;
 
 @end
@@ -38,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.incrementedScore = 0;
+    _incrementedScore = 0;
     self.streakLabel.hidden = YES;
     self.scoreLabel.text = @"";
     self.highScoreLabel.hidden = YES;
@@ -53,10 +55,10 @@
 
 - (void)incrementScore
 {
-    if (self.incrementedScore < [WIBGamePlayManager sharedInstance].score)
+    if (_incrementedScore < [WIBGamePlayManager sharedInstance].score)
     {
-        self.incrementedScore++;
-        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
+        _incrementedScore++;
+        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)_incrementedScore];
     }
     else
     {
@@ -69,7 +71,7 @@
 {
     if([WIBGamePlayManager sharedInstance].score == [WIBGamePlayManager sharedInstance].highScore)
     {
-        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)self.incrementedScore];
+        self.scoreLabel.text = [NSString stringWithFormat:@"Total Score: %ld",(long)_incrementedScore];
         self.highScoreLabel.hidden = NO;
         [self throbHighScoreLabel];
     }

@@ -65,7 +65,12 @@
 {
     [self adjustDifficulty];
     NSNumber *lifeTimeScore = [[PFUser currentUser] objectForKey:@"lifeTimeScore"];
-    [[PFUser currentUser] setObject:@(lifeTimeScore.integerValue + self.score) forKey:@"lifeTimeScore"];
+    lifeTimeScore = @(lifeTimeScore.integerValue + self.score);
+    
+    NSInteger currentLevelPoints = lifeTimeScore.integerValue % 10000;
+    NSInteger level = lifeTimeScore.integerValue / 10000;
+    
+    [[PFUser currentUser] setObject:lifeTimeScore forKey:@"lifeTimeScore"];
     [[PFUser currentUser] saveInBackground];
     
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])

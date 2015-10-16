@@ -47,6 +47,7 @@
     
     self.scoringDelegate = [WIBGamePlayManager sharedInstance];
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
+    self.pointsLabel.alpha = 0.0;
 }
 
 - (void)refreshWithQuestion:(WIBGameQuestion *)question
@@ -82,6 +83,7 @@
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
+        self.pointsLabel.alpha = 0.0;
     } completion:^(BOOL finished){
         self.optionView1.transform = CGAffineTransformMakeTranslation(0, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(0, 0);
@@ -106,6 +108,13 @@
     optionView.type = CSAnimationTypeShake;
     optionView.duration = 0.5;
     [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.4];
+}
+
+- (void)animatePointsView
+{
+    self.pointsLabel.text = [NSString stringWithFormat:@"+ %ld points!", self.question.points];
+    self.pointsLabel.alpha = 1.0;
+    [self.pointsLabel startCanvasAnimation];
 }
 
 # pragma mark - WIBQuestionViewDelegate
@@ -179,11 +188,6 @@
 //    {
 //        self.comparsionSymbol.text = @"<";
 //    }
-}
-
-- (void)animatePointsView
-{
-    
 }
 
 - (void)revealAnswer
