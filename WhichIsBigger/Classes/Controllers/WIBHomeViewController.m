@@ -12,7 +12,7 @@
 #import "WIBNetworkManager.h"
 #import "WIBLoginViewController.h"
 
-@interface WIBHomeViewController()<PFLogInViewControllerDelegate>
+@interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @property (weak, nonatomic) IBOutlet UIButton *highScoresButton;
 @property (weak, nonatomic) IBOutlet UILabel *footerLabel;
@@ -127,5 +127,22 @@
     [[WIBGamePlayManager sharedInstance] beginGame];
     [self performSegueWithIdentifier:@"newGameSegue" sender:self];
 }
+
+- (IBAction)didPressHighScoresButton:(id)sender {
+//    if (![GKLocalPlayer localPlayer].isAuthenticated) {
+        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+        gcViewController.gameCenterDelegate = self;
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = @"highScore";
+        [self presentViewController:gcViewController animated:YES completion:nil];
+//    }
+}
+
+#pragma mark - Game Center Delegate
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

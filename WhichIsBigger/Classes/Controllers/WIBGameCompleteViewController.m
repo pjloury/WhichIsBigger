@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad
 {
-    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
+    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

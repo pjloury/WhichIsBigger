@@ -100,7 +100,7 @@
     optionView.duration = 0.5;
     
     [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.75];
-    //popAnimation
+    // TODO: Need a way to queue the exit animation immediately after this is complete.
 }
 
 - (void)animateIncorrectOptionView:(WIBOptionView *)optionView
@@ -108,6 +108,7 @@
     optionView.type = CSAnimationTypeShake;
     optionView.duration = 0.5;
     [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.4];
+    // TODO: Need a way to queue the exit animation immediately after this is complete.
 }
 
 - (void)animatePointsView

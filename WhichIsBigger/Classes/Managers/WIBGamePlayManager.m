@@ -14,6 +14,7 @@
 #import "WIBGameOption.h"
 #import "WIBGameItem.h"
 
+#import "AppDelegate.h"
 
 @interface WIBGamePlayManager()
 
@@ -23,6 +24,7 @@
 @property (nonatomic, assign) NSInteger longestStreak;
 @property (nonatomic, assign) NSUInteger level;
 @property (nonatomic) NSString *roundUUID;
+
 
 @end
 
@@ -55,6 +57,19 @@
 }
 
 # pragma mark - Game State
+- (void)authenticateGameKitUser
+{
+    if ([GKLocalPlayer localPlayer].isAuthenticated == NO) {
+        [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController * viewController, NSError *error){
+            if (viewController)
+            {
+                AppDelegate *del = [UIApplication sharedApplication].delegate;
+                [del.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+            }
+            
+        };
+    }
+}
 
 - (void)beginGame
 {
@@ -114,6 +129,7 @@
 {
     self.highScore = ((NSNumber *)[[PFUser currentUser] objectForKey:@"highScore"]).integerValue;
     self.longestStreak = ((NSNumber *)[[PFUser currentUser] objectForKey:@"longestStreak"]).integerValue;
+    [self authenticateGameKitUser];
 }
 
 - (WIBGameQuestion *)nextGameQuestion
@@ -126,6 +142,14 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
     [[PFUser currentUser] setObject:@(highScore) forKey:@"highScore"];
     [[PFUser currentUser] saveInBackground];
+    GKScore *gameKitHighScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"highScore"];
+    gameKitHighScore.value = highScore;
+    
+    [GKScore reportScores:@[gameKitHighScore] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 - (NSInteger)highScore
@@ -154,6 +178,13 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(longestStreak) forKey:@"longestStreak"];
     [[PFUser currentUser] setObject:@(longestStreak) forKey:@"longestStreak"];
     [[PFUser currentUser] saveInBackground];
+    GKScore *gameKitLongestStreak = [[GKScore alloc] initWithLeaderboardIdentifier:@"longestStreak"];
+    gameKitLongestStreak.value = longestStreak;
+    [GKScore reportScores:@[gameKitLongestStreak] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 - (NSInteger)longestStreak

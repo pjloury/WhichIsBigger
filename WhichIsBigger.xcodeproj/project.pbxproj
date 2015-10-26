@@ -21,6 +21,7 @@
 		60621C4D1BD04BE000C8207E /* WIBHighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C4C1BD04BE000C8207E /* WIBHighScoresViewController.m */; settings = {ASSET_TAGS = (); }; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
 		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
+		60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B43E101BD7631200E9F604 /* GameKit.framework */; };
 		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
 		60D39B861BC24D51008E06EF /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D39B851BC24D51008E06EF /* SidebarTableViewController.m */; };
 		60D39B891BC24D60008E06EF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D39B881BC24D60008E06EF /* SWRevealViewController.m */; };
@@ -95,6 +96,7 @@
 		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
 		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
 		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60B43E101BD7631200E9F604 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
 		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
 		60D39B841BC24D51008E06EF /* SidebarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTableViewController.h; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */,
 				601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */,
 				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
+				60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */,
 				7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */,
 				9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */,
 			);
@@ -275,6 +278,7 @@
 		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				60B43E101BD7631200E9F604 /* GameKit.framework */,
 				60A125BF1BB13C0100563331 /* SystemConfiguration.framework */,
 				601172941BA6A19E00EE8182 /* AVFoundation.framework */,
 				60D811691BA4262800B2DA78 /* QuartzCore.framework */,
@@ -469,6 +473,14 @@
 					7D0CC6E41AD4E7D400BB65BB = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = D2GRT69L42;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					7D0CC6FD1AD4E7D400BB65BB = {
 						CreatedOnToolsVersion = 6.1.1;
