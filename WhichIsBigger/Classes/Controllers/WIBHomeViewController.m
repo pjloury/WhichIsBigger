@@ -34,13 +34,6 @@
     self.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     self.startNewGameButton.enabled = NO;
     
-//    [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
-//        dispatch_async(dispatch_get_main_queue(),
-//                       ^{
-//                           self.startNewGameButton.userInteractionEnabled = YES;
-//                       });
-//    }];
-    
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
@@ -77,8 +70,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self _facebookAuth];
-    [self _scrapeFacebook];
+//    [self _facebookAuth];
+//    [self _scrapeFacebook];
 }
 
 - (IBAction)didPressLoginButton:(id)sender
@@ -169,6 +162,5 @@
 {
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 @end
