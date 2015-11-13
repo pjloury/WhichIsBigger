@@ -66,6 +66,10 @@
                 AppDelegate *del = [UIApplication sharedApplication].delegate;
                 [del.window.rootViewController presentViewController:viewController animated:YES completion:nil];
             }
+            if(!error)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GameCenterDidFinishAuthentication" object:nil];
+            }
             
         };
     }

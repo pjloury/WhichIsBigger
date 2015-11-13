@@ -324,11 +324,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-uj-BHA" userLabel="Timer Bar">
-                                <rect key="frame" x="0.0" y="8" width="600" height="10"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="10"/>
                                 <color key="backgroundColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="0.51000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="At1-Hp-Eb8"/>
@@ -337,6 +337,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Mst-jp-FMI"/>
                                         <exclude reference="Twt-GC-TT1"/>
                                     </mask>
                                 </variation>
@@ -347,7 +348,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5F-Qh-xty" customClass="WIBQuestionView">
-                                <rect key="frame" x="20" y="10" width="560" height="526"/>
+                                <rect key="frame" x="20" y="74" width="560" height="526"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-G8-lyv" userLabel="Option View1" customClass="WIBOptionView">
                                         <rect key="frame" x="20" y="183" width="200" height="200"/>
@@ -626,7 +627,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which is Bigger?" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxb-Kc-J3H">
-                                        <rect key="frame" x="25" y="38" width="510" height="50"/>
+                                        <rect key="frame" x="25" y="20" width="510" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="MZK-kD-lbC"/>
                                             <constraint firstAttribute="height" constant="50" id="in2-Kp-2b6">
@@ -842,13 +843,14 @@
                             <constraint firstItem="w9N-It-9yp" firstAttribute="top" secondItem="4cV-uj-BHA" secondAttribute="bottom" constant="15" id="UNx-eP-7gd"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="G5F-Qh-xty" secondAttribute="bottom" id="VKa-KO-tTT"/>
                             <constraint firstAttribute="trailing" secondItem="4cV-uj-BHA" secondAttribute="trailing" id="c9O-05-F12"/>
-                            <constraint firstItem="oxb-Kc-J3H" firstAttribute="top" secondItem="4cV-uj-BHA" secondAttribute="bottom" constant="30" id="d95-5w-Q0E">
+                            <constraint firstItem="oxb-Kc-J3H" firstAttribute="top" secondItem="4cV-uj-BHA" secondAttribute="bottom" constant="20" id="d95-5w-Q0E">
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
+                            <constraint firstItem="4cV-uj-BHA" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="e32-BT-teT"/>
                             <constraint firstAttribute="centerX" secondItem="G5F-Qh-xty" secondAttribute="centerX" id="h4b-Hq-3nl"/>
                             <constraint firstAttribute="width" secondItem="G5F-Qh-xty" secondAttribute="width" id="rXX-OX-Byo"/>
                             <constraint firstAttribute="centerY" secondItem="G5F-Qh-xty" secondAttribute="centerY" id="sbi-4x-hIe"/>
-                            <constraint firstItem="4cV-uj-BHA" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="wSR-WS-ehL" userLabel="Vertical Space - View - Top Layout Guide">
+                            <constraint firstItem="4cV-uj-BHA" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="wSR-WS-ehL" userLabel="Vertical Space - View - Top Layout Guide">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="height" secondItem="G5F-Qh-xty" secondAttribute="height" id="xPh-h4-W7z"/>
@@ -856,20 +858,22 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="173-rQ-TTI"/>
+                                <exclude reference="CGg-WZ-Tnh"/>
+                                <exclude reference="S2w-aj-5nr"/>
+                                <exclude reference="c9O-05-F12"/>
                                 <exclude reference="GXR-Zj-Z71"/>
                                 <exclude reference="h4b-Hq-3nl"/>
                                 <exclude reference="rXX-OX-Byo"/>
                                 <exclude reference="sbi-4x-hIe"/>
                                 <exclude reference="xPh-h4-W7z"/>
-                                <exclude reference="173-rQ-TTI"/>
-                                <exclude reference="CGg-WZ-Tnh"/>
-                                <exclude reference="S2w-aj-5nr"/>
-                                <exclude reference="c9O-05-F12"/>
                                 <exclude reference="UNx-eP-7gd"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
+                                <exclude reference="173-rQ-TTI"/>
+                                <include reference="CGg-WZ-Tnh"/>
                                 <exclude reference="8Av-yV-63t"/>
                                 <exclude reference="CAA-wy-ZoU"/>
                                 <include reference="GXR-Zj-Z71"/>
@@ -878,8 +882,6 @@
                                 <include reference="sbi-4x-hIe"/>
                                 <exclude reference="xPh-h4-W7z"/>
                                 <exclude reference="zsX-qL-zV9"/>
-                                <exclude reference="173-rQ-TTI"/>
-                                <include reference="CGg-WZ-Tnh"/>
                                 <exclude reference="VKa-KO-tTT"/>
                             </mask>
                         </variation>
@@ -891,8 +893,7 @@
                         <outlet property="questionNumberLabel" destination="w9N-It-9yp" id="s4V-II-lkR"/>
                         <outlet property="questionView" destination="G5F-Qh-xty" id="7Vj-W4-JDp"/>
                         <outlet property="timerBar" destination="4cV-uj-BHA" id="hNE-Y7-yTZ"/>
-                        <outlet property="timerBarWidth" destination="CGg-WZ-Tnh" id="8pa-hU-7cj"/>
-                        <outlet property="timerBarWidth2" destination="CGg-WZ-Tnh" id="Y0O-cp-ZIJ"/>
+                        <outlet property="timerBarWidth" destination="e32-BT-teT" id="6Zy-Sn-NTc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -1876,7 +1877,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Svu-pW-oA0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1kT-9j-yXu">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="obP-Mc-mfN" userLabel="CSAnimationView" customClass="CSAnimationView">
@@ -2372,6 +2373,9 @@
                                 <exclude reference="keu-jl-QSC"/>
                                 <exclude reference="oFp-RH-ycR"/>
                                 <exclude reference="ykd-Na-fFl"/>
+                                <exclude reference="Bm5-Ts-lj1"/>
+                                <exclude reference="O28-9w-JM7"/>
+                                <exclude reference="P31-CQ-VIZ"/>
                                 <exclude reference="3kR-cH-SzE"/>
                                 <exclude reference="7cP-LQ-gwX"/>
                                 <exclude reference="B2k-yt-rt2"/>
@@ -2384,9 +2388,6 @@
                                 <exclude reference="igN-q0-YEx"/>
                                 <exclude reference="oIH-yF-0lp"/>
                                 <exclude reference="pfF-zc-Ya5"/>
-                                <exclude reference="Bm5-Ts-lj1"/>
-                                <exclude reference="O28-9w-JM7"/>
-                                <exclude reference="P31-CQ-VIZ"/>
                                 <exclude reference="Ba3-pf-Fwg"/>
                                 <exclude reference="dkk-bp-HYw"/>
                                 <exclude reference="iK7-JP-RfB"/>
@@ -2434,6 +2435,11 @@
                                 <exclude reference="keu-jl-QSC"/>
                                 <include reference="oFp-RH-ycR"/>
                                 <exclude reference="ykd-Na-fFl"/>
+                                <exclude reference="Bm5-Ts-lj1"/>
+                                <include reference="O28-9w-JM7"/>
+                                <exclude reference="Stc-99-DtT"/>
+                                <exclude reference="g08-az-y9m"/>
+                                <exclude reference="xz7-LO-IBX"/>
                                 <exclude reference="3kR-cH-SzE"/>
                                 <exclude reference="7cP-LQ-gwX"/>
                                 <exclude reference="CgR-GF-TD5"/>
@@ -2445,11 +2451,6 @@
                                 <exclude reference="dKw-zx-WCA"/>
                                 <include reference="igN-q0-YEx"/>
                                 <include reference="pfF-zc-Ya5"/>
-                                <exclude reference="Bm5-Ts-lj1"/>
-                                <include reference="O28-9w-JM7"/>
-                                <exclude reference="Stc-99-DtT"/>
-                                <exclude reference="g08-az-y9m"/>
-                                <exclude reference="xz7-LO-IBX"/>
                                 <exclude reference="13a-Dq-8Xw"/>
                                 <include reference="Ba3-pf-Fwg"/>
                                 <exclude reference="FuW-US-noC"/>
@@ -2511,7 +2512,7 @@
         <image name="smallQuestionMark" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2o8-4F-rux"/>
         <segue reference="c21-9P-Xai"/>
+        <segue reference="Rpg-X4-sLs"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -60,7 +60,6 @@
     [self configureBackground];
     
     self.navigationItem.hidesBackButton = YES;
-    self.width = self.view.frame.size.width;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -126,7 +125,6 @@
 
     self.timerBarWidth.constant = -self.view.frame.size.width;
     [UIView animateWithDuration:SECONDS_PER_QUESTION delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished){}];
 

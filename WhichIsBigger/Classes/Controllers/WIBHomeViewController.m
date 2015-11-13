@@ -51,11 +51,32 @@
             }];
         }];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHighScore) name:@"GameCenterDidFinishAuthentication" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self updateHighScore];
+}
+
+- (void)updateHighScore
+{
+    if (![GKLocalPlayer localPlayer].isAuthenticated) {
+        self.highScoresButton.hidden = YES;
+        self.highScoresBackground.hidden = YES;
+        self.highScoresUnderscore.hidden = YES;
+    }
+    else {
+        self.highScoresButton.hidden = NO;
+        self.highScoresBackground.hidden = NO;
+        self.highScoresUnderscore.hidden = NO;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     [self _facebookAuth];
     [self _scrapeFacebook];
 }
@@ -130,7 +151,7 @@
 
 - (IBAction)didPressHighScoresButton:(id)sender {
 
-    if (![GKLocalPlayer localPlayer].isAuthenticated) {
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
         GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
         gcViewController.gameCenterDelegate = self;
         gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
