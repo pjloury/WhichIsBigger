@@ -3,12 +3,12 @@
 
 from xml.etree import cElementTree as ElementTree
 import urllib2,urllib
-import os
-import pickle
+# import os
+# import pickle
 import argparse
 import re
 import csv
-import sys
+# import sys
 import time
 
 from parse_rest.connection import register
@@ -27,6 +27,7 @@ __person_height_re = re.compile(r"""(\d+)\'\s+(\d+)""")
 
 __population_re = re.compile(r"""([0-9.]+)\s+(\w+)\s+people""")
 
+__number_re = re.compile(r"""([0-9.]+)\s+(\S+)""")
 
 __weight_re = re.compile("""(.*)\s+(lb)""")
 
@@ -52,7 +53,7 @@ class Enum(set):
             return name
         raise AttributeError
 
-Category = Enum(["age", "weight", "height", "population", "none"])
+Category = Enum(["age", "weight", "height", "population", "image", "none"])
 
 query_string = ""
 multiple_query_string = ""
@@ -60,8 +61,7 @@ multiple_query_string = ""
 pickled_objects = []
 PICKLE_FILE = './Data/objects.pkl'
 
-def correct():
-    print "In the 'correct' method"
+def fix_urls():
     all_items = GameItem.Query.all()
 
     for item in all_items:
@@ -105,16 +105,13 @@ def main():
                        help='name of the object')
     parser.add_argument('--csv', type=file, dest='csvfile',
                        help='csv file to parse')
+    parser.add_argument('--query', dest='query',
+                       help='optional generic query')
+
 
     args = parser.parse_args()
     
     print args
-
-    # category = sys.argv[1]
-    #
-    # MODE = sys.argv[2]
-    #
-    # OBJECT = " ".join(sys.argv[3:])
 
     QUERY_STRINGS = {"age":'%s birthday',"weight":'%s weight',"height":'%s height',"none":'%s',"population":'%s population'}
     MULTIPLE_QUERY_STRINGS = {"age":'oldest %s',"weight":'heaviest %s',"height":'tallest %s',"none":'%s',"population":"none"}
@@ -128,6 +125,13 @@ def main():
         OBJECT = ' '.join(args.object)
     csvfile = args.csvfile
 
+    GENERIC_QUERY = ''
+
+    if args.query:
+        GENERIC_QUERY = args.query
+
+
+    #parse a csv file for entities to query
     if csvfile:
 
         print "loading csv"
@@ -141,6 +145,7 @@ def main():
 
             OBJECT = row[0]
             TAGS = row[1]
+            QUERY = row[2].lower()
 
             #check for existing parse entry
             exists = GameItem.Query.all().filter(name=OBJECT)
@@ -166,27 +171,48 @@ def main():
 
                 categories = ["height"]
 
-            elif "country" in TAGS:
+            elif "country" in TAGS or "city" in TAGS or "state" in TAGS:
 
                 categories = ["population"]
 
-            elif "city" in TAGS:
+            elif "height" in TAGS:
+
+                categories = ["height"]
+
+            elif "weight" in TAGS:
+
+                categories = ["weight"]
+
+            elif "age" in TAGS:
+
+                categories = ["age"]
+
+            elif "population" in TAGS:
 
                 categories = ["population"]
 
-            elif "state" in TAGS:
+            else:
 
-                categories = ["population"]
+                # ValueError('No category found')
+                categories = TAGS
 
             for CATEGORY in categories:
 
                 #gracefully catch exception and move to next query
                 try:
-                    query_string = QUERY_STRINGS[CATEGORY]
+
+                    if not QUERY:
+                        query_string = QUERY_STRINGS[CATEGORY]
+                    else:
+                        query_string = "%s " + QUERY
+
                     single_query(OBJECT,CATEGORY,TAGS)
-                except:
+
+                except Exception as e:
+                    print e
                     pass
 
+    #else query manually
     elif category and MODE and OBJECT:
 
         if category == "age":
@@ -197,21 +223,27 @@ def main():
             CATEGORY = Category.height
         elif category == "population":
             CATEGORY = Category.population
-        elif category == "none":
+        elif category == "image":
+            CATEGORY = Category.image
+        else:
             CATEGORY = Category.none
 
         #query_string = %s string
-        query_string = QUERY_STRINGS[category]
-        multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
 
-        #what is multiple vs aggregate?
-        if MODE == "multiple":
-            objects = collection_query(OBJECT)
+        if GENERIC_QUERY:
+            query_string = "%s " + GENERIC_QUERY
+        else:
+            query_string = QUERY_STRINGS[category]
+            multiple_query_string = MULTIPLE_QUERY_STRINGS[category]
+
+        #Collection: eg. tallest buildings, tallest mountains
+        if MODE == "collection":
+            objects = get_list_of_results(OBJECT)
 
             for obj in objects:
                 single_query(obj,CATEGORY)
 
-        #aggregate -> get age and height for specificed object
+        #aggregate -> get multiple attributes for the object
         elif MODE == "aggregate":
 
             for CATEGORY in ["age","weight","height"]:
@@ -219,13 +251,23 @@ def main():
                 single_query(OBJECT,CATEGORY)
 
         else:
+
             single_query(OBJECT,CATEGORY)
 
     else:
         raise ValueError('Please refer to commandline arguments')
 
-#
-def collection_query(TOPIC):
+"""
+get_list_of_results
+
+returns the list of entities that matches the TOPIC
+
+e.g. tallest buildings, tallest mountains
+
+currently there is no check if such a list of entities is valid/returned by the query
+
+"""
+def get_list_of_results(TOPIC):
 
     QUERY = multiple_query_string % TOPIC
 
@@ -250,6 +292,13 @@ def collection_query(TOPIC):
 
     return results
 
+
+"""
+get_topic
+attempts to find the topic for a given XML root 
+returns a string representing the topic
+
+"""
 
 def get_topic(root):
 
@@ -306,6 +355,171 @@ def image_query(object):
         return None
 
 
+
+def parse_age(QUERY,root):
+    
+    value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
+
+    if "month/day/year" in value:
+
+        m = __birthday_re.match(value)
+
+        if m:
+            QUANTITY = m.group(1)
+
+            #convert scientifc notation to number
+            QUANTITY = int(time.mktime(time.strptime(QUANTITY, pattern)))
+
+            UNIT = "date"
+
+            return (QUANTITY,UNIT)
+
+        else:
+            raise NameError('No match for birthday query')
+
+    else:
+        raise NameError('No results found for query: %s' % QUERY)
+
+
+def parse_population(QUERY,root):
+
+    value = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+
+    if "people" in value:
+
+        m = __population_re.match(value)
+
+        if m:
+            QUANTITY = float(m.group(1))
+
+            modifier = m.group(2)
+
+            if modifier == "million":
+                QUANTITY = QUANTITY*float(10**6)
+            elif modifier == "billion":
+                QUANTITY = QUANTITY*float(10**9)
+
+            #convert scientifc notation to number
+            UNIT = "people"
+
+            return (QUANTITY,UNIT)
+
+        else:
+            raise NameError('No match for population query')
+
+    else:
+        raise NameError('No results found for query: %s' % QUERY)
+
+
+
+def parse_height(QUERY,root):
+
+    result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+    print result
+
+    m = __person_height_re.match(result)
+
+    if m:
+        QUANTITY = int(m.group(1))*12 + int(m.group(2))
+
+        UNIT = "inches"
+
+        return (QUANTITY,UNIT)
+
+    else:
+
+        subpods = root.find("./pod[@title='Unit conversions']")
+
+        if subpods:
+            for subpod in subpods:
+                value = subpod.find('plaintext').text
+
+                if " meters" in value:
+
+                    m = __height_re.match(value)
+
+                    if m:
+                        QUANTITY = m.group(1)
+
+                        #convert scientifc notation to number
+                        QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
+
+                        UNIT = m.group(2)
+                        return (QUANTITY,UNIT)
+
+                    else:
+                        raise NameError('No match for height query')
+
+        else:
+            raise NameError('No results found for query: %s' % QUERY)
+
+        raise NameError('No match for height query')
+
+
+def parse_weight(QUERY,root):
+
+    result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+
+    m = __weight_re.match(result)
+
+    if m:
+        QUANTITY = m.group(1)
+
+        #convert scientifc notation to number
+        QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
+
+        UNIT = m.group(2)
+
+        return (QUANTITY,UNIT)
+
+
+    else:
+
+        subpods = root.find("./pod[@title='Unit conversions']").find('plaintext').text
+
+        if subpods:
+
+            for subpod in subpods:
+
+                value = subpod.find('plaintext').text
+
+                if " pounds" in value:
+
+                    m = __weight_re.match(value)
+
+                    if m:
+                        QUANTITY = m.group(1)
+
+                        #convert scientifc notation to number
+                        QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
+
+                        UNIT = m.group(2)
+                        return (QUANTITY,UNIT)
+                    else:
+                        raise NameError('No match for weight query')
+
+        else:
+            raise NameError('No results found for query: %s' % QUERY)
+
+        raise NameError('No match for weight query')
+
+
+def parse(root):
+
+    value = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+
+    print value
+
+    m = __number_re.search(value)
+
+    if m:
+        QUANTITY = m.group(1)
+        UNIT = m.group(2)
+
+
+    return (QUANTITY,UNIT)
+
+
 def single_query(object,CATEGORY,TAGS=[]):
 
     #ensure all non-ascii characters are converted to html entities
@@ -348,153 +562,32 @@ def single_query(object,CATEGORY,TAGS=[]):
     UNIT = ''
     QUANTITY = -1
 
-    if CATEGORY == Category.none:
+    #assume we are just looking for the image
+    if CATEGORY == Category.image:
 
         value = root.find("./pod[@title='Image']").find('markup').text
         m = __image_re.search(value)
         if m:
             PHOTO = "http://"+m.group(1)
 
-
     elif CATEGORY == Category.age:
 
-        value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
-
-        if "month/day/year" in value:
-
-            m = __birthday_re.match(value)
-
-            if m:
-                QUANTITY = m.group(1)
-
-                #convert scientifc notation to number
-                QUANTITY = int(time.mktime(time.strptime(QUANTITY, pattern)))
-
-                UNIT = "date"
-            else:
-                raise NameError('No match for birthday query')
-
-        else:
-            raise NameError('No results found for query: %s' % QUERY)
-
+        QUANTITY,UNIT = parse_age(QUERY,root)
+      
     elif CATEGORY == Category.population:
 
-        value = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
-
-        if "people" in value:
-
-            m = __population_re.match(value)
-
-            if m:
-                QUANTITY = float(m.group(1))
-
-                modifier = m.group(2)
-
-                if modifier == "million":
-                    QUANTITY = QUANTITY*float(10**6)
-                elif modifier == "billion":
-                    QUANTITY = QUANTITY*float(10**9)
-
-                #convert scientifc notation to number
-                UNIT = "people"
-            else:
-                raise NameError('No match for population query')
-
-        else:
-            raise NameError('No results found for query: %s' % QUERY)
+        QUANTITY,UNIT = parse_population(QUERY,root)
 
     elif CATEGORY == Category.height:
 
-        result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
-        print result
-
-        m = __person_height_re.match(result)
-
-        if m:
-            QUANTITY = int(m.group(1))*12 + int(m.group(2))
-
-            UNIT = "inches"
-
-        else:
-
-            subpods = root.find("./pod[@title='Unit conversions']")
-
-            result_found = False
-
-            if subpods:
-                for subpod in subpods:
-                    value = subpod.find('plaintext').text
-
-                    if " meters" in value:
-
-                        m = __height_re.match(value)
-
-                        if m:
-                            QUANTITY = m.group(1)
-
-                            #convert scientifc notation to number
-                            QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
-
-                            UNIT = m.group(2)
-                            result_found = True
-                            break
-                        else:
-                            raise NameError('No match for height query')
-
-
-            else:
-                raise NameError('No results found for query: %s' % QUERY)
-            if not result_found:
-                raise NameError('No match for height query')
-
+        QUANTITY,UNIT = parse_height(QUERY,root)
 
     elif CATEGORY == Category.weight:
 
-        result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+        QUANTITY,UNIT = parse_weight(QUERY,root)
 
-        m = __weight_re.match(result)
-
-        if m:
-            QUANTITY = m.group(1)
-
-            #convert scientifc notation to number
-            QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
-
-            UNIT = m.group(2)
-
-        else:
-
-            subpods = root.find("./pod[@title='Unit conversions']").find('plaintext').text
-
-            result_found = False
-
-            if subpods:
-
-                for subpod in subpods:
-
-                    value = subpod.find('plaintext').text
-
-                    if " pounds" in value:
-
-                        m = __weight_re.match(value)
-
-                        if m:
-                            QUANTITY = m.group(1)
-
-                            #convert scientifc notation to number
-                            QUANTITY = float(QUANTITY.replace(u"×10^","E+").replace('~',''))
-
-                            UNIT = m.group(2)
-                            result_found = True
-                            break
-                        else:
-                            raise NameError('No match for weight query')
-
-            else:
-                raise NameError('No results found for query: %s' % QUERY)
-
-            if not result_found:
-                raise NameError('No match for height query')
+    else:
+        QUANTITY,UNIT = parse(root)
 
     ############## PARSE API ##############
 
