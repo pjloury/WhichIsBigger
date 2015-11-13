@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
+    self.navigationItem.hidesBackButton= YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,6 +66,10 @@
         [self.scoreLabelTimer invalidate];
         [self didFinishIncrementingScore];
     }
+}
+
+- (IBAction)didPressDone:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didFinishIncrementingScore

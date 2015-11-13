@@ -11,6 +11,7 @@
 #import "WIBGamePlayManager.h"
 #import "WIBNetworkManager.h"
 #import "WIBLoginViewController.h"
+#import "WIBGameCompleteViewController.h"
 
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
@@ -45,7 +46,6 @@
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
                 dispatch_async(dispatch_get_main_queue(),
                                ^{
-                                    //self.startNewGameButton.userInteractionEnabled = YES;
                                     self.startNewGameButton.enabled = YES;
                                });
             }];
@@ -129,13 +129,18 @@
 }
 
 - (IBAction)didPressHighScoresButton:(id)sender {
-//    if (![GKLocalPlayer localPlayer].isAuthenticated) {
+
+    if (![GKLocalPlayer localPlayer].isAuthenticated) {
         GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
         gcViewController.gameCenterDelegate = self;
         gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
         gcViewController.leaderboardIdentifier = @"highScore";
         [self presentViewController:gcViewController animated:YES completion:nil];
-//    }
+    }
+
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    WIBGameCompleteViewController *vc = [sb instantiateViewControllerWithIdentifier:@"GameCompleteViewController"];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Game Center Delegate

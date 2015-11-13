@@ -75,7 +75,7 @@
         
     }
 
-    [[WIBNetworkManager sharedInstance] preloadImages:self.gameQuestions];
+    [[WIBNetworkManager sharedInstance] preloadImages:gameQuestions];
     return gameQuestions;
 }
 

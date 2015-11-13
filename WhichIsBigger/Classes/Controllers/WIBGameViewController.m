@@ -33,6 +33,7 @@
 @property (strong, atomic) NSTimer *nextButtonTimer;
 @property (strong, atomic) NSDate *startDate;
 @property int currSeconds;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timerBarWidth;
 
 // Views
 @property (nonatomic, strong) IBOutlet WIBQuestionView *questionView;
@@ -40,17 +41,12 @@
 @property (nonatomic, strong) IBOutlet WIBPopButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIView *timerBar;
 @property (nonatomic, strong) IBOutlet UILabel *questionNumberLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timerLengthConstraint;
+
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
 @implementation WIBGameViewController
-
-- (void)viewDidLoad
-{
-    self.navigationController.navigationBarHidden = YES;
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -62,16 +58,14 @@
     // Configure View using Model
     [self configureQuestionView];
     [self configureBackground];
-    self.timerBar.alpha = 0.0;
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.width = self.view.frame.size.width;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // Kick off the first question's timer
     [super viewDidAppear:animated];
-    [UIView animateWithDuration:0.1 animations:^{
-        self.timerBar.alpha = 1.0;
-    }];
     [self startTimer];
 }
 
@@ -104,7 +98,9 @@
     if([WIBGamePlayManager sharedInstance].questionNumber == NUMBER_OF_QUESTIONS)
     {    
         [[WIBGamePlayManager sharedInstance] endGame];
-        [self performSegueWithIdentifier:@"gameCompleteSegue" sender:self];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        WIBGameCompleteViewController *vc = [sb instantiateViewControllerWithIdentifier:@"GameCompleteViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else
     {
@@ -116,8 +112,8 @@
             [self.questionView startQuestionEntranceAnimationWithCompletion:
              ^(BOOL finished){}];
             [self resumeLayer:self.timerBar.layer];
-            self.timerLengthConstraint.constant = self.view.frame.size.width;
-            [self.timerBar layoutIfNeeded];
+            self.timerBarWidth.constant = 0;
+            [self.view layoutIfNeeded];
             [self startTimer];
         }];
     }
@@ -127,11 +123,13 @@
 {
     _currSeconds = SECONDS_PER_QUESTION;
     self.startDate = [NSDate date];
-   
+
+    self.timerBarWidth.constant = -self.view.frame.size.width;
     [UIView animateWithDuration:SECONDS_PER_QUESTION delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                         self.timerLengthConstraint.constant = 0;
-                         [self.timerBar layoutIfNeeded];
+
+        [self.view layoutIfNeeded];
     } completion:^(BOOL finished){}];
+
     if(!self.timer)
     {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];

@@ -7,6 +7,7 @@
 //
 
 #import "WIBLoadingViewController.h"
+#import "WIBGameViewController.h"
 
 @interface WIBLoadingViewController ()
 @property (weak, nonatomic) IBOutlet CSAnimationView *animationView;
@@ -21,7 +22,7 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupImageDownloadDidComplete:) name:kGroupImageDownloadCompleteNotification object:nil];
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,18 +53,11 @@
         self.animationView.transform = CGAffineTransformMakeScale(1.5, 1.5);
         self.animationView.alpha = 0;
     } completion:^(BOOL finished) {
-            [self performSegueWithIdentifier:@"beginGameSegue" sender:self];
+        //[self performSegueWithIdentifier:@"beginGameSegue" sender:self];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        WIBGameViewController *vc = [sb instantiateViewControllerWithIdentifier:@"GameViewController"];
+        [self.navigationController pushViewController:vc animated:NO];
     }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
