@@ -21,6 +21,8 @@
 @property (readonly) NSString *roundUUID;
 @property (nonatomic, readonly) NSInteger questionIndex;
 
+- (void)generateQuestions;
+
 - (void)questionAnsweredCorrectly;
 - (void)questionAnsweredInCorrectly;
 

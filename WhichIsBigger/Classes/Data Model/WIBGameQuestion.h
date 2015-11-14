@@ -28,8 +28,8 @@
 
 // Initializers
 - (instancetype)initOneToOneQuestion:(WIBQuestionType *)categoryString;
-- (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1 dissimilargameItem2:(WIBGameItem *)item2;
-
+- (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1
+                       dissimilargameItem2:(WIBGameItem *)item2;
 // Save
 - (void)saveInBackground;
 

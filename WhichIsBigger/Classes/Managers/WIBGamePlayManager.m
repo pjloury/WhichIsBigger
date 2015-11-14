@@ -39,13 +39,11 @@
     dispatch_once(&pred, ^{
         shared = [[WIBGamePlayManager alloc] init];
         
-        if ([[PFUser currentUser] objectForKey:@"skewFactor"])
-        {
+        if ([[PFUser currentUser] objectForKey:@"skewFactor"]) {
             NSNumber *skewFactor = [[PFUser currentUser] objectForKey:@"skewFactor"];
             shared.skewFactor = skewFactor.doubleValue;
         }
-        else
-        {
+        else {
             shared.skewFactor = 0.5;
         }
         
@@ -61,16 +59,13 @@
 {
     if ([GKLocalPlayer localPlayer].isAuthenticated == NO) {
         [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController * viewController, NSError *error){
-            if (viewController)
-            {
+            if (viewController) {
                 AppDelegate *del = [UIApplication sharedApplication].delegate;
                 [del.window.rootViewController presentViewController:viewController animated:YES completion:nil];
             }
-            if(!error)
-            {
+            if(!error) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GameCenterDidFinishAuthentication" object:nil];
             }
-            
         };
     }
 }
@@ -78,6 +73,7 @@
 - (void)beginGame
 {
     self.gameRound = [[WIBGameRound alloc] init];
+    [self.gameRound generateQuestions];
 }
 
 - (void)endGame

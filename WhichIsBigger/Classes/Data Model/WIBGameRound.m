@@ -32,17 +32,15 @@
     self = [super init];
     if (self) {
         self.questionIndex = -1;
-        self.usedNames = nil;
-        self.gameQuestions = [self generateQuestions];
+        self.usedNames = [[NSMutableSet alloc] init];
         self.roundUUID = [[NSUUID UUID] UUIDString];
     }
     return self;
 }
 
-- (NSMutableArray *)generateQuestions
+- (void)generateQuestions
 {
-    NSMutableArray *gameQuestions = [NSMutableArray array];
-    self.usedNames = [[NSMutableSet alloc] init];
+    NSMutableArray *questions = [NSMutableArray array];
     
     WIBQuestionType *questionType = [self randomQuestionType];
     
@@ -57,26 +55,20 @@
         // the send type of object is a category
         
         WIBGameQuestion *question;
-        
-        switch(questionType.comparisonType)
-        {
+        switch(questionType.comparisonType) {
             case (WIBComparisonUnalikeType):
-            {
                 question = [[WIBDissimilarQuestion alloc] initWithQuestionType:questionType];
                 break;
-            }
             default:
-            {
                 question = [[WIBGameQuestion alloc] initOneToOneQuestion:questionType];
                 break;
-            }
         }
-        [gameQuestions addObject:question];
+        [questions addObject:question];
         
     }
 
-    [[WIBNetworkManager sharedInstance] preloadImages:gameQuestions];
-    return gameQuestions;
+    [[WIBNetworkManager sharedInstance] preloadImages:questions];
+    self.gameQuestions = questions;
 }
 
 - (void)printQuestions

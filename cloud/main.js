@@ -7,7 +7,14 @@ Parse.Cloud.define("hello", function(request, response) {
 
 
 Parse.Cloud.afterSave("Question", function(request) {
-  // Our "Comment" class has a "text" key with the body of the comment itself
+  // Push Notifications should be fired when others do something
+
+  // does the current user have the new highest score or streak?
+  var userQuery = new Parse.Query(Parse.User);
+
+  // query all of the users, sorted by high score or streak
+  // send a notification to the user with the second highest score
+
   var questionNumber = request.object.get('questionNumber');
   var correct = request.object.get('answeredCorrectly');
 
@@ -15,7 +22,8 @@ Parse.Cloud.afterSave("Question", function(request) {
 
   var pushQuery = new Parse.Query(Parse.Installation);
   pushQuery.equalTo('deviceType', 'ios');
-    
+  
+  /*
   Parse.Push.send({
     where: pushQuery, // Set our Installation query
     data: {
@@ -29,4 +37,5 @@ Parse.Cloud.afterSave("Question", function(request) {
       throw "Got an error " + error.code + " : " + error.message;
     }
   });
+  */
 });
