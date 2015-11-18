@@ -31,11 +31,18 @@
 {
     self = [super init];
     if (self) {
-        self.questionIndex = -1;
+        self.questionIndex = 0;
         self.usedNames = [[NSMutableSet alloc] init];
         self.roundUUID = [[NSUUID UUID] UUIDString];
     }
     return self;
+}
+
+- (NSString *)category
+{
+    WIBGameQuestion *question =  [self.gameQuestions firstObject];
+    NSString *qString = question.questionType.questionString;
+    return [NSString stringWithFormat:@"Which %@", qString];
 }
 
 - (void)generateQuestions
@@ -85,6 +92,8 @@
     // categoryWhiteList
     NSUInteger randomQuestionTypeIndex = arc4random_uniform((u_int32_t)[WIBGamePlayManager sharedInstance].questionTypes.count);
     return [WIBGamePlayManager sharedInstance].questionTypes[randomQuestionTypeIndex];
+    
+    // return a specific questionType
 }
 
 - (WIBGameQuestion *)nextGameQuestion
@@ -94,8 +103,8 @@
     {
         [self.currentQuestion saveInBackground];
     }
-    self.questionIndex++;
     self.currentQuestion = [self.gameQuestions objectAtIndex:self.questionIndex];
+    self.questionIndex++;
     return self.currentQuestion;
 }
 
@@ -108,6 +117,11 @@
             correctAnswers++;
     }
     return correctAnswers;
+}
+
+- (float)accuracy
+{
+    return (float)self.numberOfCorrectAnswers / NUMBER_OF_QUESTIONS;
 }
 
 - (void)questionAnsweredCorrectly

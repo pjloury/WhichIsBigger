@@ -17,8 +17,10 @@
 
 // non-mutable
 @property (nonatomic, assign, readonly) NSInteger score;
+@property (nonatomic, assign, readonly) float accuracy;
 @property (nonatomic, strong, readonly) NSMutableArray *gameQuestions;
 @property (readonly) NSString *roundUUID;
+@property (nonatomic, copy) NSString *category;
 @property (nonatomic, readonly) NSInteger questionIndex;
 
 - (void)generateQuestions;

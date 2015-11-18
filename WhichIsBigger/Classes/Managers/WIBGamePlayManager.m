@@ -23,6 +23,8 @@
 @property (nonatomic, assign) NSInteger currentStreak;
 @property (nonatomic, assign) NSInteger longestStreak;
 @property (nonatomic, assign) NSUInteger level;
+@property (nonatomic, assign) NSUInteger currentLevelPoints;
+
 @property (nonatomic) NSString *roundUUID;
 
 
@@ -82,8 +84,8 @@
     NSNumber *lifeTimeScore = [[PFUser currentUser] objectForKey:@"lifeTimeScore"];
     lifeTimeScore = @(lifeTimeScore.integerValue + self.score);
     
-    NSInteger currentLevelPoints = lifeTimeScore.integerValue % 10000;
-    NSInteger level = lifeTimeScore.integerValue / 10000;
+    self.currentLevelPoints = lifeTimeScore.integerValue % POINTS_PER_LEVEL;
+    self.level = lifeTimeScore.integerValue / POINTS_PER_LEVEL;
     
     [[PFUser currentUser] setObject:lifeTimeScore forKey:@"lifeTimeScore"];
     [[PFUser currentUser] saveInBackground];
@@ -96,7 +98,7 @@
 
 - (void)adjustDifficulty
 {
-    if (self.gameRound.numberOfCorrectAnswers > 4 && self.questionCeiling - 5 > self.questionFloor)
+    if (self.gameRound.accuracy >= 0.8 && self.questionCeiling - 5 > self.questionFloor)
     {
         self.questionCeiling -= 5;
         if (self.questionFloor > 5)
@@ -113,7 +115,7 @@
             self.skewFactor -= 0.1;
         }
     }
-    else if ( self.accuracy <= 0.55)
+    else if (self.gameRound.accuracy <= 0.4)
     {
         self.questionCeiling += 5;
         if (self.questionFloor < (self.questionCeiling - 5) )
@@ -218,7 +220,7 @@
 
 - (NSUInteger)questionNumber
 {
-    return self.gameRound.questionIndex + 1;
+    return self.gameRound.questionIndex;
 }
 
 - (BOOL)localStorage

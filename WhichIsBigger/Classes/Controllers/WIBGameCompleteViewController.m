@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 @property (weak, nonatomic) IBOutlet UILabel *highScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 @property (weak, nonatomic) IBOutlet WIBPopButton *playAgainButton;
 @property (weak, nonatomic) IBOutlet WIBPopButton *challengeAFriendButton;
 @property (weak, nonatomic) NSTimer *scoreLabelTimer;
@@ -34,7 +35,6 @@
 
 - (void)viewDidLoad
 {
-    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
     self.navigationItem.hidesBackButton= YES;
 }
 
@@ -48,10 +48,17 @@
     self.playAgainButton.enabled = NO;
     self.highScoreLabel.alpha = 0.0;
     
+    self.levelLabel.text = [NSString stringWithFormat:@"Level:%ld Points:%ld/1000",[WIBGamePlayManager sharedInstance].level, [WIBGamePlayManager sharedInstance].currentLevelPoints];
+    
     self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.playAgainButton.layer.borderWidth = 1;
     self.challengeAFriendButton.layer.borderWidth = 1;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
 }
 
 - (void)incrementScore

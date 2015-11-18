@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet CSAnimationView *comparsionSymbolAnimationView;
 @property (nonatomic, strong) IBOutlet UILabel *comparsionSymbol;
 @property (nonatomic, weak) WIBGameQuestion *question;
+@property (getter=isGamePlayDisabled) BOOL gamePlayDisabled;
 @property (nonatomic, weak) id<WIBGamePlayDelegate> gamePlayDelegate;
 - (void)setup;
 - (void)refreshWithQuestion:(WIBGameQuestion *)question;

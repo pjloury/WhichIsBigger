@@ -25,6 +25,7 @@
 - (void)configureViews;
 - (void)animateTimeOutLarger;
 - (void)animateTimeOutSmaller;
+- (void)animatePointsLabel:(NSInteger) points;
 - (void)popAnimation;
 
 @end

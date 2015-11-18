@@ -18,6 +18,8 @@
 // Views
 @property (nonatomic, strong) IBOutlet WIBImageView *imageView;
 
+@property (nonatomic, strong) IBOutlet CSAnimationView *pointsLabelAnimationView;
+@property (nonatomic, strong) IBOutlet UILabel *pointsLabel;
 @property (nonatomic, strong) IBOutlet UILabel *multiplierLabel;
 @property (nonatomic, strong) IBOutlet UILabel *answerLabel;
 @property (nonatomic, strong) IBOutlet WIBOptionButton *popButton;
@@ -41,6 +43,7 @@
 {
     self.backgroundColor = [UIColor sexyLightPurpleColor];
     self.clipsToBounds = NO;
+    self.pointsLabel.alpha = 0.0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self.popButton action:@selector(longPressDetected:)];
@@ -123,6 +126,20 @@
 - (void)animateTimeOutSmaller
 {
     self.answerLabel.textColor = [UIColor redColor];
+}
+
+- (void)animatePointsLabel:(NSInteger) points
+{
+    self.pointsLabel.text = [NSString stringWithFormat:@"+%ld pts",points];
+    self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
+    self.pointsLabel.alpha = 1;
+    
+    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+        self.pointsLabel.transform = CGAffineTransformMakeScale(3, 3);
+        self.pointsLabel.alpha = 0.0;
+    } completion:^(BOOL finished) {
+                self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
+    }];
 }
 
 - (WIBGameItem *)gameItem

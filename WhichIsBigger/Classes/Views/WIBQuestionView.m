@@ -53,6 +53,7 @@
 - (void)refreshWithQuestion:(WIBGameQuestion *)question
 {
     self.question = question;
+    self.gamePlayDisabled = NO;
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
     [self.optionView1 refreshWithOption:self.question.option1];
     [self.optionView2 refreshWithOption:self.question.option2];
@@ -96,10 +97,33 @@
 
 - (void)animateCorrectOptionView:(WIBOptionView *)optionView
 {
+    [optionView animatePointsLabel:self.question.points];
+    
+    self.comparsionSymbol.hidden = NO;
+    
+    self.comparsionSymbol.transform = CGAffineTransformMakeScale(1, 1);
+    self.comparsionSymbol.alpha = 1;
+    self.comparsionSymbol.backgroundColor = [UIColor clearColor];
+    self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
+    
+    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+        // End
+        self.comparsionSymbol.transform = CGAffineTransformMakeScale(3, 3);
+        self.comparsionSymbol.alpha = 0;
+        self.comparsionSymbol.backgroundColor = [UIColor clearColor];
+        self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
+        
+    } completion:^(BOOL finished) {
+        self.comparsionSymbol.transform = CGAffineTransformMakeScale(1, 1);
+        self.comparsionSymbol.alpha = 0;
+        self.comparsionSymbol.backgroundColor = [UIColor clearColor];
+        self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
+    }];
 //    optionView.type = CSAnimationTypePop;
 //    optionView.duration = 0.5;
 //    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.75];
     // TODO: Need a way to queue the exit animation immediately after this is complete.
+    
 }
 
 - (void)animateIncorrectOptionView:(WIBOptionView *)optionView
@@ -120,6 +144,7 @@
 # pragma mark - WIBQuestionViewDelegate
 - (void)optionView:(WIBOptionView *)optionView didSelectOption:(WIBGameOption *)option
 {
+    self.gamePlayDisabled = YES;
     self.optionView1.userInteractionEnabled = NO;
     self.optionView2.userInteractionEnabled = NO;
     
@@ -130,8 +155,8 @@
     {
         self.question.answeredCorrectly = YES;
         [optionView correctResponse];
-        [self animateCorrectOptionView:optionView];
         [self.scoringDelegate didAnswerQuestionCorrectly];
+        [self animateCorrectOptionView:optionView];
         [self animatePointsView];
     }
     else
@@ -168,12 +193,15 @@
         [self.optionView2 animateTimeOutLarger];
     }
 
+    self.gamePlayDisabled = YES;
+    
     self.optionView1.alpha = 0.5;
     self.optionView2.alpha = 0.5;
     [self.optionView1 revealAnswerLabel];
     [self.optionView2 revealAnswerLabel];
     
     [self.scoringDelegate didFailToAnswerQuestion];
+    
     [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];
     
 //    [self.comparsionSymbolAnimationView startCanvasAnimation];
@@ -192,18 +220,16 @@
 
 - (void)revealAnswer
 {
-    if(self.question.option1.total.doubleValue > self.question.option2.total.doubleValue)
-    {
+    if(self.question.option1.total.doubleValue > self.question.option2.total.doubleValue) {
 		// stub for answer reveal animation sequence
     }
-    else
-    {
+    else {
 		// stub for answer reveal animation sequence
     }
     
     [self.optionView1 revealAnswerLabel];
     [self.optionView2 revealAnswerLabel];
-    [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];
+    [self.gamePlayDelegate questionViewDidFinishRevealingAnswer:self];//timeup is also calling this
 }
 
 @end

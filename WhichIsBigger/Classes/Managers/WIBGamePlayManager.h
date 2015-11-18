@@ -45,5 +45,6 @@
 @property (nonatomic, assign, readonly) float accuracy;
 
 @property (nonatomic, assign, readonly) NSUInteger level;
+@property (nonatomic, assign, readonly) NSUInteger currentLevelPoints;
 
 @end
