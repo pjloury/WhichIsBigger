@@ -9,17 +9,19 @@ import argparse
 import re
 import csv
 # import sys
-import time
+import time, datetime
 
 from parse_rest.connection import register
 from parse_rest.datatypes import Object
+
+from dateutil.parser import parse as dateparse
 
 from api_keys import *
 
 pattern = '%m/%d/%Y'
 
-__topic_re = re.compile("""(.*)\s+\|""")
-__topic_re1 = re.compile("""(.*)\s+\(""")
+__topic_re = re.compile("""(.+?)\s+\|""")
+__topic_re1 = re.compile("""(.+?)\s+\(""")
 
 __birthday_re = re.compile("""(\d+/\d+/\d+)""")
 __height_re = re.compile("""(.*)\s+(meters)""")
@@ -28,6 +30,9 @@ __person_height_re = re.compile(r"""(\d+)\'\s+(\d+)""")
 __population_re = re.compile(r"""([0-9.]+)\s+(\w+)\s+people""")
 
 __number_re = re.compile(r"""([0-9.]+)\s+(\S+)""")
+
+# __year_re = re.compile(r"""([\d\d\d\d)""")
+
 
 __weight_re = re.compile("""(.*)\s+(lb)""")
 
@@ -53,7 +58,7 @@ class Enum(set):
             return name
         raise AttributeError
 
-Category = Enum(["age", "weight", "height", "population", "image", "none"])
+#Category = Enum(["age", "weight", "height", "population", "image", "none"])
 
 query_string = ""
 multiple_query_string = ""
@@ -107,7 +112,8 @@ def main():
                        help='csv file to parse')
     parser.add_argument('--query', dest='query',
                        help='optional generic query')
-
+    parser.add_argument('--units', dest='units',
+                       help='units for generic query')
 
     args = parser.parse_args()
     
@@ -130,6 +136,7 @@ def main():
     if args.query:
         GENERIC_QUERY = args.query
 
+    UNITS = args.units
 
     #parse a csv file for entities to query
     if csvfile:
@@ -146,6 +153,7 @@ def main():
             OBJECT = row[0]
             TAGS = row[1]
             QUERY = row[2].lower()
+            UNITS = row[3].lower()
 
             #check for existing parse entry
             exists = GameItem.Query.all().filter(name=OBJECT)
@@ -206,7 +214,7 @@ def main():
                     else:
                         query_string = "%s " + QUERY
 
-                    single_query(OBJECT,CATEGORY,TAGS)
+                    single_query(OBJECT,CATEGORY,UNITS,TAGS)
 
                 except Exception as e:
                     print e
@@ -215,18 +223,20 @@ def main():
     #else query manually
     elif category and MODE and OBJECT:
 
-        if category == "age":
-            CATEGORY = Category.age
-        elif category == "weight":
-            CATEGORY = Category.weight
-        elif category == "height":
-            CATEGORY = Category.height
-        elif category == "population":
-            CATEGORY = Category.population
-        elif category == "image":
-            CATEGORY = Category.image
-        else:
-            CATEGORY = Category.none
+        CATEGORY = category
+
+        # if category == "age":
+        #     CATEGORY = Category.age
+        # elif category == "weight":
+        #     CATEGORY = Category.weight
+        # elif category == "height":
+        #     CATEGORY = Category.height
+        # elif category == "population":
+        #     CATEGORY = Category.population
+        # elif category == "image":
+        #     CATEGORY = Category.image
+        # else:
+        #     CATEGORY = Category.none
 
         #query_string = %s string
 
@@ -241,18 +251,18 @@ def main():
             objects = get_list_of_results(OBJECT)
 
             for obj in objects:
-                single_query(obj,CATEGORY)
+                single_query(obj,CATEGORY,UNITS)
 
         #aggregate -> get multiple attributes for the object
         elif MODE == "aggregate":
 
             for CATEGORY in ["age","weight","height"]:
                 query_string = QUERY_STRINGS[CATEGORY]
-                single_query(OBJECT,CATEGORY)
+                single_query(OBJECT,CATEGORY,UNITS)
 
         else:
 
-            single_query(OBJECT,CATEGORY)
+            single_query(OBJECT,CATEGORY,UNITS)
 
     else:
         raise ValueError('Please refer to commandline arguments')
@@ -279,7 +289,7 @@ def get_list_of_results(TOPIC):
 
     root = ElementTree.fromstring(xml)
 
-    text = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+    text = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
     results = []
 
@@ -383,7 +393,7 @@ def parse_age(QUERY,root):
 
 def parse_population(QUERY,root):
 
-    value = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+    value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
     if "people" in value:
 
@@ -414,7 +424,7 @@ def parse_population(QUERY,root):
 
 def parse_height(QUERY,root):
 
-    result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+    result = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
     print result
 
     m = __person_height_re.match(result)
@@ -458,7 +468,7 @@ def parse_height(QUERY,root):
 
 def parse_weight(QUERY,root):
 
-    result = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+    result = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
     m = __weight_re.match(result)
 
@@ -504,23 +514,65 @@ def parse_weight(QUERY,root):
         raise NameError('No match for weight query')
 
 
-def parse(root):
+def parse(root,UNITS):
 
-    value = root.find("./pod[@title='Result']").find('subpod').find('plaintext').text
+    value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
     print value
 
     m = __number_re.search(value)
 
-    if m:
-        QUANTITY = m.group(1)
-        UNIT = m.group(2)
 
+
+    if m:
+        QUANTITY = float(m.group(1))
+        UNIT = m.group(2).lower()
+
+        if "trillion" in UNIT:
+            QUANTITY *= pow(10, 12)
+        elif "billion" in UNIT:
+            QUANTITY *= pow(10, 9)
+        elif "million" in UNIT:
+            QUANTITY *= pow(10, 6)
+        elif "thousand" in UNIT:
+            QUANTITY *= pow(10, 3)
+
+        elif "date" in UNITS:
+
+            try:
+
+                dt = dateparse(str(int(QUANTITY)))
+                QUANTITY = (dt-datetime.datetime(1970,1,1)).total_seconds()
+
+
+            except Exception as e:
+
+                raise NameError("Exception")
+
+        if not UNITS:
+            if "$" in value:
+                UNIT = "dollars"
+        else:
+            UNIT = UNITS
+
+    else:
+
+        #check if it is a date
+        try:
+
+            dt = dateparse(value)
+
+            QUANTITY = (dt-datetime.datetime(1970,1,1)).total_seconds()
+
+            UNIT = "date"
+
+        except:
+            raise NameError('Could not parse!')
 
     return (QUANTITY,UNIT)
 
 
-def single_query(object,CATEGORY,TAGS=[]):
+def single_query(object,CATEGORY,UNITS="",TAGS=[]):
 
     #ensure all non-ascii characters are converted to html entities
     #OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
@@ -563,31 +615,32 @@ def single_query(object,CATEGORY,TAGS=[]):
     QUANTITY = -1
 
     #assume we are just looking for the image
-    if CATEGORY == Category.image:
+    if CATEGORY == "image":
 
         value = root.find("./pod[@title='Image']").find('markup').text
         m = __image_re.search(value)
         if m:
             PHOTO = "http://"+m.group(1)
 
-    elif CATEGORY == Category.age:
+    elif CATEGORY == "age":
 
         QUANTITY,UNIT = parse_age(QUERY,root)
       
-    elif CATEGORY == Category.population:
+    elif CATEGORY == "population":
 
         QUANTITY,UNIT = parse_population(QUERY,root)
 
-    elif CATEGORY == Category.height:
+    elif CATEGORY == "height":
 
         QUANTITY,UNIT = parse_height(QUERY,root)
 
-    elif CATEGORY == Category.weight:
+    elif CATEGORY == "weight":
 
         QUANTITY,UNIT = parse_weight(QUERY,root)
 
     else:
-        QUANTITY,UNIT = parse(root)
+
+        QUANTITY,UNIT = parse(root,UNITS)
 
     ############## PARSE API ##############
 
