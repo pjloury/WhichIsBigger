@@ -14,6 +14,12 @@ green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 alpha:1.0]
 
+@interface UIColor ()
+
+@property NSMutableArray *colors;
+
+@end
+
 @implementation UIColor (Additions)
 
 + (UIColor *)lighterGrayColor {
@@ -120,6 +126,13 @@ alpha:1.0]
         [array addObject:(id)[color CGColor]];
     }
     return [NSArray arrayWithArray:array];
+}
+
++ (NSMutableArray *)randomColors
+{
+    NSMutableArray *colors = [[UIColor colorArray] mutableCopy];
+    [colors shuffle];
+    return colors;
 }
 
 + (CAGradientLayer *)gradientLayerWithColor:(UIColor *)color {

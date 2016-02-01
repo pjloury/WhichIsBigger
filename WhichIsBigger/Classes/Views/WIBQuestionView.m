@@ -62,9 +62,6 @@
 # pragma mark - Transition Animations
 - (void)startQuestionEntranceAnimationWithCompletion:(void (^)(BOOL finished))completion
 {
-    self.optionView1.backgroundColor = [UIColor sexyLightPurpleColor];
-    self.optionView2.backgroundColor = [UIColor sexyLightPurpleColor];
-
     self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
     self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
     self.optionView1.hidden = NO;
@@ -78,9 +75,6 @@
 
 - (void)startQuestionExitAnimationWithCompletion:(void (^)(BOOL finished))completion
 {
-    self.optionView1.backgroundColor = [UIColor sexyLightPurpleColor];
-    self.optionView2.backgroundColor = [UIColor sexyLightPurpleColor];
-
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);

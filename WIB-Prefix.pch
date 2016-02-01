@@ -16,9 +16,12 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "Canvas.h"
+#import "CircleProgressBar.h"
 #import "WIBConstants.h"
 #import "UIColor+Additions.h"
 #import "FBShimmeringView.h"
+#import "UIImage+Placeholder.h"
+#import "NSMutableArray+Shuffle.h"
 
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>

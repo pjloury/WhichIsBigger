@@ -69,6 +69,26 @@
         
         return [NSString stringWithFormat:@"%ld years %ld months", (long)[breakdownInfo year],(long)[breakdownInfo month]];
     }
+    else if ([self.item.unit isEqualToString:@"dollars"]) {
+        if ([self.total longValue] > 999999 && [self.total longValue] <= 999999999) {
+            float millions = [self.total floatValue] / 1000000;
+            return [NSString stringWithFormat:@"$%.2f Million", millions];
+        }
+        else if ([self.total longValue] > 999999999 && [self.total longValue] <= 999999999999)
+        {
+            float billions = [self.total floatValue] / 1000000000;
+            return [NSString stringWithFormat:@"$%.2f Billion", billions];
+        }
+        else if ([self.total longValue] > 999999999999)
+        {
+            float trillions = [self.total floatValue] / 1000000000000;
+            return [NSString stringWithFormat:@"$%.2f Trillion", trillions];
+        }
+        else {
+            return [NSString stringWithFormat:@"$%@", [fmt stringFromNumber:self.total]];
+        }
+    }
+    
     else
     {
         return [NSString stringWithFormat:@"%@ %@", [fmt stringFromNumber:self.total], self.item.unit];

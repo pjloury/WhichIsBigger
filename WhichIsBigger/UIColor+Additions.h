@@ -30,6 +30,7 @@
 + (UIColor *)sexyOrangeColor;
 + (UIColor *)sexyDeepOrangeColor;
 
++ (NSMutableArray *)randomColors;
 
 + (CAGradientLayer *)gradientLayerWithColor:(UIColor *)color;
 

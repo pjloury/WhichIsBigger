@@ -17,8 +17,10 @@
 		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
 		604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0C81BB3DF8500595B2B /* WIBReachability.m */; };
 		604DF0CC1BB769F600595B2B /* WIBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0CB1BB769F600595B2B /* WIBProfileViewController.m */; };
-		60621C4A1BD0424A00C8207E /* WIBGameRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C491BD0424A00C8207E /* WIBGameRound.m */; settings = {ASSET_TAGS = (); }; };
-		60621C4D1BD04BE000C8207E /* WIBHighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C4C1BD04BE000C8207E /* WIBHighScoresViewController.m */; settings = {ASSET_TAGS = (); }; };
+		605D46191C5F38CD00A7529E /* UIImage+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605D46181C5F38CD00A7529E /* UIImage+Placeholder.m */; };
+		605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */; };
+		60621C4A1BD0424A00C8207E /* WIBGameRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C491BD0424A00C8207E /* WIBGameRound.m */; };
+		60621C4D1BD04BE000C8207E /* WIBHighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C4C1BD04BE000C8207E /* WIBHighScoresViewController.m */; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
 		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
 		60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B43E101BD7631200E9F604 /* GameKit.framework */; };
@@ -89,6 +91,10 @@
 		604DF0C81BB3DF8500595B2B /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = Classes/Managers/WIBReachability.m; sourceTree = "<group>"; };
 		604DF0CA1BB769F600595B2B /* WIBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBProfileViewController.h; path = WhichIsBigger/Classes/Controllers/WIBProfileViewController.h; sourceTree = "<group>"; };
 		604DF0CB1BB769F600595B2B /* WIBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBProfileViewController.m; path = WhichIsBigger/Classes/Controllers/WIBProfileViewController.m; sourceTree = "<group>"; };
+		605D46171C5F38CD00A7529E /* UIImage+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Placeholder.h"; path = "WhichIsBigger/Classes/Data Model/UIImage+Placeholder.h"; sourceTree = "<group>"; };
+		605D46181C5F38CD00A7529E /* UIImage+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Placeholder.m"; path = "WhichIsBigger/Classes/Data Model/UIImage+Placeholder.m"; sourceTree = "<group>"; };
+		605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Shuffle.h"; path = "WhichIsBigger/NSMutableArray+Shuffle.h"; sourceTree = "<group>"; };
+		605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Shuffle.m"; path = "WhichIsBigger/NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
 		60621C481BD0424A00C8207E /* WIBGameRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameRound.h; path = "Classes/Data Model/WIBGameRound.h"; sourceTree = "<group>"; };
 		60621C491BD0424A00C8207E /* WIBGameRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameRound.m; path = "Classes/Data Model/WIBGameRound.m"; sourceTree = "<group>"; };
 		60621C4B1BD04BE000C8207E /* WIBHighScoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBHighScoresViewController.h; sourceTree = "<group>"; };
@@ -139,8 +145,6 @@
 		7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Blogger_Sans.otf; sourceTree = "<group>"; };
 		7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium.otf"; sourceTree = "<group>"; };
-		7D8E8D7D1B47C4D4005B4AA2 /* NSNumber+Separated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Separated.h"; sourceTree = "<group>"; };
-		7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Separated.m"; sourceTree = "<group>"; };
 		7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Classes/Views/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WIB-Prefix.pch"; sourceTree = "<group>"; };
 		7D943FA01AF0C6B90061387B /* WIBGamePlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGamePlayManager.h; path = Classes/Managers/WIBGamePlayManager.h; sourceTree = "<group>"; };
@@ -204,6 +208,10 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				605D46171C5F38CD00A7529E /* UIImage+Placeholder.h */,
+				605D46181C5F38CD00A7529E /* UIImage+Placeholder.m */,
+				605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */,
+				605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */,
 				604DF0CA1BB769F600595B2B /* WIBProfileViewController.h */,
 				604DF0CB1BB769F600595B2B /* WIBProfileViewController.m */,
 				601172991BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.h */,
@@ -411,8 +419,6 @@
 		F37659221ADE3B9600932FC9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				7D8E8D7D1B47C4D4005B4AA2 /* NSNumber+Separated.h */,
-				7D8E8D7E1B47C4D4005B4AA2 /* NSNumber+Separated.m */,
 				F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */,
 				F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */,
 				F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */,
@@ -577,6 +583,7 @@
 				60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */,
 				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
+				605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */,
 				6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */,
 				60621C4D1BD04BE000C8207E /* WIBHighScoresViewController.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
@@ -605,6 +612,7 @@
 				F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */,
 				7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */,
 				60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */,
+				605D46191C5F38CD00A7529E /* UIImage+Placeholder.m in Sources */,
 				604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

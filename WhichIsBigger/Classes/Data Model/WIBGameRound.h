@@ -24,6 +24,7 @@
 @property (nonatomic, readonly) NSInteger questionIndex;
 
 - (void)generateQuestions;
+- (UIColor *)randomColor;
 
 - (void)questionAnsweredCorrectly;
 - (void)questionAnsweredInCorrectly;

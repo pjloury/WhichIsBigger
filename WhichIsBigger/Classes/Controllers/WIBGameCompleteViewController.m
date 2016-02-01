@@ -10,6 +10,7 @@
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
 
+
 // Models
 #import "WIBGameQuestion.h"
 
@@ -20,9 +21,10 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *answersCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
+@property (weak, nonatomic) IBOutlet CircleProgressBar *progressBar;
 @property (weak, nonatomic) IBOutlet UILabel *highScoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *levelLabel;
-@property (weak, nonatomic) IBOutlet WIBPopButton *playAgainButton;
+@property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
 @property (weak, nonatomic) IBOutlet WIBPopButton *challengeAFriendButton;
 @property (weak, nonatomic) NSTimer *scoreLabelTimer;
 // Level View (have a Circle Grow)
@@ -50,6 +52,18 @@
     
     self.levelLabel.text = [NSString stringWithFormat:@"Level:%ld Points:%ld/1000",[WIBGamePlayManager sharedInstance].level, [WIBGamePlayManager sharedInstance].currentLevelPoints];
     
+    self.progressBar.backgroundColor = [UIColor whiteColor];
+    self.progressBar.progressBarWidth = 10.0;
+    self.progressBar.progressBarProgressColor = [UIColor blueColor];
+    self.progressBar.progressBarTrackColor = [UIColor purpleColor];
+    self.progressBar.hintViewBackgroundColor = [UIColor purpleColor];
+    self.progressBar.hintHidden = NO;
+    self.progressBar.startAngle = -90.0;
+
+    [self.progressBar setHintTextGenerationBlock:^NSString *(CGFloat progress) {
+        return [NSString stringWithFormat:@"%ld", [WIBGamePlayManager sharedInstance].level];
+    }];
+    
     self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.playAgainButton.layer.borderWidth = 1;
@@ -59,6 +73,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
+    CGFloat progress = [WIBGamePlayManager sharedInstance].currentLevelPoints/POINTS_PER_LEVEL;
+    [self.progressBar setProgress:progress animated:YES duration:1.0];
 }
 
 - (void)incrementScore

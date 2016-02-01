@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) WIBGameQuestion *currentQuestion;
 
+@property NSMutableArray *randomColors;
+
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *gameQuestions;
 @property (nonatomic) NSString *roundUUID;
@@ -76,6 +78,15 @@
 
     [[WIBNetworkManager sharedInstance] preloadImages:questions];
     self.gameQuestions = questions;
+    
+    self.randomColors = [UIColor randomColors];
+}
+
+- (UIColor *)randomColor
+{
+    UIColor *color = [self.randomColors firstObject];
+    [self.randomColors removeObject:color];
+    return color;
 }
 
 - (void)printQuestions

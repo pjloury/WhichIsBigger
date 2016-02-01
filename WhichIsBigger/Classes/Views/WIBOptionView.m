@@ -37,13 +37,15 @@
     self.popButton.userInteractionEnabled = YES;
     self.answerLabel.hidden = YES;
     [self configureViews];
+    
+    self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
 }
 
 - (void)configureViews
 {
-    self.backgroundColor = [UIColor sexyLightPurpleColor];
     self.clipsToBounds = NO;
     self.pointsLabel.alpha = 0.0;
+    self.pointsLabel.backgroundColor = [UIColor clearColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self.popButton action:@selector(longPressDetected:)];
@@ -56,29 +58,29 @@
     [self configureImageView];
     [self configureLabels];
     
-    self.layer.shadowColor = [UIColor clearColor].CGColor;
-    self.layer.cornerRadius = self.layer.frame.size.width/10;
+    self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
+
+    self.backgroundColor = [UIColor clearColor];
+    self.layer.cornerRadius = self.layer.frame.size.width/20;
     self.layer.masksToBounds = YES;
-    self.answerLabel.textColor = [UIColor lightPurpleColor];
-    
-//    self.layer.shadowColor = [UIColor blackColor].CGColor;
-//    self.layer.shadowOpacity = .4;
-//    self.layer.shadowRadius = 4;
-//    self.layer.shadowOffset = CGSizeZero;
 }
 
 - (void)correctResponse
 {
-    self.imageView.layer.shadowColor = [UIColor greenColor].CGColor;
-    self.imageView.layer.shadowOpacity = 1.0;
-    self.imageView.layer.shadowRadius = 20;
+    self.imageView.layer.opacity = 0.0;
+    self.imageView.layer.borderColor = [UIColor greenColor].CGColor;
+    [UIView animateWithDuration:1.0 animations:^{
+        self.imageView.layer.opacity = 1.0;
+    }];
 }
 
 - (void)incorrectResponse;
 {
-    self.imageView.layer.shadowColor = [UIColor redColor].CGColor;
-    self.imageView.layer.shadowOpacity = 1.0;
-    self.imageView.layer.shadowRadius = 20;
+    self.imageView.layer.opacity = 0.0;
+    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
+    [UIView animateWithDuration:1.0 animations:^{
+        self.imageView.layer.opacity = 1.0;
+    }];
 }
 
 - (void)gameQuestionTimeUpHandler:(NSNotification *)note
@@ -135,10 +137,10 @@
     self.pointsLabel.alpha = 1;
     
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
-        self.pointsLabel.transform = CGAffineTransformMakeScale(3, 3);
-        self.pointsLabel.alpha = 0.0;
+        self.pointsLabel.transform = CGAffineTransformMakeScale(2, 2);
     } completion:^(BOOL finished) {
-                self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
+        [UIView animateKeyframesWithDuration:0.8 delay:0.8 options:0 animations:^{self.pointsLabel.alpha = 0.0;}
+                                  completion:nil];
     }];
 }
 

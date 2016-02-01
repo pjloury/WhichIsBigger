@@ -52,7 +52,7 @@
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.photoURL.length > 0 && gameItem.isSupported)
+    if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.isSupported)
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
@@ -87,7 +87,7 @@
     static int tries = 0;
     
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough && gameItem.photoURL.length > 0 && gameItem.isSupported)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough && gameItem.isSupported)
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
@@ -122,7 +122,7 @@
     
     // Cannot, be already used name, cannot be a tie, must be close enough
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.photoURL.length > 0 && gameItem.isSupported)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.isSupported)
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);
