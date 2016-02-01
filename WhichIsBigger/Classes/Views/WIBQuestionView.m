@@ -78,6 +78,9 @@
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
+        [self.optionView1 removeAllAnimations];
+        [self.optionView2 removeAllAnimations];
+        
         self.pointsLabel.alpha = 0.0;
     } completion:^(BOOL finished){
         self.optionView1.transform = CGAffineTransformMakeTranslation(0, 0);
