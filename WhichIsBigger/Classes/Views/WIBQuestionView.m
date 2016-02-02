@@ -27,6 +27,8 @@
 @property (nonatomic, strong) IBOutlet WIBOptionView *optionView2;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *pointsLabel;
+@property (nonatomic, assign) NSInteger incrementedScore;
+@property (nonatomic, strong ) NSTimer * scoreLabelTimer;
 
 @property (nonatomic, weak) id<WIBScoringDelegate> scoringDelegate;
 
@@ -75,13 +77,14 @@
 
 - (void)startQuestionExitAnimationWithCompletion:(void (^)(BOOL finished))completion
 {
+    [self.scoreLabelTimer invalidate];
+    self.pointsLabel.text = [NSString stringWithFormat:@"%ld pts",(long)[WIBGamePlayManager sharedInstance].score];
+    
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
         [self.optionView1 removeAllAnimations];
         [self.optionView2 removeAllAnimations];
-        
-        self.pointsLabel.alpha = 0.0;
     } completion:^(BOOL finished){
         self.optionView1.transform = CGAffineTransformMakeTranslation(0, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(0, 0);
@@ -102,6 +105,8 @@
     self.comparsionSymbol.alpha = 1;
     self.comparsionSymbol.backgroundColor = [UIColor clearColor];
     self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
+    
+    
     
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         // End
@@ -131,14 +136,32 @@
     // TODO: Need a way to queue the exit animation immediately after this is complete.
 }
 
+# pragma mark - WIBQuestionViewDelegate
 - (void)animatePointsView
 {
-    self.pointsLabel.text = [NSString stringWithFormat:@"+ %ld points!", self.question.points];
+    NSInteger score = [[[WIBGamePlayManager sharedInstance] gameRound] score];
+    NSInteger questionIndex = [[[WIBGamePlayManager sharedInstance] gameRound] questionIndex];
+    WIBGameQuestion *lastQuestion = [[[[WIBGamePlayManager sharedInstance] gameRound] gameQuestions] objectAtIndex:questionIndex-1];
+    self.incrementedScore = score - lastQuestion.points;
+    
     self.pointsLabel.alpha = 1.0;
-    [self.pointsLabel startCanvasAnimation];
+    self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(incrementScore) userInfo:nil repeats:YES];
 }
 
-# pragma mark - WIBQuestionViewDelegate
+- (void)incrementScore
+{
+    if (self.incrementedScore < [WIBGamePlayManager sharedInstance].score)
+    {
+        _incrementedScore++;
+        self.pointsLabel.text = [NSString stringWithFormat:@"%ld pts",(long)self.incrementedScore];
+    }
+    else
+    {
+        [self.scoreLabelTimer invalidate];
+    }
+}
+
+
 - (void)optionView:(WIBOptionView *)optionView didSelectOption:(WIBGameOption *)option
 {
     self.gamePlayDisabled = YES;

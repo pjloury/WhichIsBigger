@@ -45,6 +45,7 @@
             <string>BloggerSans-Medium</string>
             <string>BloggerSans-Medium</string>
             <string>BloggerSans-Medium</string>
+            <string>BloggerSans-Medium</string>
         </mutableArray>
         <mutableArray key="Blogger_Sans-Medium_Italic.otf">
             <string>BloggerSans-MediumItalic</string>
@@ -358,8 +359,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-uj-BHA" userLabel="Timer Bar">
-                                <rect key="frame" x="0.0" y="64" width="600" height="10"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-uj-BHA" userLabel="Timer Bar">
+                                <rect key="frame" x="0.0" y="20" width="600" height="10"/>
                                 <color key="backgroundColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="0.51000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="At1-Hp-Eb8"/>
@@ -378,11 +379,11 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G5F-Qh-xty" customClass="WIBQuestionView">
-                                <rect key="frame" x="20" y="74" width="560" height="526"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5F-Qh-xty" customClass="WIBQuestionView">
+                                <rect key="frame" x="20" y="30" width="560" height="570"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-G8-lyv" userLabel="Option View1" customClass="WIBOptionView">
-                                        <rect key="frame" x="20" y="183" width="200" height="200"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-G8-lyv" userLabel="Option View1" customClass="WIBOptionView">
+                                        <rect key="frame" x="20" y="205" width="200" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oYM-3z-H8O" customClass="WIBOptionButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -423,10 +424,10 @@
                                                         </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BAp-Hn-2Wa" customClass="CSAnimationView">
-                                                        <rect key="frame" x="63" y="91" width="140" height="85"/>
+                                                        <rect key="frame" x="68" y="25" width="90" height="32"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="+ 52 pts!" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrC-AR-5OS" userLabel="Points Label">
-                                                                <rect key="frame" x="20" y="20" width="100" height="45"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="+ 52 pts!" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrC-AR-5OS" userLabel="Points Label">
+                                                                <rect key="frame" x="0.0" y="0.0" width="81.5" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -574,8 +575,8 @@
                                             <outlet property="popButton" destination="oYM-3z-H8O" id="BI6-OL-X75"/>
                                         </connections>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jj3-Vf-UGz" customClass="CSAnimationView">
-                                        <rect key="frame" x="240" y="243" width="80" height="80"/>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jj3-Vf-UGz" customClass="CSAnimationView">
+                                        <rect key="frame" x="240" y="265" width="80" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkX-Al-Ght">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -610,8 +611,8 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bG-g8-LtS" userLabel="Option View2" customClass="WIBOptionView">
-                                        <rect key="frame" x="340" y="183" width="200" height="200"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bG-g8-LtS" userLabel="Option View2" customClass="WIBOptionView">
+                                        <rect key="frame" x="340" y="205" width="200" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mwj-cc-iv5" customClass="WIBOptionButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -765,8 +766,8 @@
                                             <outlet property="popButton" destination="Mwj-cc-iv5" id="Dz5-sa-M6T"/>
                                         </connections>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1 of 5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9N-It-9yp">
-                                        <rect key="frame" x="20" y="491" width="55" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 of 5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9N-It-9yp">
+                                        <rect key="frame" x="20" y="535" width="55" height="22"/>
                                         <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="22"/>
                                         <color key="textColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -774,8 +775,8 @@
                                             <rect key="frame" x="25" y="761" width="56" height="26"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwB-4n-464" customClass="WIBPopButton">
-                                        <rect key="frame" x="180" y="487" width="200" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwB-4n-464" customClass="WIBPopButton">
+                                        <rect key="frame" x="180" y="531" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="3uf-hJ-1Kx"/>
                                             <constraint firstAttribute="height" constant="30" id="5Hb-VY-dAg"/>
@@ -810,6 +811,15 @@
                                             </mask>
                                         </variation>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ok-9r-diA">
+                                        <rect key="frame" x="497" y="535" width="55" height="22"/>
+                                        <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="22"/>
+                                        <color key="textColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="25" y="761" width="56" height="26"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="jj3-Vf-UGz" secondAttribute="centerY" id="0J7-4W-tCF"/>
@@ -821,6 +831,7 @@
                                     <constraint firstItem="SE8-G8-lyv" firstAttribute="top" secondItem="2bG-g8-LtS" secondAttribute="bottom" constant="-200" id="4az-7a-FsG">
                                         <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                                     </constraint>
+                                    <constraint firstItem="4ok-9r-diA" firstAttribute="trailing" secondItem="G5F-Qh-xty" secondAttribute="trailingMargin" id="91m-BC-KX7"/>
                                     <constraint firstItem="w9N-It-9yp" firstAttribute="centerY" secondItem="lwB-4n-464" secondAttribute="centerY" id="A77-nc-Pdr"/>
                                     <constraint firstItem="SE8-G8-lyv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="G5F-Qh-xty" secondAttribute="top" priority="750" constant="80" id="Ftd-rP-Ygq">
                                         <variation key="heightClass=regular-widthClass=compact" constant="100"/>
@@ -868,6 +879,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="-35"/>
                                     </constraint>
                                     <constraint firstAttribute="centerY" secondItem="SE8-G8-lyv" secondAttribute="centerY" constant="-20" id="wdc-tU-YJd"/>
+                                    <constraint firstItem="4ok-9r-diA" firstAttribute="baseline" secondItem="w9N-It-9yp" secondAttribute="baseline" id="xO8-sV-96q"/>
                                     <constraint firstItem="SE8-G8-lyv" firstAttribute="leading" secondItem="G5F-Qh-xty" secondAttribute="leading" constant="20" id="zdW-hs-8ag"/>
                                     <constraint firstAttribute="bottom" secondItem="w9N-It-9yp" secondAttribute="bottom" constant="13" id="ziR-f5-eL8"/>
                                 </constraints>
@@ -942,6 +954,7 @@
                                     <outlet property="comparsionSymbolAnimationView" destination="jj3-Vf-UGz" id="b7C-4h-gfd"/>
                                     <outlet property="optionView1" destination="SE8-G8-lyv" id="LMt-dn-8bH"/>
                                     <outlet property="optionView2" destination="2bG-g8-LtS" id="1rY-wc-iSH"/>
+                                    <outlet property="pointsLabel" destination="4ok-9r-diA" id="daq-Z1-N7k"/>
                                     <outlet property="titleLabel" destination="oxb-Kc-J3H" id="RVH-cd-oYK"/>
                                 </connections>
                             </view>

@@ -139,8 +139,9 @@
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         self.pointsLabel.transform = CGAffineTransformMakeScale(2, 2);
     } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:0.8 delay:0.8 options:0 animations:^{
-            self.pointsLabel.alpha = 0.0; }
+        [UIView animateKeyframesWithDuration:1.2 delay:1.2 options:0 animations:^{
+            self.pointsLabel.alpha = 0.0;
+        }
                                   completion:nil];
     }];
 }
@@ -188,7 +189,7 @@
 - (void)removeAllAnimations {
     [self.pointsLabel.layer removeAllAnimations];
     self.pointsLabel.alpha = 0.0;
-    self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);    
+    self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
 }
 
 @end
