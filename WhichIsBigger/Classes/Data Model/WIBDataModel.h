@@ -15,6 +15,10 @@
 
 - (WIBGameItem*)firstGameItemForCategory:(NSString *)category;
 - (WIBGameItem*)secondGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
+
+- (WIBGameItem*)firstNonHumanGameItemForCategory:(NSString *)category;
+- (WIBGameItem*)secondNonHumanGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
+
 - (WIBGameItem*)secondGameItemForCategory:(NSString *)category dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude;
 
 @end

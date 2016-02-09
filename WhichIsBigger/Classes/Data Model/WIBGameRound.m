@@ -49,9 +49,12 @@
 
 - (void)generateQuestions
 {
+    [self generateQuestionsForType:[self randomQuestionType]];
+}
+
+- (void)generateQuestionsForType:(WIBQuestionType *)questionType
+{
     NSMutableArray *questions = [NSMutableArray array];
-    
-    WIBQuestionType *questionType = [self randomQuestionType];
     
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {

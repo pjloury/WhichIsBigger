@@ -63,6 +63,24 @@
     }
 }
 
+- (WIBGameItem*)firstNonHumanGameItemForCategory:(NSString *)category
+{
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    
+    int r = arc4random() % [gameItemsWithSameCategory count];
+    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
+    
+    if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.isSupported && !gameItem.isPerson)
+    {
+        [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
+        return gameItem;
+    }
+    else
+    {
+        return [self firstGameItemForCategory:category];
+    }
+}
+
 - (WIBGameItem*)secondGameItemForCategory:(NSString *)category dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude
 {
     NSAssert(magnitude>1,@"Magnitude is too small");
@@ -123,6 +141,42 @@
     // Cannot, be already used name, cannot be a tie, must be close enough
     if(![self itemNameAlreadyUsed:gameItem.name] &&
        [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.isSupported)
+    {
+        [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
+        NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);
+        return gameItem;
+    }
+    else
+    {
+        tries++;
+        if (tries < [gameItemsWithSameCategory count])
+        {
+            return [self secondGameItemForCategory:category withRespectToItem:item withQuestionCeiling:questionCeiling];
+        }
+        else
+        {
+            return [self secondGameItemForCategory:category withRespectToItem:item withQuestionCeiling:questionCeiling+10];
+        }
+    }
+}
+
+- (WIBGameItem*)secondNonHumanGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling
+{
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    
+    int r = arc4random() % [gameItemsWithSameCategory count];
+    
+    WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
+    
+    NSLog(@"%@ vs %@", gameItem.name,item.name);
+    double percentDifference = (fabs((gameItem.baseQuantity.doubleValue - item.baseQuantity.doubleValue)/fmin(item.baseQuantity.doubleValue,gameItem.baseQuantity.doubleValue))) * 100;
+    BOOL closeEnough = (percentDifference < questionCeiling && percentDifference > [WIBGamePlayManager sharedInstance].questionFloor);
+    
+    static int tries = 0;
+    
+    // Cannot, be already used name, cannot be a tie, must be close enough
+    if(![self itemNameAlreadyUsed:gameItem.name] &&
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.isSupported && !gameItem.isPerson)
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);

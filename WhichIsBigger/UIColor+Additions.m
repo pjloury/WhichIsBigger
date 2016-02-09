@@ -99,6 +99,13 @@ alpha:1.0]
     return [UIColor colorWithRed:175 green:68 blue:255 alpha:.17];
 }
 
++ (UIColor *)randomColor
+{
+    NSArray *colors = [UIColor colorArray];
+    int r = arc4random() % [colors count];
+    return [colors objectAtIndex:r];
+}
+
 + (NSArray *)colorArray {
     return @[
              [UIColor sexyRedColor],

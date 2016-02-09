@@ -48,30 +48,12 @@
     PFQuery *query =  [PFQuery queryWithClassName:@"QuestionType"];
     [query whereKey:@"name" containedIn:[[PFConfig currentConfig] objectForKey:@"questionTypeWhiteList"]];
     
-    if ([WIBGamePlayManager sharedInstance].localStorage && ![self.reachability isReachable])
-    {
-        [query fromLocalDatastore];
-    }
+    if ([WIBGamePlayManager sharedInstance].localStorage && ![self.reachability isReachable])[query fromLocalDatastore];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         NSMutableArray *questionTypes = [NSMutableArray array];
-         for (PFObject *object in objects)
-         {
-             WIBQuestionType *questionType = [[WIBQuestionType alloc] init];
-             questionType.name = [object objectForKey:@"name"];
-             questionType.comparisonType = ((NSNumber *)[object objectForKey:@"comparisonType"]).integerValue;
-             questionType.category = [object objectForKey:@"category"];
-             questionType.questionString  = [object objectForKey:@"questionString"];
-             [questionTypes addObject:questionType];
-         }
-         
-         [WIBGamePlayManager sharedInstance].questionTypes = questionTypes;
-         
-         if (completion)
-         {
-             completion();
-         }
+         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];
+         if (completion) completion();
          [PFObject pinAllInBackground:objects];
      }];
 }

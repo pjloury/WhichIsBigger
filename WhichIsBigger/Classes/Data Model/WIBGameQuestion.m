@@ -31,6 +31,20 @@
     return self;
 }
 
+- (instancetype)initNonHumanOneToOneQuestion:(WIBQuestionType *)questionType
+{
+    self = [super init];
+    if (self)
+    {
+        WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstNonHumanGameItemForCategory:questionType.category];
+        WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondNonHumanGameItemForCategory:questionType.category withRespectToItem:item1 withQuestionCeiling:[WIBGamePlayManager sharedInstance].questionCeiling];
+        _option1 = [[WIBGameOption alloc] initWithItem:item1 multiplier:1];
+        _option2 = [[WIBGameOption alloc] initWithItem:item2 multiplier:1];
+        _questionType = questionType;
+    }
+    return self;
+}
+
 - (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1 dissimilargameItem2:(WIBGameItem *)item2
 {
     self = [super init];

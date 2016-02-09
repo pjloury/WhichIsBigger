@@ -22,7 +22,8 @@
 + (WIBGamePlayManager *)sharedInstance;
 
 - (void)setupGamePlay;
-- (void)beginGame;
+- (void)beginRoundForType:(WIBQuestionType *)type;
+- (void)beginRound;
 - (void)endGame;
 - (NSUInteger)score;
 - (WIBGameQuestion *)nextGameQuestion;

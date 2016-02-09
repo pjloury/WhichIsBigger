@@ -10,4 +10,21 @@
 
 @implementation WIBQuestionType
 
+@dynamic comparisonType;
+@dynamic category;
+@dynamic title;
+@dynamic backgroundColor;
+@dynamic tintColor;
+@dynamic image;
+@dynamic questionString;
+@dynamic name;
+
++ (void)load {
+    [WIBQuestionType registerSubclass];
+}
+
++ (NSString *)parseClassName {
+    return @"QuestionType";
+}
+
 @end

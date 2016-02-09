@@ -311,7 +311,7 @@ returns a string representing the topic
 """
 
 def get_topic(root):
-
+    print root
     topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
 
     m = __topic_re.match(topic)
@@ -583,14 +583,14 @@ def single_query(object,CATEGORY,UNITS="",TAGS=[]):
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
     #print xml
-
     root = ElementTree.fromstring(xml)
-
     # print ElementTree.tostring(root)
     # for child in root:
     #     print child.tag, child.attrib
 
     #use City, Country format (exclude province)
+
+    print root
     TOPIC = get_topic(root)
     topicItems = [x.strip() for x in TOPIC.split(',')]
     if len(topicItems)>2:

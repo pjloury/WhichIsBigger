@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class WIBGameQuestion;
+@class WIBQuestionType;
 
 @interface WIBGameRound : NSObject
 
@@ -24,6 +25,7 @@
 @property (nonatomic, readonly) NSInteger questionIndex;
 
 - (void)generateQuestions;
+- (void)generateQuestionsForType:(WIBQuestionType *)questionType;
 - (UIColor *)randomColor;
 
 - (void)questionAnsweredCorrectly;

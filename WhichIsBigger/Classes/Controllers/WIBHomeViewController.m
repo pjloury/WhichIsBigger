@@ -13,14 +13,17 @@
 #import "WIBLoginViewController.h"
 #import "WIBGameCompleteViewController.h"
 
-@interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate>
+#import "WIBQuestionType.h"
+#import "WIBQuestionTypeCell.h"
+
+@interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @property (weak, nonatomic) IBOutlet UIButton *highScoresButton;
 @property (weak, nonatomic) IBOutlet UILabel *footerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIView *highScoresUnderscore;
-@property (weak, nonatomic) IBOutlet UIView *highScoresBackground;
+@property (weak, nonatomic) IBOutlet UICollectionView *categoriesCollectionView;
+
 
 @property (nonatomic) NSArray *readPermissions;
 
@@ -36,6 +39,7 @@
     
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
+            [self.categoriesCollectionView reloadData];
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
                 dispatch_async(dispatch_get_main_queue(),
                                ^{
@@ -51,21 +55,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self updateHighScore];
+    self.highScoresButton.hidden = ![GKLocalPlayer localPlayer].isAuthenticated;
 }
 
 - (void)updateHighScore
 {
-    if (![GKLocalPlayer localPlayer].isAuthenticated) {
-        self.highScoresButton.hidden = YES;
-        self.highScoresBackground.hidden = YES;
-        self.highScoresUnderscore.hidden = YES;
-    }
-    else {
-        self.highScoresButton.hidden = NO;
-        self.highScoresBackground.hidden = NO;
-        self.highScoresUnderscore.hidden = NO;
-    }
+    self.highScoresButton.hidden = ![GKLocalPlayer localPlayer].isAuthenticated;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -138,7 +133,7 @@
 
 - (IBAction)didPressNewGameButton:(id)sender
 {
-    [[WIBGamePlayManager sharedInstance] beginGame];
+    [[WIBGamePlayManager sharedInstance] beginRound];
     [self performSegueWithIdentifier:@"newGameSegue" sender:self];
 }
 
@@ -151,10 +146,37 @@
         gcViewController.leaderboardIdentifier = @"highScore";
         [self presentViewController:gcViewController animated:YES completion:nil];
     }
+}
 
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    WIBGameCompleteViewController *vc = [sb instantiateViewControllerWithIdentifier:@"GameCompleteViewController"];
-//    [self.navigationController pushViewController:vc animated:YES];
+#pragma mark - Collection View Data Source
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+//    NSArray *unlockedCategories = [[PFUser currentUser]objectForKey:@"unlockedCategories"];
+//    return unlockedCategories.count;
+    // I could get the categories for each one
+    return [[[WIBGamePlayManager sharedInstance] questionTypes] count];
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    WIBQuestionTypeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"questionTypeCell" forIndexPath:indexPath];
+    WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
+    //[cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url]];
+    cell.imageView.image = [UIImage imageWithData:[type.image getData]];
+    cell.label.text = type.title;
+    cell.backgroundColor = [UIColor randomColor];
+    cell.label.textColor = [UIColor randomColor];
+    return cell;
+}
+
+#pragma mark - Collection View Delegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
+    [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
+    [self performSegueWithIdentifier:@"newGameSegue" sender:self];
 }
 
 #pragma mark - Game Center Delegate

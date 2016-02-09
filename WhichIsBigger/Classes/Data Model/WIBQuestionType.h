@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 typedef NS_ENUM(NSUInteger, WIBComparisonType) {
     WIBComparisonLikeToLikeType,
@@ -14,12 +15,23 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
     WIBComparisonCount
 };
 
-@interface WIBQuestionType : NSObject
+@interface WIBQuestionType : PFObject<PFSubclassing>
 
-@property (nonatomic) NSString *questionString;
++ (NSString *)parseClassName;
+
 @property (nonatomic) WIBComparisonType comparisonType;
-@property (nonatomic) UIColor *themeColor;
-@property (nonatomic) NSString *name;
 @property (nonatomic) NSString *category;
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *backgroundColor;
+@property (nonatomic) NSString *tintColor;
+@property (nonatomic) PFFile *image;
+@property (nonatomic) NSString *questionString;
+@property (nonatomic) NSString *name;
+
+//@property (nonatomic) NSString *questionString;
+//@property (nonatomic) WIBComparisonType comparisonType;
+//@property (nonatomic) UIColor *themeColor;
+//@property (nonatomic) NSString *name;
+//@property (nonatomic) NSString *category;
 
 @end

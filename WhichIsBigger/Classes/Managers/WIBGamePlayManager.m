@@ -72,10 +72,16 @@
     }
 }
 
-- (void)beginGame
+- (void)beginRound
 {
     self.gameRound = [[WIBGameRound alloc] init];
     [self.gameRound generateQuestions];
+}
+
+- (void)beginRoundForType:(WIBQuestionType *)type
+{
+    self.gameRound = [[WIBGameRound alloc] init];
+    [self.gameRound generateQuestionsForType:type];
 }
 
 - (void)endGame
@@ -94,6 +100,26 @@
     {
         self.highScore = self.gameRound.score;
     }
+}
+
+// Start with countries
+// Then cities and states
+
+
+// How to determine which category to give them next. Need to be risk Adverse
+// Cloud brings down the categories.. Always in the same order..
+// Start with
+// Use a colon to split apart categoryString from tag
+
+
+- (double) questionCeiling
+{
+    return 5;
+}
+
+- (double) questionFloor
+{
+    return 0;
 }
 
 - (void)adjustDifficulty

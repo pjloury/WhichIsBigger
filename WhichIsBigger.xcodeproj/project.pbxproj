@@ -23,6 +23,8 @@
 		60621C4D1BD04BE000C8207E /* WIBHighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C4C1BD04BE000C8207E /* WIBHighScoresViewController.m */; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
 		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
+		60A43EFD1C686CD200EFC46E /* WIBCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A43EFC1C686CD200EFC46E /* WIBCategoryCell.m */; };
+		60A43F001C687C4700EFC46E /* WIBQuestionTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */; };
 		60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B43E101BD7631200E9F604 /* GameKit.framework */; };
 		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
 		60D39B861BC24D51008E06EF /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D39B851BC24D51008E06EF /* SidebarTableViewController.m */; };
@@ -102,6 +104,10 @@
 		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
 		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
 		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60A43EFB1C686CD200EFC46E /* WIBCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBCategoryCell.h; path = WhichIsBigger/Classes/Views/WIBCategoryCell.h; sourceTree = "<group>"; };
+		60A43EFC1C686CD200EFC46E /* WIBCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBCategoryCell.m; path = WhichIsBigger/Classes/Views/WIBCategoryCell.m; sourceTree = "<group>"; };
+		60A43EFE1C687C4700EFC46E /* WIBQuestionTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionTypeCell.h; path = WhichIsBigger/Classes/Views/WIBQuestionTypeCell.h; sourceTree = "<group>"; };
+		60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionTypeCell.m; path = WhichIsBigger/Classes/Views/WIBQuestionTypeCell.m; sourceTree = "<group>"; };
 		60B43E101BD7631200E9F604 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
 		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
@@ -208,6 +214,10 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				60A43EFE1C687C4700EFC46E /* WIBQuestionTypeCell.h */,
+				60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */,
+				60A43EFB1C686CD200EFC46E /* WIBCategoryCell.h */,
+				60A43EFC1C686CD200EFC46E /* WIBCategoryCell.m */,
 				605D46171C5F38CD00A7529E /* UIImage+Placeholder.h */,
 				605D46181C5F38CD00A7529E /* UIImage+Placeholder.m */,
 				605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */,
@@ -582,9 +592,11 @@
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
 				60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */,
 				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
+				60A43F001C687C4700EFC46E /* WIBQuestionTypeCell.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */,
 				6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */,
+				60A43EFD1C686CD200EFC46E /* WIBCategoryCell.m in Sources */,
 				60621C4D1BD04BE000C8207E /* WIBHighScoresViewController.m in Sources */,
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
 				60D39B891BC24D60008E06EF /* SWRevealViewController.m in Sources */,

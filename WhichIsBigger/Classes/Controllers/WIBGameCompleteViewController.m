@@ -133,7 +133,7 @@
 
 - (IBAction)didPressPlayAgain:(id)sender
 {
-    [[WIBGamePlayManager sharedInstance] beginGame];
+    [[WIBGamePlayManager sharedInstance] beginRound];
     [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
 }
 
