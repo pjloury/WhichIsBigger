@@ -7,14 +7,16 @@
 //
 
 #import "WIBQuestionType.h"
+#import "UIColor+Additions.h"
 
 @implementation WIBQuestionType
 
 @dynamic comparisonType;
 @dynamic category;
 @dynamic title;
-@dynamic backgroundColor;
-@dynamic tintColor;
+@dynamic backgroundColorString;
+@dynamic tintColorString;
+@dynamic pointsToUnlock;
 @dynamic image;
 @dynamic questionString;
 @dynamic name;
@@ -25,6 +27,14 @@
 
 + (NSString *)parseClassName {
     return @"QuestionType";
+}
+
+- (UIColor *)backgroundColor {
+    return [UIColor colorWithString:self.backgroundColorString];
+}
+
+- (UIColor *)tintColor {
+    return [UIColor colorWithString:self.tintColorString];
 }
 
 @end

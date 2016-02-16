@@ -11,5 +11,28 @@
 
 @implementation WIBQuestionTypeCell
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = .15f;
+    animation.fromValue = @(1);
+    animation.toValue = @(1.2f);
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
+    [self.layer addAnimation:animation forKey:@"scale"];
+    [super touchesBegan:touches withEvent:event]; // you need this
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = .1f;
+    animation.toValue = @(1);
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
+    [self.layer addAnimation:animation forKey:@"scale1"];
+    [super touchesEnded:touches withEvent:event];
+}
 
 @end

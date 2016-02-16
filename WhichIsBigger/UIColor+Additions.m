@@ -106,24 +106,35 @@ alpha:1.0]
     return [colors objectAtIndex:r];
 }
 
++ (NSArray *)randomColorPair
+{
+    int r1 = arc4random() % [UIColor colorArray].count;
+    int r2 = arc4random() % [UIColor colorArray].count;
+    while (abs(r2-r1)<= 1) {
+        r2 = arc4random() % [UIColor colorArray].count;
+    }
+    return @[[UIColor colorArray][r1], [UIColor colorArray][r2]];
+}
+
+
 + (NSArray *)colorArray {
     return @[
-             [UIColor sexyRedColor],
              [UIColor sexyPinkColor],
-             [UIColor sexyPurpleColor],
-             [UIColor sexyDeepPurpleColor],
-             [UIColor sexyIndigoColor],
-             [UIColor sexyBlueColor],
-             [UIColor sexyLightBlueColor],
-             [UIColor sexyCyanColor],
-             [UIColor sexyTealColor],
-             [UIColor sexyGreenColor],
-             [UIColor sexyLightGreenColor],
-             [UIColor sexyLimeColor],
+             [UIColor sexyRedColor],
+             [UIColor sexyOrangeColor],
+             [UIColor sexyDeepOrangeColor],
              [UIColor sexyYellowColor],
              [UIColor sexyAmberColor],
-             [UIColor sexyOrangeColor],
-             [UIColor sexyDeepOrangeColor]
+             [UIColor sexyLightGreenColor],
+             [UIColor sexyLimeColor],
+             [UIColor sexyGreenColor],
+             [UIColor sexyTealColor],
+             [UIColor sexyCyanColor],
+             [UIColor sexyLightBlueColor],
+             [UIColor sexyBlueColor],
+             [UIColor sexyIndigoColor],
+             [UIColor sexyPurpleColor],
+             [UIColor sexyDeepPurpleColor]
              ];
 }
 
@@ -160,5 +171,13 @@ alpha:1.0]
     return gradientLayer;
 }
 
++ (UIColor *)colorWithString:(NSString *)hexString
+{
+    NSMutableString *tempHex=[[NSMutableString alloc] init];
+    [tempHex appendString:hexString];
+    unsigned colorInt = 0;
+    [[NSScanner scannerWithString:tempHex] scanHexInt:&colorInt];
+    return UIColorFromRGB(colorInt);
+}
 
 @end

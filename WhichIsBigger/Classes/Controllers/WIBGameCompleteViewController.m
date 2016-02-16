@@ -9,7 +9,7 @@
 #import "WIBGameCompleteViewController.h"
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 // Models
 #import "WIBGameQuestion.h"
@@ -180,11 +180,14 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     WIBGameQuestion *question = [WIBGamePlayManager sharedInstance].gameRound.gameQuestions[indexPath.row];
-    NSString *imageName = question.answeredCorrectly ? @"greenCheck" : @"redX";
-    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"answer" forIndexPath:indexPath];
     UIImageView *answerImageView = (UIImageView *)[cell viewWithTag:10];
-    answerImageView.image = [UIImage imageNamed:imageName];
+    
+    if (question.answeredCorrectly) {
+         [answerImageView sd_setImageWithURL:[NSURL URLWithString:question.answer.item.photoURL]];
+    } else {
+        answerImageView.image = [UIImage imageNamed:@"redX"];
+    }
     return cell;
 }
 

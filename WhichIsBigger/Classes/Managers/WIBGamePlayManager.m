@@ -22,8 +22,10 @@
 
 @property (nonatomic, assign) NSInteger currentStreak;
 @property (nonatomic, assign) NSInteger longestStreak;
-@property (nonatomic, assign) NSUInteger level;
-@property (nonatomic, assign) NSUInteger currentLevelPoints;
+@property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) NSInteger lifeTimeScore;
+
+@property (nonatomic, assign) NSInteger currentLevelPoints;
 
 @property (nonatomic) NSString *roundUUID;
 
@@ -87,14 +89,7 @@
 - (void)endGame
 {
     [self adjustDifficulty];
-    NSNumber *lifeTimeScore = [[PFUser currentUser] objectForKey:@"lifeTimeScore"];
-    lifeTimeScore = @(lifeTimeScore.integerValue + self.score);
-    
-    self.currentLevelPoints = lifeTimeScore.integerValue % POINTS_PER_LEVEL;
-    self.level = lifeTimeScore.integerValue / POINTS_PER_LEVEL;
-    
-    [[PFUser currentUser] setObject:lifeTimeScore forKey:@"lifeTimeScore"];
-    [[PFUser currentUser] saveInBackground];
+    self.lifeTimeScore = self.lifeTimeScore + self.score;
     
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
     {
@@ -102,9 +97,44 @@
     }
 }
 
+- (NSInteger)level
+{
+    return self.lifeTimeScore / POINTS_PER_LEVEL;
+}
+
+- (NSInteger)lifeTimeScore
+{
+    return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
+}
+
+- (void)setLifeTimeScore:(NSInteger)lifeTimeScore
+{
+    [[PFUser currentUser] setObject:@(lifeTimeScore) forKey:@"lifeTimeScore"];
+    [[PFUser currentUser] saveInBackground];
+}
+
+- (NSInteger)currentLevelPoints
+{
+    return self.lifeTimeScore % POINTS_PER_LEVEL;
+}
+
+
+- (NSArray *)availableQuestionTypes
+{
+    // for every 5, give me the next question type
+    //NSUInteger indexOfUnlockedCategories = self.level/5;
+    //return [self.questionTypes subarrayWithRange:NSMakeRange(0, indexOfUnlockedCategories)];
+    NSMutableArray *array = [NSMutableArray array];
+    for (WIBQuestionType *questionType in self.questionTypes) {
+        if (self.lifeTimeScore > [questionType.pointsToUnlock integerValue]) {
+            [array addObject:questionType];
+        }
+    }
+    return array;
+}
+
 // Start with countries
 // Then cities and states
-
 
 // How to determine which category to give them next. Need to be risk Adverse
 // Cloud brings down the categories.. Always in the same order..
@@ -221,7 +251,7 @@
     return (num) ? num.integerValue: 0;
 }
 
-- (NSUInteger)totalCorrectAnswers
+- (NSInteger)totalCorrectAnswers
 {
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalCorrectAnswers"];
     return (num) ? num.integerValue: 0;
@@ -232,7 +262,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(totalCorrectAnswers) forKey:@"totalCorrectAnswers"];
 }
 
-- (NSUInteger)totalAnswers
+- (NSInteger)totalAnswers
 {
     //PFQuery *totalAnswersQuery [PFQuery queryWithClassName:@"Question"];
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalAnswers"];

@@ -35,10 +35,17 @@
     self.userInteractionEnabled = YES;
     self.popButton.popDelegate = self;
     self.popButton.userInteractionEnabled = YES;
+    self.answerLabel.textColor = [UIColor lightPurpleColor];
     self.answerLabel.hidden = YES;
     [self configureViews];
     
+    self.imageView.layer.masksToBounds = NO;
     self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
+    
+    self.imageView.layer.shadowColor = [UIColor grayColor].CGColor;
+    self.imageView.layer.shadowOffset = CGSizeMake(4, 4);
+    self.imageView.layer.shadowOpacity = 1;
+    self.imageView.layer.shadowRadius = 1.0;
 }
 
 - (void)configureViews
@@ -49,7 +56,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self.popButton action:@selector(longPressDetected:)];
-    longPressRecognizer.minimumPressDuration = 0.4;
+    longPressRecognizer.minimumPressDuration = 0.1;
     longPressRecognizer.allowableMovement = 50.0f;
     [self.popButton addGestureRecognizer:longPressRecognizer];
     self.popButton.delegate = self;
@@ -63,24 +70,31 @@
     self.backgroundColor = [UIColor clearColor];
     self.layer.cornerRadius = self.layer.frame.size.width/20;
     self.layer.masksToBounds = YES;
+    
+    self.imageView.layer.shadowColor = [UIColor grayColor].CGColor;
+    self.imageView.layer.shadowOffset = CGSizeMake(5, 5);
+    self.imageView.layer.shadowOpacity = 1;
+    self.imageView.layer.shadowRadius = 1.0;
+    
+    
 }
 
 - (void)correctResponse
 {
-    self.imageView.layer.opacity = 0.0;
-    self.imageView.layer.borderColor = [UIColor greenColor].CGColor;
-    [UIView animateWithDuration:1.0 animations:^{
-        self.imageView.layer.opacity = 1.0;
-    }];
+    self.imageView.layer.masksToBounds = NO;
+//    self.imageView.layer.borderColor = [UIColor greenColor].CGColor;
+    self.imageView.layer.shadowColor = [UIColor greenColor].CGColor;
+    self.imageView.layer.shadowRadius = 10.0f;
+    self.imageView.layer.shadowOpacity = 1.0f;
 }
 
 - (void)incorrectResponse;
 {
-    self.imageView.layer.opacity = 0.0;
-    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
-    [UIView animateWithDuration:1.0 animations:^{
-        self.imageView.layer.opacity = 1.0;
-    }];
+    self.imageView.layer.masksToBounds = NO;
+//    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
+    self.imageView.layer.shadowColor = [UIColor redColor].CGColor;
+    self.imageView.layer.shadowRadius = 10.0f;
+    self.imageView.layer.shadowOpacity = 1.0f;
 }
 
 - (void)gameQuestionTimeUpHandler:(NSNotification *)note
@@ -159,7 +173,7 @@
 - (void)popAnimation
 {
     [self popButtonPressed];
-    [self performSelector:@selector(popButtonLetGo) withObject:nil afterDelay:0.2];
+    [self performSelector:@selector(popButtonLetGo) withObject:nil afterDelay:0.05];
 }
 
 # pragma mark - Pop Button Delegate
@@ -171,7 +185,7 @@
     animation.toValue = @(1.2f);
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
-    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:@"linear"];
     [self.layer addAnimation:animation forKey:@"scale"];
 
 }

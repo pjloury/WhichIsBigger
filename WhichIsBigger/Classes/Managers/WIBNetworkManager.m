@@ -52,7 +52,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];
+         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];         
          if (completion) completion();
          [PFObject pinAllInBackground:objects];
      }];

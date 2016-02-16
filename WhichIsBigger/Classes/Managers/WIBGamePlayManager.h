@@ -28,6 +28,7 @@
 - (NSUInteger)score;
 - (WIBGameQuestion *)nextGameQuestion;
 
+@property (nonatomic) NSArray *availableQuestionTypes;
 @property (nonatomic) NSMutableArray *questionTypes;
 @property (nonatomic, readonly) WIBGameRound *gameRound;
 @property (nonatomic, assign, readonly) NSUInteger questionNumber;
@@ -41,11 +42,11 @@
 @property (nonatomic, assign, readonly) NSInteger highScore;
 @property (nonatomic, assign, readonly) NSInteger currentStreak;
 @property (nonatomic, assign, readonly) NSInteger longestStreak;
-@property (nonatomic, assign, readonly) NSUInteger totalCorrectAnswers;
-@property (nonatomic, assign, readonly) NSUInteger totalAnswers;
+@property (nonatomic, assign, readonly) NSInteger totalCorrectAnswers;
+@property (nonatomic, assign, readonly) NSInteger totalAnswers;
 @property (nonatomic, assign, readonly) float accuracy;
 
-@property (nonatomic, assign, readonly) NSUInteger level;
-@property (nonatomic, assign, readonly) NSUInteger currentLevelPoints;
+@property (nonatomic, assign, readonly) NSInteger level;
+@property (nonatomic, assign, readonly) NSInteger currentLevelPoints;
 
 @end

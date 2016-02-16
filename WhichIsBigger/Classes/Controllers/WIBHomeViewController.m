@@ -12,6 +12,7 @@
 #import "WIBNetworkManager.h"
 #import "WIBLoginViewController.h"
 #import "WIBGameCompleteViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "WIBQuestionType.h"
 #import "WIBQuestionTypeCell.h"
@@ -37,8 +38,12 @@
     self.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     self.startNewGameButton.enabled = NO;
     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor lightPurpleColor]];
+    
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
+            NSSortDescriptor *pointsToUnlock = [[NSSortDescriptor alloc] initWithKey:@"pointsToUnlock" ascending:YES];
+            //[[WIBGamePlayManager sharedInstance].questionTypes sortUsingDescriptors:@[pointsToUnlock]];
             [self.categoriesCollectionView reloadData];
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
                 dispatch_async(dispatch_get_main_queue(),
@@ -152,22 +157,44 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    NSArray *unlockedCategories = [[PFUser currentUser]objectForKey:@"unlockedCategories"];
-//    return unlockedCategories.count;
-    // I could get the categories for each one
     return [[[WIBGamePlayManager sharedInstance] questionTypes] count];
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WIBQuestionTypeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"questionTypeCell" forIndexPath:indexPath];
+    cell.clipsToBounds = NO;
+    
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
-    //[cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url]];
-    cell.imageView.image = [UIImage imageWithData:[type.image getData]];
-    cell.label.text = type.title;
-    cell.backgroundColor = [UIColor randomColor];
-    cell.label.textColor = [UIColor randomColor];
+    
+    if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^
+        (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+            image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            cell.imageView.image = image;
+        }];
+        
+        cell.label.text = type.title;
+        cell.imageViewContainer.backgroundColor = [UIColor randomColorPair][0];
+        cell.imageView.tintColor = [UIColor randomColorPair][1];
+    } else {
+        UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        cell.imageView.image = image;
+        cell.label.text = @"???";
+        cell.imageViewContainer.backgroundColor = [UIColor randomColorPair][0];
+        cell.imageView.tintColor = [UIColor randomColorPair][1];
+    }
+    
+    cell.label.textColor = [UIColor grayColor];
+    cell.imageViewContainer.layer.cornerRadius = 6.0;
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:cell.imageViewContainer.bounds];
+    cell.imageViewContainer.layer.masksToBounds = NO;
+    cell.imageViewContainer.layer.shadowColor = [UIColor grayColor].CGColor;
+    cell.imageViewContainer.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    cell.imageViewContainer.layer.shadowOpacity = 0.5f;
+    cell.imageViewContainer.layer.shadowPath = shadowPath.CGPath;
+    [cell.label sizeToFit];
     return cell;
 }
 
