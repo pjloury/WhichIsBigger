@@ -22,6 +22,7 @@
 #import "FBShimmeringView.h"
 #import "UIImage+Placeholder.h"
 #import "NSMutableArray+Shuffle.h"
+#import <iAd/iAd.h>
 
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIBAdViewController.h"
 
-@interface WIBLoadingViewController : UIViewController
+@interface WIBLoadingViewController : WIBAdViewController
 
 @end

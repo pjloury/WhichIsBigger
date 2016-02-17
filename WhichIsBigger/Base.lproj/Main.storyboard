@@ -151,7 +151,7 @@
                                 </state>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggp-8O-ecC" userLabel="TutorialButton">
-                                <rect key="frame" x="545" y="479" width="35" height="35"/>
+                                <rect key="frame" x="545" y="371" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="0jB-Oj-8Xz"/>
                                     <constraint firstAttribute="width" constant="35" id="KE1-la-U7d"/>
@@ -164,7 +164,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-xN-xH7" userLabel="LoginButton">
-                                <rect key="frame" x="20" y="469" width="45" height="45"/>
+                                <rect key="frame" x="20" y="366" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="4o7-jP-iwx"/>
                                     <constraint firstAttribute="width" constant="45" id="fxo-xw-xmI"/>
@@ -268,10 +268,18 @@
                                     <outlet property="delegate" destination="KTJ-1G-a6D" id="Stp-6e-XjD"/>
                                 </connections>
                             </collectionView>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eoR-Hx-rT6">
+                                <rect key="frame" x="0.0" y="486" width="608" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oQf-jg-9zH"/>
+                                </constraints>
+                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" red="0.52549019610000003" green="0.28627450980000002" blue="0.96078431369999995" alpha="0.16" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eoR-Hx-rT6" secondAttribute="trailingMargin" id="24T-eB-Scr"/>
                             <constraint firstItem="ggp-8O-ecC" firstAttribute="trailing" secondItem="AY9-H3-wFQ" secondAttribute="trailingMargin" id="4db-B1-m24"/>
+                            <constraint firstItem="8eP-wg-HXJ" firstAttribute="top" secondItem="eoR-Hx-rT6" secondAttribute="bottom" id="50q-ZF-0xd"/>
                             <constraint firstItem="JxI-uQ-Kqt" firstAttribute="centerY" secondItem="ggp-8O-ecC" secondAttribute="centerY" constant="5" id="5w6-lJ-z5z"/>
                             <constraint firstItem="8eP-wg-HXJ" firstAttribute="top" secondItem="0qU-j0-DBG" secondAttribute="bottom" constant="20" id="9Q3-Wr-6yj"/>
                             <constraint firstAttribute="centerX" secondItem="p0u-lJ-dK9" secondAttribute="centerX" constant="15" id="ATh-C7-dpi"/>
@@ -291,9 +299,12 @@
                             <constraint firstItem="8eP-wg-HXJ" firstAttribute="top" secondItem="JxI-uQ-Kqt" secondAttribute="bottom" constant="20" id="Uag-SD-B8l"/>
                             <constraint firstItem="gAP-xN-xH7" firstAttribute="leading" secondItem="AY9-H3-wFQ" secondAttribute="leadingMargin" id="VJS-1Z-pAB"/>
                             <constraint firstAttribute="centerX" secondItem="0qU-j0-DBG" secondAttribute="centerX" id="ZKh-xe-buw"/>
+                            <constraint firstItem="ggp-8O-ecC" firstAttribute="centerY" secondItem="gAP-xN-xH7" secondAttribute="centerY" id="ZtN-PN-b0h"/>
                             <constraint firstAttribute="centerX" secondItem="B7t-LI-PCZ" secondAttribute="centerX" id="ddi-DN-71A"/>
+                            <constraint firstAttribute="leading" secondItem="eoR-Hx-rT6" secondAttribute="leading" id="e5Q-Hx-pcK"/>
+                            <constraint firstItem="eoR-Hx-rT6" firstAttribute="leading" secondItem="AY9-H3-wFQ" secondAttribute="leadingMargin" id="fru-7a-Gty"/>
                             <constraint firstItem="NeW-yK-dsX" firstAttribute="centerY" secondItem="p0u-lJ-dK9" secondAttribute="centerY" constant="-5" id="hNX-ZY-BTC"/>
-                            <constraint firstItem="JxI-uQ-Kqt" firstAttribute="top" secondItem="gAP-xN-xH7" secondAttribute="bottom" constant="-28" id="hNt-es-a4r"/>
+                            <constraint firstItem="JxI-uQ-Kqt" firstAttribute="top" secondItem="gAP-xN-xH7" secondAttribute="bottom" constant="75" id="hNt-es-a4r"/>
                             <constraint firstItem="JxI-uQ-Kqt" firstAttribute="leading" secondItem="AY9-H3-wFQ" secondAttribute="leadingMargin" id="o9R-ey-3rf"/>
                             <constraint firstItem="n0Q-Fv-VRF" firstAttribute="top" secondItem="OTx-Ly-lX2" secondAttribute="bottom" constant="40" id="sxI-oa-Thd"/>
                             <constraint firstItem="8eP-wg-HXJ" firstAttribute="top" secondItem="B7t-LI-PCZ" secondAttribute="bottom" constant="100" id="zjf-Fn-pMg"/>
@@ -305,6 +316,8 @@
                                 <exclude reference="Jjw-W5-Yn9"/>
                                 <exclude reference="BYO-MA-ft3"/>
                                 <exclude reference="QKd-pz-gLT"/>
+                                <exclude reference="5w6-lJ-z5z"/>
+                                <exclude reference="fru-7a-Gty"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -315,6 +328,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Which is Bigger?" id="ZX4-7R-6OO"/>
                     <connections>
+                        <outlet property="adBannerView" destination="eoR-Hx-rT6" id="x5e-xI-B1T"/>
                         <outlet property="categoriesCollectionView" destination="OTx-Ly-lX2" id="U2N-tD-dww"/>
                         <outlet property="footerLabel" destination="0qU-j0-DBG" id="fDP-x3-VmU"/>
                         <outlet property="highScoresButton" destination="B7t-LI-PCZ" id="rlz-xu-RXQ"/>
@@ -2052,11 +2066,26 @@
                                     <rect key="frame" x="51" y="251" width="300" height="300"/>
                                 </variation>
                             </view>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQs-Xm-qPC">
+                                <rect key="frame" x="0.0" y="486" width="600" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ifl-db-xXl"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="MJI-Nz-U0i"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MJI-Nz-U0i"/>
+                                    </mask>
+                                </variation>
+                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Svu-pW-oA0" firstAttribute="top" secondItem="FQs-Xm-qPC" secondAttribute="bottom" id="2bM-Ml-Wsn"/>
                             <constraint firstAttribute="centerX" secondItem="obP-Mc-mfN" secondAttribute="centerX" id="Qsw-2L-ln7"/>
+                            <constraint firstItem="FQs-Xm-qPC" firstAttribute="leading" secondItem="1kT-9j-yXu" secondAttribute="leading" id="SGa-AB-AeP"/>
                             <constraint firstItem="okT-Dk-DeL" firstAttribute="top" secondItem="UtH-DJ-m8D" secondAttribute="bottom" constant="49" id="X8D-r7-33X"/>
+                            <constraint firstAttribute="trailing" secondItem="FQs-Xm-qPC" secondAttribute="trailing" id="h6J-gz-C0c"/>
                             <constraint firstItem="okT-Dk-DeL" firstAttribute="centerX" secondItem="1kT-9j-yXu" secondAttribute="centerX" id="hFt-3t-Ksr"/>
                             <constraint firstAttribute="centerY" secondItem="obP-Mc-mfN" secondAttribute="centerY" id="tkH-pT-ktu"/>
                         </constraints>
@@ -2087,6 +2116,12 @@
                         <outlet property="shimmeringView" destination="axe-zj-Zf4" id="qb8-rg-EiT"/>
                     </connections>
                 </viewController>
+                <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="UeG-l0-M0p">
+                    <rect key="frame" x="0.0" y="0.0" width="608" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="z2Q-BR-ckH"/>
+                    </constraints>
+                </adBannerView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9R-tC-ynt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="112" y="-1553"/>
@@ -2760,6 +2795,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="c21-9P-Xai"/>
-        <segue reference="2o8-4F-rux"/>
+        <segue reference="Rpg-X4-sLs"/>
     </inferredMetricsTieBreakers>
 </document>

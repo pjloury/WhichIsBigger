@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601172941BA6A19E00EE8182 /* AVFoundation.framework */; };
 		6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6011729A1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m */; };
+		602A92F31C745B1C007777EB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602A92F21C745B1C007777EB /* iAd.framework */; };
+		602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F51C745E96007777EB /* WIBAdViewController.m */; };
 		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
 		6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78D1B98238000C592CC /* WIBQuestionView.m */; };
 		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
@@ -78,6 +80,9 @@
 		601172941BA6A19E00EE8182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		601172991BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTopScoreTableViewCell.h; path = WhichIsBigger/Classes/Views/WIBTopScoreTableViewCell.h; sourceTree = "<group>"; };
 		6011729A1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTopScoreTableViewCell.m; path = WhichIsBigger/Classes/Views/WIBTopScoreTableViewCell.m; sourceTree = "<group>"; };
+		602A92F21C745B1C007777EB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		602A92F41C745E96007777EB /* WIBAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBAdViewController.h; path = WhichIsBigger/WIBAdViewController.h; sourceTree = "<group>"; };
+		602A92F51C745E96007777EB /* WIBAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBAdViewController.m; path = WhichIsBigger/WIBAdViewController.m; sourceTree = "<group>"; };
 		6033C78A1B98238000C592CC /* WIBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionView.h; path = Classes/Views/WIBOptionView.h; sourceTree = "<group>"; };
 		6033C78B1B98238000C592CC /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionView.m; path = Classes/Views/WIBOptionView.m; sourceTree = "<group>"; };
 		6033C78C1B98238000C592CC /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionView.h; path = Classes/Views/WIBQuestionView.h; sourceTree = "<group>"; };
@@ -183,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602A92F31C745B1C007777EB /* iAd.framework in Frameworks */,
 				60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */,
 				601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */,
 				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
@@ -214,6 +220,8 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				602A92F41C745E96007777EB /* WIBAdViewController.h */,
+				602A92F51C745E96007777EB /* WIBAdViewController.m */,
 				60A43EFE1C687C4700EFC46E /* WIBQuestionTypeCell.h */,
 				60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */,
 				60A43EFB1C686CD200EFC46E /* WIBCategoryCell.h */,
@@ -296,6 +304,7 @@
 		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				602A92F21C745B1C007777EB /* iAd.framework */,
 				60B43E101BD7631200E9F604 /* GameKit.framework */,
 				60A125BF1BB13C0100563331 /* SystemConfiguration.framework */,
 				601172941BA6A19E00EE8182 /* AVFoundation.framework */,
@@ -593,6 +602,7 @@
 				60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */,
 				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
 				60A43F001C687C4700EFC46E /* WIBQuestionTypeCell.m in Sources */,
+				602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */,
 				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
 				605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */,
 				6011729B1BAA9A3B00EE8182 /* WIBTopScoreTableViewCell.m in Sources */,

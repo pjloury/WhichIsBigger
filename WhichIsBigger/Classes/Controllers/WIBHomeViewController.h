@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SWRevealViewController.h"
+#import "WIBAdViewController.h"
 
-@interface WIBHomeViewController : UIViewController
+@interface WIBHomeViewController : WIBAdViewController
 
 @end
