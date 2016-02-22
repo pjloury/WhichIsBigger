@@ -47,6 +47,7 @@
 {
     PFQuery *query =  [PFQuery queryWithClassName:@"QuestionType"];
     [query whereKey:@"name" containedIn:[[PFConfig currentConfig] objectForKey:@"questionTypeWhiteList"]];
+    [query orderByAscending:@"pointsToUnlock"];
     
     if ([WIBGamePlayManager sharedInstance].localStorage && ![self.reachability isReachable])[query fromLocalDatastore];
     

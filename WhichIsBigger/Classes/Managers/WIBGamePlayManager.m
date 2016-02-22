@@ -104,7 +104,8 @@
 
 - (NSInteger)lifeTimeScore
 {
-    return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
+    //return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
+    return 9000000000;
 }
 
 - (void)setLifeTimeScore:(NSInteger)lifeTimeScore
@@ -118,12 +119,24 @@
     return self.lifeTimeScore % POINTS_PER_LEVEL;
 }
 
+- (double)secondsPerQuestion
+{
+    double remainder = self.level % 5;
+    double seconds = (double) SECONDS_PER_QUESTION;
+    double secondsPerQuestion = seconds - remainder / 2;
+    NSLog(@"%f",secondsPerQuestion);
+    return secondsPerQuestion;
+}
+
+- (double)animationSpeed
+{
+//    return 0.5 * (self.secondsPerQuestion/SECONDS_PER_QUESTION) * 1.75;
+    return 0.5;
+}
+
 
 - (NSArray *)availableQuestionTypes
 {
-    // for every 5, give me the next question type
-    //NSUInteger indexOfUnlockedCategories = self.level/5;
-    //return [self.questionTypes subarrayWithRange:NSMakeRange(0, indexOfUnlockedCategories)];
     NSMutableArray *array = [NSMutableArray array];
     for (WIBQuestionType *questionType in self.questionTypes) {
         if (self.lifeTimeScore > [questionType.pointsToUnlock integerValue]) {
@@ -140,7 +153,6 @@
 // Cloud brings down the categories.. Always in the same order..
 // Start with
 // Use a colon to split apart categoryString from tag
-
 
 - (double) questionCeiling
 {

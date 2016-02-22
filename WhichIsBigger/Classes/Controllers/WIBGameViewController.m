@@ -30,6 +30,7 @@
 // Model
 @property (strong, nonatomic) WIBGameQuestion *question;
 @property (strong, atomic) NSTimer *timer;
+@property (strong, atomic) NSTimer *blinkTimer;
 @property (strong, atomic) NSTimer *nextButtonTimer;
 @property (strong, atomic) NSDate *startDate;
 @property int currSeconds;
@@ -89,6 +90,7 @@
 {
 	self.tapRecognizer.enabled = NO;
     [self.timerBar.layer removeAllAnimations];
+    [self.blinkTimer invalidate];
     [self.nextButtonTimer invalidate];
     self.nextButton.enabled = NO;
     self.nextButton.alpha = 0.0;
@@ -121,11 +123,11 @@
 
 - (void)startTimer
 {
-    _currSeconds = SECONDS_PER_QUESTION;
+    _currSeconds = [WIBGamePlayManager sharedInstance].secondsPerQuestion;
     self.startDate = [NSDate date];
     
     self.timerBarWidth.constant = -self.view.frame.size.width;
-    [UIView animateWithDuration:SECONDS_PER_QUESTION delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].secondsPerQuestion delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished){}];
 
@@ -142,7 +144,7 @@
         _currSeconds-=1;
     }
     else {
-        _currSeconds=SECONDS_PER_QUESTION; // in the bad case, this is 1
+        _currSeconds=[WIBGamePlayManager sharedInstance].secondsPerQuestion; // in the bad case, this is 1
         // is timer getting fired again AFTER its 1?
         [self.timer invalidate];
         self.timer = nil;
@@ -212,7 +214,7 @@
         else {
             self.tapRecognizer.enabled = YES;
         }
-        self.nextButtonTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(revealNext) userInfo:nil repeats:NO];
+        self.nextButtonTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(revealNext) userInfo:nil repeats:NO];
     }
 }
 
@@ -227,10 +229,16 @@
         if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS)
         {
             self.nextButtonParentView.type = CSAnimationTypePop;
-            self.nextButtonParentView.delay = 0.2;
-            self.nextButtonParentView.duration = 0.3;
-            [self.nextButtonParentView startCanvasAnimation];
         }
+        else {
+            self.nextButtonParentView.type = CSAnimationTypeFlash;
+        }
+        self.nextButtonParentView.delay = 0.2;
+        self.nextButtonParentView.duration = 0.5;
+        
+        self.blinkTimer = [NSTimer scheduledTimerWithTimeInterval: 1.5 target: self.nextButtonParentView
+                                       selector: @selector(startCanvasAnimation) userInfo: nil repeats: YES];
+        
     }];
 }
 

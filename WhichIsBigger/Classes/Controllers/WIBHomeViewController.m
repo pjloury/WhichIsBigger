@@ -61,6 +61,7 @@
 {
     [super viewWillAppear:animated];
     self.highScoresButton.hidden = ![GKLocalPlayer localPlayer].isAuthenticated;
+    [self.categoriesCollectionView reloadData];
 }
 
 - (void)updateHighScore
@@ -173,17 +174,17 @@
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             cell.imageView.image = image;
         }];
-        
         cell.label.text = type.title;
-        cell.imageViewContainer.backgroundColor = [UIColor randomColorPair][0];
-        cell.imageView.tintColor = [UIColor randomColorPair][1];
+        cell.imageViewContainer.backgroundColor = type.backgroundColor;//[UIColor randomColorPair][0];
+        cell.imageView.tintColor = type.tintColor;//[UIColor randomColorPair][1];
     } else {
         UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
+        cell.userInteractionEnabled = NO;
         image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         cell.imageView.image = image;
         cell.label.text = @"???";
-        cell.imageViewContainer.backgroundColor = [UIColor randomColorPair][0];
-        cell.imageView.tintColor = [UIColor randomColorPair][1];
+        cell.imageViewContainer.backgroundColor = [UIColor whiteColor];//[UIColor randomColorPair][0];
+        cell.imageView.tintColor = [UIColor lightPurpleColor];//[UIColor randomColorPair][1];
     }
     
     cell.label.textColor = [UIColor grayColor];

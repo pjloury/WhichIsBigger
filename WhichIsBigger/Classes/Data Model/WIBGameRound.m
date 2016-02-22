@@ -140,7 +140,7 @@
 
 - (void)questionAnsweredCorrectly
 {
-    self.currentQuestion.points = round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * self.currentQuestion.answerTime / SECONDS_PER_QUESTION));
+    self.currentQuestion.points = round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * self.currentQuestion.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
 }
 
 - (void)questionAnsweredInCorrectly
@@ -156,7 +156,7 @@
     {
         if (question.answeredCorrectly)
         {
-            _score += round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * question.answerTime / SECONDS_PER_QUESTION));
+            _score += round(POINTS_PER_QUESTION - (POINTS_PER_QUESTION * question.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
         }
     }
     

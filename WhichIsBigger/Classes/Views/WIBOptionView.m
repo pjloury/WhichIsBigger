@@ -12,6 +12,7 @@
 #import "WIBGameOption.h"
 #import "WIBGameItem.h"
 #import "UIView+AutoLayout.h"
+#import "WIBGamePlayManager.h"
 
 @interface WIBOptionView ()<WIBOptionViewDelegate, WIBPopDelegate>
 
@@ -41,6 +42,7 @@
     
     self.imageView.layer.masksToBounds = NO;
     self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
+
     
     self.imageView.layer.shadowColor = [UIColor grayColor].CGColor;
     self.imageView.layer.shadowOffset = CGSizeMake(4, 4);
@@ -66,23 +68,23 @@
     [self configureLabels];
     
     self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
-
+    self.imageView.layer.borderWidth = 4.0f;
+    
     self.backgroundColor = [UIColor clearColor];
     self.layer.cornerRadius = self.layer.frame.size.width/20;
     self.layer.masksToBounds = YES;
     
     self.imageView.layer.shadowColor = [UIColor grayColor].CGColor;
-    self.imageView.layer.shadowOffset = CGSizeMake(5, 5);
+    self.imageView.layer.shadowOffset = CGSizeMake(4, 4);
     self.imageView.layer.shadowOpacity = 1;
     self.imageView.layer.shadowRadius = 1.0;
-    
-    
 }
 
 - (void)correctResponse
 {
     self.imageView.layer.masksToBounds = NO;
-//    self.imageView.layer.borderColor = [UIColor greenColor].CGColor;
+    self.imageView.layer.borderColor = [UIColor greenColor].CGColor;
+    self.imageView.layer.shadowOffset = CGSizeZero;
     self.imageView.layer.shadowColor = [UIColor greenColor].CGColor;
     self.imageView.layer.shadowRadius = 10.0f;
     self.imageView.layer.shadowOpacity = 1.0f;
@@ -91,7 +93,8 @@
 - (void)incorrectResponse;
 {
     self.imageView.layer.masksToBounds = NO;
-//    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
+    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
+    self.imageView.layer.shadowOffset = CGSizeZero;
     self.imageView.layer.shadowColor = [UIColor redColor].CGColor;
     self.imageView.layer.shadowRadius = 10.0f;
     self.imageView.layer.shadowOpacity = 1.0f;
@@ -150,10 +153,10 @@
     self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
     self.pointsLabel.alpha = 1;
     
-    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
         self.pointsLabel.transform = CGAffineTransformMakeScale(2, 2);
     } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:1.2 delay:1.2 options:0 animations:^{
+        [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:1.2 options:0 animations:^{
             self.pointsLabel.alpha = 0.0;
         }
                                   completion:nil];

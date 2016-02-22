@@ -21,11 +21,11 @@
 
 + (WIBGamePlayManager *)sharedInstance;
 
+// Game State
 - (void)setupGamePlay;
 - (void)beginRoundForType:(WIBQuestionType *)type;
 - (void)beginRound;
 - (void)endGame;
-- (NSUInteger)score;
 - (WIBGameQuestion *)nextGameQuestion;
 
 @property (nonatomic) NSArray *availableQuestionTypes;
@@ -33,19 +33,30 @@
 @property (nonatomic, readonly) WIBGameRound *gameRound;
 @property (nonatomic, assign, readonly) NSUInteger questionNumber;
 
-
+// Difficulty
 @property (nonatomic, assign) double questionCeiling;
 @property (nonatomic, assign) double questionFloor;
 @property (nonatomic, assign) double skewFactor;
+
+// Game Parameters
+@property (nonatomic, assign, readonly) double secondsPerQuestion;
+@property (nonatomic, assign, readonly) double animationSpeed;
+
+// Caching
 @property (nonatomic, assign) BOOL localStorage;
 
+// Scoring
 @property (nonatomic, assign, readonly) NSInteger highScore;
 @property (nonatomic, assign, readonly) NSInteger currentStreak;
 @property (nonatomic, assign, readonly) NSInteger longestStreak;
+
+// Statistics
 @property (nonatomic, assign, readonly) NSInteger totalCorrectAnswers;
 @property (nonatomic, assign, readonly) NSInteger totalAnswers;
 @property (nonatomic, assign, readonly) float accuracy;
 
+// Level Advancement
+- (NSUInteger)score;
 @property (nonatomic, assign, readonly) NSInteger level;
 @property (nonatomic, assign, readonly) NSInteger currentLevelPoints;
 

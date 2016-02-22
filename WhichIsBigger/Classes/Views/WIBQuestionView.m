@@ -64,12 +64,15 @@
 # pragma mark - Transition Animations
 - (void)startQuestionEntranceAnimationWithCompletion:(void (^)(BOOL finished))completion
 {
+    [self.optionView1.layer removeAllAnimations];
+    [self.optionView2.layer removeAllAnimations];
+    
     self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
     self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
     self.optionView1.hidden = NO;
     self.optionView2.hidden = NO;
     
-    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(0, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(0, 0);
     } completion:completion];
@@ -77,10 +80,13 @@
 
 - (void)startQuestionExitAnimationWithCompletion:(void (^)(BOOL finished))completion
 {
+    [self.optionView1.layer removeAllAnimations];
+    [self.optionView2.layer removeAllAnimations];
+    
     [self.scoreLabelTimer invalidate];
     self.pointsLabel.text = [NSString stringWithFormat:@"%ld pts",(long)[WIBGamePlayManager sharedInstance].score];
     
-    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
         [self.optionView1 removeAllAnimations];
@@ -106,8 +112,6 @@
     self.comparsionSymbol.backgroundColor = [UIColor clearColor];
     self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
     
-    
-    
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
         // End
         self.comparsionSymbol.transform = CGAffineTransformMakeScale(3, 3);
@@ -121,18 +125,18 @@
         self.comparsionSymbol.backgroundColor = [UIColor clearColor];
         self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
     }];
-//    optionView.type = CSAnimationTypePop;
-//    optionView.duration = 0.5;
-//    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.75];
+    optionView.type = CSAnimationTypePop;
+    optionView.duration = [WIBGamePlayManager sharedInstance].animationSpeed;
+    [optionView startCanvasAnimation];
     // TODO: Need a way to queue the exit animation immediately after this is complete.
     
 }
 
 - (void)animateIncorrectOptionView:(WIBOptionView *)optionView
 {
-//    optionView.type = CSAnimationTypeShake;
-//    optionView.duration = 0.5;
-//    [optionView performSelector:@selector(startCanvasAnimation) withObject:nil afterDelay:0.4];
+    optionView.type = CSAnimationTypeShake;
+    optionView.duration = [WIBGamePlayManager sharedInstance].animationSpeed;
+    [optionView startCanvasAnimation];
     // TODO: Need a way to queue the exit animation immediately after this is complete.
 }
 
@@ -173,6 +177,7 @@
     
     if([option.item.name isEqualToString:self.question.answer.item.name])
     {
+        self.titleLabel.text = @"Correct!";
         self.question.answeredCorrectly = YES;
         [optionView correctResponse];
         [self.scoringDelegate didAnswerQuestionCorrectly];
@@ -181,6 +186,7 @@
     }
     else
     {
+        self.titleLabel.text = @"Wrong!";
         self.question.answeredCorrectly = NO;
         [optionView incorrectResponse];
         [self animateIncorrectOptionView:optionView];
@@ -192,6 +198,8 @@
 
 - (void)timeUp
 {
+    self.titleLabel.text = @"Too Slow!";
+    
     self.optionView1.type = CSAnimationTypeFadeIn;
     self.optionView1.duration = 0.75;
     

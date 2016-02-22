@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIBAdViewController.h"
 
 @class WIBQuestionView;
 @class WIBGameOption;
@@ -16,6 +17,6 @@
 
 @end
 
-@interface WIBGameViewController : UIViewController<WIBGamePlayDelegate>
+@interface WIBGameViewController : WIBAdViewController<WIBGamePlayDelegate>
 
 @end
