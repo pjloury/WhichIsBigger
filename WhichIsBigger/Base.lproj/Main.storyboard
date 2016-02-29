@@ -74,25 +74,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mvN-FQ-cKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1539" y="-1552.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ndi-LL-7N2">
-            <objects>
-                <viewController id="5z2-1u-DiB" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kHc-MD-OFO"/>
-                        <viewControllerLayoutGuide type="bottom" id="3Se-Ru-dkc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6cV-8q-mpO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4wW-uo-xTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-669" y="-2221"/>
+            <point key="canvasLocation" x="-1431" y="-1553"/>
         </scene>
         <!--Home ViewController-->
         <scene sceneID="nGN-2I-dBN">
@@ -365,7 +347,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Which is Bigger?" id="ZX4-7R-6OO"/>
+                    <navigationItem key="navigationItem" id="ZX4-7R-6OO"/>
                     <connections>
                         <outlet property="adBannerView" destination="eoR-Hx-rT6" id="x5e-xI-B1T"/>
                         <outlet property="categoriesCollectionView" destination="OTx-Ly-lX2" id="U2N-tD-dww"/>
@@ -427,8 +409,8 @@
                                                     <constraint firstItem="0Fn-eL-Ffl" firstAttribute="top" secondItem="Yl9-kV-pJV" secondAttribute="top" constant="20" id="hv9-RR-V3D"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qy0-mQ-Mqe">
-                                                <rect key="frame" x="-0.5" y="225" width="300" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qy0-mQ-Mqe">
+                                                <rect key="frame" x="-1" y="225" width="300" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="JYW-Zh-PnV"/>
                                                     <constraint firstAttribute="width" constant="300" id="OuG-l0-AEl"/>
@@ -471,23 +453,28 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjE-Wi-tc2" customClass="WIBPopButton">
-                                <rect key="frame" x="220" y="411" width="160" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjE-Wi-tc2" customClass="WIBPopButton">
+                                <rect key="frame" x="225" y="408" width="150" height="48"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.85098039219999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="Mzb-CA-mlz"/>
-                                    <constraint firstAttribute="height" constant="45" id="xfc-jM-ySA"/>
+                                    <constraint firstAttribute="width" constant="150" id="Mzb-CA-mlz"/>
+                                    <constraint firstAttribute="height" constant="48" id="xfc-jM-ySA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="29"/>
                                 <state key="normal" title="Let's Go!">
                                     <color key="titleColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Mzb-CA-mlz"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="continuePressed:" destination="BjA-po-p3G" eventType="touchUpInside" id="qBG-CI-YHd"/>
                                 </connections>
                             </button>
                             <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrW-KZ-SoB">
-                                <rect key="frame" x="-126" y="486" width="825" height="50"/>
+                                <rect key="frame" x="20" y="486" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xcU-l7-k8l"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="xm4-Id-uOa"/>
@@ -509,15 +496,16 @@
                         <constraints>
                             <constraint firstItem="Khx-hf-Zge" firstAttribute="top" secondItem="EjE-Wi-tc2" secondAttribute="bottom" constant="80" id="0I9-IL-qCq"/>
                             <constraint firstItem="EjE-Wi-tc2" firstAttribute="centerX" secondItem="5qg-jh-4kz" secondAttribute="centerX" id="1j6-wh-rgI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="lrW-KZ-SoB" secondAttribute="trailing" constant="-119" id="4Di-Eb-YSX"/>
+                            <constraint firstAttribute="trailing" secondItem="lrW-KZ-SoB" secondAttribute="trailing" id="4Di-Eb-YSX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EjE-Wi-tc2" secondAttribute="trailing" constant="7" id="BEF-jy-PNG"/>
                             <constraint firstItem="CqA-N2-0Yp" firstAttribute="centerX" secondItem="5qg-jh-4kz" secondAttribute="centerX" id="J3u-2v-w6Q"/>
+                            <constraint firstItem="EjE-Wi-tc2" firstAttribute="width" secondItem="Yl9-kV-pJV" secondAttribute="width" constant="-10" id="QOx-TL-5iC"/>
                             <constraint firstItem="EjE-Wi-tc2" firstAttribute="top" secondItem="Hbt-Hu-euP" secondAttribute="bottom" constant="23" id="S6D-tV-WCh"/>
                             <constraint firstItem="Hbt-Hu-euP" firstAttribute="leading" secondItem="5qg-jh-4kz" secondAttribute="leadingMargin" constant="100" id="ZYD-wV-bZf"/>
                             <constraint firstItem="Khx-hf-Zge" firstAttribute="top" secondItem="lrW-KZ-SoB" secondAttribute="bottom" id="e6P-Ce-N3z"/>
                             <constraint firstItem="CqA-N2-0Yp" firstAttribute="top" secondItem="Ncu-ji-ffo" secondAttribute="bottom" constant="40" id="gdO-1q-ifz"/>
                             <constraint firstItem="Hbt-Hu-euP" firstAttribute="centerX" secondItem="CqA-N2-0Yp" secondAttribute="centerX" id="ooM-Oy-Yg8"/>
-                            <constraint firstItem="lrW-KZ-SoB" firstAttribute="leading" secondItem="5qg-jh-4kz" secondAttribute="leadingMargin" constant="-146" id="rXY-1j-REX"/>
+                            <constraint firstItem="lrW-KZ-SoB" firstAttribute="leading" secondItem="5qg-jh-4kz" secondAttribute="leading" id="rXY-1j-REX"/>
                             <constraint firstItem="Hbt-Hu-euP" firstAttribute="top" secondItem="CqA-N2-0Yp" secondAttribute="bottom" constant="50" id="z68-k6-58S"/>
                         </constraints>
                         <variation key="default">
@@ -2889,7 +2877,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jf-AZ-1xZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="414"/>
                                 <color key="backgroundColor" red="0.119986943" green="0.87121212120000002" blue="0.19307680769999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="434" id="sye-qy-KGc"/>
@@ -2910,13 +2898,13 @@
                                 </constraints>
                             </adBannerView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-YJ-iq0" customClass="WIBPopButton">
-                                <rect key="frame" x="220" y="430" width="160" height="36"/>
+                                <rect key="frame" x="220" y="424" width="160" height="42"/>
                                 <color key="backgroundColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="0.19" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="90C-qL-GKc"/>
                                     <constraint firstAttribute="height" constant="50" id="96b-Jx-HGD"/>
                                     <constraint firstAttribute="width" constant="159" id="i9b-Eb-bYg"/>
-                                    <constraint firstAttribute="height" constant="36" id="zVV-Rp-DzF"/>
+                                    <constraint firstAttribute="height" constant="42" id="zVV-Rp-DzF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BloggerSans" family="Blogger Sans" pointSize="24"/>
                                 <state key="normal" title="Continue">

@@ -61,9 +61,7 @@
     self.questionTypeView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
     self.questionTypeView.layer.shadowOpacity = 0.8f;
     self.questionTypeView.layer.borderColor = questionType.tintColor.CGColor;
-    self.questionTypeView.layer.borderWidth = 15.0f;
-
-//    self.questionTypeView.layer.shadowPath = shadowPath.CGPath;
+    self.questionTypeView.layer.borderWidth = 2.0f;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,7 +87,7 @@
     self.questionTypeLabel.textColor = questionType.tintColor;
     
     self.advanceButon.layer.cornerRadius = 10.0f;
-    self.advanceButon.layer.borderWidth = 3.0f;
+    self.advanceButon.layer.borderWidth = 1.0f;
     self.advanceButon.layer.borderColor = [UIColor lightPurpleColor].CGColor;
 }
 
@@ -106,7 +104,7 @@
     animation.fromValue = @(0);
     animation.toValue = @(2 * M_PI);
     animation.repeatCount = 1;
-    animation.duration = 4.0;
+    animation.duration = 3.5;
     
     [self.shimmeringContentView.layer addAnimation:animation forKey:@"rotation"];
     CATransform3D transform = CATransform3DIdentity;
