@@ -42,8 +42,6 @@
     
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
-            NSSortDescriptor *pointsToUnlock = [[NSSortDescriptor alloc] initWithKey:@"pointsToUnlock" ascending:YES];
-            //[[WIBGamePlayManager sharedInstance].questionTypes sortUsingDescriptors:@[pointsToUnlock]];
             [self.categoriesCollectionView reloadData];
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
                 dispatch_async(dispatch_get_main_queue(),
@@ -143,15 +141,15 @@
     [self performSegueWithIdentifier:@"newGameSegue" sender:self];
 }
 
-- (IBAction)didPressHighScoresButton:(id)sender {
-
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-        gcViewController.gameCenterDelegate = self;
-        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = @"highScore";
-        [self presentViewController:gcViewController animated:YES completion:nil];
-    }
+- (IBAction)didPressHighScoresButton:(id)sender
+{
+//    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+//        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+//        gcViewController.gameCenterDelegate = self;
+//        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+//        gcViewController.leaderboardIdentifier = @"highScore";
+//        [self presentViewController:gcViewController animated:YES completion:nil];
+//    }
 }
 
 #pragma mark - Collection View Data Source
@@ -167,6 +165,8 @@
     cell.clipsToBounds = NO;
     
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
+    
+    cell.label.textAlignment = NSTextAlignmentCenter;
     
     if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^

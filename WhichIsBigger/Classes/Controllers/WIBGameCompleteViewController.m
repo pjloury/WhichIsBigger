@@ -41,8 +41,13 @@
 
 - (IBAction)didPressPlayAgain:(id)sender
 {
-    [[WIBGamePlayManager sharedInstance] beginRound];
-    [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
+    if ([[WIBGamePlayManager sharedInstance] unlockedQuestionType]) {
+        [self performSegueWithIdentifier:@"unlockedQuestionTypeSegue" sender:self];
+    }
+    else {
+        [[WIBGamePlayManager sharedInstance] beginRound];
+        [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
+    }
 }
 
 - (IBAction)didPressActionButton:(id)sender {
@@ -60,7 +65,6 @@
     // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
     [FBSDKAppInviteDialog showWithContent:content
                                  delegate:self];
-
 }
 
 /*!

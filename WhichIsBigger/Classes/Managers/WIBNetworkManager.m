@@ -34,11 +34,9 @@
 
 - (void)getConfigurationWithCompletion:(void (^)())completion
 {    
-    if ([self.reachability isReachable])
-    {
+    if ([self.reachability isReachable]) {
         [PFConfig getConfig];
     }
-    // TODO: Use promises here
     if (completion)
         completion();
 }

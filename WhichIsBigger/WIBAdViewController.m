@@ -8,8 +8,6 @@
 
 #import "WIBAdViewController.h"
 
-
-
 @implementation WIBAdViewController
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner

@@ -29,6 +29,7 @@
 
 @property (nonatomic) NSString *roundUUID;
 
+@property NSArray *previousQuestionTypes;
 
 @end
 
@@ -78,23 +79,34 @@
 {
     self.gameRound = [[WIBGameRound alloc] init];
     [self.gameRound generateQuestions];
+    self.unlockedQuestionType = nil;
 }
 
 - (void)beginRoundForType:(WIBQuestionType *)type
 {
     self.gameRound = [[WIBGameRound alloc] init];
     [self.gameRound generateQuestionsForType:type];
+    self.unlockedQuestionType = nil;
 }
 
 - (void)endGame
 {
     [self adjustDifficulty];
     self.lifeTimeScore = self.lifeTimeScore + self.score;
+    if (self.previousQuestionTypes.count != self.availableQuestionTypes.count) {
+        self.previousQuestionTypes = self.availableQuestionTypes;
+        self.unlockedQuestionType = self.availableQuestionTypes.lastObject;
+    }
     
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
     {
         self.highScore = self.gameRound.score;
     }
+}
+
+- (WIBQuestionType *)unlockedQuestionType
+{
+    return [self availableQuestionTypes].firstObject;
 }
 
 - (NSInteger)level
@@ -116,7 +128,8 @@
 
 - (NSInteger)currentLevelPoints
 {
-    return self.lifeTimeScore % POINTS_PER_LEVEL;
+    return 100;
+//    return self.lifeTimeScore % POINTS_PER_LEVEL;
 }
 
 - (double)secondsPerQuestion
@@ -133,7 +146,6 @@
 //    return 0.5 * (self.secondsPerQuestion/SECONDS_PER_QUESTION) * 1.75;
     return 0.5;
 }
-
 
 - (NSArray *)availableQuestionTypes
 {
@@ -154,15 +166,15 @@
 // Start with
 // Use a colon to split apart categoryString from tag
 
-- (double) questionCeiling
-{
-    return 5;
-}
-
-- (double) questionFloor
-{
-    return 0;
-}
+//- (double) questionCeiling
+//{
+//    return 5;
+//}
+//
+//- (double) questionFloor
+//{
+//    return 0;
+//}
 
 - (void)adjustDifficulty
 {
@@ -197,8 +209,8 @@
     
 - (void)setupGamePlay
 {
-    self.highScore = ((NSNumber *)[[PFUser currentUser] objectForKey:@"highScore"]).integerValue;
-    self.longestStreak = ((NSNumber *)[[PFUser currentUser] objectForKey:@"longestStreak"]).integerValue;
+//    self.highScore = ((NSNumber *)[[PFUser currentUser] objectForKey:@"highScore"]).integerValue;
+//    self.longestStreak = ((NSNumber *)[[PFUser currentUser] objectForKey:@"longestStreak"]).integerValue;
     [self authenticateGameKitUser];
 }
 
@@ -229,18 +241,22 @@
 
 - (NSUInteger)score
 {
+//    return 200;
     return self.gameRound.score;
 }
 
 - (void)setCurrentStreak:(NSInteger)currentStreak
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(currentStreak) forKey:@"currentStreak"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@(currentStreak) forKey:@"currentStreak"];
+    [[PFUser currentUser] setObject:@(currentStreak) forKey:@"currentStreak"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (NSInteger)currentStreak
 {
-    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentStreak"];
-    return (num) ? num.integerValue: 0;
+//    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentStreak"];
+//    return (num) ? num.integerValue: 0;
+    return [[[PFUser currentUser] objectForKey:@"currentStreak" ] integerValue];
 }
 
 - (void)setLongestStreak:(NSInteger)longestStreak
@@ -259,31 +275,29 @@
 
 - (NSInteger)longestStreak
 {
-    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"longestStreak"];
-    return (num) ? num.integerValue: 0;
+    return [[[PFUser currentUser] objectForKey:@"longestStreak" ] integerValue];
 }
 
 - (NSInteger)totalCorrectAnswers
 {
-    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalCorrectAnswers"];
-    return (num) ? num.integerValue: 0;
+    return [[[PFUser currentUser] objectForKey:@"totalCorrectAnswers" ] integerValue];
 }
 
 - (void)setTotalCorrectAnswers:(NSUInteger)totalCorrectAnswers
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(totalCorrectAnswers) forKey:@"totalCorrectAnswers"];
+    [[PFUser currentUser] setObject:@(totalCorrectAnswers) forKey:@"totalCorrectAnswers"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (NSInteger)totalAnswers
 {
-    //PFQuery *totalAnswersQuery [PFQuery queryWithClassName:@"Question"];
-    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"totalAnswers"];
-    return (num) ? num.integerValue: 0;
+    return [[[PFUser currentUser] objectForKey:@"totalAnswers" ] integerValue];
 }
 
 - (void)setTotalAnswers:(NSUInteger)totalAnswers
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(totalAnswers) forKey:@"totalAnswers"];
+    [[PFUser currentUser] setObject:@(totalAnswers) forKey:@"totalAnswers"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (NSUInteger)questionNumber

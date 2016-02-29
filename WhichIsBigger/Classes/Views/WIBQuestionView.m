@@ -125,6 +125,8 @@
         self.comparsionSymbol.backgroundColor = [UIColor clearColor];
         self.comparsionSymbol.layer.backgroundColor = [UIColor clearColor].CGColor;
     }];
+    
+    [optionView.layer removeAllAnimations];
     optionView.type = CSAnimationTypePop;
     optionView.duration = [WIBGamePlayManager sharedInstance].animationSpeed;
     [optionView startCanvasAnimation];

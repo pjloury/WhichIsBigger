@@ -59,5 +59,6 @@
 - (NSUInteger)score;
 @property (nonatomic, assign, readonly) NSInteger level;
 @property (nonatomic, assign, readonly) NSInteger currentLevelPoints;
+@property (nonatomic) WIBQuestionType *unlockedQuestionType;
 
 @end
