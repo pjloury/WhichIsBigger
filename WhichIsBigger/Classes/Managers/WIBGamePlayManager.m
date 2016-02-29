@@ -116,8 +116,8 @@
 
 - (NSInteger)lifeTimeScore
 {
-    //return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
-    return 9000000000;
+    return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
+    //return 9000000000;
 }
 
 - (void)setLifeTimeScore:(NSInteger)lifeTimeScore

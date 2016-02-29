@@ -10,6 +10,31 @@
 
 @implementation WIBAdViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
+    [nc.navigationBar setBarTintColor:[UIColor lightPurpleColor]];
+    
+    UILabel *whichIsBigger = [[UILabel alloc] initWithFrame:CGRectMake(0,0,250.0,CGRectGetHeight(nc.navigationBar.frame))];
+    self.navigationItem.titleView = whichIsBigger;
+    
+//    for (NSString* family in [UIFont familyNames])
+//    {
+//        NSLog(@"%@", family);
+//        
+//        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+//        {
+//            NSLog(@"  %@", name);
+//        }
+//    }
+    
+    whichIsBigger.font = [UIFont fontWithName:@"BloggerSans-Medium" size:20];
+    whichIsBigger.textColor = [UIColor whiteColor];
+    whichIsBigger.text = @"Which is Bigger ?";
+    whichIsBigger.textAlignment = NSTextAlignmentCenter;
+}
+
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
     if (!_bannerIsVisible)

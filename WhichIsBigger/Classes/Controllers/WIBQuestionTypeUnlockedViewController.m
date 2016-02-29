@@ -17,6 +17,9 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
+
+@property (weak, nonatomic) IBOutlet UIView *shimmeringContentView;
+
 @property (weak, nonatomic) IBOutlet UIView *questionTypeView;
 @property (weak, nonatomic) IBOutlet UIImageView *questionTypeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *questionTypeLabel;
@@ -50,6 +53,17 @@
     
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
     [[WIBGamePlayManager sharedInstance] beginRoundForType:questionType];
+    
+//    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.questionTypeView.bounds];
+    self.questionTypeView.layer.shadowRadius = 8.0f;
+    self.questionTypeView.layer.masksToBounds = NO;
+    self.questionTypeView.layer.shadowColor = questionType.tintColor.CGColor;
+    self.questionTypeView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
+    self.questionTypeView.layer.shadowOpacity = 0.8f;
+    self.questionTypeView.layer.borderColor = questionType.tintColor.CGColor;
+    self.questionTypeView.layer.borderWidth = 15.0f;
+
+//    self.questionTypeView.layer.shadowPath = shadowPath.CGPath;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,10 +82,15 @@
     
     [confettiView startConfetti];
     [self performSelector:@selector(finishConfetti) withObject:nil afterDelay:1.25];
-    [self.shimmeringView setContentView:self.questionTypeView];
+    [self.shimmeringView setContentView:self.shimmeringContentView];
     [self.shimmeringView setShimmering:YES];
     
     self.questionTypeLabel.text = questionType.title;
+    self.questionTypeLabel.textColor = questionType.tintColor;
+    
+    self.advanceButon.layer.cornerRadius = 10.0f;
+    self.advanceButon.layer.borderWidth = 3.0f;
+    self.advanceButon.layer.borderColor = [UIColor lightPurpleColor].CGColor;
 }
 
 - (void)finishConfetti
@@ -89,10 +108,10 @@
     animation.repeatCount = 1;
     animation.duration = 4.0;
     
-    [self.questionTypeView.layer addAnimation:animation forKey:@"rotation"];
+    [self.shimmeringContentView.layer addAnimation:animation forKey:@"rotation"];
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = 1.0 / 500.0;
-    self.questionTypeView.layer.transform = transform;
+    self.shimmeringContentView.layer.transform = transform;
 }
 
 - (void)groupImageDownloadDidComplete:(NSNotification *)note

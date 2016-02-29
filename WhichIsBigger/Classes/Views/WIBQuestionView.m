@@ -130,8 +130,6 @@
     optionView.type = CSAnimationTypePop;
     optionView.duration = [WIBGamePlayManager sharedInstance].animationSpeed;
     [optionView startCanvasAnimation];
-    // TODO: Need a way to queue the exit animation immediately after this is complete.
-    
 }
 
 - (void)animateIncorrectOptionView:(WIBOptionView *)optionView
@@ -139,7 +137,6 @@
     optionView.type = CSAnimationTypeShake;
     optionView.duration = [WIBGamePlayManager sharedInstance].animationSpeed;
     [optionView startCanvasAnimation];
-    // TODO: Need a way to queue the exit animation immediately after this is complete.
 }
 
 # pragma mark - WIBQuestionViewDelegate

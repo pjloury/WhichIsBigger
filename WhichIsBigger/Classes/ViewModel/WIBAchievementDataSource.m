@@ -27,7 +27,8 @@
     }
     else if (indexPath.item == 2) {
         cell.descriptionLabel.text = @"CAREER ACCURACY";
-        cell.achievementLabel.text = [NSString stringWithFormat:@"%f%%",[WIBGamePlayManager sharedInstance].accuracy];
+        double accuracy = [WIBGamePlayManager sharedInstance].accuracy * 100;
+        cell.achievementLabel.text = [NSString stringWithFormat:@"%d%%", (int)accuracy];
         cell.descriptor = @"accuracy";
     }
     
