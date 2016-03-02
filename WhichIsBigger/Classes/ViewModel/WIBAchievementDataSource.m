@@ -16,9 +16,9 @@
 {
     WIBAchievementCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"achievement" forIndexPath:indexPath];
     if (indexPath.item == 0) {
-        cell.descriptionLabel.text = @"HIGH SCORE";
+        cell.descriptionLabel.text = @"BEST ROUND";
         cell.achievementLabel.text = [NSString stringWithFormat:@"%ld",[WIBGamePlayManager sharedInstance].highScore];
-        cell.descriptor = @"highScore";
+        cell.descriptor = @"bestRound";
     }
     else if (indexPath.item == 1) {
         cell.descriptionLabel.text = @"LONGEST STREAK";

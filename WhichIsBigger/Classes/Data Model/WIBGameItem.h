@@ -2,11 +2,13 @@
 //  WIBGameItem.h
 //  WhichIsBigger
 //
-//  Created by Christopher Echanique on 4/7/15.
+//  Created by PJ Loury on 4/7/15.
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+@class WIBQuestionType;
 
 @interface WIBGameItem : NSObject
 
@@ -22,5 +24,5 @@
 + (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
 
 - (BOOL)isPerson;
-- (BOOL)isSupported;
+- (BOOL)supportsQuestionType:(WIBQuestionType *)type;
 @end

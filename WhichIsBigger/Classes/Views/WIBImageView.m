@@ -18,6 +18,45 @@
 
 @implementation WIBImageView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    self.layer.masksToBounds = NO;
+    self.state = WIBImageViewStateUnanswered;
+    return self;
+}
+
+- (void)setState:(WIBImageViewState)state
+{
+    switch (state) {
+        case WIBImageViewStateUnanswered:
+            self.layer.shadowColor = [UIColor grayColor].CGColor;
+            self.layer.borderColor = [UIColor clearColor].CGColor;
+            self.layer.shadowOffset = CGSizeMake(4, 4);
+            self.layer.shadowOpacity = 1;
+            self.layer.shadowRadius = 1.0;
+            break;
+        case WIBImageViewStateCorrect:
+            self.layer.borderWidth = 4.0f;
+            self.layer.borderColor = [UIColor greenColor].CGColor;
+            self.layer.shadowOffset = CGSizeZero;
+            self.layer.shadowColor = [UIColor greenColor].CGColor;
+            self.layer.shadowRadius = 10.0f;
+            self.layer.shadowOpacity = 1.0f;
+            break;
+        case WIBImageViewStateIncorrect:
+            self.layer.borderWidth = 4.0f;
+            self.layer.borderColor = [UIColor redColor].CGColor;
+            self.layer.shadowOffset = CGSizeZero;
+            self.layer.shadowColor = [UIColor redColor].CGColor;
+            self.layer.shadowRadius = 10.0f;
+            self.layer.shadowOpacity = 1.0f;
+            break;
+    }
+}
+
+
+
 - (void)setup
 {
     self.userInteractionEnabled = YES;
@@ -59,7 +98,6 @@
     
     self.layer.cornerRadius = self.layer.frame.size.width/20;
     self.layer.masksToBounds = YES;
-    
     //NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
 }
 

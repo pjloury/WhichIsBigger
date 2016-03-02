@@ -18,6 +18,7 @@
 #import "WIBQuestionTypeCell.h"
 
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @property (weak, nonatomic) IBOutlet UIButton *highScoresButton;
 @property (weak, nonatomic) IBOutlet UILabel *footerLabel;
@@ -158,8 +159,6 @@
     
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
     
-    cell.label.textAlignment = NSTextAlignmentCenter;
-    
     if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^
         (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
@@ -169,19 +168,16 @@
         cell.label.text = type.title;
         cell.imageViewContainer.backgroundColor = type.backgroundColor;
         cell.imageView.tintColor = type.tintColor;
-        //cell.imageViewContainer.layer.borderColor = type.tintColor.CGColor;
-
     } else {
         UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
-        cell.userInteractionEnabled = NO;
         image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         cell.imageView.image = image;
-        cell.label.text = @"???";
+        cell.label.text = [NSString stringWithFormat:@"LEVEL %ld", (indexPath.item +1)];
+        // cell.label.text = @"???";
         cell.imageViewContainer.backgroundColor = [UIColor whiteColor];
-        cell.imageView.tintColor = [UIColor lightPurpleColor];
-        //cell.imageViewContainer.layer.borderColor = [UIColor lightPurpleColor].CGColor;
+        cell.imageView.tintColor = type.tintColor;
     }
-    
+
     //cell.imageViewContainer.layer.borderWidth = 1.0;
     
     cell.label.textColor = [UIColor grayColor];
@@ -189,10 +185,13 @@
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:cell.imageViewContainer.bounds];
     cell.imageViewContainer.layer.masksToBounds = NO;
     cell.imageViewContainer.layer.shadowColor = [UIColor grayColor].CGColor;
-    cell.imageViewContainer.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    cell.imageViewContainer.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
     cell.imageViewContainer.layer.shadowOpacity = 0.5f;
     cell.imageViewContainer.layer.shadowPath = shadowPath.CGPath;
-    [cell.label sizeToFit];
+    
+    cell.animationView.type = CSAnimationTypeShake;
+    cell.animationView.duration = 2.0;
+    
     return cell;
 }
 
@@ -200,8 +199,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
-    [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
-    [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+    if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
+        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
+        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+    } else {
+        WIBQuestionTypeCell *cell = (WIBQuestionTypeCell *)[collectionView.dataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
+        [cell.animationView startCanvasAnimation];
+    }
 }
 
 #pragma mark - Game Center Delegate

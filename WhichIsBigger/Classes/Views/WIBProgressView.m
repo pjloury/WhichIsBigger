@@ -28,60 +28,52 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    
-    [self setInitialProgressWidth];
-    
-    return self;
-}
-
-- (void)setInitialProgressWidth
-{
     self.fullBarWidth  = self.frame.size.width;
-    
-    self.previousPoints = ([[WIBGamePlayManager sharedInstance] currentLevelPoints] - [WIBGamePlayManager sharedInstance].score);
-    CGFloat previousPercentage = (CGFloat) self.previousPoints/(CGFloat) POINTS_PER_LEVEL;
-    NSLog(@"%f",previousPercentage);
-    
-    CGFloat startingWidth = self.fullBarWidth * previousPercentage;
-    self.progressBarWidthConstraint.constant = startingWidth;
+    return self;
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated completion:(void(^)())completion;
 {
-    CGFloat endingWidth = self.fullBarWidth * progress;
+    CGFloat progressWidth = self.fullBarWidth * progress;
+    CGFloat progressDifference = progress - self.progress;
     
-    if (self.previousPoints > 0) {
-        [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed*3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.progressBarWidthConstraint.constant = endingWidth;
-            [self layoutIfNeeded];
-        } completion:^(BOOL finished){
-            if (completion) {
-                completion();
+    if (animated) {
+        if (progressDifference > 0) {
+            self.progressBarWidthConstraint.constant = progressWidth;
+            [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed*3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished){
+                if (completion) {
+                    completion();
+                }
             }
+            ];
         }
-        ];
+        else {
+            self.progressBarWidthConstraint.constant = self.fullBarWidth;
+            [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [self layoutIfNeeded];
+            }
+                             completion:^(BOOL finished) {
+                                 self.progressBarWidthConstraint.constant = 0;
+                                 [self layoutIfNeeded];
+                                 [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:[WIBGamePlayManager sharedInstance].animationSpeed options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                     self.progressBarWidthConstraint.constant = progressWidth;
+                                     [self layoutIfNeeded];
+                                 } completion:^(BOOL finished) {
+                                     if (completion) {
+                                         completion();
+                                     }
+                                        
+                                 }];
+                             }];
+        }
     }
     else {
-        [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            self.progressBarWidthConstraint.constant = self.fullBarWidth;
-            [self.progressMeter layoutIfNeeded];
-        }
-                         completion:^(BOOL finished) {
-                             self.progressBarWidthConstraint.constant = 0;
-                             [self layoutIfNeeded];
-                             [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                                 self.progressBarWidthConstraint.constant = endingWidth;
-                                 [self layoutIfNeeded];
-                             } completion:^(BOOL finished) {
-                                 if (completion) {
-                                     completion();
-                                 }
-                                    
-                             }];
-                         }];
+        self.progressBarWidthConstraint.constant = progressWidth;
+        [self layoutIfNeeded];
     }
-
-    
+    self.progress = progress;
 }
 
 @end

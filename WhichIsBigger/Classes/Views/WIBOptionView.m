@@ -40,14 +40,8 @@
     self.answerLabel.hidden = YES;
     [self configureViews];
     
-    self.imageView.layer.masksToBounds = NO;
-    self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
-
-    
-    self.imageView.layer.shadowColor = [UIColor grayColor].CGColor;
-    self.imageView.layer.shadowOffset = CGSizeMake(4, 4);
-    self.imageView.layer.shadowOpacity = 1;
-    self.imageView.layer.shadowRadius = 1.0;
+    self.imageView.state = WIBImageViewStateUnanswered;
+//    self.multiplierLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
 }
 
 - (void)configureViews
@@ -55,6 +49,8 @@
     self.clipsToBounds = NO;
     self.pointsLabel.alpha = 0.0;
     self.pointsLabel.backgroundColor = [UIColor clearColor];
+    self.multiplierLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self.popButton action:@selector(longPressDetected:)];
@@ -66,38 +62,10 @@
     
     [self configureImageView];
     [self configureLabels];
-    
-    self.imageView.layer.borderColor = [UIColor clearColor].CGColor;
-    self.imageView.layer.borderWidth = 4.0f;
-    
+
     self.backgroundColor = [UIColor clearColor];
     self.layer.cornerRadius = self.layer.frame.size.width/20;
     self.layer.masksToBounds = YES;
-    
-    self.imageView.layer.shadowColor = [UIColor grayColor].CGColor;
-    self.imageView.layer.shadowOffset = CGSizeMake(4, 4);
-    self.imageView.layer.shadowOpacity = 1;
-    self.imageView.layer.shadowRadius = 1.0;
-}
-
-- (void)correctResponse
-{
-    self.imageView.layer.masksToBounds = NO;
-    self.imageView.layer.borderColor = [UIColor greenColor].CGColor;
-    self.imageView.layer.shadowOffset = CGSizeZero;
-    self.imageView.layer.shadowColor = [UIColor greenColor].CGColor;
-    self.imageView.layer.shadowRadius = 10.0f;
-    self.imageView.layer.shadowOpacity = 1.0f;
-}
-
-- (void)incorrectResponse;
-{
-    self.imageView.layer.masksToBounds = NO;
-    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
-    self.imageView.layer.shadowOffset = CGSizeZero;
-    self.imageView.layer.shadowColor = [UIColor redColor].CGColor;
-    self.imageView.layer.shadowRadius = 10.0f;
-    self.imageView.layer.shadowOpacity = 1.0f;
 }
 
 - (void)gameQuestionTimeUpHandler:(NSNotification *)note
@@ -114,21 +82,25 @@
 
 - (void)configureLabels
 {
-    if (self.gameOption.multiplier == 1)
-    {
+    if (self.gameOption.multiplier == 1) {
         self.multiplierLabel.text = self.gameItem.name;
-    }
-    else
-    {
-        if ([self.gameItem.name characterAtIndex:self.gameItem.name.length-1] == 's')
-        {
+    } else {
+        if ([self.gameItem.name characterAtIndex:self.gameItem.name.length-1] == 's') {
             self.multiplierLabel.text = [NSString stringWithFormat:@"%@ %@es",self.gameOption.multiplierString,self.gameItem.name];
-        }
-        else
-        {
+        } else {
             self.multiplierLabel.text = [NSString stringWithFormat:@"%@ %@s",self.gameOption.multiplierString,self.gameItem.name];
         }
     }
+}
+
+- (void)correctResponse
+{
+    self.imageView.state = WIBImageViewStateCorrect;
+}
+
+- (void)incorrectResponse
+{
+    self.imageView.state = WIBImageViewStateIncorrect;
 }
 
 - (void)revealAnswerLabel
@@ -190,7 +162,6 @@
     animation.fillMode = kCAFillModeForwards;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:@"linear"];
     [self.layer addAnimation:animation forKey:@"scale"];
-
 }
 - (void)popButtonLetGo
 {

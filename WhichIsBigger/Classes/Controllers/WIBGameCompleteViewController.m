@@ -47,7 +47,8 @@
         [self performSegueWithIdentifier:@"unlockedQuestionTypeSegue" sender:self];
     }
     else {
-        [[WIBGamePlayManager sharedInstance] beginRound];
+        WIBQuestionType *type = [WIBGamePlayManager sharedInstance].gameRound.questionType;
+        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
     }
 }

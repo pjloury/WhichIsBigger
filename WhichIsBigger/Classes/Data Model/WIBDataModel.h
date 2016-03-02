@@ -9,16 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "WIBGameItem.h"
 
+@class WIBQuestionType;
+
 @interface WIBDataModel : NSObject 
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
 
-- (WIBGameItem*)firstGameItemForCategory:(NSString *)category;
-- (WIBGameItem*)secondGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
+- (WIBGameItem*)firstGameItemForQuestionType:(WIBQuestionType *)type;
+//- (WIBGameItem*)firstNonHumanGameItemForQuestionType:(WIBQuestionType *)type;
 
-- (WIBGameItem*)firstNonHumanGameItemForCategory:(NSString *)category;
-- (WIBGameItem*)secondNonHumanGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
+- (WIBGameItem*)secondGameItemForQuestionType:(WIBQuestionType *)type dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude;
 
-- (WIBGameItem*)secondGameItemForCategory:(NSString *)category dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude;
+- (WIBGameItem*)secondGameItemForQuestionType:(WIBQuestionType *)type withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling;
 
 @end

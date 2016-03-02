@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WIBGameRound.h"
+#import "WIBQuestionType.h"
 
 @protocol WIBScoringDelegate
 - (void)didAnswerQuestionCorrectly;
@@ -16,7 +17,6 @@
 @end
 
 @class WIBGameQuestion;
-@class WIBQuestionType;
 @interface WIBGamePlayManager : NSObject<WIBScoringDelegate>
 
 + (WIBGamePlayManager *)sharedInstance;

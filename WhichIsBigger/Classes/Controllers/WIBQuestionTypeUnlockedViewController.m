@@ -34,6 +34,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.hidesBackButton = YES;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupImageDownloadDidComplete:) name:kGroupImageDownloadCompleteNotification object:nil];
     
     self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(continuePressed:)];
@@ -120,7 +123,9 @@
 
 - (IBAction)continuePressed:(id)sender
 {
+    [self.view.layer removeAllAnimations];
     [self performSegueWithIdentifier:@"startUnlockedQuestionTypeSegue" sender:self];
+    [WIBGamePlayManager sharedInstance].unlockedQuestionType = nil;
 }
 
 

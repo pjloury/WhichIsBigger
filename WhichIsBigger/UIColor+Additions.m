@@ -27,6 +27,14 @@ alpha:1.0]
 }
 //[UIColor colorWithRed:0.686 green:0.267 blue:1.0 alpha:1.0].CGColor;
 
++ (UIColor *)faintPurpleColor {
+    return UIColorFromRGB(0xFFFAFF);
+}
+
++ (UIColor *)pastelPurpleColor {
+    return UIColorFromRGB(0xF7E7FE);
+}
+
 + (UIColor *)lightPurpleColor {
     return UIColorFromRGB(0x9D1BFF);
 }

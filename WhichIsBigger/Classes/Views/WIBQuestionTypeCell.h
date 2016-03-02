@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WIBQuestionTypeCell : UICollectionViewCell
-
+@property (weak, nonatomic) IBOutlet CSAnimationView *animationView;
 @property IBOutlet UIImageView *imageView;
 @property IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UIView *imageViewContainer;

@@ -16,16 +16,25 @@
 	return [self.tagArray containsObject:@"person"];
 }
 
-- (BOOL)isSupported
+- (BOOL)supportsQuestionType:(WIBQuestionType *)type
 {
+    NSMutableArray *requiredTags = [[type.name componentsSeparatedByString:@":"] mutableCopy];
+    [requiredTags removeObjectAtIndex:0];
+    
+    BOOL questionTypeConstraintSatisfied = (requiredTags.count == 0);
+    
     for (NSString *tag in self.tagArray)
     {
         if ([((NSArray *)[PFConfig currentConfig][@"tagBlackList"]) containsObject:tag.lowercaseString])
         {
             return NO;
         }
+        if ([requiredTags containsObject:tag]) {
+            questionTypeConstraintSatisfied = YES;
+        }
     }
-    return YES;
+    
+    return (questionTypeConstraintSatisfied && self.photoURL != nil && self.photoURL.length > 0);
 }
 
 - (void)setTagArray:(NSArray *)tagArray

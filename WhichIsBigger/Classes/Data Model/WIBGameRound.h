@@ -23,6 +23,7 @@
 @property (readonly) NSString *roundUUID;
 @property (nonatomic, copy) NSString *category;
 @property (nonatomic, readonly) NSInteger questionIndex;
+@property (nonatomic, readonly) WIBQuestionType *questionType;
 
 - (void)generateQuestions;
 - (void)generateQuestionsForType:(WIBQuestionType *)questionType;

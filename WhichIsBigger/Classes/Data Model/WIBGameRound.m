@@ -24,6 +24,7 @@
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *gameQuestions;
 @property (nonatomic) NSString *roundUUID;
+@property (nonatomic) WIBQuestionType *questionType;
 
 @end
 
@@ -54,8 +55,8 @@
 
 - (void)generateQuestionsForType:(WIBQuestionType *)questionType
 {
+    self.questionType = questionType;
     NSMutableArray *questions = [NSMutableArray array];
-    
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
         // TODO: Server driven # of categories .. (future looking)

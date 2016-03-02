@@ -11,10 +11,17 @@
 
 @class WIBGameItem;
 
+typedef NS_ENUM(NSUInteger, WIBImageViewState) {
+    WIBImageViewStateUnanswered,
+    WIBImageViewStateCorrect,
+    WIBImageViewStateIncorrect,
+};
 
 @interface WIBImageView : UIImageView
 
 - (void)setup;
+
+@property (nonatomic) WIBImageViewState state;
 @property (nonatomic, weak) WIBGameItem *gameItem;
 @property (nonatomic, assign) int multiplier;
 @property (weak, nonatomic) IBOutlet UILabel *multiplierLabel;

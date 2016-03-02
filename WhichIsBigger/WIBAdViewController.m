@@ -19,6 +19,8 @@
     UILabel *whichIsBigger = [[UILabel alloc] initWithFrame:CGRectMake(0,0,250.0,CGRectGetHeight(nc.navigationBar.frame))];
     self.navigationItem.titleView = whichIsBigger;
     
+    self.view.backgroundColor = [UIColor faintPurpleColor];
+    
 //    for (NSString* family in [UIFont familyNames])
 //    {
 //        NSLog(@"%@", family);
@@ -29,8 +31,8 @@
 //        }
 //    }
     
-    whichIsBigger.font = [UIFont fontWithName:@"BloggerSans-Medium" size:20];
-    whichIsBigger.textColor = [UIColor whiteColor];
+    whichIsBigger.font = [UIFont fontWithName:@"BloggerSans-Medium" size:28];
+    whichIsBigger.textColor = [UIColor pastelPurpleColor];
     whichIsBigger.text = @"Which is Bigger ?";
     whichIsBigger.textAlignment = NSTextAlignmentCenter;
 }

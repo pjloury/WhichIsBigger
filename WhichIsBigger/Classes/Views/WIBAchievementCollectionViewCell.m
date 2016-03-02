@@ -10,6 +10,11 @@
 
 @implementation WIBAchievementCollectionViewCell
 
+- (void)setHighlighted:(BOOL)highlighted
+{
+    [super setHighlighted:highlighted];
+    self.backgroundColor = highlighted ? [UIColor lightGrayColor]: [UIColor whiteColor];
+}
 
 
 @end

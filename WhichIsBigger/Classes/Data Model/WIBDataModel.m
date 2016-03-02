@@ -45,48 +45,48 @@
     return [[WIBGamePlayManager sharedInstance].gameRound.usedNames containsObject:name];
 }
 
-- (WIBGameItem*)firstGameItemForCategory:(NSString *)category
+- (WIBGameItem*)firstGameItemForQuestionType:(WIBQuestionType *)type
 {
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:type.category];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.isSupported)
+    if(![self itemNameAlreadyUsed:gameItem.name] && [gameItem supportsQuestionType:type])
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
     }
     else
     {
-        return [self firstGameItemForCategory:category];
+        return [self firstGameItemForQuestionType:type];
     }
 }
 
-- (WIBGameItem*)firstNonHumanGameItemForCategory:(NSString *)category
+- (WIBGameItem*)firstNonHumanGameItemForQuestionType:(WIBQuestionType *)type
 {
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:type.category];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    if(![self itemNameAlreadyUsed:gameItem.name] && gameItem.isSupported && !gameItem.isPerson)
+    if(![self itemNameAlreadyUsed:gameItem.name] && [gameItem supportsQuestionType:type] && !gameItem.isPerson)
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
     }
     else
     {
-        return [self firstGameItemForCategory:category];
+        return [self firstGameItemForQuestionType:type];
     }
 }
 
-- (WIBGameItem*)secondGameItemForCategory:(NSString *)category dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude
+- (WIBGameItem*)secondGameItemForQuestionType:(WIBQuestionType *)type dissimilarTo:(WIBGameItem *)item orderOfMagnitude:(double)magnitude
 {
     NSAssert(magnitude>1,@"Magnitude is too small");
     
     // Start with Large Magnitude difference, then progressively smaller
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:type.category];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
     
@@ -105,7 +105,7 @@
     static int tries = 0;
     
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough && gameItem.isSupported)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && differentEnough && [gameItem supportsQuestionType:type])
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         return gameItem;
@@ -115,18 +115,18 @@
         tries++;
         if (tries < [gameItemsWithSameCategory count])
         {
-            return [self secondGameItemForCategory:category dissimilarTo:item orderOfMagnitude:magnitude];
+            return [self secondGameItemForQuestionType:type dissimilarTo:item orderOfMagnitude:magnitude];
         }
         else
         {
-            return [self secondGameItemForCategory:category dissimilarTo:item orderOfMagnitude:magnitude-1];
+            return [self secondGameItemForQuestionType:type dissimilarTo:item orderOfMagnitude:magnitude-1];
         }
     }
 }
 
-- (WIBGameItem*)secondGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling
+- (WIBGameItem*)secondGameItemForQuestionType:(WIBQuestionType *)type withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling
 {
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:type.category];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
 
@@ -140,7 +140,7 @@
     
     // Cannot, be already used name, cannot be a tie, must be close enough
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.isSupported)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && [gameItem supportsQuestionType:type])
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);
@@ -151,18 +151,18 @@
         tries++;
         if (tries < [gameItemsWithSameCategory count])
         {
-            return [self secondGameItemForCategory:category withRespectToItem:item withQuestionCeiling:questionCeiling];
+            return [self secondGameItemForQuestionType:type withRespectToItem:item withQuestionCeiling:questionCeiling];
         }
         else
         {
-            return [self secondGameItemForCategory:category withRespectToItem:item withQuestionCeiling:questionCeiling+10];
+            return [self secondGameItemForQuestionType:type withRespectToItem:item withQuestionCeiling:questionCeiling+10];
         }
     }
 }
 
-- (WIBGameItem*)secondNonHumanGameItemForCategory:(NSString *)category withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling
+- (WIBGameItem*)secondNonHumanGameItemForQuestionType:(WIBQuestionType *)type withRespectToItem:(WIBGameItem *)item withQuestionCeiling:(double)questionCeiling
 {
-    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:category];
+    NSMutableArray* gameItemsWithSameCategory= [self.gameItemsDictionary objectForKey:type.category];
     
     int r = arc4random() % [gameItemsWithSameCategory count];
     
@@ -176,7 +176,7 @@
     
     // Cannot, be already used name, cannot be a tie, must be close enough
     if(![self itemNameAlreadyUsed:gameItem.name] &&
-       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && gameItem.isSupported && !gameItem.isPerson)
+       [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && [gameItem supportsQuestionType:type] && !gameItem.isPerson)
     {
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);
@@ -187,11 +187,11 @@
         tries++;
         if (tries < [gameItemsWithSameCategory count])
         {
-            return [self secondGameItemForCategory:category withRespectToItem:item withQuestionCeiling:questionCeiling];
+            return [self secondGameItemForQuestionType:type withRespectToItem:item withQuestionCeiling:questionCeiling];
         }
         else
         {
-            return [self secondGameItemForCategory:category withRespectToItem:item withQuestionCeiling:questionCeiling+10];
+            return [self secondGameItemForQuestionType:type withRespectToItem:item withQuestionCeiling:questionCeiling+10];
         }
     }
 }

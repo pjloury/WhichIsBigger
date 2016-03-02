@@ -10,6 +10,8 @@
 
 @interface UIColor (Additions)
 
++ (UIColor *)faintPurpleColor;
++ (UIColor *)pastelPurpleColor;
 + (UIColor *)lighterGrayColor;
 + (UIColor *)lightPurpleColor;
 + (UIColor *)sexyRedColor;

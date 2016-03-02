@@ -35,8 +35,12 @@ const static double kIdealWaitTime = 1.0;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.categoryLabel.text = [WIBGamePlayManager sharedInstance].gameRound.category;
+    self.categoryLabel.text = [WIBGamePlayManager sharedInstance].gameRound.questionType.questionString;
     self.categoryLabel.alpha = 0;
+    
+    UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
+    [nc.navigationBar setBarTintColor:[WIBGamePlayManager sharedInstance].gameRound.questionType.tintColor];
+    //self.categoryLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
     self.shimmeringView.contentView = self.loadingQuestionMarkView;
     self.shimmeringView.shimmering = YES;
 }

@@ -28,7 +28,7 @@
 
 // Initializers
 - (instancetype)initOneToOneQuestion:(WIBQuestionType *)categoryString;
-- (instancetype)initNonHumanOneToOneQuestion:(WIBQuestionType *)categoryString;
+//- (instancetype)initNonHumanOneToOneQuestion:(WIBQuestionType *)categoryString;
 - (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1
                        dissimilargameItem2:(WIBGameItem *)item2;
 // Save

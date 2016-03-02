@@ -13,9 +13,9 @@
 
 - (id)initWithQuestionType:(WIBQuestionType *)questionType;
 {
-    WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForCategory:questionType.category];
+    WIBGameItem *item1 = [[WIBDataModel sharedInstance] firstGameItemForQuestionType:questionType];
     // Choice.. intentionally make it very different
-    WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForCategory:questionType.category dissimilarTo:item1 orderOfMagnitude:50.0];
+    WIBGameItem *item2 = [[WIBDataModel sharedInstance] secondGameItemForQuestionType:questionType dissimilarTo:item1 orderOfMagnitude:50.0];
     self.questionType = questionType;
     return [super initWithDissimilarGameItem:item1 dissimilargameItem2:item2];
 }

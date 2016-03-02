@@ -79,14 +79,12 @@
 {
     self.gameRound = [[WIBGameRound alloc] init];
     [self.gameRound generateQuestions];
-    self.unlockedQuestionType = nil;
 }
 
 - (void)beginRoundForType:(WIBQuestionType *)type
 {
     self.gameRound = [[WIBGameRound alloc] init];
     [self.gameRound generateQuestionsForType:type];
-    self.unlockedQuestionType = nil;
 }
 
 - (void)endGame
@@ -104,32 +102,39 @@
     }
 }
 
-- (WIBQuestionType *)unlockedQuestionType
-{
-    return [self availableQuestionTypes].firstObject;
-}
+//- (WIBQuestionType *)unlockedQuestionType
+//{
+//    return [self availableQuestionTypes].firstObject;
+//}
 
 - (NSInteger)level
 {
-    return self.lifeTimeScore / POINTS_PER_LEVEL;
+    return (self.lifeTimeScore / POINTS_PER_LEVEL) +1;
 }
 
 - (NSInteger)lifeTimeScore
 {
     return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
-    //return 9000000000;
 }
 
 - (void)setLifeTimeScore:(NSInteger)lifeTimeScore
 {
     [[PFUser currentUser] setObject:@(lifeTimeScore) forKey:@"lifeTimeScore"];
     [[PFUser currentUser] saveInBackground];
+    GKScore *gameKitLifeTimeScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"careerPoints"];
+    gameKitLifeTimeScore.value = lifeTimeScore;
+    
+    [GKScore reportScores:@[gameKitLifeTimeScore] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+    
 }
 
 - (NSInteger)currentLevelPoints
 {
-    return 100;
-//    return self.lifeTimeScore % POINTS_PER_LEVEL;
+    return self.lifeTimeScore % POINTS_PER_LEVEL;
 }
 
 - (double)secondsPerQuestion
@@ -137,7 +142,6 @@
     double remainder = self.level % 5;
     double seconds = (double) SECONDS_PER_QUESTION;
     double secondsPerQuestion = seconds - remainder / 2;
-    NSLog(@"%f",secondsPerQuestion);
     return secondsPerQuestion;
 }
 
@@ -155,6 +159,7 @@
             [array addObject:questionType];
         }
     }
+    //return self.questionTypes;
     return array;
 }
 
@@ -166,15 +171,15 @@
 // Start with
 // Use a colon to split apart categoryString from tag
 
-//- (double) questionCeiling
-//{
-//    return 5;
-//}
-//
-//- (double) questionFloor
-//{
-//    return 0;
-//}
+- (double) questionCeiling
+{
+    return 5;
+}
+
+- (double) questionFloor
+{
+    return 0;
+}
 
 - (void)adjustDifficulty
 {
@@ -206,7 +211,13 @@
         self.skewFactor += 0.1;
     }
 }
-    
+
+- (void)setQuestionTypes:(NSMutableArray *)questionTypes
+{
+    _questionTypes = questionTypes;
+    self.previousQuestionTypes = self.availableQuestionTypes;
+}
+
 - (void)setupGamePlay
 {
 //    self.highScore = ((NSNumber *)[[PFUser currentUser] objectForKey:@"highScore"]).integerValue;
@@ -319,11 +330,6 @@
 - (float)accuracy
 {
     return (float)self.totalCorrectAnswers / (float)self.totalAnswers;
-//    float accu;
-//    PFQuery *accuracyQuery = [PFQuery queryWithClassName:@"Question"];
-//    [accuracyQuery whereKey:@"user" equalTo: [PFUser currentUser]];
-//    return accu;
-    // can filter the questions for answeredCorrectly!
 }
 
 # pragma mark - WIBScoringDelegate

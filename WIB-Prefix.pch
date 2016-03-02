@@ -20,7 +20,7 @@
 #import "WIBConstants.h"
 #import "UIColor+Additions.h"
 #import "FBShimmeringView.h"
-#import "UIImage+Placeholder.h"
+#import "UIImage+Additions.h"
 #import "NSMutableArray+Shuffle.h"
 #import <iAd/iAd.h>
 
