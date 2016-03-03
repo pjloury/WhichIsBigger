@@ -38,6 +38,7 @@
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFUser enableAutomaticUser];
     
+    /*
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
                                                     UIUserNotificationTypeSound);
@@ -45,9 +46,8 @@
                                                                              categories:nil];
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
-    
-    [[WIBGamePlayManager sharedInstance] setupGamePlay];
-    
+    */
+     
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 									didFinishLaunchingWithOptions:launchOptions];
 }

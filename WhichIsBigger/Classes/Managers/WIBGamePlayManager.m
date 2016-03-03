@@ -121,7 +121,7 @@
 {
     [[PFUser currentUser] setObject:@(lifeTimeScore) forKey:@"lifeTimeScore"];
     [[PFUser currentUser] saveInBackground];
-    GKScore *gameKitLifeTimeScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"careerPoints"];
+    GKScore *gameKitLifeTimeScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"topScores"];
     gameKitLifeTimeScore.value = lifeTimeScore;
     
     [GKScore reportScores:@[gameKitLifeTimeScore] withCompletionHandler:^(NSError *error) {
@@ -159,8 +159,8 @@
             [array addObject:questionType];
         }
     }
-    //return self.questionTypes;
-    return array;
+    return [self.questionTypes subarrayWithRange:NSMakeRange(0,3)];
+    //return array;
 }
 
 // Start with countries
@@ -216,13 +216,6 @@
 {
     _questionTypes = questionTypes;
     self.previousQuestionTypes = self.availableQuestionTypes;
-}
-
-- (void)setupGamePlay
-{
-//    self.highScore = ((NSNumber *)[[PFUser currentUser] objectForKey:@"highScore"]).integerValue;
-//    self.longestStreak = ((NSNumber *)[[PFUser currentUser] objectForKey:@"longestStreak"]).integerValue;
-    [self authenticateGameKitUser];
 }
 
 - (WIBGameQuestion *)nextGameQuestion

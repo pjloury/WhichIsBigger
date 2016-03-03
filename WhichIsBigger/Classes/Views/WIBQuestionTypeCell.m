@@ -22,7 +22,7 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     animation.duration = .15f;
     animation.fromValue = @(1);
-    animation.toValue = @(1.2f);
+    animation.toValue = @(1.1f);
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
     animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :1.8 :1 :1];

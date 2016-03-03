@@ -58,7 +58,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.view.backgroundColor = [UIColor faintPurpleColor];
+    self.tableView.backgroundColor = [UIColor faintPurpleColor];
     
     self.achievementDataSource = [[WIBAchievementDataSource alloc] init];
     self.achievementsCollectionView.dataSource = self.achievementDataSource;
@@ -87,6 +87,9 @@
         self.goalLevelImageView.image = [UIImage trophy];
         self.goalLevelImageView.tintColor = [UIColor randomColorPair][0];
         self.goalLevelBackgroundView.backgroundColor = [UIColor randomColorPair][1];
+    } else {
+        self.goalLevelImageView.image =  [UIImage imageNamed:@"smallQuestionMark"];
+        self.goalLevelBackgroundView.backgroundColor = [UIColor whiteColor];
     }
     
     NSInteger currentLevel = [WIBGamePlayManager sharedInstance].level;
@@ -106,8 +109,7 @@
     self.goalLevelBackgroundView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.goalLevelBackgroundView.layer.shadowOpacity = 0.5f;
     self.goalLevelBackgroundView.layer.shadowPath = goalLevelShadowPath.CGPath;
-    
-    self.goalLevelBackgroundView.backgroundColor = [UIColor whiteColor];
+
     self.goalLevelBackgroundView.layer.cornerRadius = 5.0f;
 
     CGFloat previousPoints = ([[WIBGamePlayManager sharedInstance] currentLevelPoints] - [WIBGamePlayManager sharedInstance].score);

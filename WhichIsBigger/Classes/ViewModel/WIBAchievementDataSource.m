@@ -17,7 +17,7 @@
     WIBAchievementCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"achievement" forIndexPath:indexPath];
     if (indexPath.item == 0) {
         cell.descriptionLabel.text = @"BEST ROUND";
-        cell.achievementLabel.text = [NSString stringWithFormat:@"%ld",[WIBGamePlayManager sharedInstance].highScore];
+        cell.achievementLabel.text = [NSString stringWithFormat:@"%ld",(long)[WIBGamePlayManager sharedInstance].highScore];
         cell.descriptor = @"bestRound";
     }
     else if (indexPath.item == 1) {
@@ -31,6 +31,7 @@
         cell.achievementLabel.text = [NSString stringWithFormat:@"%d%%", (int)accuracy];
         cell.descriptor = @"accuracy";
     }
+    cell.layer.cornerRadius = 10.0f;
     
     return cell;
 }

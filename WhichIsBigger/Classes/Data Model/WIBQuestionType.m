@@ -16,6 +16,7 @@
 @dynamic title;
 @dynamic backgroundColorString;
 @dynamic tintColorString;
+@dynamic themeColorString;
 @dynamic pointsToUnlock;
 @dynamic image;
 @dynamic questionString;
@@ -35,6 +36,10 @@
 
 - (UIColor *)tintColor {
     return [UIColor colorWithString:self.tintColorString];
+}
+
+- (UIColor *)themeColor {
+    return [UIColor colorWithString:self.themeColorString];
 }
 
 @end

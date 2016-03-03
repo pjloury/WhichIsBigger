@@ -30,11 +30,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
+    //self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
 //    self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
 
-    self.playAgainButton.layer.cornerRadius = 10;
-    self.playAgainButton.layer.borderWidth = 2;
+    self.playAgainButton.layer.cornerRadius = 6;
+   // self.playAgainButton.layer.borderWidth = 2;
 }
 
 - (IBAction)didPressDone:(id)sender {

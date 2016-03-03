@@ -27,8 +27,9 @@
 - (void)beginRound;
 - (void)endGame;
 - (WIBGameQuestion *)nextGameQuestion;
+- (void)authenticateGameKitUser;
 
-@property (nonatomic) NSArray *availableQuestionTypes;
+@property (nonatomic, readonly) NSArray *availableQuestionTypes;
 @property (nonatomic) NSMutableArray *questionTypes;
 @property (nonatomic, readonly) WIBGameRound *gameRound;
 @property (nonatomic, assign, readonly) NSUInteger questionNumber;

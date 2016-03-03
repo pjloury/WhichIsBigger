@@ -118,7 +118,7 @@ alpha:1.0]
 {
     int r1 = arc4random() % [UIColor colorArray].count;
     int r2 = arc4random() % [UIColor colorArray].count;
-    while (abs(r2-r1)<= 1) {
+    while (abs(r2-r1)< 4) {
         r2 = arc4random() % [UIColor colorArray].count;
     }
     return @[[UIColor colorArray][r1], [UIColor colorArray][r2]];

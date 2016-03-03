@@ -104,11 +104,8 @@
 
 - (WIBQuestionType *)randomQuestionType
 {
-    // categoryWhiteList
-    NSUInteger randomQuestionTypeIndex = arc4random_uniform((u_int32_t)[WIBGamePlayManager sharedInstance].questionTypes.count);
-    return [WIBGamePlayManager sharedInstance].questionTypes[randomQuestionTypeIndex];
-    
-    // return a specific questionType
+    NSUInteger randomQuestionTypeIndex = arc4random_uniform((u_int32_t)[WIBGamePlayManager sharedInstance].availableQuestionTypes.count);
+    return [WIBGamePlayManager sharedInstance].availableQuestionTypes[randomQuestionTypeIndex];
 }
 
 - (WIBGameQuestion *)nextGameQuestion

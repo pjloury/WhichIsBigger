@@ -51,19 +51,15 @@
         }];
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHighScore) name:@"GameCenterDidFinishAuthentication" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPressHighScoresButton:) name:@"GameCenterDidFinishAuthentication" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.highScoresButton.hidden = ![GKLocalPlayer localPlayer].isAuthenticated;
+    self.highScoresButton.layer.cornerRadius = 6;
+    self.startNewGameButton.layer.cornerRadius = 6;
     [self.categoriesCollectionView reloadData];
-}
-
-- (void)updateHighScore
-{
-    self.highScoresButton.hidden = ![GKLocalPlayer localPlayer].isAuthenticated;
 }
 
 - (IBAction)didPressLoginButton:(id)sender
@@ -78,6 +74,90 @@
     }];
 }
 
+- (IBAction)didPressNewGameButton:(id)sender
+{
+    [[WIBGamePlayManager sharedInstance] beginRound];
+    [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+}
+
+- (IBAction)didPressHighScoresButton:(id)sender
+{
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+        gcViewController.gameCenterDelegate = self;
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = @"highScore";
+        [self presentViewController:gcViewController animated:YES completion:nil];
+    }else {
+        [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
+    }
+}
+
+#pragma mark - Collection View Data Source
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [[[WIBGamePlayManager sharedInstance] questionTypes] count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    WIBQuestionTypeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"questionTypeCell" forIndexPath:indexPath];
+    cell.clipsToBounds = NO;
+    
+    WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
+    
+    if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^
+        (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+            image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            cell.imageView.image = image;
+        }];
+        cell.label.text = type.title;
+        cell.imageViewContainer.backgroundColor = type.backgroundColor;
+        cell.imageView.tintColor = type.tintColor;
+    } else {
+        UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
+        //image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        //cell.imageView.tintColor = type.tintColor;
+        cell.imageView.image = image;
+        cell.label.text = [NSString stringWithFormat:@"LEVEL %ld", (indexPath.item +1)];
+        cell.imageViewContainer.backgroundColor = [UIColor whiteColor];
+    }
+    
+    cell.label.textColor = [UIColor grayColor];
+    cell.imageViewContainer.layer.cornerRadius = 8.0;
+    cell.imageViewContainer.layer.masksToBounds = NO;
+    cell.imageViewContainer.layer.shadowColor = [UIColor grayColor].CGColor;
+    cell.imageViewContainer.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
+    cell.imageViewContainer.layer.shadowOpacity = 0.5f;
+    
+    cell.animationView.type = CSAnimationTypeShake;
+    cell.animationView.duration = 2.0;
+    
+    return cell;
+}
+
+# pragma mark - Collection View Delegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
+    if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
+        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
+        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+    } else {
+        WIBQuestionTypeCell *cell = (WIBQuestionTypeCell *)[collectionView.dataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
+        [cell.animationView startCanvasAnimation];
+    }
+}
+
+# pragma mark - Game Center Delegate
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+# pragma mark - Facebook
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
     [self _facebookAuth];
@@ -126,92 +206,6 @@
             NSLog(@"Some other error: %@", error);
         }
     }];
-}
-
-- (IBAction)didPressNewGameButton:(id)sender
-{
-    [[WIBGamePlayManager sharedInstance] beginRound];
-    [self performSegueWithIdentifier:@"newGameSegue" sender:self];
-}
-
-- (IBAction)didPressHighScoresButton:(id)sender
-{
-//    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-//        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-//        gcViewController.gameCenterDelegate = self;
-//        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-//        gcViewController.leaderboardIdentifier = @"highScore";
-//        [self presentViewController:gcViewController animated:YES completion:nil];
-//    }
-}
-
-#pragma mark - Collection View Data Source
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [[[WIBGamePlayManager sharedInstance] questionTypes] count];
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    WIBQuestionTypeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"questionTypeCell" forIndexPath:indexPath];
-    cell.clipsToBounds = NO;
-    
-    WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
-    
-    if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^
-        (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-            image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            cell.imageView.image = image;
-        }];
-        cell.label.text = type.title;
-        cell.imageViewContainer.backgroundColor = type.backgroundColor;
-        cell.imageView.tintColor = type.tintColor;
-    } else {
-        UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
-        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        cell.imageView.image = image;
-        cell.label.text = [NSString stringWithFormat:@"LEVEL %ld", (indexPath.item +1)];
-        // cell.label.text = @"???";
-        cell.imageViewContainer.backgroundColor = [UIColor whiteColor];
-        cell.imageView.tintColor = type.tintColor;
-    }
-
-    //cell.imageViewContainer.layer.borderWidth = 1.0;
-    
-    cell.label.textColor = [UIColor grayColor];
-    cell.imageViewContainer.layer.cornerRadius = 8.0;
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:cell.imageViewContainer.bounds];
-    cell.imageViewContainer.layer.masksToBounds = NO;
-    cell.imageViewContainer.layer.shadowColor = [UIColor grayColor].CGColor;
-    cell.imageViewContainer.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
-    cell.imageViewContainer.layer.shadowOpacity = 0.5f;
-    cell.imageViewContainer.layer.shadowPath = shadowPath.CGPath;
-    
-    cell.animationView.type = CSAnimationTypeShake;
-    cell.animationView.duration = 2.0;
-    
-    return cell;
-}
-
-#pragma mark - Collection View Delegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
-    if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
-        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
-        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
-    } else {
-        WIBQuestionTypeCell *cell = (WIBQuestionTypeCell *)[collectionView.dataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
-        [cell.animationView startCanvasAnimation];
-    }
-}
-
-#pragma mark - Game Center Delegate
--(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
-{
-    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

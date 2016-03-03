@@ -64,7 +64,7 @@
     
     self.navigationItem.hidesBackButton = YES;
     UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
-    [nc.navigationBar setBarTintColor:[WIBGamePlayManager sharedInstance].gameRound.questionType.tintColor];
+    [nc.navigationBar setBarTintColor:[WIBGamePlayManager sharedInstance].gameRound.questionType.themeColor];
 }
 
 - (void)configureQuestionView
