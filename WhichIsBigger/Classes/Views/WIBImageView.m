@@ -39,18 +39,12 @@
         case WIBImageViewStateCorrect:
             self.layer.borderWidth = 4.0f;
             self.layer.borderColor = [UIColor greenColor].CGColor;
-//            self.layer.shadowOffset = CGSizeZero;
             self.layer.shadowColor = [UIColor clearColor].CGColor;
-//            self.layer.shadowRadius = 10.0f;
-//            self.layer.shadowOpacity = 1.0f;
             break;
         case WIBImageViewStateIncorrect:
             self.layer.borderWidth = 4.0f;
             self.layer.borderColor = [UIColor redColor].CGColor;
-//            self.layer.shadowOffset = CGSizeZero;
             self.layer.shadowColor = [UIColor clearColor].CGColor;
-//            self.layer.shadowRadius = 10.0f;
-//            self.layer.shadowOpacity = 1.0f;
             break;
     }
 }

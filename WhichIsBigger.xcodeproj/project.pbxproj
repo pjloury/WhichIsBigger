@@ -779,7 +779,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d32d0a39-d09f-4c6d-a8fa-43744aee9ab5";
 			};
 			name = Debug;
 		};
@@ -807,7 +807,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d32d0a39-d09f-4c6d-a8fa-43744aee9ab5";
 			};
 			name = Release;
 		};

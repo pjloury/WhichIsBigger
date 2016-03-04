@@ -129,18 +129,19 @@
     }
 }
 
-- (void)viewDidLayoutSubviews
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self setPreviousProgress];
+    self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
+}
+
+- (void)setPreviousProgress
 {
     CGFloat previousPoints = ([[WIBGamePlayManager sharedInstance] currentLevelPoints] - [WIBGamePlayManager sharedInstance].score);
     CGFloat previousPercentage = (CGFloat) previousPoints/(CGFloat) [WIBGamePlayManager sharedInstance].pointsPerLevel;
     NSLog(@"PREVIOUS: %f",previousPercentage);
     //previousPercentage = .8;
     [self.progressMeterSuperView setProgress:previousPercentage animated:NO completion:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
 }
 
 - (void)revealCell
@@ -277,7 +278,7 @@
         return CGSizeMake(proportionalWidth, 65);
     }
     else if ([collectionView isEqual:self.achievementsCollectionView]) {
-        CGFloat proportionalWidth = (collectionView.frame.size.width - 40) / 3;
+        CGFloat proportionalWidth = (collectionView.frame.size.width - 50) / 3;
         return CGSizeMake(proportionalWidth, 80);
     }
     else {

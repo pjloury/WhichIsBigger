@@ -88,6 +88,9 @@
     self.questionTypeLabel.text = questionType.title;
     self.questionTypeLabel.textColor = questionType.tintColor;
     
+    self.advanceButton.titleLabel.numberOfLines = 1;
+    self.advanceButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.advanceButton.titleLabel.minimumScaleFactor = 0.5;
     self.advanceButton.layer.cornerRadius = 6.0f;
 }
 

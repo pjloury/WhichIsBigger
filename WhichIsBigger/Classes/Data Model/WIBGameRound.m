@@ -149,16 +149,11 @@
 # pragma mark - Accessors
 - (NSInteger)score
 {
-    _score = 0;
-    for (WIBGameQuestion *question in self.gameQuestions)
-    {
-        if (question.answeredCorrectly)
-        {
-            _score += ceil([WIBGamePlayManager sharedInstance].pointsPerQuestion - ([WIBGamePlayManager sharedInstance].pointsPerQuestion * question.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
-        }
+    NSInteger total = 0;
+    for (WIBGameQuestion *question in self.gameQuestions) {
+        total += question.points;
     }
-    
-    return _score;
+    return total;
 }
 
 
