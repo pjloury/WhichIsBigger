@@ -60,20 +60,6 @@
 }
 
 # pragma mark - Game State
-- (void)authenticateGameKitUser
-{
-    if ([GKLocalPlayer localPlayer].isAuthenticated == NO) {
-        [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController * viewController, NSError *error){
-            if (viewController) {
-                AppDelegate *del = [UIApplication sharedApplication].delegate;
-                [del.window.rootViewController presentViewController:viewController animated:YES completion:nil];
-            }
-            if(!error) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"GameCenterDidFinishAuthentication" object:nil];
-            }
-        };
-    }
-}
 
 - (void)beginRound
 {
@@ -102,14 +88,34 @@
     }
 }
 
+- (WIBGameQuestion *)nextGameQuestion
+{
+    return [self.gameRound nextGameQuestion];
+}
+
 //- (WIBQuestionType *)unlockedQuestionType
 //{
 //    return [self availableQuestionTypes].firstObject;
 //}
 
+- (NSInteger)pointsPerQuestion
+{
+    return [[[PFConfig currentConfig] objectForKey:@"pointsPerQuestion"] integerValue];
+}
+
+- (NSInteger)pointsPerLevel
+{
+    return [[[PFConfig currentConfig] objectForKey:@"pointsPerLevel"] integerValue];
+}
+
 - (NSInteger)level
 {
-    return (self.lifeTimeScore / POINTS_PER_LEVEL) +1;
+    return (self.lifeTimeScore / self.pointsPerLevel) +1;
+}
+
+- (NSInteger)previousLevel
+{
+    return (self.lifeTimeScore - self.score) / self.pointsPerLevel + 1;
 }
 
 - (NSInteger)lifeTimeScore
@@ -121,34 +127,30 @@
 {
     [[PFUser currentUser] setObject:@(lifeTimeScore) forKey:@"lifeTimeScore"];
     [[PFUser currentUser] saveInBackground];
-    GKScore *gameKitLifeTimeScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"topScores"];
-    gameKitLifeTimeScore.value = lifeTimeScore;
-    
-    [GKScore reportScores:@[gameKitLifeTimeScore] withCompletionHandler:^(NSError *error) {
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-    }];
-    
+    [self syncScoreWithGameKit:@"topScores" scoreValue:self.lifeTimeScore];
 }
 
 - (NSInteger)currentLevelPoints
 {
-    return self.lifeTimeScore % POINTS_PER_LEVEL;
+    return self.lifeTimeScore % self.pointsPerLevel;
+}
+
+- (NSInteger)initialSecondsPerQuestion
+{
+    return [[[PFConfig currentConfig] objectForKey:@"initialSecondsPerQuestion"] integerValue];
 }
 
 - (double)secondsPerQuestion
 {
-    double remainder = self.level % 5;
-    double seconds = (double) SECONDS_PER_QUESTION;
-    double secondsPerQuestion = seconds - remainder / 2;
-    return secondsPerQuestion;
+    double sec = ((double)-2 / (double)self.pointsPerLevel)* (double)self.currentLevelPoints + self.initialSecondsPerQuestion;
+    return sec;
+    
 }
 
 - (double)animationSpeed
 {
-//    return 0.5 * (self.secondsPerQuestion/SECONDS_PER_QUESTION) * 1.75;
-    return 0.5;
+    //return 0.5 * (self.secondsPerQuestion/SECONDS_PER_QUESTION) * 1.75;
+    return self.secondsPerQuestion/6;
 }
 
 - (NSArray *)availableQuestionTypes
@@ -159,31 +161,31 @@
             [array addObject:questionType];
         }
     }
-    return [self.questionTypes subarrayWithRange:NSMakeRange(0,3)];
-    //return array;
+    //return [self.questionTypes subarrayWithRange:NSMakeRange(0,3)];
+    return array;
 }
 
-// Start with countries
-// Then cities and states
-
-// How to determine which category to give them next. Need to be risk Adverse
-// Cloud brings down the categories.. Always in the same order..
-// Start with
-// Use a colon to split apart categoryString from tag
+- (double) skewFactor
+{
+    double skew = - (double).25 / (double)self.pointsPerLevel * self.currentLevelPoints + .3;
+    return skew;
+}
 
 - (double) questionCeiling
 {
-    return 5;
+    double ceiling = - (double)15 / (double)self.pointsPerLevel * self.currentLevelPoints + 20;
+    return ceiling;
 }
 
 - (double) questionFloor
 {
-    return 0;
+    double floor = - (double)4.99 / (double)self.pointsPerLevel * self.currentLevelPoints + 5;
+    return floor;
 }
 
 - (void)adjustDifficulty
 {
-    if (self.gameRound.accuracy >= 0.8 && self.questionCeiling - 5 > self.questionFloor)
+    if (self.gameRound.accuracy >= 0.7 && self.questionCeiling - 5 > self.questionFloor)
     {
         self.questionCeiling -= 5;
         if (self.questionFloor > 5)
@@ -218,24 +220,12 @@
     self.previousQuestionTypes = self.availableQuestionTypes;
 }
 
-- (WIBGameQuestion *)nextGameQuestion
-{
-    return [self.gameRound nextGameQuestion];
-}
-
 - (void)setHighScore:(NSInteger)highScore
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
     [[PFUser currentUser] setObject:@(highScore) forKey:@"highScore"];
     [[PFUser currentUser] saveInBackground];
-    GKScore *gameKitHighScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"highScore"];
-    gameKitHighScore.value = highScore;
-    
-    [GKScore reportScores:@[gameKitHighScore] withCompletionHandler:^(NSError *error) {
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-    }];
+    [self syncScoreWithGameKit:@"highScore" scoreValue:self.highScore];
 }
 
 - (NSInteger)highScore
@@ -245,7 +235,6 @@
 
 - (NSUInteger)score
 {
-//    return 200;
     return self.gameRound.score;
 }
 
@@ -268,13 +257,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(longestStreak) forKey:@"longestStreak"];
     [[PFUser currentUser] setObject:@(longestStreak) forKey:@"longestStreak"];
     [[PFUser currentUser] saveInBackground];
-    GKScore *gameKitLongestStreak = [[GKScore alloc] initWithLeaderboardIdentifier:@"longestStreak"];
-    gameKitLongestStreak.value = longestStreak;
-    [GKScore reportScores:@[gameKitLongestStreak] withCompletionHandler:^(NSError *error) {
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-    }];
+    [self syncScoreWithGameKit:@"longestStreak" scoreValue:self.longestStreak];
 }
 
 - (NSInteger)longestStreak
@@ -352,6 +335,41 @@
     self.currentStreak = 0;
     self.totalAnswers++;
     [self.gameRound questionAnsweredInCorrectly];
+}
+
+# pragma mark - GameKit
+- (void)authenticateGameKitUser
+{
+    if ([GKLocalPlayer localPlayer].isAuthenticated == NO) {
+        [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController * viewController, NSError *error){
+            if (viewController) {
+                AppDelegate *del = [UIApplication sharedApplication].delegate;
+                [del.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+            }
+            if(!error) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GameCenterDidFinishAuthentication" object:nil];
+                [self syncScoresWithGameCenter];
+            }
+        };
+    }
+}
+
+- (void)syncScoresWithGameCenter
+{
+    [self syncScoreWithGameKit:@"topScores" scoreValue:self.lifeTimeScore];
+    [self syncScoreWithGameKit:@"highScore" scoreValue:self.highScore];
+    [self syncScoreWithGameKit:@"longestStreak" scoreValue:self.longestStreak];
+}
+
+- (void)syncScoreWithGameKit:(NSString *)scoreName scoreValue:(NSInteger)scoreValue
+{
+    GKScore *gameKitScore = [[GKScore alloc] initWithLeaderboardIdentifier:scoreName];
+    gameKitScore.value = scoreValue;
+    [GKScore reportScores:@[gameKitScore] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 @end

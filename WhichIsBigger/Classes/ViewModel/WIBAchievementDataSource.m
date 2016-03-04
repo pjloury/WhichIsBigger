@@ -16,17 +16,17 @@
 {
     WIBAchievementCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"achievement" forIndexPath:indexPath];
     if (indexPath.item == 0) {
-        cell.descriptionLabel.text = @"BEST ROUND";
+        cell.descriptionLabel.text = @"Best Round";
         cell.achievementLabel.text = [NSString stringWithFormat:@"%ld",(long)[WIBGamePlayManager sharedInstance].highScore];
         cell.descriptor = @"bestRound";
     }
     else if (indexPath.item == 1) {
-        cell.descriptionLabel.text = @"LONGEST STREAK";
+        cell.descriptionLabel.text = @"Longest Streak";
         cell.achievementLabel.text = [NSString stringWithFormat:@"%ld",[WIBGamePlayManager sharedInstance].longestStreak];
         cell.descriptor = @"longestStreak";
     }
     else if (indexPath.item == 2) {
-        cell.descriptionLabel.text = @"CAREER ACCURACY";
+        cell.descriptionLabel.text = @"Career Accuracy";
         double accuracy = [WIBGamePlayManager sharedInstance].accuracy * 100;
         cell.achievementLabel.text = [NSString stringWithFormat:@"%d%%", (int)accuracy];
         cell.descriptor = @"accuracy";

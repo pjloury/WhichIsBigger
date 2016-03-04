@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *questionTypeView;
 @property (weak, nonatomic) IBOutlet UIImageView *questionTypeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *questionTypeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *advanceButon;
+@property (weak, nonatomic) IBOutlet UIButton *advanceButton;
 
 
 @property UITapGestureRecognizer *tapRecognizer;
@@ -42,7 +42,7 @@
     self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(continuePressed:)];
     [self.view addGestureRecognizer:self.tapRecognizer];
     self.tapRecognizer.enabled = NO;
-    self.advanceButon.userInteractionEnabled = NO;
+    self.advanceButton.userInteractionEnabled = NO;
     
     confettiView = [[KRConfettiView alloc] initWithFrame:self.view.frame];
     confettiView.colours = @[[UIColor colorWithRed:0.95 green:0.40 blue:0.27 alpha:1.0],
@@ -57,7 +57,6 @@
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
     [[WIBGamePlayManager sharedInstance] beginRoundForType:questionType];
     
-//    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.questionTypeView.bounds];
     self.questionTypeView.layer.shadowRadius = 8.0f;
     self.questionTypeView.layer.masksToBounds = NO;
     self.questionTypeView.layer.shadowColor = questionType.tintColor.CGColor;
@@ -89,9 +88,7 @@
     self.questionTypeLabel.text = questionType.title;
     self.questionTypeLabel.textColor = questionType.tintColor;
     
-    self.advanceButon.layer.cornerRadius = 10.0f;
-    self.advanceButon.layer.borderWidth = 1.0f;
-    self.advanceButon.layer.borderColor = [UIColor lightPurpleColor].CGColor;
+    self.advanceButton.layer.cornerRadius = 6.0f;
 }
 
 - (void)finishConfetti
@@ -118,7 +115,7 @@
 - (void)groupImageDownloadDidComplete:(NSNotification *)note
 {
     self.tapRecognizer.enabled = YES;
-    self.advanceButon.userInteractionEnabled = YES;
+    self.advanceButton.userInteractionEnabled = YES;
 }
 
 - (IBAction)continuePressed:(id)sender
@@ -127,16 +124,5 @@
     [self performSegueWithIdentifier:@"startUnlockedQuestionTypeSegue" sender:self];
     [WIBGamePlayManager sharedInstance].unlockedQuestionType = nil;
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

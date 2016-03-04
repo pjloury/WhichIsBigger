@@ -9,7 +9,7 @@ pod 'Shimmer'
 pod 'SDWebImage', '~>3.7'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
-pod 'CircleProgressBar', '~> 0.21'
+pod 'KTCenterFlowLayout'
 end
 
 target 'WhichIsBiggerTests' do

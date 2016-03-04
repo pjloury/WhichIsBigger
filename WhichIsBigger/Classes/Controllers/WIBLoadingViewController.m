@@ -100,7 +100,6 @@ const static double kIdealWaitTime = 1.0;
         self.shimmeringView.alpha = 0;
         self.categoryLabel.alpha = 0;
     } completion:^(BOOL finished) {
-        //[self performSegueWithIdentifier:@"beginGameSegue" sender:self];
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WIBGameViewController *vc = [sb instantiateViewControllerWithIdentifier:@"GameViewController"];
         [self.navigationController pushViewController:vc animated:NO];

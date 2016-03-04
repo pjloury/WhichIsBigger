@@ -41,6 +41,26 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (IBAction)didPressActionButton:(id)sender {
+    NSString *highScore = [NSString stringWithFormat:@"Have you played Which is Bigger? See if you can beat my top score of %ld!", [WIBGamePlayManager sharedInstance].highScore];
+    NSString *urlString = [[PFConfig currentConfig] objectForKey:@"appURL"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableArray *items = [NSMutableArray array];
+    [items addObject:highScore];
+    if (url) [items addObject:url];
+    
+    UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    NSArray *excludedActivities = @[
+                                    UIActivityTypePostToWeibo,
+                                    UIActivityTypePrint, UIActivityTypeCopyToPasteboard,
+                                    UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,
+                                    UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,
+                                    UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo];
+    controller.excludedActivityTypes = excludedActivities;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 - (IBAction)didPressPlayAgain:(id)sender
 {
     if ([[WIBGamePlayManager sharedInstance] unlockedQuestionType]) {
@@ -51,9 +71,6 @@
         [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
     }
-}
-
-- (IBAction)didPressActionButton:(id)sender {
 }
 
 - (void)openFacebookShareFlow

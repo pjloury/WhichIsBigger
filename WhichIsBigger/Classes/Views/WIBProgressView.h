@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol WIBProgressViewDelegate;
+
 @interface WIBProgressView : UIView
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated completion:(void(^)())completion;
+@property (nonatomic, weak) id<WIBProgressViewDelegate> delegate;
 
+@end
+
+@protocol WIBProgressViewDelegate <NSObject>
+- (void)progressViewDidSurpassFullProgress:(WIBProgressView *)progressView;
 @end

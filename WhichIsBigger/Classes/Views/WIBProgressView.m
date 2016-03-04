@@ -32,9 +32,16 @@
     return self;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.fullBarWidth  = self.frame.size.width;
+}
+
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated completion:(void(^)())completion;
 {
-    CGFloat progressWidth = self.fullBarWidth * progress;
+    //fullBarWidth claims to be 420;
+    CGFloat progressWidth = self.frame.size.width * progress;
     CGFloat progressDifference = progress - self.progress;
     
     if (animated) {
@@ -55,6 +62,7 @@
                 [self layoutIfNeeded];
             }
                              completion:^(BOOL finished) {
+                                [self.delegate progressViewDidSurpassFullProgress:self];
                                  self.progressBarWidthConstraint.constant = 0;
                                  [self layoutIfNeeded];
                                  [UIView animateWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:[WIBGamePlayManager sharedInstance].animationSpeed options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -64,7 +72,6 @@
                                      if (completion) {
                                          completion();
                                      }
-                                        
                                  }];
                              }];
         }

@@ -41,6 +41,7 @@
 
 // Game Parameters
 @property (nonatomic, assign, readonly) double secondsPerQuestion;
+@property (nonatomic, assign, readonly) NSInteger initialSecondsPerQuestion;
 @property (nonatomic, assign, readonly) double animationSpeed;
 
 // Caching
@@ -50,6 +51,7 @@
 @property (nonatomic, assign, readonly) NSInteger highScore;
 @property (nonatomic, assign, readonly) NSInteger currentStreak;
 @property (nonatomic, assign, readonly) NSInteger longestStreak;
+@property (nonatomic, assign, readonly) NSInteger lifeTimeScore;
 
 // Statistics
 @property (nonatomic, assign, readonly) NSInteger totalCorrectAnswers;
@@ -58,7 +60,10 @@
 
 // Level Advancement
 - (NSUInteger)score;
+@property (nonatomic, assign, readonly) NSInteger pointsPerQuestion;
+@property (nonatomic, assign, readonly) NSInteger pointsPerLevel;
 @property (nonatomic, assign, readonly) NSInteger level;
+@property (nonatomic, assign, readonly) NSInteger previousLevel;
 @property (nonatomic, assign, readonly) NSInteger currentLevelPoints;
 @property (nonatomic) WIBQuestionType *unlockedQuestionType;
 

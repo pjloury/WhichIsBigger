@@ -124,7 +124,6 @@ alpha:1.0]
     return @[[UIColor colorArray][r1], [UIColor colorArray][r2]];
 }
 
-
 + (NSArray *)colorArray {
     return @[
              [UIColor sexyPinkColor],
@@ -133,6 +132,25 @@ alpha:1.0]
              [UIColor sexyDeepOrangeColor],
              [UIColor sexyYellowColor],
              [UIColor sexyAmberColor],
+             [UIColor sexyLightGreenColor],
+             [UIColor sexyLimeColor],
+             [UIColor sexyGreenColor],
+             [UIColor sexyTealColor],
+             [UIColor sexyCyanColor],
+             [UIColor sexyLightBlueColor],
+             [UIColor sexyBlueColor],
+             [UIColor sexyIndigoColor],
+             [UIColor sexyPurpleColor],
+             [UIColor sexyDeepPurpleColor]
+             ];
+}
+
++ (NSArray *)backgroundColorArray {
+    return @[
+             [UIColor sexyPinkColor],
+             [UIColor sexyRedColor],
+             [UIColor sexyOrangeColor],
+             [UIColor sexyDeepOrangeColor],
              [UIColor sexyLightGreenColor],
              [UIColor sexyLimeColor],
              [UIColor sexyGreenColor],
@@ -186,6 +204,12 @@ alpha:1.0]
     unsigned colorInt = 0;
     [[NSScanner scannerWithString:tempHex] scanHexInt:&colorInt];
     return UIColorFromRGB(colorInt);
+}
+
++ (UIColor *)backgorundColorForLevel:(NSInteger)level
+{
+    NSInteger index = level % [UIColor backgroundColorArray].count;
+    return [UIColor backgroundColorArray][index];
 }
 
 @end

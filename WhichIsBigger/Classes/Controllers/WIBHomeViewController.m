@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *categoriesCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
 
 
 @property (nonatomic) NSArray *readPermissions;
@@ -38,6 +39,7 @@
     [super viewDidLoad];
     self.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     self.startNewGameButton.enabled = NO;
+    self.categoriesCollectionView.userInteractionEnabled = NO;
         
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
@@ -46,6 +48,7 @@
                 dispatch_async(dispatch_get_main_queue(),
                                ^{
                                     self.startNewGameButton.enabled = YES;
+                                   self.categoriesCollectionView.userInteractionEnabled = YES;
                                });
             }];
         }];
@@ -60,6 +63,7 @@
     self.highScoresButton.layer.cornerRadius = 6;
     self.startNewGameButton.layer.cornerRadius = 6;
     [self.categoriesCollectionView reloadData];
+    self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld pts", [WIBGamePlayManager sharedInstance].lifeTimeScore];
 }
 
 - (IBAction)didPressLoginButton:(id)sender

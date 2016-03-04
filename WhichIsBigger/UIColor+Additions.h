@@ -33,6 +33,7 @@
 + (UIColor *)sexyDeepOrangeColor;
 
 + (UIColor *)colorWithString:(NSString *)hexString;
++ (UIColor *)colorForLevel:(NSInteger)level;
 
 + (UIColor *)randomColor;
 + (NSArray *)randomColorPair;

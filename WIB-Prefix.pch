@@ -16,7 +16,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "Canvas.h"
-#import "CircleProgressBar.h"
 #import "WIBConstants.h"
 #import "UIColor+Additions.h"
 #import "FBShimmeringView.h"

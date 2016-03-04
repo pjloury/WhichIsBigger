@@ -13,7 +13,7 @@
 - (void)setHighlighted:(BOOL)highlighted
 {
     [super setHighlighted:highlighted];
-    self.backgroundColor = highlighted ? [UIColor lightGrayColor]: [UIColor whiteColor];
+    self.backgroundColor = highlighted ? [UIColor colorWithString:@"FAFAFA"]: [UIColor whiteColor];
 }
 
 

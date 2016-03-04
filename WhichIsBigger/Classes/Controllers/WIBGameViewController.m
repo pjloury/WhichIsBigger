@@ -51,11 +51,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    // Set Model
-    //self.question = [[WIBGamePlayManager sharedInstance].gameRound.gameQuestions firstObject];
-    
-    // get the first Q, none will be left
     self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
     
     // Configure View using Model
@@ -107,9 +102,7 @@
     else
     {
         [self.questionView startQuestionExitAnimationWithCompletion:
-         ^(BOOL finished){
-//            self.question = [[WIBGamePlayManager sharedInstance].gameRound.gameQuestions firstObject];
-             
+         ^(BOOL finished){             
              self.question = [[WIBGamePlayManager sharedInstance] nextGameQuestion];
             [self.questionView refreshWithQuestion:self.question];
             self.questionNumberLabel.text = [NSString stringWithFormat:@"%ld of %d",(long)[WIBGamePlayManager sharedInstance].questionNumber, NUMBER_OF_QUESTIONS];
@@ -133,40 +126,26 @@
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished){}];
 
-    [self.timer invalidate];
-    self.timer = nil;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].secondsPerQuestion target:self selector:@selector(timerExpired) userInfo:nil repeats:NO];
     
 }
 
-- (void)timerFired
+- (void)timerExpired
 {
-    // starts as 5.
-    if (_currSeconds>1) {
-        _currSeconds-=1;
+    if (!self.questionView.isGamePlayDisabled) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
     }
-    else {
-        _currSeconds=[WIBGamePlayManager sharedInstance].secondsPerQuestion; // in the bad case, this is 1
-        // is timer getting fired again AFTER its 1?
-        [self.timer invalidate];
-        self.timer = nil;
-        
-        if (!self.questionView.isGamePlayDisabled) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kGameQuestionTimeUpNotification object:nil];
-        }
             
-        if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS) {
-            [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
-            [self.nextButton sizeToFit];
-        }
-        //TODO: Kick off "reveal" animation!
+    if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS) {
+        [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+        [self.nextButton sizeToFit];
     }
 }
 
 # pragma mark - WIBGamePlayDelegate
 - (void)questionView:(WIBQuestionView *)questionView didSelectOption:(WIBGameOption *)option
 {
-    [self.timer invalidate]; // is there latency on this call?
+    [self.timer invalidate];
     self.timer = nil;
     [self pauseLayer:self.timerBar.layer];
     self.question.answerTime = fabs([self.startDate timeIntervalSinceNow]);
@@ -189,7 +168,6 @@
     layer.beginTime = timeSincePause;
 }
 
-// this gets called when time is up too!
 - (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
 {
     // if someone taps too late, don't construe this tap as a "next" tap
