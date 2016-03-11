@@ -206,7 +206,7 @@ alpha:1.0]
     return UIColorFromRGB(colorInt);
 }
 
-+ (UIColor *)backgorundColorForLevel:(NSInteger)level
++ (UIColor *)colorForLevel:(NSInteger)level
 {
     NSInteger index = level % [UIColor backgroundColorArray].count;
     return [UIColor backgroundColorArray][index];

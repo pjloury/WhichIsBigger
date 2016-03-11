@@ -122,7 +122,7 @@
     if ([WIBGamePlayManager sharedInstance].availableQuestionTypes.count == [WIBGamePlayManager sharedInstance].questionTypes.count) {
         self.goalLevelImageView.image = [UIImage trophy];
         self.goalLevelImageView.tintColor = [UIColor sexyAmberColor];
-        self.goalLevelBackgroundView.backgroundColor = [UIColor randomColorPair][1];
+        self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].previousLevel];
     } else {
         self.goalLevelImageView.image =  [UIImage imageNamed:@"smallQuestionMark"];
         self.goalLevelBackgroundView.backgroundColor = [UIColor whiteColor];
@@ -298,13 +298,14 @@
         self.leftLevelView.alpha = 0.0;
         self.rightLevelView.alpha = 0.0; }
                     completion:^(BOOL finished) {
-                        self.currentLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",[WIBGamePlayManager sharedInstance].level];
+                        self.currentLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",(long)[WIBGamePlayManager sharedInstance].level];
                         if ([WIBGamePlayManager sharedInstance].unlockedQuestionType) {
                             self.currentLevelImageView.image = [UIImage placeholder];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
                         }
-                        self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",([WIBGamePlayManager sharedInstance].level +1)];
+                        self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",([WIBGamePlayManager sharedInstance].level)];
+                        self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].level];
                         [UIView animateWithDuration:0.5 animations:^{
                             self.leftLevelView.alpha = 1.0;
                             self.rightLevelView.alpha = 1.0;
