@@ -9,6 +9,7 @@ pod 'Shimmer'
 pod 'SDWebImage', '~>3.7'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
+pod 'Google-Mobile-Ads-SDK', '~> 7.0'
 pod 'KTCenterFlowLayout'
 end
 
