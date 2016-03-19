@@ -45,6 +45,7 @@
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
             [self.categoriesCollectionView reloadData];
             [self.categoriesCollectionView layoutIfNeeded];
+            [self.categoriesCollectionView flashScrollIndicators];
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
                 dispatch_async(dispatch_get_main_queue(),
                                ^{

@@ -14,7 +14,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    self.backgroundColor = [UIColor faintPurpleColor];
+    self.backgroundColor = [UIColor clearColor];
     return self;
 }
 
