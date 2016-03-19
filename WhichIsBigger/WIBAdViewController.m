@@ -6,6 +6,7 @@
 //  Copyright © 2016 Angry Tortoise Productions. All rights reserved.
 //
 
+
 #import "WIBAdViewController.h"
 
 @implementation WIBAdViewController
@@ -14,6 +15,18 @@
 {
     [super viewWillAppear:animated];
     self.view.backgroundColor = [UIColor faintPurpleColor];
+        
+    self.adBannerView.adUnitID = @"ca-app-pub-4490282633558794/8329432662";
+    self.adBannerView.rootViewController = self;
+    
+    GADRequest *request = [GADRequest request];
+    // Requests test ads on devices you specify. Your test device ID is printed to the console when
+    // an ad request is made. GADBannerView automatically returns test ads when running on a
+    // simulator.
+    request.testDevices = @[
+                            @"2077ef9a63d2b398840261c8221a0c9a"  // Eric's iPod Touch
+                            ];
+    [self.adBannerView loadRequest:request];
     
     UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
     [nc.navigationBar setBarTintColor:[UIColor lightPurpleColor]];
