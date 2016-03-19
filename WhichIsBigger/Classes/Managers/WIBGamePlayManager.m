@@ -77,11 +77,17 @@
 {
     [self adjustDifficulty];
     self.lifeTimeScore = self.lifeTimeScore + self.score;
-    if (self.previousQuestionTypes.count != self.availableQuestionTypes.count) {
-        self.previousQuestionTypes = self.availableQuestionTypes;
-        self.unlockedQuestionType = self.availableQuestionTypes.lastObject;
+    for (WIBQuestionType *questionType in self.availableQuestionTypes) {
+        NSArray *unlockedQuestionTypes = [[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"];
+        if (!unlockedQuestionTypes) {
+            [self unlockedQuestionTypeSeen:self.questionTypes.firstObject];
+        }
+        else if (![unlockedQuestionTypes containsObject:questionType.name]) {
+            self.unlockedQuestionType = questionType;
+            break;
+        }
     }
-    
+        
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
     {
         self.highScore = self.gameRound.score;
@@ -105,7 +111,7 @@
 
 - (NSInteger)pointsPerLevel
 {
-    return [[[PFConfig currentConfig] objectForKey:@"pointsPerLevel"] integerValue];
+    return 500;//return [[[PFConfig currentConfig] objectForKey:@"pointsPerLevel"] integerValue];
 }
 
 - (NSInteger)level
@@ -142,7 +148,7 @@
 
 - (double)secondsPerQuestion
 {
-    double sec = ((double)-2 / (double)self.pointsPerLevel)* (double)self.currentLevelPoints + self.initialSecondsPerQuestion;
+    double sec = ((double)-1 / (double)self.pointsPerLevel)* (double)self.currentLevelPoints + self.initialSecondsPerQuestion;
     return sec;
     
 }
@@ -218,6 +224,17 @@
 {
     _questionTypes = questionTypes;
     self.previousQuestionTypes = self.availableQuestionTypes;
+}
+
+- (void)unlockedQuestionTypeSeen:(WIBQuestionType *)unlockedQuestionType
+{
+    NSMutableArray *unlockedQuestionTypes = [[[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"] mutableCopy];
+    if (!unlockedQuestionTypes) {
+        unlockedQuestionTypes = [NSMutableArray array];
+    }
+    [unlockedQuestionTypes addObject:unlockedQuestionType.name];
+    [[PFUser currentUser] setObject:unlockedQuestionTypes forKey:@"unlockedQuestionTypes"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (void)setHighScore:(NSInteger)highScore

@@ -293,19 +293,28 @@
 }
 
 #pragma mark - WIBProgressViewDelegate
+// Started with L1, L2
+// progress did surpass, and changed to L2, L2. Left image stayed the same while Right changed to Orange and Purple
+
 - (void)progressViewDidSurpassFullProgress:(WIBProgressView *)progressView {
     [UIView animateWithDuration:0.25 animations:^(void){
         self.leftLevelView.alpha = 0.0;
         self.rightLevelView.alpha = 0.0; }
                     completion:^(BOOL finished) {
                         self.currentLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",(long)[WIBGamePlayManager sharedInstance].level];
+                        // If something was just unlocked, foreshadow it
                         if ([WIBGamePlayManager sharedInstance].unlockedQuestionType) {
                             self.currentLevelImageView.image = [UIImage placeholder];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
+                            self.goalLevelImageView.tintColor = [UIColor lightPurpleColor];
+                            self.goalLevelBackgroundView.backgroundColor = [UIColor whiteColor];
+                        } else {
+                            self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].level];
+                            self.goalLevelImageView.tintColor = [UIColor sexyAmberColor];
                         }
-                        self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",([WIBGamePlayManager sharedInstance].level)];
-                        self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].level];
+                        self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",([WIBGamePlayManager sharedInstance].level+1)];
+                        
                         [UIView animateWithDuration:0.5 animations:^{
                             self.leftLevelView.alpha = 1.0;
                             self.rightLevelView.alpha = 1.0;

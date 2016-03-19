@@ -63,12 +63,15 @@
 
 - (IBAction)didPressPlayAgain:(id)sender
 {
+    self.playAgainButton.userInteractionEnabled = NO;
+    WIBQuestionType *type = [WIBGamePlayManager sharedInstance].gameRound.questionType;
+    [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
+    
     if ([[WIBGamePlayManager sharedInstance] unlockedQuestionType]) {
         [self performSegueWithIdentifier:@"unlockedQuestionTypeSegue" sender:self];
     }
     else {
-        WIBQuestionType *type = [WIBGamePlayManager sharedInstance].gameRound.questionType;
-        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
+
         [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
     }
 }

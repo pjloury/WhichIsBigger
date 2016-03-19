@@ -12,6 +12,8 @@
 #import "WIBGamePlayManager.h"
 #import "KRConfettiView.h"
 
+const static double kIdealWaitTime = 3.0;
+
 @interface WIBQuestionTypeUnlockedViewController () {
     KRConfettiView *confettiView;
 }
@@ -25,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *questionTypeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *advanceButton;
 
+@property NSDate *startDate;
+
 
 @property UITapGestureRecognizer *tapRecognizer;
 
@@ -35,14 +39,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.startDate = [NSDate date];
+    
     self.navigationItem.hidesBackButton = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupImageDownloadDidComplete:) name:kGroupImageDownloadCompleteNotification object:nil];
     
-    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(continuePressed:)];
-    [self.view addGestureRecognizer:self.tapRecognizer];
-    self.tapRecognizer.enabled = NO;
-    self.advanceButton.userInteractionEnabled = NO;
+    //self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(continuePressed:)];
+    //[self.view addGestureRecognizer:self.tapRecognizer];
+    //self.tapRecognizer.enabled = NO;
+    
+    //self.advanceButton.userInteractionEnabled = NO;
+    self.advanceButton.enabled = NO;
     
     confettiView = [[KRConfettiView alloc] initWithFrame:self.view.frame];
     confettiView.colours = @[[UIColor colorWithRed:0.95 green:0.40 blue:0.27 alpha:1.0],
@@ -55,7 +63,6 @@
    [self.view addSubview:confettiView];
     
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
-    [[WIBGamePlayManager sharedInstance] beginRoundForType:questionType];
     
     self.questionTypeView.layer.shadowRadius = 8.0f;
     self.questionTypeView.layer.masksToBounds = NO;
@@ -69,7 +76,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
-    [self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.image.url]];
+    //[self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.image.url]];
     
     [self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.image.url] completed:^
      (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
@@ -92,6 +99,11 @@
     self.advanceButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.advanceButton.titleLabel.minimumScaleFactor = 0.5;
     self.advanceButton.layer.cornerRadius = 6.0f;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+
 }
 
 - (void)finishConfetti
@@ -117,15 +129,28 @@
 
 - (void)groupImageDownloadDidComplete:(NSNotification *)note
 {
-    self.tapRecognizer.enabled = YES;
-    self.advanceButton.userInteractionEnabled = YES;
+    NSTimeInterval timeElapsed = [self.startDate timeIntervalSinceReferenceDate];
+    if (timeElapsed > kIdealWaitTime) {
+        //self.tapRecognizer.enabled = YES;
+//        self.advanceButton.userInteractionEnabled = YES;
+        self.advanceButton.enabled = YES;
+    }
+    else {
+        double extraWaitTime = kIdealWaitTime - timeElapsed;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, extraWaitTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                //self.advanceButton.userInteractionEnabled = YES;
+                self.advanceButton.enabled = YES;
+        });
+    }
 }
 
 - (IBAction)continuePressed:(id)sender
 {
     [self.view.layer removeAllAnimations];
+    self.advanceButton.enabled = NO;
+    WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
+    [[WIBGamePlayManager sharedInstance] unlockedQuestionTypeSeen:questionType];
     [self performSegueWithIdentifier:@"startUnlockedQuestionTypeSegue" sender:self];
-    [WIBGamePlayManager sharedInstance].unlockedQuestionType = nil;
 }
 
 @end
