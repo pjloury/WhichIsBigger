@@ -72,7 +72,7 @@
     self.optionView1.hidden = NO;
     self.optionView2.hidden = NO;
     
-    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
+    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed*.85 delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(0, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(0, 0);
     } completion:completion];
@@ -86,7 +86,7 @@
     [self.scoreLabelTimer invalidate];
     self.pointsLabel.text = [NSString stringWithFormat:@"%ld pts",(long)[WIBGamePlayManager sharedInstance].score];
     
-    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
+    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed*.85 delay:0 options:0 animations:^{
         self.optionView1.transform = CGAffineTransformMakeTranslation(-300, 0);
         self.optionView2.transform = CGAffineTransformMakeTranslation(300, 0);
         [self.optionView1 removeAllAnimations];

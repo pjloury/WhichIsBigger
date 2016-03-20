@@ -15,13 +15,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarWidthConstraint;
 
 @property CGFloat progress;
-
 @property CGFloat fullBarWidth;
-@property CGFloat previousPoints;
 
 @end
-
-
 
 @implementation WIBProgressView
 

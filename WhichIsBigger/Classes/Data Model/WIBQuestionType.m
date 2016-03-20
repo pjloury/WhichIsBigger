@@ -11,6 +11,7 @@
 
 @implementation WIBQuestionType
 
+@dynamic clarifyingString;
 @dynamic comparisonType;
 @dynamic category;
 @dynamic title;

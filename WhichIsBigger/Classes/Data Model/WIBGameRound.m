@@ -48,25 +48,12 @@
     return [NSString stringWithFormat:@"Which %@", qString];
 }
 
-- (void)generateQuestions
-{
-    [self generateQuestionsForType:[self randomQuestionType]];
-}
-
 - (void)generateQuestionsForType:(WIBQuestionType *)questionType
 {
     self.questionType = questionType;
     NSMutableArray *questions = [NSMutableArray array];
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
-        // TODO: Server driven # of categories .. (future looking)
-        
-        // random number based on the number of categories
-        // categories should be a set
-        
-        // can have a relation to another type of object
-        // the send type of object is a category
-        
         WIBGameQuestion *question;
         switch(questionType.comparisonType) {
             case (WIBComparisonUnalikeType):
@@ -82,7 +69,6 @@
 
     [[WIBNetworkManager sharedInstance] preloadImages:questions];
     self.gameQuestions = questions;
-    
     self.randomColors = [UIColor randomColors];
 }
 

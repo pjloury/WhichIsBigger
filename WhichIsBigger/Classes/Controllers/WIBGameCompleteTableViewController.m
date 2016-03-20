@@ -103,7 +103,7 @@
     
     NSInteger previousLevel = [WIBGamePlayManager sharedInstance].previousLevel;
     self.currentLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld", (long)previousLevel];
-    self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %d",     (previousLevel + 1)];
+    self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",     (previousLevel + 1)];
   
     UIBezierPath *currentLevelShadowPath = [UIBezierPath bezierPathWithRect:    self.currentLevelBackgroundView.bounds];
     self.currentLevelBackgroundView.layer.masksToBounds = NO;
@@ -132,16 +132,23 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+         self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
+    });
 }
 
 - (void)setPreviousProgress
 {
-    CGFloat previousPoints = ([[WIBGamePlayManager sharedInstance] currentLevelPoints] - [WIBGamePlayManager sharedInstance].score);
-    CGFloat previousPercentage = (CGFloat) previousPoints/(CGFloat) [WIBGamePlayManager sharedInstance].pointsPerLevel;
-    NSLog(@"PREVIOUS: %f",previousPercentage);
-    //previousPercentage = .8;
-    [self.progressMeterSuperView setProgress:previousPercentage animated:NO completion:nil];
+//    CGFloat currentLevelPoints = [[WIBGamePlayManager sharedInstance] currentLevelPoints];
+    NSInteger lifetimePoints = [[WIBGamePlayManager sharedInstance] lifeTimeScore];
+    NSInteger score = [WIBGamePlayManager sharedInstance].score;
+    NSInteger previousPoints = lifetimePoints - score;
+    NSInteger pointsPerLevel = [WIBGamePlayManager sharedInstance].pointsPerLevel;
+    NSInteger previousProgressInPoints = previousPoints % pointsPerLevel;
+    CGFloat previousProgress = previousProgressInPoints / (CGFloat)pointsPerLevel;
+    NSLog(@"PREVIOUS: %f",previousProgress);
+    //previousProgress = .8;
+    [self.progressMeterSuperView setProgress:previousProgress animated:NO completion:nil];
 }
 
 - (void)revealCell
@@ -169,12 +176,14 @@
     } completion:^(BOOL finished) {
     }];
     
-    CGFloat currentPercentage = (CGFloat) [[WIBGamePlayManager sharedInstance] currentLevelPoints]/ (CGFloat) [WIBGamePlayManager sharedInstance].pointsPerLevel;
-    NSLog(@"CURRENT: %f",currentPercentage);
-    //currentPercentage = .2;
-    [self.progressMeterSuperView setProgress:currentPercentage animated:YES completion:^(){
-        [self didFinishProgressUpdate];
-    }];
+    if ([WIBGamePlayManager sharedInstance].score > 0) {
+        CGFloat currentPercentage = (CGFloat) [[WIBGamePlayManager sharedInstance] currentLevelPoints]/ (CGFloat) [WIBGamePlayManager sharedInstance].pointsPerLevel;
+        NSLog(@"CURRENT: %f",currentPercentage);
+        //currentPercentage = .2;
+        [self.progressMeterSuperView setProgress:currentPercentage animated:YES completion:^(){
+            [self didFinishProgressUpdate];
+        }];
+    }
 }
 
 - (void)incrementScore
@@ -302,17 +311,20 @@
         self.rightLevelView.alpha = 0.0; }
                     completion:^(BOOL finished) {
                         self.currentLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",(long)[WIBGamePlayManager sharedInstance].level];
-                        // If something was just unlocked, foreshadow it
+
                         if ([WIBGamePlayManager sharedInstance].unlockedQuestionType) {
+                            NSLog(@"There's a question to unlock!!!");
                             self.currentLevelImageView.image = [UIImage placeholder];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
-                            self.goalLevelImageView.tintColor = [UIColor lightPurpleColor];
-                            self.goalLevelBackgroundView.backgroundColor = [UIColor whiteColor];
-                        } else {
+                        }
+                        
+                        if ([WIBGamePlayManager sharedInstance].level >= [WIBGamePlayManager sharedInstance].questionTypes.count){
                             self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].level];
+                            self.goalLevelImageView.image = [UIImage trophy];
                             self.goalLevelImageView.tintColor = [UIColor sexyAmberColor];
                         }
+                        
                         self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",([WIBGamePlayManager sharedInstance].level+1)];
                         
                         [UIView animateWithDuration:0.5 animations:^{

@@ -780,6 +780,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a70a5db2-5e4c-4447-8ab9-fc544bd2c1e4";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -808,6 +809,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a70a5db2-5e4c-4447-8ab9-fc544bd2c1e4";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -40,16 +40,9 @@ const static double kIdealWaitTime = 3.0;
     [super viewDidLoad];
     
     self.startDate = [NSDate date];
-    
     self.navigationItem.hidesBackButton = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupImageDownloadDidComplete:) name:kGroupImageDownloadCompleteNotification object:nil];
-    
-    //self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(continuePressed:)];
-    //[self.view addGestureRecognizer:self.tapRecognizer];
-    //self.tapRecognizer.enabled = NO;
-    
-    //self.advanceButton.userInteractionEnabled = NO;
     self.advanceButton.enabled = NO;
     
     confettiView = [[KRConfettiView alloc] initWithFrame:self.view.frame];
@@ -60,7 +53,7 @@ const static double kIdealWaitTime = 3.0;
                              [UIColor colorWithRed:0.58 green:0.39 blue:0.55 alpha:1.0]];
     confettiView.intensity = 0.8;
     confettiView.type = Diamond;
-   [self.view addSubview:confettiView];
+    [self.view insertSubview:confettiView belowSubview:self.advanceButton];
     
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
     
@@ -75,8 +68,8 @@ const static double kIdealWaitTime = 3.0;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
-    //[self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.image.url]];
     
     [self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.image.url] completed:^
      (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
@@ -101,15 +94,10 @@ const static double kIdealWaitTime = 3.0;
     self.advanceButton.layer.cornerRadius = 6.0f;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-
-}
-
 - (void)finishConfetti
 {
     [confettiView stopConfetti];
-    [self performSelector:@selector(spinQuestionTypeView) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(spinQuestionTypeView) withObject:nil afterDelay:1.5];
 }
 
 - (void)spinQuestionTypeView
@@ -131,14 +119,11 @@ const static double kIdealWaitTime = 3.0;
 {
     NSTimeInterval timeElapsed = [self.startDate timeIntervalSinceReferenceDate];
     if (timeElapsed > kIdealWaitTime) {
-        //self.tapRecognizer.enabled = YES;
-//        self.advanceButton.userInteractionEnabled = YES;
         self.advanceButton.enabled = YES;
     }
     else {
         double extraWaitTime = kIdealWaitTime - timeElapsed;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, extraWaitTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                //self.advanceButton.userInteractionEnabled = YES;
                 self.advanceButton.enabled = YES;
         });
     }

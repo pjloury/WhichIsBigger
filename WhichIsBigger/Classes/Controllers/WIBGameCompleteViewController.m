@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     self.navigationItem.hidesBackButton= YES;
 }
 
@@ -33,9 +34,7 @@
     [super viewWillAppear:animated];
     //self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
 //    self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
-
     self.playAgainButton.layer.cornerRadius = 6;
-   // self.playAgainButton.layer.borderWidth = 2;
 }
 
 - (IBAction)didPressDone:(id)sender {
@@ -65,14 +64,14 @@
 - (IBAction)didPressPlayAgain:(id)sender
 {
     self.playAgainButton.userInteractionEnabled = NO;
-    WIBQuestionType *type = [WIBGamePlayManager sharedInstance].gameRound.questionType;
-    [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
-    
     if ([[WIBGamePlayManager sharedInstance] unlockedQuestionType]) {
+        WIBQuestionType *type = [WIBGamePlayManager sharedInstance].unlockedQuestionType;
+        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"unlockedQuestionTypeSegue" sender:self];
     }
     else {
-
+        WIBQuestionType *type = [WIBGamePlayManager sharedInstance].gameRound.questionType;
+        [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
     }
 }

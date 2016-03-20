@@ -17,6 +17,9 @@ const static double kIdealWaitTime = 1.0;
 @property (weak, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingQuestionMarkView;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *clarifyingLabel;
+
+@property BOOL exiting;
 @property (weak, nonatomic) NSDate *startDate;
 @property (nonatomic) BOOL *stopThat;
 
@@ -41,6 +44,8 @@ const static double kIdealWaitTime = 1.0;
     UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
     [nc.navigationBar setBarTintColor:[WIBGamePlayManager sharedInstance].gameRound.questionType.themeColor];
     //self.categoryLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
+    self.clarifyingLabel.text = [WIBGamePlayManager sharedInstance].gameRound.questionType.clarifyingString;
+    
     self.shimmeringView.contentView = self.loadingQuestionMarkView;
     self.shimmeringView.shimmering = YES;
 }
@@ -80,15 +85,18 @@ const static double kIdealWaitTime = 1.0;
 
 - (void)categoryEntranceAnimation
 {
-    self.categoryLabel.transform = CGAffineTransformMakeScale(2, 2);
-    self.categoryLabel.alpha = 0;
-    [UIView animateKeyframesWithDuration:0.75 delay:0.0 options:0 animations:^{
-        // End
-        self.categoryLabel.transform = CGAffineTransformMakeScale(1, 1);
-        self.categoryLabel.alpha = 1;
-    } completion:^(BOOL finished) {
-        [self exitAnimation];
-    }];
+    if (!self.exiting) {
+        self.exiting = YES;
+        self.categoryLabel.transform = CGAffineTransformMakeScale(2, 2);
+        self.categoryLabel.alpha = 0;
+        [UIView animateKeyframesWithDuration:0.75 delay:0.0 options:0 animations:^{
+            // End
+            self.categoryLabel.transform = CGAffineTransformMakeScale(1, 1);
+            self.categoryLabel.alpha = 1;
+        } completion:^(BOOL finished) {
+            [self exitAnimation];
+        }];
+    }
 }
 
 - (void)exitAnimation

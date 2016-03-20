@@ -67,17 +67,19 @@
     
     [self sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
             placeholderImage:[UIImage placeholder] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                if (!error)
-                {
-                    NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
-                    //CGRect imageRect = AVMakeRectWithAspectRatioInsideRect(image.size,self.frame);
-                }
-                else
-                {
-                    self.image = [UIImage placeholder];
-                    self.tintColor = [[[WIBGamePlayManager sharedInstance] gameRound] randomColor];
-                }
-                self.layer.borderWidth = 1;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (!error)
+                    {
+                        NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
+                        //CGRect imageRect = AVMakeRectWithAspectRatioInsideRect(image.size,self.frame);
+                    }
+                    else
+                    {
+                        self.image = [UIImage placeholder];
+                        self.tintColor = [[[WIBGamePlayManager sharedInstance] gameRound] randomColor];
+                    }
+                    self.layer.borderWidth = 1;
+                });
             }];
     
     if (self.multiplier > 1)

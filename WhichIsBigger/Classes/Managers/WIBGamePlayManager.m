@@ -64,28 +64,29 @@
 - (void)beginRound
 {
     self.gameRound = [[WIBGameRound alloc] init];
-    [self.gameRound generateQuestions];
+    [self.gameRound generateQuestionsForType:[self randomQuestionType]];
+}
+
+- (WIBQuestionType *)randomQuestionType
+{
+    NSUInteger randomQuestionTypeIndex = arc4random_uniform((u_int32_t)self.availableQuestionTypes.count);
+    return self.availableQuestionTypes[randomQuestionTypeIndex];
 }
 
 - (void)beginRoundForType:(WIBQuestionType *)type
 {
     self.gameRound = [[WIBGameRound alloc] init];
     [self.gameRound generateQuestionsForType:type];
+    [[PFUser currentUser] setObject:self.availableQuestionTypes forKey:@"unlockedQuestionTypes"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (void)endGame
 {
     [self adjustDifficulty];
     self.lifeTimeScore = self.lifeTimeScore + self.score;
-    for (WIBQuestionType *questionType in self.availableQuestionTypes) {
-        NSArray *unlockedQuestionTypes = [[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"];
-        if (!unlockedQuestionTypes) {
-            [self unlockedQuestionTypeSeen:self.questionTypes.firstObject];
-        }
-        else if (![unlockedQuestionTypes containsObject:questionType.name]) {
-            self.unlockedQuestionType = questionType;
-            break;
-        }
+    if (self.availableQuestionTypes.count > [[[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"] count]) {
+        self.unlockedQuestionType = self.availableQuestionTypes.lastObject;
     }
         
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
@@ -111,7 +112,7 @@
 
 - (NSInteger)pointsPerLevel
 {
-    return 500;//return [[[PFConfig currentConfig] objectForKey:@"pointsPerLevel"] integerValue];
+    return [[[PFConfig currentConfig] objectForKey:@"pointsPerLevel"] integerValue];
 }
 
 - (NSInteger)level
@@ -228,13 +229,16 @@
 
 - (void)unlockedQuestionTypeSeen:(WIBQuestionType *)unlockedQuestionType
 {
+    if ([unlockedQuestionType isEqual:self.unlockedQuestionType]) {
+        self.unlockedQuestionType = nil;
+    }
     NSMutableArray *unlockedQuestionTypes = [[[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"] mutableCopy];
     if (!unlockedQuestionTypes) {
         unlockedQuestionTypes = [NSMutableArray array];
     }
     [unlockedQuestionTypes addObject:unlockedQuestionType.name];
     [[PFUser currentUser] setObject:unlockedQuestionTypes forKey:@"unlockedQuestionTypes"];
-    [[PFUser currentUser] saveInBackground];
+    [[PFUser currentUser] save];
 }
 
 - (void)setHighScore:(NSInteger)highScore

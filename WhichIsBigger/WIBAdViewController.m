@@ -17,6 +17,7 @@
     self.view.backgroundColor = [UIColor faintPurpleColor];
         
     self.adBannerView.adUnitID = @"ca-app-pub-4490282633558794/8329432662";
+    self.adBannerView.adSize = kGADAdSizeBanner;
     self.adBannerView.rootViewController = self;
     
     GADRequest *request = [GADRequest request];
@@ -24,7 +25,8 @@
     // an ad request is made. GADBannerView automatically returns test ads when running on a
     // simulator.
     request.testDevices = @[
-                            @"2077ef9a63d2b398840261c8221a0c9a"  // Eric's iPod Touch
+                            @"2077ef9a63d2b398840261c8221a0c9a",  // Eric's iPod Touch
+                            @"6b0ce7dd31b8109a6ca3f1ee4a064faa" // PJ's iPhone 6"
                             ];
     [self.adBannerView loadRequest:request];
     
@@ -39,44 +41,5 @@
     whichIsBigger.text = @"Which is Bigger ?";
     whichIsBigger.textAlignment = NSTextAlignmentCenter;
 }
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-    if (!_bannerIsVisible)
-    {
-        // If banner isn't part of view hierarchy, add it
-        if (_adBannerView.superview == nil)
-        {
-            [self.view addSubview:_adBannerView];
-        }
-        
-        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
-        
-        // Assumes the banner view is just off the bottom of the screen.
-        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
-        
-        [UIView commitAnimations];
-        
-        _bannerIsVisible = YES;
-    }
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-    NSLog(@"Failed to retrieve ad");
-    
-    if (_bannerIsVisible)
-    {
-        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-        
-        // Assumes the banner view is placed at the bottom of the screen.
-        banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
-        
-        [UIView commitAnimations];
-        
-        _bannerIsVisible = NO;
-    }
-}
-
 
 @end

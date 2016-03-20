@@ -147,19 +147,16 @@ alpha:1.0]
 
 + (NSArray *)backgroundColorArray {
     return @[
-             [UIColor sexyPinkColor],
-             [UIColor sexyRedColor],
-             [UIColor sexyOrangeColor],
-             [UIColor sexyDeepOrangeColor],
              [UIColor sexyLightGreenColor],
-             [UIColor sexyLimeColor],
-             [UIColor sexyGreenColor],
-             [UIColor sexyTealColor],
-             [UIColor sexyCyanColor],
-             [UIColor sexyLightBlueColor],
-             [UIColor sexyBlueColor],
              [UIColor sexyIndigoColor],
+             [UIColor sexyPinkColor],
+             [UIColor sexyCyanColor],
              [UIColor sexyPurpleColor],
+             [UIColor sexyTealColor],
+             [UIColor sexyOrangeColor],
+             [UIColor sexyRedColor],
+             [UIColor sexyBlueColor],
+             [UIColor sexyGreenColor],
              [UIColor sexyDeepPurpleColor]
              ];
 }
