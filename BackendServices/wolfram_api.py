@@ -16,8 +16,8 @@ from dateutil.parser import parse as dateparse
 from api_keys import *
 
 
-__topic_re = re.compile("""(.+?)\s+\|""")
-__topic_re1 = re.compile("""(.+?)\s+\(""")
+__name_re = re.compile("""(.+?)\s+\|""")
+__name_re1 = re.compile("""(.+?)\s+\(""")
 
 __birthday_re = re.compile("""(\d+/\d+/\d+)""")
 __height_re = re.compile("""(.*)\s+(meters)""")
@@ -48,8 +48,8 @@ class Enum(set):
         raise AttributeError
 
 
-query_string = ""
-multiple_query_string = ""
+# query_string = ""
+# multiple_query_string = ""
 
 ############## END WOLFRAM API ##############
 
@@ -57,8 +57,8 @@ multiple_query_string = ""
 def main():
     print "In the main method"
 
-    global query_string
-    global multiple_query_string
+    # global query_string
+    # global multiple_query_string
 
     parser = argparse.ArgumentParser(description='wolfram to parse backend service')
 
@@ -69,8 +69,6 @@ def main():
 
     print args
 
-    QUERY_STRINGS = {"age": '%s birthday', "weight": '%s weight', "height": '%s height', "none": '%s',
-                     "population": '%s population'}
 
     csvfile = args.csvfile
 
@@ -81,76 +79,39 @@ def main():
 
         reader = csv.reader(csvfile)
 
+        # skip first line of csv (assume this is header)
+        next(reader, None)
+
         for row in reader:
+
             print "reading a row"
             if len(row) < 2:
                 continue
 
-            OBJECT = row[0]
-            TAGS = row[1]  # all tags in quotes
+            NAME = row[0]
+            CATEGORIES = row[1]
             QUERY = row[2].lower()
             UNITS = row[3].lower()
+            TAGS = row[4]  # all tags in quotes
 
             # check for existing parse entry
-            exists = GameItem.Query.all().filter(name=OBJECT)
+            exists = GameItem.Query.all().filter(name=NAME)
             if len(exists) > 0:
                 print "Duplicate found"
                 continue
 
             TAGS = [t.lower() for t in TAGS.split(',')]
+            CATEGORIES = [t.lower() for t in CATEGORIES.split(',')]
 
-            if "celebrity" in TAGS:
 
-                categories = ["age", "height"]
-
-            elif "athlete" in TAGS:
-
-                categories = ["age", "height", "weight"]
-
-            elif "person" in TAGS:
-
-                categories = ["age", "weight"]
-
-            elif "tall structure" in TAGS:
-
-                categories = ["height"]
-
-            elif "country" in TAGS or "city" in TAGS or "state" in TAGS:
-
-                categories = ["population"]
-
-            elif "height" in TAGS:
-
-                categories = ["height"]
-
-            elif "weight" in TAGS:
-
-                categories = ["weight"]
-
-            elif "age" in TAGS:
-
-                categories = ["age"]
-
-            elif "population" in TAGS:
-
-                categories = ["population"]
-
-            else:
-
-                # ValueError('No category found')
-                categories = TAGS
-
-            for CATEGORY in categories:
+            for category in CATEGORIES:
 
                 # gracefully catch exception and move to next query
                 try:
 
-                    if not QUERY:
-                        query_string = QUERY_STRINGS[CATEGORY]
-                    else:
-                        query_string = "%s " + QUERY
+                    query_string = "%s " + QUERY
 
-                    single_query(OBJECT, CATEGORY, UNITS, TAGS)
+                    single_query(query_string,NAME, category, UNITS, TAGS)
 
                 except Exception as e:
                     print e
@@ -160,30 +121,7 @@ def main():
         raise ValueError('Please refer to commandline arguments')
 
 
-"""
-get_topic
-attempts to find the topic for a given XML root 
-returns a string representing the topic
 
-"""
-
-
-def get_topic(root):
-    print root
-    topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
-
-    m = __topic_re.match(topic)
-
-    if m:
-        return m.group(1)
-    else:
-
-        m = __topic_re1.match(topic)
-
-        if m:
-            return m.group(1)
-
-        raise NameError('Error parsing topic')
 
 
 def image_query(obj):
@@ -419,44 +357,43 @@ def parse(root, UNITS):
     return (QUANTITY, UNIT)
 
 
-def single_query(object, CATEGORY, UNITS="", TAGS=[]):
-    # ensure all non-ascii characters are converted to html entities
-    # OBJECT = OBJECT.encode("ascii", "xmlcharrefreplace")
+def get_image(NAME, TAGS):
 
-    QUERY = urllib.quote(query_string % object)
+    NAME = NAME.encode('utf-8')
+
+
+    image_url = image_query(NAME)
+
+    photo = ''
+
+    if image_url:
+        photo = "http://" + image_url
+
+
+    elif "city" in TAGS and not photo:
+        country = [x.strip() for x in NAME.split(',')][-1]
+        countryItems = GameItem.Query.filter(name=country).limit(1)
+        for countryItem in countryItems:
+            if (countryItem.photoURL):
+                photo = countryItem.photoURL
+                print "FOUND THE URL! " + photo
+                break
+
+    return photo
+
+
+def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[]):
+
+    QUERY = urllib.quote(query_string % NAME)
 
     BUILT_QUERY = QUERYSTRING % (QUERY, APP_ID)
 
     xml = urllib2.urlopen(BUILT_QUERY).read()
-    #print xml
     root = ElementTree.fromstring(xml)
-    # print ElementTree.tostring(root)
-    # for child in root:
-    #     print child.tag, child.attrib
-
-    # use City, Country format (exclude province)
 
     print root
-    # TOPIC = get_topic(root)
-    # topicItems = [x.strip() for x in TOPIC.split(',')]
-    # if len(topicItems) > 2:
-    #     TOPIC = topicItems[0] + ", " + topicItems[-1]
-    TOPIC = object
 
-    PHOTO = ''
-    object = object.encode('utf-8')
-    image_url = image_query(object)
-    if image_url:
-        PHOTO = "http://" + image_url
-
-    elif "city" in TAGS and not PHOTO:
-        country = [x.strip() for x in TOPIC.split(',')][-1]
-        countryItems = GameItem.Query.filter(name=country).limit(1)
-        for countryItem in countryItems:
-            if (countryItem.photoURL):
-                PHOTO = countryItem.photoURL
-                print "FOUND THE URL! " + PHOTO
-                break
+    PHOTO = get_image(NAME,TAGS)
 
     UNIT = ''
     QUANTITY = -1
@@ -491,8 +428,8 @@ def single_query(object, CATEGORY, UNITS="", TAGS=[]):
 
     ############## PARSE API ##############
 
-    kv = GameItem(category=CATEGORY, tagArray=TAGS, name=TOPIC, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
-    print "Finished " + TOPIC
+    kv = GameItem(category=CATEGORY, tagArray=TAGS, name=NAME, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
+    print "Finished " + NAME
     kv.save()
 
     ############## End PARSE API ##############
@@ -500,71 +437,3 @@ def single_query(object, CATEGORY, UNITS="", TAGS=[]):
 
 if __name__ == "__main__":
     main()
-
-"""
-get_list_of_results (DEPRECATED)
-
-returns the list of entities that matches the TOPIC
-
-e.g. tallest buildings, tallest mountains
-
-currently there is no check if such a list of entities is valid/returned by the query
-
-"""
-
-
-def get_list_of_results(TOPIC):
-    QUERY = multiple_query_string % TOPIC
-
-    BUILT_QUERY = QUERYSTRING % (QUERY.replace(' ', '%20'), APP_ID)
-
-    xml = urllib2.urlopen(BUILT_QUERY).read()
-
-    print xml
-
-    root = ElementTree.fromstring(xml)
-
-    text = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
-
-    results = []
-
-    for line in text.split('\n'):
-
-        m = __list_re.match(line)
-
-        if m:
-            results.append(m.group(1))
-
-    return results
-
-
-"""
-fix_urls (DEPRECATED)
-Used previously to fix bad urls
-"""
-
-
-def fix_urls():
-    all_items = GameItem.Query.all()
-
-    for item in all_items:
-
-        if hasattr(item, 'tags') and item.tags != None:
-            tag_cs = item.tags
-
-            tag_array = tag_cs.split(',')
-
-            item.tagArray = tag_array
-
-            item.tags = None
-
-        image_url = item.photoURL
-
-        if 'http://' not in image_url and image_url != None and image_url != "":
-            item.photoURL = 'http://' + image_url
-
-        if image_url == 'http://':
-            item.photoURL = None
-
-        print item
-        item.save()
