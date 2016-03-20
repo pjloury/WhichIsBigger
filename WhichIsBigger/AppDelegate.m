@@ -35,7 +35,7 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
-    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    //[PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFUser enableAutomaticUser];
     
     /*
@@ -48,10 +48,12 @@
     [application registerForRemoteNotifications];
     */
      
-	return [[FBSDKApplicationDelegate sharedInstance] application:application
-									didFinishLaunchingWithOptions:launchOptions];
+//	return [[FBSDKApplicationDelegate sharedInstance] application:application
+//									didFinishLaunchingWithOptions:launchOptions];
+    return YES;
 }
 
+/*
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
 		 annotation:(id)annotation
 {
@@ -59,6 +61,7 @@
 												sourceApplication:sourceApplication
 													   annotation:annotation];
 }
+*/
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -83,7 +86,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  [FBSDKAppEvents activateApp];
+//  [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

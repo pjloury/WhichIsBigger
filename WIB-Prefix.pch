@@ -14,6 +14,8 @@
 
 @import GameKit;
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import <QuartzCore/QuartzCore.h>
 #import "Canvas.h"
 #import "WIBConstants.h"
@@ -26,9 +28,9 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
+//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
+//#import <FBSDKShareKit/FBSDKShareKit.h>
 
 #endif

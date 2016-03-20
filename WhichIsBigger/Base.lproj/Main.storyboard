@@ -193,6 +193,7 @@
                                 </state>
                                 <connections>
                                     <action selector="didPressHighScoresButton:" destination="KTJ-1G-a6D" eventType="touchUpInside" id="mmW-Wn-y0e"/>
+                                    <segue destination="jIF-eA-FXD" kind="show" id="Gsv-mn-3lP"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5s-O0-8Ke">
@@ -207,7 +208,7 @@
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OTx-Ly-lX2">
                                 <rect key="frame" x="8" y="80" width="584" height="265"/>
-                                <color key="backgroundColor" red="0.94117647059999998" green="0.85098039219999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.96796065495426697" green="0.92918244360298552" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="7k4-8o-Frw">
                                     <size key="itemSize" width="88" height="105"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -406,10 +407,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="9sr-Hy-lx9"/>
-                                <exclude reference="Lqc-cd-o0r"/>
                                 <exclude reference="TSC-WW-xuR"/>
                                 <exclude reference="oUx-Ca-NEy"/>
+                                <exclude reference="9sr-Hy-lx9"/>
+                                <exclude reference="Lqc-cd-o0r"/>
                                 <exclude reference="ZCt-J9-pEt"/>
                                 <exclude reference="jnZ-pG-Zim"/>
                                 <exclude reference="skF-s0-ZIo"/>
@@ -572,7 +573,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjE-Wi-tc2" customClass="WIBPopButton">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjE-Wi-tc2" customClass="WIBPopButton">
                                 <rect key="frame" x="225" y="408" width="150" height="48"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.85098039219999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

@@ -68,17 +68,17 @@
     self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld pts", [WIBGamePlayManager sharedInstance].lifeTimeScore];
 }
 
-- (IBAction)didPressLoginButton:(id)sender
-{
-    // need to protect against the case where another user is already linked to the ID
-    [PFFacebookUtils logInInBackgroundWithReadPermissions:self.readPermissions block:^(PFUser *user, NSError *error){
-        if(error) {
-            NSLog(error.description);
-        }
-        [self _facebookAuth];
-        [self _scrapeFacebook];
-    }];
-}
+//- (IBAction)didPressLoginButton:(id)sender
+//{
+//    // need to protect against the case where another user is already linked to the ID
+//    [PFFacebookUtils logInInBackgroundWithReadPermissions:self.readPermissions block:^(PFUser *user, NSError *error){
+//        if(error) {
+//            NSLog(error.description);
+//        }
+//        [self _facebookAuth];
+//        [self _scrapeFacebook];
+//    }];
+//}
 
 - (IBAction)didPressNewGameButton:(id)sender
 {
@@ -88,15 +88,15 @@
 
 - (IBAction)didPressHighScoresButton:(id)sender
 {
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-        gcViewController.gameCenterDelegate = self;
-        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = @"highScore";
-        [self presentViewController:gcViewController animated:YES completion:nil];
-    }else {
-        [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
-    }
+//    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+//        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+//        gcViewController.gameCenterDelegate = self;
+//        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+//        gcViewController.leaderboardIdentifier = @"highScore";
+//        [self presentViewController:gcViewController animated:YES completion:nil];
+//    }else {
+//        [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
+//    }
 }
 
 #pragma mark - Collection View Data Source
@@ -164,54 +164,54 @@
 }
 
 # pragma mark - Facebook
-- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
-{
-    [self _facebookAuth];
-}
+//- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
+//{
+//    [self _facebookAuth];
+//}
+//
+//- (void)_facebookAuth
+//{
+//    if ([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+//        self.loginButton.hidden = YES;
+//        [self.profileButton setTitle:[[PFUser currentUser] objectForKey:@"firstName"] forState:UIControlStateNormal];
+//    }
+//    
+//    else {
+//        self.loginButton.hidden = NO;
+//        self.profileButton.hidden = YES;
+//    }
+//}
 
-- (void)_facebookAuth
-{
-    if ([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        self.loginButton.hidden = YES;
-        [self.profileButton setTitle:[[PFUser currentUser] objectForKey:@"firstName"] forState:UIControlStateNormal];
-    }
-    
-    else {
-        self.loginButton.hidden = NO;
-        self.profileButton.hidden = YES;
-    }
-}
-
-- (void)_scrapeFacebook
-{
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            // result is a dictionary with the user's Facebook data
-            NSDictionary *userData = (NSDictionary *)result;
-            
-            NSString *facebookID = userData[@"id"];
-            NSString *name = userData[@"name"];
-            //NSString *location = userData[@"location"][@"name"];
-            
-            NSString *picURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
-            NSString *firstName = [name componentsSeparatedByString:@" "].firstObject;
-            
-            self.footerLabel.text = [NSString stringWithFormat:@"Welcome back, %@", firstName];
-            
-            [[PFUser currentUser] setObject:facebookID forKey:@"facebookID"];
-            [[PFUser currentUser] setObject:name forKey:@"name"];
-            [[PFUser currentUser] setObject:firstName forKey:@"firstName"];
-            [[PFUser currentUser] setObject:picURLString forKey:@"picURLString"];
-            [[PFUser currentUser] saveInBackground];
-        }
-        else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
-            NSLog(@"The facebook session was invalidated");
-            [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
-        } else {
-            NSLog(@"Some other error: %@", error);
-        }
-    }];
-}
+//- (void)_scrapeFacebook
+//{
+//    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+//    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//        if (!error) {
+//            // result is a dictionary with the user's Facebook data
+//            NSDictionary *userData = (NSDictionary *)result;
+//            
+//            NSString *facebookID = userData[@"id"];
+//            NSString *name = userData[@"name"];
+//            //NSString *location = userData[@"location"][@"name"];
+//            
+//            NSString *picURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
+//            NSString *firstName = [name componentsSeparatedByString:@" "].firstObject;
+//            
+//            self.footerLabel.text = [NSString stringWithFormat:@"Welcome back, %@", firstName];
+//            
+//            [[PFUser currentUser] setObject:facebookID forKey:@"facebookID"];
+//            [[PFUser currentUser] setObject:name forKey:@"name"];
+//            [[PFUser currentUser] setObject:firstName forKey:@"firstName"];
+//            [[PFUser currentUser] setObject:picURLString forKey:@"picURLString"];
+//            [[PFUser currentUser] saveInBackground];
+//        }
+//        else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
+//            NSLog(@"The facebook session was invalidated");
+//            [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
+//        } else {
+//            NSLog(@"Some other error: %@", error);
+//        }
+//    }];
+//}
 
 @end

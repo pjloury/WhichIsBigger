@@ -13,7 +13,8 @@
 // Views
 #import "WIBPopButton.h"
 
-@interface WIBGameCompleteViewController ()< FBSDKAppInviteDialogDelegate>
+@interface WIBGameCompleteViewController ()
+//@interface WIBGameCompleteViewController ()< FBSDKAppInviteDialogDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
 //@property (weak, nonatomic) IBOutlet WIBPopButton *challengeAFriendButton;
@@ -76,38 +77,38 @@
     }
 }
 
-- (void)openFacebookShareFlow
-{
-    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
-    
-    // Should be a link to the app store!
-    content.appLinkURL = [NSURL URLWithString:@"https://www.mydomain.com/myapplink"];
-    //optionally set previewImageURL
-    content.appInvitePreviewImageURL = [NSURL URLWithString:@"https://www.mydomain.com/my_invite_image.jpg"];
-    
-    // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
-    [FBSDKAppInviteDialog showWithContent:content
-                                 delegate:self];
-}
-
-/*!
- @abstract Sent to the delegate when the app invite completes without error.
- @param appInviteDialog The FBSDKAppInviteDialog that completed.
- @param results The results from the dialog.  This may be nil or empty.
- */
-- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
-{
-    
-}
-/*!
- @abstract Sent to the delegate when the app invite encounters an error.
- @param appInviteDialog The FBSDKAppInviteDialog that completed.
- @param error The error.
- */
-- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
-{
-    
-}
+//- (void)openFacebookShareFlow
+//{
+//    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+//    
+//    // Should be a link to the app store!
+//    content.appLinkURL = [NSURL URLWithString:@"https://www.mydomain.com/myapplink"];
+//    //optionally set previewImageURL
+//    content.appInvitePreviewImageURL = [NSURL URLWithString:@"https://www.mydomain.com/my_invite_image.jpg"];
+//    
+//    // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+//    [FBSDKAppInviteDialog showWithContent:content
+//                                 delegate:self];
+//}
+//
+///*!
+// @abstract Sent to the delegate when the app invite completes without error.
+// @param appInviteDialog The FBSDKAppInviteDialog that completed.
+// @param results The results from the dialog.  This may be nil or empty.
+// */
+//- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
+//{
+//    
+//}
+///*!
+// @abstract Sent to the delegate when the app invite encounters an error.
+// @param appInviteDialog The FBSDKAppInviteDialog that completed.
+// @param error The error.
+// */
+//- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
+//{
+//    
+//}
 
 
 @end

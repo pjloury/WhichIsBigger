@@ -66,6 +66,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self setPreviousProgress];
     
     self.tableView.backgroundColor = [UIColor faintPurpleColor];
     
@@ -131,7 +132,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self setPreviousProgress];
     self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
 }
 

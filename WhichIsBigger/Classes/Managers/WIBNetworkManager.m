@@ -15,6 +15,7 @@
 #import "WIBQuestionType.h"
 #import "WIBDataModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SDWebImagePrefetcher.h"
 #import "WIBGamePlayManager.h"
 
 @implementation WIBNetworkManager
@@ -51,10 +52,20 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];         
+         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];
+         [self prefetchImagesForObjects:objects];
          if (completion) completion();
          [PFObject pinAllInBackground:objects];
      }];
+}
+
+- (void)prefetchImagesForObjects:(NSArray *)array
+{
+    NSMutableArray *urls = [NSMutableArray array];
+    for (WIBQuestionType *type in array) {
+        [urls addObject:[NSURL URLWithString:type.image.url]];
+    }
+    [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urls];
 }
 
 - (void)generateDataModelWithCompletion:(void (^)())completion

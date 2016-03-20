@@ -765,9 +765,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WhichIsBigger",
-					"/Users/ploury/Downloads/parse-library-1.7.1",
+					"/Users/pjloury/Downloads/parse-library-1.7.1",
 					"$(PROJECT_DIR)",
-					/Users/ploury/Documents/FacebookSDK,
+					/Users/pjloury/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
@@ -793,9 +793,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WhichIsBigger",
-					"/Users/ploury/Downloads/parse-library-1.7.1",
+					"/Users/pjloury/Downloads/parse-library-1.7.1",
 					"$(PROJECT_DIR)",
-					/Users/ploury/Documents/FacebookSDK,
+					/Users/pjloury/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
