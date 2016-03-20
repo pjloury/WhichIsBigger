@@ -133,8 +133,6 @@ const static double kIdealWaitTime = 3.0;
 {
     [self.view.layer removeAllAnimations];
     self.advanceButton.enabled = NO;
-    WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
-    [[WIBGamePlayManager sharedInstance] unlockedQuestionTypeSeen:questionType];
     [self performSegueWithIdentifier:@"startUnlockedQuestionTypeSegue" sender:self];
 }
 

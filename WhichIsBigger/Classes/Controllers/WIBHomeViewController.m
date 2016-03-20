@@ -150,9 +150,6 @@
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
     if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
         [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
-        if ([type isEqual:[WIBGamePlayManager sharedInstance].unlockedQuestionType]) {
-            [[WIBGamePlayManager sharedInstance] unlockedQuestionTypeSeen:type];
-        }
         [self performSegueWithIdentifier:@"newGameSegue" sender:self];
     } else {
         WIBQuestionTypeCell *cell = (WIBQuestionTypeCell *)[collectionView.dataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];

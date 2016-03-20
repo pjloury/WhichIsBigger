@@ -66,6 +66,5 @@
 @property (nonatomic, assign, readonly) NSInteger previousLevel;
 @property (nonatomic, assign, readonly) NSInteger currentLevelPoints;
 @property (nonatomic) WIBQuestionType *unlockedQuestionType;
-- (void)unlockedQuestionTypeSeen:(WIBQuestionType *)unlockedQuestionType;
 
 @end

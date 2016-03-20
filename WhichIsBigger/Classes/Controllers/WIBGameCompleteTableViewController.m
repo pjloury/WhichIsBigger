@@ -120,7 +120,8 @@
     self.goalLevelBackgroundView.layer.shadowPath = goalLevelShadowPath.CGPath;
     self.goalLevelBackgroundView.layer.cornerRadius = 5.0f;
     
-    if ([WIBGamePlayManager sharedInstance].availableQuestionTypes.count == [WIBGamePlayManager sharedInstance].questionTypes.count) {
+    WIBQuestionType *lastType = [WIBGamePlayManager sharedInstance].questionTypes.lastObject;
+    if (([WIBGamePlayManager sharedInstance].lifeTimeScore - [WIBGamePlayManager sharedInstance].score) > lastType.pointsToUnlock.integerValue) {
         self.goalLevelImageView.image = [UIImage trophy];
         self.goalLevelImageView.tintColor = [UIColor sexyAmberColor];
         self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].previousLevel];
@@ -128,13 +129,16 @@
         self.goalLevelImageView.image =  [UIImage imageNamed:@"smallQuestionMark"];
         self.goalLevelBackgroundView.backgroundColor = [UIColor whiteColor];
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-         self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
-    });
+    [super viewDidAppear:animated];
+
 }
 
 - (void)setPreviousProgress
