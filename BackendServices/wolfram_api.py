@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
+#python wolfram_api.py --csv = /
+
 from xml.etree import cElementTree as ElementTree
 import urllib2, urllib
 import argparse
@@ -47,29 +49,16 @@ class Enum(set):
             return name
         raise AttributeError
 
-
-# query_string = ""
-# multiple_query_string = ""
-
 ############## END WOLFRAM API ##############
 
 
 def main():
-    print "In the main method"
-
-    # global query_string
-    # global multiple_query_string
-
     parser = argparse.ArgumentParser(description='wolfram to parse backend service')
 
     parser.add_argument('--csv', type=file, dest='csvfile',
                         help='csv file to parse')
 
     args = parser.parse_args()
-
-    print args
-
-
     csvfile = args.csvfile
 
     # parse a csv file for entities to query
@@ -103,14 +92,11 @@ def main():
             TAGS = [t.lower() for t in TAGS.split(',')]
             CATEGORIES = [t.lower() for t in CATEGORIES.split(',')]
 
-
             for category in CATEGORIES:
 
                 # gracefully catch exception and move to next query
                 try:
-
                     query_string = "%s " + QUERY
-
                     single_query(query_string,NAME, category, UNITS, TAGS)
 
                 except Exception as e:
@@ -121,9 +107,6 @@ def main():
         raise ValueError('Please refer to commandline arguments')
 
 
-
-
-
 def image_query(obj):
     obj = obj.encode('utf-8')
 
@@ -131,15 +114,7 @@ def image_query(obj):
 
     BUILT_QUERY = QUERYSTRING_IMAGE % (QUERY, APP_ID)
 
-    # if os.path.exists(PICKLE_PATH):
-    # xml = pickle.load(open(PICKLE_PATH,'rb'))
-    #
-    # else:
-    #     xml = urllib2.urlopen(BUILT_QUERY).read()
-    #     pickle.dump(xml,open(PICKLE_PATH,'wb'))
-
     xml = urllib2.urlopen(BUILT_QUERY).read()
-    #print xml
 
     root = ElementTree.fromstring(xml)
     node = root.find("./pod[@title='Image']")
@@ -159,7 +134,6 @@ def image_query(obj):
     else:
         return None
 
-
 def parse_age(QUERY, root):
     value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
 
@@ -169,12 +143,9 @@ def parse_age(QUERY, root):
 
         if m:
             QUANTITY = m.group(1)
-
             # convert scientific notation to number
             QUANTITY = int(time.mktime(time.strptime(QUANTITY, '%m/%d/%Y')))
-
             UNIT = "date"
-
             return (QUANTITY, UNIT)
 
         else:
@@ -193,7 +164,6 @@ def parse_population(QUERY, root):
 
         if m:
             QUANTITY = float(m.group(1))
-
             modifier = m.group(2)
 
             if modifier == "million":
@@ -203,7 +173,6 @@ def parse_population(QUERY, root):
 
             # convert scientific notation to number
             UNIT = "people"
-
             return (QUANTITY, UNIT)
 
         else:
@@ -223,7 +192,6 @@ def parse_height(QUERY, root):
         QUANTITY = int(m.group(1)) * 12 + int(m.group(2))
 
         UNIT = "inches"
-
         return (QUANTITY, UNIT)
 
     else:
@@ -268,7 +236,6 @@ def parse_weight(QUERY, root):
         QUANTITY = float(QUANTITY.replace(u"×10^", "E+").replace('~', ''))
 
         UNIT = m.group(2)
-
         return (QUANTITY, UNIT)
 
     else:
@@ -325,10 +292,8 @@ def parse(root, UNITS):
         elif "date" in UNITS:
 
             try:
-
                 dt = dateparse(str(int(QUANTITY)))
                 QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
-
 
             except Exception as e:
 
@@ -360,7 +325,6 @@ def parse(root, UNITS):
 def get_image(NAME, TAGS):
 
     NAME = NAME.encode('utf-8')
-
 
     image_url = image_query(NAME)
 
