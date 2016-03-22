@@ -13,6 +13,8 @@
 
 @interface WIBGameRound : NSObject
 
+- (instancetype)initWithQuestionType:(WIBQuestionType *)questionType;
+
 // mutable
 @property (nonatomic, strong) NSMutableSet *usedNames;
 
@@ -25,8 +27,6 @@
 @property (nonatomic, readonly) NSInteger questionIndex;
 @property (nonatomic, readonly) WIBQuestionType *questionType;
 
-- (void)generateQuestions;
-- (void)generateQuestionsForType:(WIBQuestionType *)questionType;
 - (UIColor *)randomColor;
 
 - (void)questionAnsweredCorrectly;

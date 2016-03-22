@@ -62,8 +62,7 @@
 
 - (void)beginRound
 {
-    self.gameRound = [[WIBGameRound alloc] init];
-    [self.gameRound generateQuestionsForType:[self randomQuestionType]];
+    [self beginRoundForType:[self randomQuestionType]];
 }
 
 - (WIBQuestionType *)randomQuestionType
@@ -74,8 +73,7 @@
 
 - (void)beginRoundForType:(WIBQuestionType *)type
 {
-    self.gameRound = [[WIBGameRound alloc] init];
-    [self.gameRound generateQuestionsForType:type];
+    self.gameRound = [[WIBGameRound alloc] initWithQuestionType:type];
     [[PFUser currentUser] setObject:self.availableQuestionTypes forKey:@"unlockedQuestionTypes"];
     [[PFUser currentUser] save];
 }

@@ -30,13 +30,14 @@
 
 @implementation WIBGameRound
 
-- (instancetype)init
+- (instancetype)initWithQuestionType:(WIBQuestionType *)questionType
 {
     self = [super init];
     if (self) {
         self.questionIndex = 0;
         self.usedNames = [[NSMutableSet alloc] init];
         self.roundUUID = [[NSUUID UUID] UUIDString];
+        [self generateQuestionsForType:questionType];
     }
     return self;
 }

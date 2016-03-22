@@ -162,39 +162,19 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="190"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="27"/>
-                                <state key="normal" title="New Game">
+                                <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="23"/>
+                                <state key="normal" title="Random Category">
                                     <color key="titleColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled">
                                     <color key="titleColor" red="0.75700005691918448" green="0.51738470931227354" blue="0.99864071607589722" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="106" y="565" width="190" height="48"/>
+                                </variation>
                                 <connections>
                                     <action selector="didPressNewGameButton:" destination="KTJ-1G-a6D" eventType="touchUpInside" id="2di-pv-K8p"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7t-LI-PCZ" customClass="WIBPopButton">
-                                <rect key="frame" x="200" y="413" width="200" height="48"/>
-                                <color key="backgroundColor" red="0.94117647058823528" green="0.85490196078431369" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Upj-Bq-uwp">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="190"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="48" id="npy-BE-oLz">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="48"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="27"/>
-                                <state key="normal" title="High Scores">
-                                    <color key="titleColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didPressHighScoresButton:" destination="KTJ-1G-a6D" eventType="touchUpInside" id="mmW-Wn-y0e"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5s-O0-8Ke">
@@ -354,6 +334,29 @@
                                     <constraint firstAttribute="height" constant="50" id="Guf-yl-2yl"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7t-LI-PCZ" customClass="WIBPopButton">
+                                <rect key="frame" x="200" y="413" width="200" height="48"/>
+                                <color key="backgroundColor" red="0.94117647058823528" green="0.85490196078431369" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Upj-Bq-uwp">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="190"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="48" id="npy-BE-oLz">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="24"/>
+                                <state key="normal" title="High Scores">
+                                    <color key="titleColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressHighScoresButton:" destination="KTJ-1G-a6D" eventType="touchUpInside" id="mmW-Wn-y0e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
