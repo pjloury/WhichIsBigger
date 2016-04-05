@@ -88,15 +88,15 @@
 
 - (IBAction)didPressHighScoresButton:(id)sender
 {
-//    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-//        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-//        gcViewController.gameCenterDelegate = self;
-//        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-//        gcViewController.leaderboardIdentifier = @"highScore";
-//        [self presentViewController:gcViewController animated:YES completion:nil];
-//    }else {
-//        [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
-//    }
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+        gcViewController.gameCenterDelegate = self;
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = @"highScore";
+        [self presentViewController:gcViewController animated:YES completion:nil];
+    } else {
+        [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
+    }
 }
 
 #pragma mark - Collection View Data Source
