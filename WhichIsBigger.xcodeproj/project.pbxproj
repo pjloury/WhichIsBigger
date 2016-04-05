@@ -1,0 +1,883 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601172941BA6A19E00EE8182 /* AVFoundation.framework */; };
+		602A92F31C745B1C007777EB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602A92F21C745B1C007777EB /* iAd.framework */; };
+		602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F51C745E96007777EB /* WIBAdViewController.m */; };
+		602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */; };
+		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
+		6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78D1B98238000C592CC /* WIBQuestionView.m */; };
+		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
+		6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */; };
+		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
+		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
+		604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0C81BB3DF8500595B2B /* WIBReachability.m */; };
+		605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */; };
+		60621C4A1BD0424A00C8207E /* WIBGameRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C491BD0424A00C8207E /* WIBGameRound.m */; };
+		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
+		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
+		60A43F001C687C4700EFC46E /* WIBQuestionTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */; };
+		60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B43E101BD7631200E9F604 /* GameKit.framework */; };
+		60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */; };
+		60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */; };
+		60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DB38161BBF94C5001EC806 /* WIBDissimilarQuestion.m */; };
+		60DB381A1BBFB564001EC806 /* WIBQuestionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DB38191BBFB564001EC806 /* WIBQuestionType.m */; };
+		60DC8B441C83EF000026DF38 /* WIBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DC8B431C83EE710026DF38 /* WIBProgressView.m */; };
+		60DC8B471C841EDA0026DF38 /* WIBAchievementCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DC8B461C841EDA0026DF38 /* WIBAchievementCollectionViewCell.m */; };
+		60DC8B4A1C841FC10026DF38 /* WIBAchievementDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DC8B491C841FC10026DF38 /* WIBAchievementDataSource.m */; };
+		60DC8B4D1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */; };
+		60DC8B4E1C84346D0026DF38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D811691BA4262800B2DA78 /* QuartzCore.framework */; };
+		60DC8B511C843E0C0026DF38 /* KRConfettiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DC8B501C843E0C0026DF38 /* KRConfettiView.m */; };
+		60E400B91C86EA8500A82850 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E400B81C86EA8500A82850 /* UIImage+Additions.m */; };
+		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
+		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
+		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
+		7D0CC6F41AD4E7D400BB65BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F21AD4E7D400BB65BB /* Main.storyboard */; };
+		7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */; };
+		7D0CC7051AD4E7D400BB65BB /* WhichIsBiggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */; };
+		7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72C1AD4EAA200BB65BB /* libz.dylib */; };
+		7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */; };
+		7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */; };
+		7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */; };
+		7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */; };
+		7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */; };
+		7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */; };
+		7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */; };
+		7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */; };
+		7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */; };
+		7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */; };
+		7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */; };
+		7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */; };
+		7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */; };
+		7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */; };
+		7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FAD1AF0C7160061387B /* WIBImageView.m */; };
+		7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB11AF0C73A0061387B /* WIBGameItem.m */; };
+		7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */; };
+		7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */; };
+		7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */; };
+		9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */; };
+		F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE631AEF3CE8002E1565 /* WIBConstants.m */; };
+		F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */; };
+		F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659251ADE3BDE00932FC9 /* UIColor+Additions.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D0CC6FF1AD4E7D400BB65BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D0CC6DD1AD4E7D400BB65BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D0CC6E41AD4E7D400BB65BB;
+			remoteInfo = WhichIsBigger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		601172941BA6A19E00EE8182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		602A92F21C745B1C007777EB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		602A92F41C745E96007777EB /* WIBAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBAdViewController.h; sourceTree = "<group>"; };
+		602A92F51C745E96007777EB /* WIBAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBAdViewController.m; sourceTree = "<group>"; };
+		602A92F71C7AE98D007777EB /* WIBGameCompleteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteTableViewController.h; path = Classes/Controllers/WIBGameCompleteTableViewController.h; sourceTree = "<group>"; };
+		602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameCompleteTableViewController.m; path = Classes/Controllers/WIBGameCompleteTableViewController.m; sourceTree = "<group>"; };
+		6033C78A1B98238000C592CC /* WIBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionView.h; path = Classes/Views/WIBOptionView.h; sourceTree = "<group>"; };
+		6033C78B1B98238000C592CC /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionView.m; path = Classes/Views/WIBOptionView.m; sourceTree = "<group>"; };
+		6033C78C1B98238000C592CC /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionView.h; path = Classes/Views/WIBQuestionView.h; sourceTree = "<group>"; };
+		6033C78D1B98238000C592CC /* WIBQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionView.m; path = Classes/Views/WIBQuestionView.m; sourceTree = "<group>"; };
+		604014671B87006100E2C5D6 /* WIBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionButton.h; path = Classes/Views/WIBOptionButton.h; sourceTree = "<group>"; };
+		604014681B87006100E2C5D6 /* WIBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionButton.m; path = Classes/Views/WIBOptionButton.m; sourceTree = "<group>"; };
+		6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WIBLogo.xib; path = ../WIBLogo.xib; sourceTree = "<group>"; };
+		6040146F1B87E13900E2C5D6 /* WIBTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialViewController.h; path = Classes/Controllers/WIBTutorialViewController.h; sourceTree = "<group>"; };
+		604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialViewController.m; path = Classes/Controllers/WIBTutorialViewController.m; sourceTree = "<group>"; };
+		604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDismissSegue.h; path = WhichIsBigger/Classes/WIBDismissSegue.h; sourceTree = "<group>"; };
+		604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDismissSegue.m; path = WhichIsBigger/Classes/WIBDismissSegue.m; sourceTree = "<group>"; };
+		604DF0C71BB3DF8500595B2B /* WIBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBReachability.h; path = Classes/Managers/WIBReachability.h; sourceTree = "<group>"; };
+		604DF0C81BB3DF8500595B2B /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = Classes/Managers/WIBReachability.m; sourceTree = "<group>"; };
+		605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Shuffle.h"; sourceTree = "<group>"; };
+		605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
+		60621C481BD0424A00C8207E /* WIBGameRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameRound.h; path = "Classes/Data Model/WIBGameRound.h"; sourceTree = "<group>"; };
+		60621C491BD0424A00C8207E /* WIBGameRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameRound.m; path = "Classes/Data Model/WIBGameRound.m"; sourceTree = "<group>"; };
+		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
+		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
+		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60A43EFE1C687C4700EFC46E /* WIBQuestionTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionTypeCell.h; path = Classes/Views/WIBQuestionTypeCell.h; sourceTree = "<group>"; };
+		60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionTypeCell.m; path = Classes/Views/WIBQuestionTypeCell.m; sourceTree = "<group>"; };
+		60B43E101BD7631200E9F604 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBInviteViewController.h; path = Classes/Controllers/WIBInviteViewController.h; sourceTree = "<group>"; };
+		60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBInviteViewController.m; path = Classes/Controllers/WIBInviteViewController.m; sourceTree = "<group>"; };
+		60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoadingViewController.h; path = Classes/Controllers/WIBLoadingViewController.h; sourceTree = "<group>"; };
+		60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoadingViewController.m; path = Classes/Controllers/WIBLoadingViewController.m; sourceTree = "<group>"; };
+		60D811691BA4262800B2DA78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		60DB38151BBF94C5001EC806 /* WIBDissimilarQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBDissimilarQuestion.h; path = "Classes/Data Model/WIBDissimilarQuestion.h"; sourceTree = "<group>"; };
+		60DB38161BBF94C5001EC806 /* WIBDissimilarQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDissimilarQuestion.m; path = "Classes/Data Model/WIBDissimilarQuestion.m"; sourceTree = "<group>"; };
+		60DB38181BBFB564001EC806 /* WIBQuestionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionType.h; path = "Classes/Data Model/WIBQuestionType.h"; sourceTree = "<group>"; };
+		60DB38191BBFB564001EC806 /* WIBQuestionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionType.m; path = "Classes/Data Model/WIBQuestionType.m"; sourceTree = "<group>"; };
+		60DC8B421C83EE710026DF38 /* WIBProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WIBProgressView.h; path = Classes/Views/WIBProgressView.h; sourceTree = "<group>"; };
+		60DC8B431C83EE710026DF38 /* WIBProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WIBProgressView.m; path = Classes/Views/WIBProgressView.m; sourceTree = "<group>"; };
+		60DC8B451C841EDA0026DF38 /* WIBAchievementCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBAchievementCollectionViewCell.h; path = Classes/Views/WIBAchievementCollectionViewCell.h; sourceTree = "<group>"; };
+		60DC8B461C841EDA0026DF38 /* WIBAchievementCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBAchievementCollectionViewCell.m; path = Classes/Views/WIBAchievementCollectionViewCell.m; sourceTree = "<group>"; };
+		60DC8B481C841FC10026DF38 /* WIBAchievementDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBAchievementDataSource.h; path = Classes/ViewModel/WIBAchievementDataSource.h; sourceTree = "<group>"; };
+		60DC8B491C841FC10026DF38 /* WIBAchievementDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBAchievementDataSource.m; path = Classes/ViewModel/WIBAchievementDataSource.m; sourceTree = "<group>"; };
+		60DC8B4B1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionTypeUnlockedViewController.h; path = Classes/Controllers/WIBQuestionTypeUnlockedViewController.h; sourceTree = "<group>"; };
+		60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionTypeUnlockedViewController.m; path = Classes/Controllers/WIBQuestionTypeUnlockedViewController.m; sourceTree = "<group>"; };
+		60DC8B4F1C843E0C0026DF38 /* KRConfettiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KRConfettiView.h; path = "../../../Downloads/KRConfettiView-Final/KRConfetti/KRConfettiView.h"; sourceTree = "<group>"; };
+		60DC8B501C843E0C0026DF38 /* KRConfettiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KRConfettiView.m; path = "../../../Downloads/KRConfettiView-Final/KRConfetti/KRConfettiView.m"; sourceTree = "<group>"; };
+		60E400B71C86EA8500A82850 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Additions.h"; path = "Classes/Data Model/UIImage+Additions.h"; sourceTree = "<group>"; };
+		60E400B81C86EA8500A82850 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Additions.m"; path = "Classes/Data Model/UIImage+Additions.m"; sourceTree = "<group>"; };
+		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhichIsBigger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D0CC6EA1AD4E7D400BB65BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7D0CC6F31AD4E7D400BB65BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7D0CC6FE1AD4E7D400BB65BB /* WhichIsBiggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhichIsBiggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D0CC7031AD4E7D400BB65BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhichIsBiggerTests.m; sourceTree = "<group>"; };
+		7D0CC72C1AD4EAA200BB65BB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBDataModel.h; path = "Classes/Data Model/WIBDataModel.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDataModel.m; path = "Classes/Data Model/WIBDataModel.m"; sourceTree = "<group>"; };
+		7D0CC73F1AD4F37700BB65BB /* WIBGameQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBGameQuestion.h; path = "Classes/Data Model/WIBGameQuestion.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBGameQuestion.m; path = "Classes/Data Model/WIBGameQuestion.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBLoginViewController.h; path = Classes/Controllers/WIBLoginViewController.h; sourceTree = "<group>"; };
+		7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBLoginViewController.m; path = Classes/Controllers/WIBLoginViewController.m; sourceTree = "<group>"; };
+		7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-WhichIsBigger-Parse.a"; path = "Pods/../build/Debug-iphoneos/libPods-WhichIsBigger-Parse.a"; sourceTree = "<group>"; };
+		7D70EE621AEF3CE8002E1565 /* WIBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBConstants.h; path = WhichIsBigger/WIBConstants.h; sourceTree = "<group>"; };
+		7D70EE631AEF3CE8002E1565 /* WIBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBConstants.m; path = WhichIsBigger/WIBConstants.m; sourceTree = "<group>"; };
+		7D70EE691AEF507D002E1565 /* WIBGameOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameOption.h; path = "Classes/Data Model/WIBGameOption.h"; sourceTree = "<group>"; };
+		7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameOption.m; path = "Classes/Data Model/WIBGameOption.m"; sourceTree = "<group>"; };
+		7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Blogger_Sans.otf; sourceTree = "<group>"; };
+		7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium.otf"; sourceTree = "<group>"; };
+		7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Classes/Views/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WIB-Prefix.pch"; sourceTree = "<group>"; };
+		7D943FA01AF0C6B90061387B /* WIBGamePlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGamePlayManager.h; path = Classes/Managers/WIBGamePlayManager.h; sourceTree = "<group>"; };
+		7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBGamePlayManager.m; path = Classes/Managers/WIBGamePlayManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D943FA21AF0C6B90061387B /* WIBNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBNetworkManager.h; path = Classes/Managers/WIBNetworkManager.h; sourceTree = "<group>"; };
+		7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBNetworkManager.m; path = Classes/Managers/WIBNetworkManager.m; sourceTree = "<group>"; };
+		7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteViewController.h; path = Classes/Controllers/WIBGameCompleteViewController.h; sourceTree = "<group>"; };
+		7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameCompleteViewController.m; path = Classes/Controllers/WIBGameCompleteViewController.m; sourceTree = "<group>"; };
+		7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameViewController.h; path = Classes/Controllers/WIBGameViewController.h; sourceTree = "<group>"; };
+		7D943FAC1AF0C7160061387B /* WIBImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBImageView.h; path = Classes/Views/WIBImageView.h; sourceTree = "<group>"; };
+		7D943FAD1AF0C7160061387B /* WIBImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBImageView.m; path = Classes/Views/WIBImageView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D943FB01AF0C73A0061387B /* WIBGameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBGameItem.h; path = "Classes/Data Model/WIBGameItem.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7D943FB11AF0C73A0061387B /* WIBGameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameItem.m; path = "Classes/Data Model/WIBGameItem.m"; sourceTree = "<group>"; };
+		7D943FB51AF0C8CA0061387B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameViewController.m; path = Classes/Controllers/WIBGameViewController.m; sourceTree = "<group>"; };
+		7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBPopButton.h; path = Classes/Views/WIBPopButton.h; sourceTree = "<group>"; };
+		7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBPopButton.m; path = Classes/Views/WIBPopButton.m; sourceTree = "<group>"; };
+		7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium_Italic.otf"; sourceTree = "<group>"; };
+		97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.debug.xcconfig"; sourceTree = "<group>"; };
+		F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
+		F37659251ADE3BDE00932FC9 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
+		F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D0CC6E21AD4E7D400BB65BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60DC8B4E1C84346D0026DF38 /* QuartzCore.framework in Frameworks */,
+				602A92F31C745B1C007777EB /* iAd.framework in Frameworks */,
+				60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */,
+				601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */,
+				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
+				60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */,
+				7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */,
+				9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D0CC6FB1AD4E7D400BB65BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60DC8B521C84EF170026DF38 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				60DC8B481C841FC10026DF38 /* WIBAchievementDataSource.h */,
+				60DC8B491C841FC10026DF38 /* WIBAchievementDataSource.m */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		7A8391618E6BDC98E5C3DF80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */,
+				F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7D0CC6DC1AD4E7D400BB65BB = {
+			isa = PBXGroup;
+			children = (
+				604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */,
+				604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */,
+				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
+				7D70EE631AEF3CE8002E1565 /* WIBConstants.m */,
+				7D8E8D861B48B933005B4AA2 /* WIB-Prefix.pch */,
+				7D0CC7301AD4EAC400BB65BB /* Frameworks */,
+				7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */,
+				7D0CC7011AD4E7D400BB65BB /* WhichIsBiggerTests */,
+				7D0CC6E61AD4E7D400BB65BB /* Products */,
+				7A8391618E6BDC98E5C3DF80 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		7D0CC6E61AD4E7D400BB65BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */,
+				7D0CC6FE1AD4E7D400BB65BB /* WhichIsBiggerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */,
+				7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */,
+				F37659221ADE3B9600932FC9 /* Categories */,
+				F30117811AF099C300F1D854 /* Controllers */,
+				7D0CC6F51AD4E7D400BB65BB /* Images.xcassets */,
+				7D8E8D831B485FAB005B4AA2 /* LaunchScreen.storyboard */,
+				7D0CC6F21AD4E7D400BB65BB /* Main.storyboard */,
+				7D0CC73A1AD4F2EE00BB65BB /* Managers */,
+				7D0CC73B1AD4F30000BB65BB /* Models */,
+				7D8E8D5E1B4741A6005B4AA2 /* Resources */,
+				7D0CC6E81AD4E7D400BB65BB /* Supporting Files */,
+				60DC8B521C84EF170026DF38 /* View Models */,
+				F30117801AF0997200F1D854 /* Views */,
+			);
+			path = WhichIsBigger;
+			sourceTree = "<group>";
+		};
+		7D0CC6E81AD4E7D400BB65BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7D943FB51AF0C8CA0061387B /* Info.plist */,
+				7D0CC6EA1AD4E7D400BB65BB /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7D0CC7011AD4E7D400BB65BB /* WhichIsBiggerTests */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC7041AD4E7D400BB65BB /* WhichIsBiggerTests.m */,
+				7D0CC7021AD4E7D400BB65BB /* Supporting Files */,
+			);
+			path = WhichIsBiggerTests;
+			sourceTree = "<group>";
+		};
+		7D0CC7021AD4E7D400BB65BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC7031AD4E7D400BB65BB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				602A92F21C745B1C007777EB /* iAd.framework */,
+				60B43E101BD7631200E9F604 /* GameKit.framework */,
+				60A125BF1BB13C0100563331 /* SystemConfiguration.framework */,
+				601172941BA6A19E00EE8182 /* AVFoundation.framework */,
+				60D811691BA4262800B2DA78 /* QuartzCore.framework */,
+				7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */,
+				7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */,
+				7D0CC72C1AD4EAA200BB65BB /* libz.dylib */,
+				97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D0CC73A1AD4F2EE00BB65BB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7D943FA01AF0C6B90061387B /* WIBGamePlayManager.h */,
+				7D943FA11AF0C6B90061387B /* WIBGamePlayManager.m */,
+				604DF0C71BB3DF8500595B2B /* WIBReachability.h */,
+				604DF0C81BB3DF8500595B2B /* WIBReachability.m */,
+				7D943FA21AF0C6B90061387B /* WIBNetworkManager.h */,
+				7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		7D0CC73B1AD4F30000BB65BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7D0CC73C1AD4F32F00BB65BB /* WIBDataModel.h */,
+				7D0CC73D1AD4F32F00BB65BB /* WIBDataModel.m */,
+				60DB38151BBF94C5001EC806 /* WIBDissimilarQuestion.h */,
+				60DB38161BBF94C5001EC806 /* WIBDissimilarQuestion.m */,
+				7D943FB01AF0C73A0061387B /* WIBGameItem.h */,
+				7D943FB11AF0C73A0061387B /* WIBGameItem.m */,
+				7D70EE691AEF507D002E1565 /* WIBGameOption.h */,
+				7D70EE6A1AEF507D002E1565 /* WIBGameOption.m */,
+				7D0CC73F1AD4F37700BB65BB /* WIBGameQuestion.h */,
+				7D0CC7401AD4F37700BB65BB /* WIBGameQuestion.m */,
+				60621C481BD0424A00C8207E /* WIBGameRound.h */,
+				60621C491BD0424A00C8207E /* WIBGameRound.m */,
+				60DB38181BBFB564001EC806 /* WIBQuestionType.h */,
+				60DB38191BBFB564001EC806 /* WIBQuestionType.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		7D8E8D5E1B4741A6005B4AA2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7D8E8D5F1B4741EF005B4AA2 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7D8E8D5F1B4741EF005B4AA2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7D8E8D751B479BA6005B4AA2 /* BloggerSans */,
+				7D8E8D741B479B9B005B4AA2 /* OpenSans */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		7D8E8D741B479B9B005B4AA2 /* OpenSans */ = {
+			isa = PBXGroup;
+			children = (
+				7D8E8D671B4741FC005B4AA2 /* OpenSans-Regular.ttf */,
+				7D8E8D601B4741FC005B4AA2 /* OpenSans-Bold.ttf */,
+				7D8E8D651B4741FC005B4AA2 /* OpenSans-Light.ttf */,
+			);
+			name = OpenSans;
+			sourceTree = "<group>";
+		};
+		7D8E8D751B479BA6005B4AA2 /* BloggerSans */ = {
+			isa = PBXGroup;
+			children = (
+				7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */,
+				7D8E8D781B479C67005B4AA2 /* Blogger_Sans-Medium.otf */,
+				7D8E8D761B479BB7005B4AA2 /* Blogger_Sans.otf */,
+			);
+			name = BloggerSans;
+			sourceTree = "<group>";
+		};
+		F30117801AF0997200F1D854 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				60DC8B4F1C843E0C0026DF38 /* KRConfettiView.h */,
+				60DC8B501C843E0C0026DF38 /* KRConfettiView.m */,
+				60DC8B451C841EDA0026DF38 /* WIBAchievementCollectionViewCell.h */,
+				60DC8B461C841EDA0026DF38 /* WIBAchievementCollectionViewCell.m */,
+				7D943FAC1AF0C7160061387B /* WIBImageView.h */,
+				7D943FAD1AF0C7160061387B /* WIBImageView.m */,
+				6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */,
+				604014671B87006100E2C5D6 /* WIBOptionButton.h */,
+				604014681B87006100E2C5D6 /* WIBOptionButton.m */,
+				6033C78A1B98238000C592CC /* WIBOptionView.h */,
+				6033C78B1B98238000C592CC /* WIBOptionView.m */,
+				7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */,
+				7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */,
+				60DC8B421C83EE710026DF38 /* WIBProgressView.h */,
+				60DC8B431C83EE710026DF38 /* WIBProgressView.m */,
+				60A43EFE1C687C4700EFC46E /* WIBQuestionTypeCell.h */,
+				60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */,
+				6033C78C1B98238000C592CC /* WIBQuestionView.h */,
+				6033C78D1B98238000C592CC /* WIBQuestionView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F30117811AF099C300F1D854 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				602A92F71C7AE98D007777EB /* WIBGameCompleteTableViewController.h */,
+				602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */,
+				602A92F41C745E96007777EB /* WIBAdViewController.h */,
+				602A92F51C745E96007777EB /* WIBAdViewController.m */,
+				60DC8B4B1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.h */,
+				60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */,
+				7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */,
+				7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */,
+				7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */,
+				7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */,
+				7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */,
+				7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */,
+				60BE9A291B8A964A000D57C6 /* WIBInviteViewController.h */,
+				60BE9A2A1B8A964A000D57C6 /* WIBInviteViewController.m */,
+				60D7FF921B8533E300740B91 /* WIBLoadingViewController.h */,
+				60D7FF931B8533E300740B91 /* WIBLoadingViewController.m */,
+				7D0EE3171B4E5F5D000C0D97 /* WIBLoginViewController.h */,
+				7D0EE3181B4E5F5D000C0D97 /* WIBLoginViewController.m */,
+				6040146F1B87E13900E2C5D6 /* WIBTutorialViewController.h */,
+				604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */,
+				60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */,
+				60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F37659221ADE3B9600932FC9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				60E400B71C86EA8500A82850 /* UIImage+Additions.h */,
+				60E400B81C86EA8500A82850 /* UIImage+Additions.m */,
+				605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */,
+				605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */,
+				F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */,
+				F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */,
+				F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */,
+				F37659251ADE3BDE00932FC9 /* UIColor+Additions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7D0CC6E41AD4E7D400BB65BB /* WhichIsBigger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D0CC7081AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBigger" */;
+			buildPhases = (
+				1E30623319D61F83166A1BD1 /* Check Pods Manifest.lock */,
+				7D0CC6E11AD4E7D400BB65BB /* Sources */,
+				7D0CC6E21AD4E7D400BB65BB /* Frameworks */,
+				7D0CC6E31AD4E7D400BB65BB /* Resources */,
+				DB639B97B9B9458757F92049 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhichIsBigger;
+			productName = WhichIsBigger;
+			productReference = 7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7D0CC6FD1AD4E7D400BB65BB /* WhichIsBiggerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D0CC70B1AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBiggerTests" */;
+			buildPhases = (
+				7D0CC6FA1AD4E7D400BB65BB /* Sources */,
+				7D0CC6FB1AD4E7D400BB65BB /* Frameworks */,
+				7D0CC6FC1AD4E7D400BB65BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D0CC7001AD4E7D400BB65BB /* PBXTargetDependency */,
+			);
+			name = WhichIsBiggerTests;
+			productName = WhichIsBiggerTests;
+			productReference = 7D0CC6FE1AD4E7D400BB65BB /* WhichIsBiggerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7D0CC6DD1AD4E7D400BB65BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Angry Tortoise Productions";
+				TargetAttributes = {
+					7D0CC6E41AD4E7D400BB65BB = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = D2GRT69L42;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					7D0CC6FD1AD4E7D400BB65BB = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 7D0CC6E41AD4E7D400BB65BB;
+					};
+				};
+			};
+			buildConfigurationList = 7D0CC6E01AD4E7D400BB65BB /* Build configuration list for PBXProject "WhichIsBigger" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7D0CC6DC1AD4E7D400BB65BB;
+			productRefGroup = 7D0CC6E61AD4E7D400BB65BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7D0CC6E41AD4E7D400BB65BB /* WhichIsBigger */,
+				7D0CC6FD1AD4E7D400BB65BB /* WhichIsBiggerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7D0CC6E31AD4E7D400BB65BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */,
+				7D0CC6F41AD4E7D400BB65BB /* Main.storyboard in Resources */,
+				7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */,
+				7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */,
+				7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */,
+				7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */,
+				7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */,
+				7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */,
+				7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */,
+				6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D0CC6FC1AD4E7D400BB65BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E30623319D61F83166A1BD1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DB639B97B9B9458757F92049 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D0CC6E11AD4E7D400BB65BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */,
+				60DC8B471C841EDA0026DF38 /* WIBAchievementCollectionViewCell.m in Sources */,
+				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
+				60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */,
+				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
+				60DC8B441C83EF000026DF38 /* WIBProgressView.m in Sources */,
+				60A43F001C687C4700EFC46E /* WIBQuestionTypeCell.m in Sources */,
+				602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */,
+				7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */,
+				605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */,
+				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
+				7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */,
+				60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */,
+				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
+				60DB381A1BBFB564001EC806 /* WIBQuestionType.m in Sources */,
+				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
+				7D943FB21AF0C73A0061387B /* WIBGameItem.m in Sources */,
+				6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */,
+				60D7FF941B8533E300740B91 /* WIBLoadingViewController.m in Sources */,
+				F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */,
+				7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */,
+				604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */,
+				7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */,
+				602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */,
+				60E400B91C86EA8500A82850 /* UIImage+Additions.m in Sources */,
+				60DC8B4D1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m in Sources */,
+				60621C4A1BD0424A00C8207E /* WIBGameRound.m in Sources */,
+				7D0CC73E1AD4F32F00BB65BB /* WIBDataModel.m in Sources */,
+				60DC8B511C843E0C0026DF38 /* KRConfettiView.m in Sources */,
+				7D0CC7411AD4F37700BB65BB /* WIBGameQuestion.m in Sources */,
+				7D70EE6B1AEF507D002E1565 /* WIBGameOption.m in Sources */,
+				7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */,
+				7D943FA41AF0C6B90061387B /* WIBGamePlayManager.m in Sources */,
+				604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */,
+				F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */,
+				60DC8B4A1C841FC10026DF38 /* WIBAchievementDataSource.m in Sources */,
+				7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */,
+				60BE9A2B1B8A964A000D57C6 /* WIBInviteViewController.m in Sources */,
+				604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D0CC6FA1AD4E7D400BB65BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D0CC7051AD4E7D400BB65BB /* WhichIsBiggerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7D0CC7001AD4E7D400BB65BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D0CC6E41AD4E7D400BB65BB /* WhichIsBigger */;
+			targetProxy = 7D0CC6FF1AD4E7D400BB65BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7D0CC6F21AD4E7D400BB65BB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D0CC6F31AD4E7D400BB65BB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7D0CC7061AD4E7D400BB65BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7D0CC7071AD4E7D400BB65BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7D0CC7091AD4E7D400BB65BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WhichIsBigger",
+					"/Users/pjloury/Downloads/parse-library-1.7.1",
+					"$(PROJECT_DIR)",
+					/Users/pjloury/Documents/FacebookSDK,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
+				INFOPLIST_FILE = WhichIsBigger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a70a5db2-5e4c-4447-8ab9-fc544bd2c1e4";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		7D0CC70A1AD4E7D400BB65BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WhichIsBigger",
+					"/Users/pjloury/Downloads/parse-library-1.7.1",
+					"$(PROJECT_DIR)",
+					/Users/pjloury/Documents/FacebookSDK,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WIB-Prefix.pch";
+				INFOPLIST_FILE = WhichIsBigger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a70a5db2-5e4c-4447-8ab9-fc544bd2c1e4";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		7D0CC70C1AD4E7D400BB65BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WhichIsBiggerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhichIsBigger.app/WhichIsBigger";
+			};
+			name = Debug;
+		};
+		7D0CC70D1AD4E7D400BB65BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WhichIsBiggerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhichIsBigger.app/WhichIsBigger";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D0CC6E01AD4E7D400BB65BB /* Build configuration list for PBXProject "WhichIsBigger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D0CC7061AD4E7D400BB65BB /* Debug */,
+				7D0CC7071AD4E7D400BB65BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D0CC7081AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBigger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D0CC7091AD4E7D400BB65BB /* Debug */,
+				7D0CC70A1AD4E7D400BB65BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D0CC70B1AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBiggerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D0CC70C1AD4E7D400BB65BB /* Debug */,
+				7D0CC70D1AD4E7D400BB65BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7D0CC6DD1AD4E7D400BB65BB /* Project object */;
+}
