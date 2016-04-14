@@ -348,6 +348,18 @@ def get_image(NAME, TAGS):
 
     return photo
 
+def get_topic(root):
+    print root
+    topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
+    m = __topic_re.match(topic)
+    if m:
+        return m.group(1)
+    else:
+ 		m = __topic_re1.match(topic)
+        if m:
+			return m.group(1)
+        raise NameError('Error parsing topic')
+  
 
 def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[]):
 
@@ -359,7 +371,12 @@ def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[]):
     root = ElementTree.fromstring(xml)
 
     print root
-    
+
+    TOPIC = get_topic(root)
+    topicItems = [x.strip() for x in TOPIC.split(',')]
+    if len(topicItems)>2:
+        TOPIC = topicItems[0] + ", " + topicItems[-1]
+        NAME = TOPIC
 
     PHOTO = get_image(NAME,TAGS)
 
