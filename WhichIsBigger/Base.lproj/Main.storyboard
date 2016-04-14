@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NF5-OB-A3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NF5-OB-A3q">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -714,18 +714,14 @@
                                                         <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="17"/>
                                                         <color key="textColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="highlightedColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="0.0" y="216" width="200" height="30"/>
-                                                        </variation>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="largeQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="QGn-eF-PHJ" customClass="WIBImageView">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="largeQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="QGn-eF-PHJ" customClass="WIBImageView">
                                                         <rect key="frame" x="0.0" y="30" width="200" height="140"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="140" id="1Gq-0V-LP1"/>
                                                         </constraints>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="0.0" y="35" width="200" height="176"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <exclude reference="1Gq-0V-LP1"/>
                                                             </mask>
@@ -820,8 +816,7 @@
                                                         <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
                                                             <rect key="frame" x="-13" y="-71" width="75" height="61"/>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="60" y="108" width="80" height="30"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="8Rz-uG-nFF"/>
                                                                 <include reference="YGN-GR-6hk"/>
@@ -885,8 +880,7 @@
                                                         <exclude reference="pmx-rj-Sbn"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="246"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <exclude reference="b3I-eg-aUv"/>
                                                         <include reference="38x-8t-OGI"/>
@@ -919,8 +913,7 @@
                                                 <exclude reference="aP2-sc-0ah"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="100" y="100" width="200" height="246"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <exclude reference="Kgp-IJ-nPc"/>
                                                 <exclude reference="aP2-sc-0ah"/>
@@ -978,14 +971,13 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mwj-cc-iv5" customClass="WIBOptionButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="largeQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="6Vp-gT-xOu" customClass="WIBImageView">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="largeQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="6Vp-gT-xOu" customClass="WIBImageView">
                                                         <rect key="frame" x="0.0" y="30" width="200" height="140"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="140" id="0ul-4h-p5g"/>
                                                         </constraints>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="0.0" y="35" width="200" height="176"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <exclude reference="0ul-4h-p5g"/>
                                                             </mask>
@@ -999,9 +991,6 @@
                                                         <fontDescription key="fontDescription" name="BloggerSans-Medium" family="Blogger Sans" pointSize="17"/>
                                                         <color key="textColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="highlightedColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="0.0" y="216" width="200" height="30"/>
-                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 Kanye Wests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwY-qq-7Ft" userLabel="questionLabel">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
@@ -1093,8 +1082,7 @@
                                                         <exclude reference="wy1-3m-WMn"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="246"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="subviews">
                                                         <include reference="GGX-4O-C1p"/>
                                                     </mask>
@@ -1125,8 +1113,7 @@
                                                 <exclude reference="pjp-N6-buW"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="100" y="370" width="200" height="246"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <exclude reference="U4X-6J-lfz"/>
                                                 <exclude reference="pjp-N6-buW"/>
@@ -1171,7 +1158,7 @@
                                         <color key="textColor" red="0.68627450980000004" green="0.2666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="25" y="649" width="51" height="24"/>
+                                            <rect key="frame" x="25" y="649" width="51" height="23.5"/>
                                         </variation>
                                     </label>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RLj-dS-ok7" customClass="CSAnimationView">
@@ -2769,7 +2756,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pn1-R0-1kJ" id="Tnc-ws-PkN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGb-G3-WiM">
@@ -2851,7 +2838,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="65"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="greenCheck" translatesAutoresizingMaskIntoConstraints="NO" id="KWE-n4-QTC">
+                                                                    <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="redX" translatesAutoresizingMaskIntoConstraints="NO" id="KWE-n4-QTC">
                                                                         <rect key="frame" x="4" y="0.0" width="42" height="42"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="42" id="lOb-ND-DXH"/>
@@ -2944,7 +2931,7 @@
                                         <rect key="frame" x="0.0" y="206" width="375" height="121"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d9c-pi-zXF" id="FGE-vZ-bql">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xhb-UG-TUa" userLabel="Current Level View">
@@ -3115,7 +3102,7 @@
                                         <rect key="frame" x="0.0" y="355" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uRk-3u-X2S" id="7e2-hA-wF3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="103.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-s0-BXT">
@@ -3392,8 +3379,8 @@
     </scenes>
     <resources>
         <image name="facebook_icon" width="72" height="72"/>
-        <image name="greenCheck" width="300" height="300"/>
         <image name="largeQuestionMark" width="562" height="817"/>
+        <image name="redX" width="2005" height="2041"/>
         <image name="smallQuestionMark" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>

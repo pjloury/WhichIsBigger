@@ -15,7 +15,7 @@ from parse_rest.datatypes import Object
 
 from dateutil.parser import parse as dateparse
 
-from api_keys import *
+#from api_keys import *
 
 
 __name_re = re.compile("""(.+?)\s+\|""")
@@ -34,9 +34,12 @@ QUERYSTRING_IMAGE = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s&form
 QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
 
 
+APP_ID='VWK3T2-4JGT62XJP7'
+PARSE_APP_ID='mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd'
+REST_API_KEY='04Tsc8rIcaimvW3mveSzTHhy20VmGx5EQVwFIdV1'
 ############## WOLFRAM API ##############
 
-register(APP_ID_KEY, REST_API_KEY)
+register(PARSE_APP_ID, REST_API_KEY)
 
 
 class GameItem(Object):
@@ -84,7 +87,7 @@ def main():
             TAGS = row[4]  # all tags in quotes
 
             # check for existing parse entry
-            exists = GameItem.Query.all().filter(name=NAME)
+            exists = GameItem.Query.all().filter(name=NAME, category=CATEGORIES)
             if len(exists) > 0:
                 print "Duplicate found"
                 continue
@@ -356,6 +359,7 @@ def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[]):
     root = ElementTree.fromstring(xml)
 
     print root
+    
 
     PHOTO = get_image(NAME,TAGS)
 
