@@ -20,4 +20,34 @@
     return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
++(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToHeight: (float)height
+{
+    float oldHeight = sourceImage.size.height;
+    float scaleFactor = height / oldHeight; // 50 /30
+    
+    float newHeight = oldHeight * scaleFactor;
+    float newWidth = sourceImage.size.width * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
++(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float)width
+{
+    float oldWidth = sourceImage.size.width;
+    float scaleFactor = width / oldWidth;
+    
+    float newHeight = sourceImage.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 @end

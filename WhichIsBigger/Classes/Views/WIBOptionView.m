@@ -49,7 +49,7 @@
     self.clipsToBounds = NO;
     self.pointsLabel.alpha = 0.0;
     self.pointsLabel.backgroundColor = [UIColor clearColor];
-    self.multiplierLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
+    self.multiplierLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] labelThemeColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameQuestionTimeUpHandler:) name:kGameQuestionTimeUpNotification object:nil];
     

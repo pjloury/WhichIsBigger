@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
 @property (nonatomic) NSString *category;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *backgroundColorString;
+@property (nonatomic) NSString *labelThemeColorString;
 @property (nonatomic) NSString *themeColorString;
 @property (nonatomic) NSString *tintColorString;
 @property (nonatomic) NSNumber *pointsToUnlock;
@@ -34,11 +35,6 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
 - (UIColor *)backgroundColor;
 - (UIColor *)tintColor;
 - (UIColor *)themeColor;
-
-//@property (nonatomic) NSString *questionString;
-//@property (nonatomic) WIBComparisonType comparisonType;
-//@property (nonatomic) UIColor *themeColor;
-//@property (nonatomic) NSString *name;
-//@property (nonatomic) NSString *category;
+- (UIColor *)labelThemeColor;
 
 @end

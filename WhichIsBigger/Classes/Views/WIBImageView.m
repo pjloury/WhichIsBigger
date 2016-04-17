@@ -9,6 +9,7 @@
 #import "WIBImageView.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
+#import "UIImage+Additions.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -54,24 +55,26 @@
 - (void)setup
 {
     self.userInteractionEnabled = YES;
-    if ([self.gameItem.categoryString isEqualToString:@"population"])
-    {
-        self.contentMode = UIViewContentModeCenter;
-    }
-    else
-    {
-        self.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    
     self.image = nil;
     
+    
     [self sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
-            placeholderImage:[UIImage placeholder] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+            placeholderImage:[UIImage placeholder] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (!error)
                     {
                         NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
-                        //CGRect imageRect = AVMakeRectWithAspectRatioInsideRect(image.size,self.frame);
+                        UIImage *im;
+                        if ([self.gameItem.categoryString isEqualToString:@"population"] || [self.gameItem.categoryString isEqualToString:@"GDP"]) {
+                            im = [UIImage imageWithImage:image scaledToHeight:50];
+                        } else {
+                            if (image.size.height > image.size.width) {
+                                im = [UIImage imageWithImage:image scaledToHeight:110];
+                            } else {
+                                im = [UIImage imageWithImage:image scaledToWidth:110];
+                            }
+                        }
+                        self.image = im;
                     }
                     else
                     {

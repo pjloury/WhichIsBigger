@@ -15,7 +15,7 @@
 
 @interface WIBGameCompleteViewController ()
 //@interface WIBGameCompleteViewController ()< FBSDKAppInviteDialogDelegate>
-
+@property (weak, nonatomic) IBOutlet WIBPopButton *randomButton;
 @property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
 //@property (weak, nonatomic) IBOutlet WIBPopButton *challengeAFriendButton;
 
@@ -35,6 +35,7 @@
     //self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
 //    self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.playAgainButton.layer.cornerRadius = 6;
+    self.randomButton.layer.cornerRadius = 6;
 }
 
 - (IBAction)didPressDone:(id)sender {
@@ -74,6 +75,10 @@
         [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
     }
+}
+- (IBAction)didPressRandomButton:(id)sender {
+    [[WIBGamePlayManager sharedInstance] beginRound];
+    [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
 }
 
 //- (void)openFacebookShareFlow

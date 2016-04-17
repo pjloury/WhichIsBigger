@@ -16,6 +16,7 @@
 @dynamic category;
 @dynamic title;
 @dynamic backgroundColorString;
+@dynamic labelThemeColorString;
 @dynamic tintColorString;
 @dynamic themeColorString;
 @dynamic pointsToUnlock;
@@ -42,5 +43,10 @@
 - (UIColor *)themeColor {
     return [UIColor colorWithString:self.themeColorString];
 }
+
+- (UIColor *)labelThemeColor; {
+    return [UIColor colorWithString:self.labelThemeColorString];
+}
+
 
 @end

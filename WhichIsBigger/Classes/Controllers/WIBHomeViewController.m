@@ -65,7 +65,7 @@
     self.highScoresButton.layer.cornerRadius = 6;
     self.startNewGameButton.layer.cornerRadius = 6;
     [self.categoriesCollectionView reloadData];
-    self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld pts", [WIBGamePlayManager sharedInstance].lifeTimeScore];
+    self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld pts", (long)[WIBGamePlayManager sharedInstance].lifeTimeScore];
 }
 
 //- (IBAction)didPressLoginButton:(id)sender

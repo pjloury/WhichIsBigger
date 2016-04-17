@@ -31,16 +31,19 @@
     [Parse setApplicationId:@"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd"
                   clientKey:@"ckRmomV114XuUhuKU6WzpeY3zQg4h2McXCQSdEP9"];
     
-    [PFUser enableRevocableSessionInBackground];
-
-    
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
     //[PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFUser enableAutomaticUser];
     
-    /*
+    
+    [PFUser enableRevocableSessionInBackground];
+    if ([GKLocalPlayer localPlayer].authenticated == YES) {
+        [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
+    }
+    
+    
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
                                                     UIUserNotificationTypeSound);
@@ -48,7 +51,7 @@
                                                                              categories:nil];
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
-    */
+    
      
 //	return [[FBSDKApplicationDelegate sharedInstance] application:application
 //									didFinishLaunchingWithOptions:launchOptions];

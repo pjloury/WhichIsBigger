@@ -75,7 +75,7 @@
 {
     self.gameRound = [[WIBGameRound alloc] initWithQuestionType:type];
     [[PFUser currentUser] setObject:self.availableQuestionTypes forKey:@"unlockedQuestionTypes"];
-    [[PFUser currentUser] save];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (void)endGame
