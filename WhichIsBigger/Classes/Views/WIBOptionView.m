@@ -78,6 +78,7 @@
     self.imageView.gameItem = self.gameOption.item;
     self.imageView.multiplier = self.gameOption.multiplier;
     [self.imageView setup];
+    self.imageView.tintColor = self.gameOption.color;
 }
 
 - (void)configureLabels

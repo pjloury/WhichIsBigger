@@ -27,6 +27,7 @@
 @property (nonatomic, readonly) NSInteger questionIndex;
 @property (nonatomic, readonly) WIBQuestionType *questionType;
 
+- (void)generateQuestions;
 - (UIColor *)randomColor;
 
 - (void)questionAnsweredCorrectly;

@@ -125,7 +125,7 @@
             
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             
-            if([urlString1 length] >0) {
+            if(urlString1 != nil && ![urlString1 isKindOfClass:[NSNull class]]) {
                 dispatch_group_enter(downloadGroup);
                 [manager downloadImageWithURL:[NSURL URLWithString:urlString1]
                                       options:0
@@ -144,7 +144,7 @@
                                     }];
             }
             
-            if([urlString2 length] >0) {
+            if(urlString2 != nil && ![urlString2 isKindOfClass:[NSNull class]]) {
                 dispatch_group_enter(downloadGroup);
                 [manager downloadImageWithURL:[NSURL URLWithString:urlString2]
                                       options:0

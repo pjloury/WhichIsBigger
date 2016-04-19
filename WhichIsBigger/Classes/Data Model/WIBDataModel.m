@@ -132,7 +132,7 @@
 
     WIBGameItem* gameItem = [gameItemsWithSameCategory objectAtIndex:r];
     
-    NSLog(@"%@ vs %@", gameItem.name,item.name);
+
     double percentDifference = (fabs((gameItem.baseQuantity.doubleValue - item.baseQuantity.doubleValue)/fmin(item.baseQuantity.doubleValue,gameItem.baseQuantity.doubleValue))) * 100;
     BOOL closeEnough = (percentDifference < questionCeiling && percentDifference > [WIBGamePlayManager sharedInstance].questionFloor);
     
@@ -142,6 +142,7 @@
     if(![self itemNameAlreadyUsed:gameItem.name] &&
        [gameItem.baseQuantity doubleValue] != [item.baseQuantity doubleValue] && closeEnough && [gameItem supportsQuestionType:type])
     {
+        NSLog(@"%@ vs %@", gameItem.name,item.name);
         [[WIBGamePlayManager sharedInstance].gameRound.usedNames addObject:gameItem.name];
         NSLog(@"%@ and %@ are %.2f%% different",item.name, gameItem.name ,percentDifference);
         return gameItem;

@@ -37,9 +37,14 @@
         self.questionIndex = 0;
         self.usedNames = [[NSMutableSet alloc] init];
         self.roundUUID = [[NSUUID UUID] UUIDString];
-        [self generateQuestionsForType:questionType];
+        self.questionType = questionType;
     }
     return self;
+}
+
+- (void)generateQuestions
+{
+     [self generateQuestionsForType:self.questionType];
 }
 
 - (NSString *)category
@@ -51,7 +56,6 @@
 
 - (void)generateQuestionsForType:(WIBQuestionType *)questionType
 {
-    self.questionType = questionType;
     NSMutableArray *questions = [NSMutableArray array];
     for(int i = 0; i < NUMBER_OF_QUESTIONS; i++)
     {
@@ -69,8 +73,14 @@
     }
 
     [[WIBNetworkManager sharedInstance] preloadImages:questions];
-    self.gameQuestions = questions;
     self.randomColors = [UIColor randomColors];
+    
+    for (WIBGameQuestion *question in questions) {
+        question.option1.color = [self randomColor];
+        question.option2.color = [self randomColor];
+    }
+    self.gameQuestions = questions;
+
 }
 
 - (UIColor *)randomColor

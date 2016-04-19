@@ -130,7 +130,6 @@ alpha:1.0]
              [UIColor sexyRedColor],
              [UIColor sexyOrangeColor],
              [UIColor sexyDeepOrangeColor],
-             [UIColor sexyYellowColor],
              [UIColor sexyAmberColor],
              [UIColor sexyLightGreenColor],
              [UIColor sexyLimeColor],

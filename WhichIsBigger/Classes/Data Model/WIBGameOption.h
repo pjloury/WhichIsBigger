@@ -18,5 +18,6 @@
 @property (nonatomic, readonly) NSString *multiplierString;
 @property (nonatomic, readonly) NSNumber *total;
 @property (nonatomic, copy) NSString *totalString;
+@property (nonatomic) UIColor *color;
 
 @end

@@ -241,7 +241,6 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.cellNumber;
-    //return NUMBER_OF_QUESTIONS;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
@@ -255,12 +254,24 @@
     answerImageView.layer.borderWidth = 2.0f;
     if (question.answeredCorrectly) {
         answerImageView.layer.borderColor = [UIColor greenColor].CGColor;
-        [answerImageView sd_setImageWithURL:[NSURL URLWithString:question.answer.item.photoURL] placeholderImage:[UIImage placeholder]];
+        if (question.answer.item.photoURL != nil && ![question.answer.item.photoURL isKindOfClass:[NSNull class]]) {
+            [answerImageView sd_setImageWithURL:[NSURL URLWithString:question.answer.item.photoURL] placeholderImage:[UIImage placeholderWithHeight:38] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (!error) {
+                    answerImageView.contentMode = UIViewContentModeScaleAspectFit;
+                } else {
+                    answerImageView.contentMode = UIViewContentModeCenter;
+                }
+            }];
+        } else {
+            answerImageView.image = [UIImage placeholderWithHeight:38];
+            answerImageView.contentMode = UIViewContentModeCenter;
+        }
+        answerImageView.tintColor = question.answer.color;
         answerLabel.text = [NSString stringWithFormat:@"%ld", (long)question.points];
         answerLabel.textAlignment = NSTextAlignmentCenter;
     } else {
         answerImageView.layer.borderColor = [UIColor clearColor].CGColor;
-        answerImageView.image = [UIImage imageNamed:@"redX"];
+        answerImageView.image = [UIImage imageWithImage:[UIImage imageNamed:@"redX"] scaledToHeight:42];
         answerLabel.text = @"";
     }
     return cell;
@@ -318,7 +329,7 @@
 
                         if ([WIBGamePlayManager sharedInstance].unlockedQuestionType) {
                             NSLog(@"There's a question to unlock!!!");
-                            self.currentLevelImageView.image = [UIImage placeholder];
+                            self.currentLevelImageView.image = [UIImage imageWithImage:[UIImage placeholder] scaledToHeight:100];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
                         }

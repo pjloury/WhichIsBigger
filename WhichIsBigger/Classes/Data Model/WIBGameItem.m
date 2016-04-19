@@ -34,7 +34,8 @@
         }
     }
     
-    return (questionTypeConstraintSatisfied && self.photoURL != nil && self.photoURL.length > 0);
+    //return (questionTypeConstraintSatisfied && self.photoURL != nil && self.photoURL.length > 0);
+    return questionTypeConstraintSatisfied;
 }
 
 - (void)setTagArray:(NSArray *)tagArray
@@ -55,7 +56,7 @@
     {
         return [NSNumber numberWithDouble:[_baseQuantity doubleValue] * 39.3701];
     }
-    else if([self.unit isEqualToString:@"date"])
+    else if([self.unit isEqualToString:@"age"])
     {
         NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
         NSTimeInterval age = currentEpoch - _baseQuantity.doubleValue;
@@ -89,6 +90,11 @@
     {
         return item1;
     }
+}
+
+- (NSString *)description
+{
+    return self.name;
 }
 
 @end

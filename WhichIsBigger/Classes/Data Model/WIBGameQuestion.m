@@ -31,7 +31,6 @@
     return self;
 }
 
-
 - (instancetype)initWithDissimilarGameItem:(WIBGameItem *)item1 dissimilargameItem2:(WIBGameItem *)item2
 {
     self = [super init];
