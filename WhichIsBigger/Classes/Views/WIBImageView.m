@@ -57,33 +57,33 @@
     self.userInteractionEnabled = YES;
     self.image = nil;
     
-    
-    [self sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
-            placeholderImage:[UIImage placeholder] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (!error)
-                    {
-                        NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
-                        UIImage *im;
-                        if ([self.gameItem.categoryString isEqualToString:@"population"] || [self.gameItem.categoryString isEqualToString:@"GDP"]) {
-                            im = [UIImage imageWithImage:image scaledToHeight:50];
-                        } else {
+    if (self.gameItem.photoURL != nil && ![self.gameItem.photoURL isKindOfClass:[NSNull class]]) {
+        NSLog(self.gameItem.photoURL);
+        [self sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
+                placeholderImage:[UIImage placeholderWithHeight:100] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!error)
+                        {
+                            NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
+                            UIImage *im;
                             if (image.size.height > image.size.width) {
                                 im = [UIImage imageWithImage:image scaledToHeight:110];
                             } else {
                                 im = [UIImage imageWithImage:image scaledToWidth:110];
                             }
+                            self.image = im;
                         }
-                        self.image = im;
-                    }
-                    else
-                    {
-                        self.image = [UIImage placeholder];
-                        self.tintColor = [[[WIBGamePlayManager sharedInstance] gameRound] randomColor];
-                    }
-                    self.layer.borderWidth = 1;
-                });
-            }];
+                        else
+                        {
+                            self.image = [UIImage placeholderWithHeight:100];
+                        }
+                        self.layer.borderWidth = 1;
+                    });
+                }];
+    }
+    else {
+        self.image = [UIImage placeholderWithHeight:100];
+    }
     
     if (self.multiplier > 1)
     {
@@ -97,7 +97,6 @@
     
     self.layer.cornerRadius = self.layer.frame.size.width/20;
     self.layer.masksToBounds = YES;
-    //NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
 }
 
 - (void)dealloc
