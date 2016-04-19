@@ -9,6 +9,8 @@ import argparse
 import re
 import csv
 import time, datetime
+# from time import mktime
+from datetime import datetime
 
 from parse_rest.connection import register
 from parse_rest.datatypes import Object
@@ -17,6 +19,8 @@ from dateutil.parser import parse as dateparse
 
 #from api_keys import *
 
+__topic_re = re.compile("""(.+?)\s+\|""")
+__topic_re1 = re.compile("""(.+?)\s+\(""")
 
 __name_re = re.compile("""(.+?)\s+\|""")
 __name_re1 = re.compile("""(.+?)\s+\(""")
@@ -34,9 +38,9 @@ QUERYSTRING_IMAGE = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s&form
 QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
 
 
-APP_ID='VWK3T2-4JGT62XJP7'
-PARSE_APP_ID='mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd'
-REST_API_KEY='04Tsc8rIcaimvW3mveSzTHhy20VmGx5EQVwFIdV1'
+APP_ID=''
+PARSE_APP_ID=''
+REST_API_KEY=''
 ############## WOLFRAM API ##############
 
 register(PARSE_APP_ID, REST_API_KEY)
@@ -85,6 +89,7 @@ def main():
             QUERY = row[2].lower()
             UNITS = row[3].lower()
             TAGS = row[4]  # all tags in quotes
+            VALUE = row [5]
 
             # check for existing parse entry
             exists = GameItem.Query.all().filter(name=NAME, category=CATEGORIES)
@@ -100,7 +105,7 @@ def main():
                 # gracefully catch exception and move to next query
                 try:
                     query_string = "%s " + QUERY
-                    single_query(query_string,NAME, category, UNITS, TAGS)
+                    single_query(query_string,NAME, category, UNITS, TAGS, VALUE)
 
                 except Exception as e:
                     print e
@@ -124,7 +129,6 @@ def image_query(obj):
 
     if not node:
         node = root.find("./pod[@title='Flag']")
-
         if not node:
             return None
 
@@ -213,7 +217,7 @@ def parse_height(QUERY, root):
                         QUANTITY = m.group(1)
 
                         # convert scientific notation to number
-                        QUANTITY = float(QUANTITY.replace(u"×10^", "E+").replace('~', ''))
+                        QUANTITY = float(QUANTITY.replace(u"Ã—10^", "E+").replace('~', ''))
 
                         UNIT = m.group(2)
                         return (QUANTITY, UNIT)
@@ -236,7 +240,7 @@ def parse_weight(QUERY, root):
         QUANTITY = m.group(1)
 
         # convert scientific notation to number
-        QUANTITY = float(QUANTITY.replace(u"×10^", "E+").replace('~', ''))
+        QUANTITY = float(QUANTITY.replace(u"Ã—10^", "E+").replace('~', ''))
 
         UNIT = m.group(2)
         return (QUANTITY, UNIT)
@@ -259,7 +263,7 @@ def parse_weight(QUERY, root):
                         QUANTITY = m.group(1)
 
                         # convert scientific notation to number
-                        QUANTITY = float(QUANTITY.replace(u"×10^", "E+").replace('~', ''))
+                        QUANTITY = float(QUANTITY.replace(u"Ã—10^", "E+").replace('~', ''))
 
                         UNIT = m.group(2)
                         return (QUANTITY, UNIT)
@@ -276,7 +280,8 @@ def parse(root, UNITS):
     value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
     print value
-
+    if value.startswith('~~ '):
+        value = value.strip('~~ ')
     m = __number_re.search(value)
 
     if m:
@@ -295,7 +300,8 @@ def parse(root, UNITS):
         elif "date" in UNITS:
 
             try:
-                dt = dateparse(str(int(QUANTITY)))
+                print "FUCK YOU 2"
+                dt = dateparse(str(int(QUANTITY)))    
                 QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
 
             except Exception as e:
@@ -309,19 +315,26 @@ def parse(root, UNITS):
             UNIT = UNITS
 
     else:
-
         # check if it is a date
         try:
-
-            dt = dateparse(value)
-
-            QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
-
+            print value
+            if len(value) == 4:
+                epoch = datetime(1970, 1, 1)
+                t = datetime(int(value), 1, 1)
+                diff = t-epoch
+                QUANTITY = diff.total_seconds()
+                print QUANTITY
+            else:
+                print "Not 4 chars"
+                print value
+                dt = dateparse(value)
+                QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
             UNIT = "date"
 
         except:
             raise NameError('Could not parse!')
 
+    print QUANTITY
     return (QUANTITY, UNIT)
 
 
@@ -335,7 +348,6 @@ def get_image(NAME, TAGS):
 
     if image_url:
         photo = "http://" + image_url
-
 
     elif "city" in TAGS and not photo:
         country = [x.strip() for x in NAME.split(',')][-1]
@@ -351,17 +363,22 @@ def get_image(NAME, TAGS):
 def get_topic(root):
     print root
     topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
+
     m = __topic_re.match(topic)
+
     if m:
         return m.group(1)
     else:
- 		m = __topic_re1.match(topic)
+
+        m = __topic_re1.match(topic)
+
         if m:
-			return m.group(1)
+            return m.group(1)
+
         raise NameError('Error parsing topic')
   
 
-def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[]):
+def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[], VALUE=0):
 
     QUERY = urllib.quote(query_string % NAME)
 
@@ -376,43 +393,58 @@ def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[]):
     topicItems = [x.strip() for x in TOPIC.split(',')]
     if len(topicItems)>2:
         TOPIC = topicItems[0] + ", " + topicItems[-1]
-        NAME = TOPIC
+    elif len(topicItems) == 2:
+        TOPIC = topicItems[1]
+    else :
+        TOPIC = NAME
 
-    PHOTO = get_image(NAME,TAGS)
+    PHOTO = get_image(TOPIC,TAGS)
 
-    UNIT = ''
     QUANTITY = -1
 
-    # assume we are just looking for the image
-    if CATEGORY == "image":
+    if not VALUE:
 
-        value = root.find("./pod[@title='Image']").find('markup').text
-        m = __image_re.search(value)
-        if m:
-            PHOTO = "http://" + m.group(1)
+        # assume we are just looking for the image
+        if CATEGORY == "image":
+            value = root.find("./pod[@title='Image']").find('markup').text
+            m = __image_re.search(value)
+            if m:
+                PHOTO = "http://" + m.group(1)
 
-    elif CATEGORY == "age":
+        elif CATEGORY == "age":
 
-        QUANTITY, UNIT = parse_age(QUERY, root)
+            QUANTITY, UNIT = parse_age(QUERY, root)
 
-    elif CATEGORY == "population":
+        elif CATEGORY == "population":
 
-        QUANTITY, UNIT = parse_population(QUERY, root)
+            QUANTITY, UNIT = parse_population(QUERY, root)
 
-    elif CATEGORY == "height":
+        elif CATEGORY == "height":
 
-        QUANTITY, UNIT = parse_height(QUERY, root)
+            QUANTITY, UNIT = parse_height(QUERY, root)
 
-    elif CATEGORY == "weight":
+        elif CATEGORY == "weight":
 
-        QUANTITY, UNIT = parse_weight(QUERY, root)
+            QUANTITY, UNIT = parse_weight(QUERY, root)
+
+        else:
+
+            QUANTITY, UNIT = parse(root, UNITS)
 
     else:
+        # QUANTITY = int(mktime(time.strptime(VALUE, "%Y")))
+        epoch = datetime(1970, 1, 1)
+        t = datetime(int(VALUE), 1, 1)
+        diff = t-epoch
+        QUANTITY = diff.total_seconds()
+        print QUANTITY
+        UNIT = "date"
 
-        QUANTITY, UNIT = parse(root, UNITS)
 
     ############## PARSE API ##############
-
+    print QUANTITY
+    if "invented" in NAME.lower():
+        NAME = NAME.lower().strip("invented").title()
     kv = GameItem(category=CATEGORY, tagArray=TAGS, name=NAME, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
     print "Finished " + NAME
     kv.save()
