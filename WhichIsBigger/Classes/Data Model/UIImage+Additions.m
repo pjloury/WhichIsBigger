@@ -11,8 +11,14 @@
 @implementation UIImage (Additions)
 
 + (UIImage *)placeholder {
-    UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
+    UIImage *image = [UIImage imageNamed:@"largeQuestionMark"];
     return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];   
+}
+
++ (UIImage *)placeholderWithHeight:(CGFloat)height {
+    UIImage *i = [UIImage imageNamed:@"largeQuestionMark"];
+    UIImage *image = [UIImage imageWithImage:i scaledToHeight:height];
+    return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 + (UIImage *)trophy {

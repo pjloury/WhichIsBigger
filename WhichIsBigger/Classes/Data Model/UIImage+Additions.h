@@ -11,8 +11,9 @@
 @interface UIImage (Additions)
 
 + (UIImage *)placeholder;
++ (UIImage *)placeholderWithHeight:(CGFloat)height;
 + (UIImage *)trophy;
-+(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToHeight: (float)height;
-+(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float)width;
++ (UIImage*)imageWithImage: (UIImage*) sourceImage scaledToHeight: (float)height;
++ (UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float)width;
 
 @end
