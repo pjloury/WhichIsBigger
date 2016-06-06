@@ -24,10 +24,12 @@
     // Requests test ads on devices you specify. Your test device ID is printed to the console when
     // an ad request is made. GADBannerView automatically returns test ads when running on a
     // simulator.
+    /*
     request.testDevices = @[
                             @"2077ef9a63d2b398840261c8221a0c9a",  // Eric's iPod Touch
                             @"6b0ce7dd31b8109a6ca3f1ee4a064faa" // PJ's iPhone 6"
                             ];
+     */
     [self.adBannerView loadRequest:request];
     
     UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;

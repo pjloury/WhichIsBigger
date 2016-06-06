@@ -12,8 +12,14 @@
 
 + (UIImage *)placeholder;
 + (UIImage *)placeholderWithHeight:(CGFloat)height;
++ (UIImage *)placeholderWithHeight:(CGFloat)height maxHeight:(CGFloat)maxHeight;
 + (UIImage *)trophy;
-+ (UIImage*)imageWithImage: (UIImage*) sourceImage scaledToHeight: (float)height;
-+ (UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float)width;
++ (UIImage*)imageWithImage:(UIImage*) sourceImage scaledToHeight:(float)height;
++ (UIImage*)imageWithImage:(UIImage*) sourceImage scaledToHeight:(float)height maxHeight:(float)maxHeight;
+
++ (UIImage*)imageWithImage:(UIImage*) sourceImage scaledToWidth:(float)width;
++ (UIImage*)imageWithImage:(UIImage*) sourceImage scaledToWidth:(float)width maxWidth:(float)maxWidth;
+
+
 
 @end

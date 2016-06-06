@@ -152,7 +152,6 @@ alpha:1.0]
              [UIColor sexyCyanColor],
              [UIColor sexyPurpleColor],
              [UIColor sexyTealColor],
-             [UIColor sexyOrangeColor],
              [UIColor sexyRedColor],
              [UIColor sexyBlueColor],
              [UIColor sexyGreenColor],

@@ -166,6 +166,7 @@
         
         dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Finished downloading images! Let everyone know...");
             [[NSNotificationCenter defaultCenter] postNotificationName:kGroupImageDownloadCompleteNotification object:nil];
         });
     });

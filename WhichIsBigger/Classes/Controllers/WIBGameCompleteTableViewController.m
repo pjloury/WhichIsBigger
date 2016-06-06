@@ -131,7 +131,7 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/2 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
+        self.answerTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(revealCell) userInfo:nil repeats:YES];
     });
 }
 
@@ -329,7 +329,7 @@
 
                         if ([WIBGamePlayManager sharedInstance].unlockedQuestionType) {
                             NSLog(@"There's a question to unlock!!!");
-                            self.currentLevelImageView.image = [UIImage imageWithImage:[UIImage placeholder] scaledToHeight:100];
+                            self.currentLevelImageView.image = [UIImage placeholderWithHeight:100];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
                         }

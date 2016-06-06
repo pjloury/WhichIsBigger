@@ -29,7 +29,7 @@
 
 - (NSNumber *)total
 {
-    if ([self.item.unit isEqualToString:@"date"]) {
+    if ([self.item.unit isEqualToString:@"epoch"]) {
         NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
         NSTimeInterval age = currentEpoch - self.item.baseQuantity.doubleValue;
         return [NSNumber numberWithDouble:age];
@@ -56,7 +56,7 @@
             return [NSString stringWithFormat:@"%@ ft", [fmt stringFromNumber:@(feet)]];
         }
     }
-    else if ([self.item.unit isEqualToString:@"age"])
+    else if ([self.item.unit isEqualToString:@"date"])
     {
         NSTimeInterval theTimeInterval = self.item.baseQuantity.doubleValue;
         
@@ -73,7 +73,7 @@
         
         return [NSString stringWithFormat:@"%ld years %ld months", (long)[breakdownInfo year],(long)[breakdownInfo month]];
     }
-    else if ([self.item.unit isEqualToString:@"date"]) {
+    else if ([self.item.unit isEqualToString:@"epoch"]) {
         NSCalendar *sysCalendar = [NSCalendar currentCalendar];
         NSDate *date= [[NSDate alloc] initWithTimeIntervalSince1970:self.item.baseQuantity.doubleValue];
         NSCalendarUnit unitFlags = NSCalendarUnitYear;

@@ -82,6 +82,7 @@ const static double kIdealWaitTime = 3.0;
     
     [confettiView startConfetti];
     [self performSelector:@selector(finishConfetti) withObject:nil afterDelay:1.25];
+    [self performSelector:@selector(spinQuestionTypeView) withObject:nil afterDelay:0.5];
     [self.shimmeringView setContentView:self.shimmeringContentView];
     [self.shimmeringView setShimmering:YES];
     
@@ -97,7 +98,6 @@ const static double kIdealWaitTime = 3.0;
 - (void)finishConfetti
 {
     [confettiView stopConfetti];
-    [self performSelector:@selector(spinQuestionTypeView) withObject:nil afterDelay:1.5];
 }
 
 - (void)spinQuestionTypeView

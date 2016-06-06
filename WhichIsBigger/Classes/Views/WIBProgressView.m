@@ -37,8 +37,13 @@
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated completion:(void(^)())completion;
 {
     //fullBarWidth claims to be 420;
+    NSLog(@"Progress: %f", progress);
+    
     CGFloat progressWidth = self.frame.size.width * progress;
+    NSLog(@"Progress Width: %f", progressWidth);
+    
     CGFloat progressDifference = progress - self.progress;
+    NSLog(@"Progress difference: %f", progressDifference);
     
     if (animated) {
         if (progressDifference > 0) {

@@ -67,9 +67,9 @@
                             NSLog(@"width %f height %f", self.layer.contentsRect.size.width, self.layer.contentsRect.size.height);
                             UIImage *im;
                             if (image.size.height > image.size.width) {
-                                im = [UIImage imageWithImage:image scaledToHeight:110];
+                                im = [UIImage imageWithImage:image scaledToHeight:100 maxHeight:self.frame.size.height];
                             } else {
-                                im = [UIImage imageWithImage:image scaledToWidth:110];
+                                im = [UIImage imageWithImage:image scaledToWidth:100];
                             }
                             self.image = im;
                         }
@@ -82,7 +82,7 @@
                 }];
     }
     else {
-        self.image = [UIImage placeholderWithHeight:100];
+        self.image = [UIImage placeholderWithHeight:100 maxHeight:self.frame.size.height];
     }
     
     if (self.multiplier > 1)

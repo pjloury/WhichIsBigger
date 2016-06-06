@@ -2,7 +2,7 @@
 //  WIBGameItem.m
 //  WhichIsBigger
 //
-//  Created by Christopher Echanique on 4/7/15.
+//  Created by PJ Loury on 4/7/15.
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
@@ -56,7 +56,7 @@
     {
         return [NSNumber numberWithDouble:[_baseQuantity doubleValue] * 39.3701];
     }
-    else if([self.unit isEqualToString:@"age"])
+    else if([self.unit isEqualToString:@"date"])
     {
         NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
         NSTimeInterval age = currentEpoch - _baseQuantity.doubleValue;
