@@ -20,6 +20,7 @@
 @dynamic tintColorString;
 @dynamic themeColorString;
 @dynamic pointsToUnlock;
+@dynamic safePointsToUnlock;
 @dynamic image;
 @dynamic questionString;
 @dynamic name;
@@ -44,8 +45,18 @@
     return [UIColor colorWithString:self.themeColorString];
 }
 
-- (UIColor *)labelThemeColor; {
+- (UIColor *)labelThemeColor {
     return [UIColor colorWithString:self.labelThemeColorString];
+}
+
+- (NSNumber *)puntosToUnlock {
+    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSString *latestVersion = [[PFConfig currentConfig] objectForKey:@"latestVersion"];
+    if ([latestVersion isEqualToString:version]) {
+        return self.safePointsToUnlock;
+    } else {
+        return self.pointsToUnlock;
+    }
 }
 
 

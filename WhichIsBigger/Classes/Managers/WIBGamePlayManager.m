@@ -160,7 +160,7 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     for (WIBQuestionType *questionType in self.questionTypes) {
-        if (self.lifeTimeScore > [questionType.pointsToUnlock integerValue]) {
+        if (self.lifeTimeScore > [questionType.puntosToUnlock integerValue]) {
             [array addObject:questionType];
         }
     }

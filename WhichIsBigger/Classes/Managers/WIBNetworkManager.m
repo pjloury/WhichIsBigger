@@ -46,7 +46,14 @@
 {
     PFQuery *query =  [PFQuery queryWithClassName:@"QuestionType"];
     [query whereKey:@"name" containedIn:[[PFConfig currentConfig] objectForKey:@"questionTypeWhiteList"]];
-    [query orderByAscending:@"pointsToUnlock"];
+    
+    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSString *latestVersion = [[PFConfig currentConfig] objectForKey:@"latestVersion"];
+    if ([latestVersion isEqualToString:version]) {
+        [query orderByAscending:@"safePointsToUnlock"];
+    } else {
+        [query orderByAscending:@"pointsToUnlock"];
+    }
     
     if ([WIBGamePlayManager sharedInstance].localStorage && ![self.reachability isReachable])[query fromLocalDatastore];
     

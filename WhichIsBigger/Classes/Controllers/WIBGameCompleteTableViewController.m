@@ -121,7 +121,7 @@
     self.goalLevelBackgroundView.layer.cornerRadius = 5.0f;
     
     WIBQuestionType *lastType = [WIBGamePlayManager sharedInstance].questionTypes.lastObject;
-    if (([WIBGamePlayManager sharedInstance].lifeTimeScore - [WIBGamePlayManager sharedInstance].score) > lastType.pointsToUnlock.integerValue) {
+    if (([WIBGamePlayManager sharedInstance].lifeTimeScore - [WIBGamePlayManager sharedInstance].score) > lastType.puntosToUnlock.integerValue) {
         self.goalLevelImageView.image = [UIImage trophy];
         self.goalLevelImageView.tintColor = [UIColor sexyAmberColor];
         self.goalLevelBackgroundView.backgroundColor = [UIColor colorForLevel:[WIBGamePlayManager sharedInstance].previousLevel];

@@ -28,6 +28,7 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
 @property (nonatomic) NSString *themeColorString;
 @property (nonatomic) NSString *tintColorString;
 @property (nonatomic) NSNumber *pointsToUnlock;
+@property (nonatomic) NSNumber *safePointsToUnlock;
 @property (nonatomic) PFFile *image;
 @property (nonatomic) NSString *questionString;
 @property (nonatomic) NSString *clarifyingString;
@@ -37,5 +38,7 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
 - (UIColor *)tintColor;
 - (UIColor *)themeColor;
 - (UIColor *)labelThemeColor;
+
+- (NSNumber *)puntosToUnlock;
 
 @end
