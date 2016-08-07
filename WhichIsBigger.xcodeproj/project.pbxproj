@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601172941BA6A19E00EE8182 /* AVFoundation.framework */; };
-		602A92F31C745B1C007777EB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602A92F21C745B1C007777EB /* iAd.framework */; };
 		602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F51C745E96007777EB /* WIBAdViewController.m */; };
 		602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */; };
 		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
@@ -79,7 +78,6 @@
 
 /* Begin PBXFileReference section */
 		601172941BA6A19E00EE8182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		602A92F21C745B1C007777EB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		602A92F41C745E96007777EB /* WIBAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBAdViewController.h; sourceTree = "<group>"; };
 		602A92F51C745E96007777EB /* WIBAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBAdViewController.m; sourceTree = "<group>"; };
 		602A92F71C7AE98D007777EB /* WIBGameCompleteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteTableViewController.h; path = Classes/Controllers/WIBGameCompleteTableViewController.h; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				60DC8B4E1C84346D0026DF38 /* QuartzCore.framework in Frameworks */,
-				602A92F31C745B1C007777EB /* iAd.framework in Frameworks */,
 				60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */,
 				601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */,
 				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
@@ -302,7 +299,6 @@
 		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				602A92F21C745B1C007777EB /* iAd.framework */,
 				60B43E101BD7631200E9F604 /* GameKit.framework */,
 				60A125BF1BB13C0100563331 /* SystemConfiguration.framework */,
 				601172941BA6A19E00EE8182 /* AVFoundation.framework */,
@@ -780,7 +776,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -809,7 +805,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

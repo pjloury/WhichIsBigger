@@ -89,6 +89,7 @@
     self.streakLabel.hidden = YES;
     self.highScoreLabel.alpha = 0.0;
     self.tableView.allowsSelection = NO;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     WIBQuestionType *type = [[[WIBGamePlayManager sharedInstance] gameRound] questionType];
     

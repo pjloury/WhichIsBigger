@@ -59,6 +59,9 @@
                                     UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,
                                     UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo];
     controller.excludedActivityTypes = excludedActivities;
+    if ( [controller respondsToSelector:@selector(popoverPresentationController)] ) {
+        controller.popoverPresentationController.barButtonItem = sender;
+    }
     [self presentViewController:controller animated:YES completion:nil];
 }
 

@@ -88,7 +88,6 @@
     } else {
         self.unlockedQuestionType = nil;
     }
-    
         
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
     {
