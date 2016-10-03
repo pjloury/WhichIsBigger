@@ -94,7 +94,7 @@
     WIBQuestionType *type = [[[WIBGamePlayManager sharedInstance] gameRound] questionType];
     
     self.currentLevelBackgroundView.backgroundColor = type.backgroundColor;
-    [self.currentLevelImageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^
+    [self.currentLevelImageView sd_setImageWithURL:[NSURL URLWithString:type.imageURL] completed:^
                                  (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                                      image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                                      self.currentLevelImageView.image = image;

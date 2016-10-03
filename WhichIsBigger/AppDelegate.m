@@ -27,9 +27,13 @@
     // Do not cache PF Objects unless we know that they contain all the required properties
     [Parse enableLocalDatastore];
     
-    // Initialize Parse.
-    [Parse setApplicationId:@"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd"
-                  clientKey:@"ckRmomV114XuUhuKU6WzpeY3zQg4h2McXCQSdEP9"];
+    ParseClientConfiguration *clientConfig = [ParseClientConfiguration configurationWithBlock:^void(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd";
+        configuration.clientKey = @"ckRmomV114XuUhuKU6WzpeY3zQg4h2McXCQSdEP9";
+        configuration.server = @"https://fast-anchorage-42311.herokuapp.com/parse";
+    }];
+    
+    [Parse initializeWithConfiguration:clientConfig];
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

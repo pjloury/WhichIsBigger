@@ -70,7 +70,7 @@
 {
     NSMutableArray *urls = [NSMutableArray array];
     for (WIBQuestionType *type in array) {
-        [urls addObject:[NSURL URLWithString:type.image.url]];
+        [urls addObject:[NSURL URLWithString:type.imageURL]];
     }
     [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urls];
 }

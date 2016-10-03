@@ -95,7 +95,7 @@
         self.multiplierLabel.hidden = YES;
     }
     
-    self.layer.cornerRadius = self.layer.frame.size.width/20;
+    self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
 }
 

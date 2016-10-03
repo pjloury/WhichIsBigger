@@ -114,7 +114,7 @@
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
     
     if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.image.url] completed:^
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:type.imageURL] completed:^
         (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             cell.imageView.image = image;

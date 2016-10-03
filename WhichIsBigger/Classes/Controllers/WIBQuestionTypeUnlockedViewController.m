@@ -71,7 +71,7 @@ const static double kIdealWaitTime = 3.0;
     [super viewWillAppear:animated];
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
     
-    [self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.image.url] completed:^
+    [self.questionTypeImageView sd_setImageWithURL:[NSURL URLWithString:questionType.imageURL] completed:^
      (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
          image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
          self.questionTypeImageView.image = image;

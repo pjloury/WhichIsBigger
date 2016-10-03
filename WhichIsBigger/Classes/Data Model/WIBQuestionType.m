@@ -22,6 +22,7 @@
 @dynamic pointsToUnlock;
 @dynamic safePointsToUnlock;
 @dynamic image;
+@dynamic imageURL;
 @dynamic questionString;
 @dynamic name;
 

@@ -64,7 +64,7 @@
     [self configureLabels];
 
     self.backgroundColor = [UIColor clearColor];
-    self.layer.cornerRadius = self.layer.frame.size.width/20;
+    self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
 }
 
