@@ -19,6 +19,7 @@
 		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
 		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
 		604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0C81BB3DF8500595B2B /* WIBReachability.m */; };
+		6056506120DC09C80016D364 /* WIBAchievement.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6056506020DC09C80016D364 /* WIBAchievement.mov */; };
 		605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */; };
 		60621C4A1BD0424A00C8207E /* WIBGameRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C491BD0424A00C8207E /* WIBGameRound.m */; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
@@ -98,6 +99,7 @@
 		604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDismissSegue.m; path = WhichIsBigger/Classes/WIBDismissSegue.m; sourceTree = "<group>"; };
 		604DF0C71BB3DF8500595B2B /* WIBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBReachability.h; path = Classes/Managers/WIBReachability.h; sourceTree = "<group>"; };
 		604DF0C81BB3DF8500595B2B /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = Classes/Managers/WIBReachability.m; sourceTree = "<group>"; };
+		6056506020DC09C80016D364 /* WIBAchievement.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = WIBAchievement.mov; sourceTree = "<group>"; };
 		605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Shuffle.h"; sourceTree = "<group>"; };
 		605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
 		60621C481BD0424A00C8207E /* WIBGameRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameRound.h; path = "Classes/Data Model/WIBGameRound.h"; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		7D8E8D5F1B4741EF005B4AA2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6056506020DC09C80016D364 /* WIBAchievement.mov */,
 				7D8E8D751B479BA6005B4AA2 /* BloggerSans */,
 				7D8E8D741B479B9B005B4AA2 /* OpenSans */,
 			);
@@ -561,6 +564,7 @@
 				7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */,
 				7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */,
 				7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */,
+				6056506120DC09C80016D364 /* WIBAchievement.mov in Resources */,
 				7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */,
 				7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */,
 				7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */,
