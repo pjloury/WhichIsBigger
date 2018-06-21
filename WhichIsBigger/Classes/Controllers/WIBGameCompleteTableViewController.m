@@ -9,6 +9,7 @@
 #import "WIBGameCompleteTableViewController.h"
 #import "WIBGamePlayManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+@import Firebase;
 
 // Models
 #import "WIBGameQuestion.h"
@@ -327,12 +328,21 @@
         self.rightLevelView.alpha = 0.0; }
                     completion:^(BOOL finished) {
                         self.currentLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",(long)[WIBGamePlayManager sharedInstance].level];
-
                         if ([WIBGamePlayManager sharedInstance].unlockedQuestionType) {
                             NSLog(@"There's a question to unlock!!!");
                             self.currentLevelImageView.image = [UIImage placeholderWithHeight:100];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
+                            if ([WIBGamePlayManager sharedInstance].level % 4 == 0) {
+                                [SKStoreReviewController requestReview];
+                            }
+                            
+                            [FIRAnalytics logEventWithName:kFIREventLevelUp
+                                                parameters:@{
+                                                             kFIRParameterItemID: @([WIBGamePlayManager sharedInstance].level),
+                                                             kFIRParameterItemCategory: [WIBGamePlayManager sharedInstance].unlockedQuestionType.category
+                                                             }
+                             ];
                         }
                         
                         if ([WIBGamePlayManager sharedInstance].level >= [WIBGamePlayManager sharedInstance].questionTypes.count){

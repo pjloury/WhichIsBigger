@@ -11,6 +11,8 @@
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
 #import "WIBHomeViewController.h"
+@import Firebase;
+@import Fabric;
 
 @interface AppDelegate ()
 
@@ -21,6 +23,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	  [application setStatusBarHidden:YES];
 	
+    [FIRApp configure];
+    //[Fabric.sharedSDK setDebug:YES];
+    
     // [Optional] Power your app with Local Datastore. For more info, go to
     // https://parse.com/docs/ios_guide#localdatastore/iOS
     
@@ -46,7 +51,6 @@
     if ([GKLocalPlayer localPlayer].authenticated == YES) {
         [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
     }
-    
     
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |

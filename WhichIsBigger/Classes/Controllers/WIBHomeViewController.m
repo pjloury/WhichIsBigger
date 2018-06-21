@@ -13,9 +13,12 @@
 #import "WIBLoginViewController.h"
 #import "WIBGameCompleteViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+@import Firebase;
 
 #import "WIBQuestionType.h"
 #import "WIBQuestionTypeCell.h"
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -34,13 +37,19 @@
 
 @implementation WIBHomeViewController
 
+- (IBAction)crashButtonTapped:(id)sender {
+    [[Crashlytics sharedInstance] crash];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     self.startNewGameButton.enabled = NO;
     self.categoriesCollectionView.userInteractionEnabled = NO;
-        
+    
+    //[self addCrashButton];
+    
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
             [self.categoriesCollectionView reloadData];
@@ -49,7 +58,7 @@
             [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
                 dispatch_async(dispatch_get_main_queue(),
                                ^{
-                                    self.startNewGameButton.enabled = YES;
+                                   self.startNewGameButton.enabled = YES;
                                    self.categoriesCollectionView.userInteractionEnabled = YES;
                                });
             }];
@@ -57,6 +66,16 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPressHighScoresButton:) name:@"GameCenterDidFinishAuthentication" object:nil];
+}
+
+- (void)addCrashButton
+{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(20, 50, 100, 30);
+    [button setTitle:@"Crash" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(crashButtonTapped:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -151,6 +170,12 @@
     if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
         [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+        [FIRAnalytics logEventWithName:kFIREventSelectContent
+                            parameters:@{
+                                         kFIRParameterItemID: @(indexPath.row),
+                                         kFIRParameterItemCategory: type.category
+                                         }
+         ];
     } else {
         WIBQuestionTypeCell *cell = (WIBQuestionTypeCell *)[collectionView.dataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
         [cell.animationView startCanvasAnimation];

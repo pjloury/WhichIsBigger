@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B7A7BA9E314715BC13F934D /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6176F934D91FA67FBA1AE53B /* libPods-WhichIsBigger.a */; };
 		601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601172941BA6A19E00EE8182 /* AVFoundation.framework */; };
 		602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F51C745E96007777EB /* WIBAdViewController.m */; };
 		602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */; };
 		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
 		6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78D1B98238000C592CC /* WIBQuestionView.m */; };
+		6039C63420CC3BC400489A15 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6039C63320CC3BC400489A15 /* GoogleService-Info.plist */; };
 		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
 		6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */; };
 		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
@@ -60,7 +62,7 @@
 		7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */; };
 		7DF8BEB41B48FC2D009577FB /* WIBPopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */; };
 		7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */; };
-		9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */; };
+		E22CD267EEC7636151BFFB98 /* libPods-WhichIsBiggerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 862144CE21CF5DA93AE2EB8F /* libPods-WhichIsBiggerTests.a */; };
 		F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D70EE631AEF3CE8002E1565 /* WIBConstants.m */; };
 		F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */; };
 		F37659261ADE3BDE00932FC9 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F37659251ADE3BDE00932FC9 /* UIColor+Additions.m */; };
@@ -86,6 +88,7 @@
 		6033C78B1B98238000C592CC /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionView.m; path = Classes/Views/WIBOptionView.m; sourceTree = "<group>"; };
 		6033C78C1B98238000C592CC /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionView.h; path = Classes/Views/WIBQuestionView.h; sourceTree = "<group>"; };
 		6033C78D1B98238000C592CC /* WIBQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionView.m; path = Classes/Views/WIBQuestionView.m; sourceTree = "<group>"; };
+		6039C63320CC3BC400489A15 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		604014671B87006100E2C5D6 /* WIBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionButton.h; path = Classes/Views/WIBOptionButton.h; sourceTree = "<group>"; };
 		604014681B87006100E2C5D6 /* WIBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionButton.m; path = Classes/Views/WIBOptionButton.m; sourceTree = "<group>"; };
 		6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WIBLogo.xib; path = ../WIBLogo.xib; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		60DC8B501C843E0C0026DF38 /* KRConfettiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KRConfettiView.m; path = "../../../Downloads/KRConfettiView-Final/KRConfetti/KRConfettiView.m"; sourceTree = "<group>"; };
 		60E400B71C86EA8500A82850 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Additions.h"; path = "Classes/Data Model/UIImage+Additions.h"; sourceTree = "<group>"; };
 		60E400B81C86EA8500A82850 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Additions.m"; path = "Classes/Data Model/UIImage+Additions.m"; sourceTree = "<group>"; };
+		6176F934D91FA67FBA1AE53B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D0CC6E51AD4E7D400BB65BB /* WhichIsBigger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhichIsBigger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,8 +177,10 @@
 		7DF8BEB21B48FC2D009577FB /* WIBPopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBPopButton.h; path = Classes/Views/WIBPopButton.h; sourceTree = "<group>"; };
 		7DF8BEB31B48FC2D009577FB /* WIBPopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBPopButton.m; path = Classes/Views/WIBPopButton.m; sourceTree = "<group>"; };
 		7DF8BEB51B49150D009577FB /* Blogger_Sans-Medium_Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blogger_Sans-Medium_Italic.otf"; sourceTree = "<group>"; };
-		97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		862144CE21CF5DA93AE2EB8F /* libPods-WhichIsBiggerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBiggerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		947E3C7385320D9D4825184C /* Pods-WhichIsBiggerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBiggerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBiggerTests/Pods-WhichIsBiggerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBigger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger.debug.xcconfig"; sourceTree = "<group>"; };
+		EC3B2AB1481BD205351CAD97 /* Pods-WhichIsBiggerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhichIsBiggerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhichIsBiggerTests/Pods-WhichIsBiggerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F376591F1ADE27D300932FC9 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		F37659201ADE27D300932FC9 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		F37659241ADE3BDE00932FC9 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
@@ -193,7 +199,7 @@
 				7D0CC72F1AD4EAAA00BB65BB /* libsqlite3.dylib in Frameworks */,
 				60B43E111BD7631200E9F604 /* GameKit.framework in Frameworks */,
 				7D0CC72D1AD4EAA200BB65BB /* libz.dylib in Frameworks */,
-				9CF46400A0F51CBA2A7EF157 /* libPods-WhichIsBigger.a in Frameworks */,
+				1B7A7BA9E314715BC13F934D /* libPods-WhichIsBigger.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22CD267EEC7636151BFFB98 /* libPods-WhichIsBiggerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +228,8 @@
 			children = (
 				9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */,
 				F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */,
+				947E3C7385320D9D4825184C /* Pods-WhichIsBiggerTests.debug.xcconfig */,
+				EC3B2AB1481BD205351CAD97 /* Pods-WhichIsBiggerTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
+				6039C63320CC3BC400489A15 /* GoogleService-Info.plist */,
 				604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */,
 				604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */,
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
@@ -306,7 +316,8 @@
 				7D1A1BD31B49A40200DA2D31 /* libPods-WhichIsBigger-Parse.a */,
 				7D0CC72E1AD4EAAA00BB65BB /* libsqlite3.dylib */,
 				7D0CC72C1AD4EAA200BB65BB /* libz.dylib */,
-				97A6AE7CDC6D2AB8A9D3627B /* libPods-WhichIsBigger.a */,
+				6176F934D91FA67FBA1AE53B /* libPods-WhichIsBigger.a */,
+				862144CE21CF5DA93AE2EB8F /* libPods-WhichIsBiggerTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -459,11 +470,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D0CC7081AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBigger" */;
 			buildPhases = (
-				1E30623319D61F83166A1BD1 /* Check Pods Manifest.lock */,
+				1E30623319D61F83166A1BD1 /* [CP] Check Pods Manifest.lock */,
 				7D0CC6E11AD4E7D400BB65BB /* Sources */,
 				7D0CC6E21AD4E7D400BB65BB /* Frameworks */,
 				7D0CC6E31AD4E7D400BB65BB /* Resources */,
-				DB639B97B9B9458757F92049 /* Copy Pods Resources */,
+				959E8A36E795C09C54478F07 /* [CP] Copy Pods Resources */,
+				6039C63520CC3C9900489A15 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -478,6 +490,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D0CC70B1AD4E7D400BB65BB /* Build configuration list for PBXNativeTarget "WhichIsBiggerTests" */;
 			buildPhases = (
+				38D99143DC25BE503C167104 /* [CP] Check Pods Manifest.lock */,
 				7D0CC6FA1AD4E7D400BB65BB /* Sources */,
 				7D0CC6FB1AD4E7D400BB65BB /* Frameworks */,
 				7D0CC6FC1AD4E7D400BB65BB /* Resources */,
@@ -551,6 +564,7 @@
 				7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */,
 				7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */,
 				7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */,
+				6039C63420CC3BC400489A15 /* GoogleService-Info.plist in Resources */,
 				7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */,
 				6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */,
 			);
@@ -566,30 +580,72 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E30623319D61F83166A1BD1 /* Check Pods Manifest.lock */ = {
+		1E30623319D61F83166A1BD1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WhichIsBigger-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		38D99143DC25BE503C167104 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WhichIsBiggerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6039C63520CC3C9900489A15 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
-		DB639B97B9B9458757F92049 /* Copy Pods Resources */ = {
+		959E8A36E795C09C54478F07 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger-resources.sh",
+				"${PODS_ROOT}/Parse/Parse/Resources/en.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/pt-BR.lproj",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-BR.lproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -811,6 +867,7 @@
 		};
 		7D0CC70C1AD4E7D400BB65BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 947E3C7385320D9D4825184C /* Pods-WhichIsBiggerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -830,6 +887,7 @@
 		};
 		7D0CC70D1AD4E7D400BB65BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC3B2AB1481BD205351CAD97 /* Pods-WhichIsBiggerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
