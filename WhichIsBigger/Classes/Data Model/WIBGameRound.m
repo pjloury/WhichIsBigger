@@ -136,6 +136,14 @@
 - (void)questionAnsweredCorrectly
 {
     self.currentQuestion.points = round([WIBGamePlayManager sharedInstance].pointsPerQuestion - ([WIBGamePlayManager sharedInstance].pointsPerQuestion * self.currentQuestion.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
+    NSInteger points = round([WIBGamePlayManager sharedInstance].pointsPerQuestion - ([WIBGamePlayManager sharedInstance].pointsPerQuestion * self.currentQuestion.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
+    if (points > 90) {
+        points = 100;
+    }
+    else if (points > 50 && points < 80) {
+        points = points + 10;
+    }
+    self.currentQuestion.points = points;
 }
 
 - (void)questionAnsweredInCorrectly

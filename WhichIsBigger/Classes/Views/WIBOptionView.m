@@ -29,6 +29,12 @@
 
 @implementation WIBOptionView
 
+- (void)optionWasSelected
+{
+    self.userInteractionEnabled = NO;
+    self.popButton.userInteractionEnabled = NO;
+}
+
 - (void)refreshWithOption:(WIBGameOption *)option;
 {
 	self.alpha = 1.0;
@@ -122,14 +128,34 @@
 
 - (void)animatePointsLabel:(NSInteger) points
 {
-    self.pointsLabel.text = [NSString stringWithFormat:@"+%ld pts",points];
+    if (points > 50) {
+        UIFont *font = [UIFont fontWithName:@"Blogger-Sans" size:20.0];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
+        [paragraphStyle setAlignment:NSTextAlignmentCenter];
+        NSDictionary *bonusAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor lightPurpleColor], NSForegroundColorAttributeName,
+                                        font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName,nil];
+        NSMutableAttributedString *bonusAttributedString = [[NSMutableAttributedString alloc] initWithString:@"Speed Bonus!" attributes:bonusAttributes];
+        
+        NSDictionary *pointsAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor quickAnswerColor], NSForegroundColorAttributeName,
+                                        font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName,nil];
+        NSMutableAttributedString *pointsAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"\n+%ld pts", points] attributes:pointsAttributes];
+        [bonusAttributedString appendAttributedString:pointsAttributedString];
+        self.pointsLabel.attributedText = bonusAttributedString;
+    }
+    else {
+        self.pointsLabel.text = [NSString stringWithFormat:@"%+ld pts", points];
+        self.pointsLabel.textColor = UIColor.quickAnswerColor;
+    }
+    
     self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
     self.pointsLabel.alpha = 1;
     
     [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
-        self.pointsLabel.transform = CGAffineTransformMakeScale(2, 2);
+        self.pointsLabel.transform = CGAffineTransformMakeScale(1.5, 1.5);
     } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:1.2 options:0 animations:^{
+        [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:1.8 options:0 animations:^{
             self.pointsLabel.alpha = 0.0;
         }
                                   completion:nil];

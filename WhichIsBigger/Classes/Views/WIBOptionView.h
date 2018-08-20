@@ -18,6 +18,7 @@
 @property (nonatomic, weak) WIBGameOption *gameOption;
 @property (nonatomic, weak) id<WIBQuestionViewDelegate> delegate;
 
+- (void)optionWasSelected;
 - (void)refreshWithOption:(WIBGameOption *)option;
 - (void)revealAnswerLabel;
 - (void)correctResponse;

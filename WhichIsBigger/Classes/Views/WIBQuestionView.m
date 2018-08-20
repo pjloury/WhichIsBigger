@@ -168,8 +168,8 @@
 - (void)optionView:(WIBOptionView *)optionView didSelectOption:(WIBGameOption *)option
 {
     self.gamePlayDisabled = YES;
-    self.optionView1.userInteractionEnabled = NO;
-    self.optionView2.userInteractionEnabled = NO;
+    [self.optionView1 optionWasSelected];
+    [self.optionView2 optionWasSelected];
     
     [self.gamePlayDelegate questionView:self didSelectOption:option];
     NSLog(@"Selected: %@ vs Answer: %@",option.item.name, self.question.answer.item.name);
