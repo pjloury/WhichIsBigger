@@ -26,7 +26,7 @@
         cell.descriptor = @"longestStreak";
     }
     else if (indexPath.item == 2) {
-        cell.descriptionLabel.text = @"Career Accuracy";
+        cell.descriptionLabel.text = @"Overall Accuracy";
         double accuracy = [WIBGamePlayManager sharedInstance].accuracy * 100;
         cell.achievementLabel.text = [NSString stringWithFormat:@"%d%%", (int)accuracy];
         cell.descriptor = @"accuracy";
