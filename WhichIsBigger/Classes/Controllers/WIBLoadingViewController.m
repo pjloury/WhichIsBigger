@@ -9,6 +9,7 @@
 #import "WIBLoadingViewController.h"
 #import "WIBGamePlayManager.h"
 #import "WIBGameViewController.h"
+#import "WIBNetworkManager.h"
 
 const static double kIdealWaitTime = 1.0;
 
@@ -30,7 +31,11 @@ const static double kIdealWaitTime = 1.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (![WIBNetworkManager sharedInstance].groupDownloadComplete) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupImageDownloadDidComplete:) name:kGroupImageDownloadCompleteNotification object:nil];
+    } else {
+        [self groupImageDownloadDidComplete: nil];
+    }
     self.navigationItem.hidesBackButton = YES;
     self.startDate = [NSDate date];
 }
@@ -39,30 +44,20 @@ const static double kIdealWaitTime = 1.0;
 {
     [super viewWillAppear:animated];
     self.categoryLabel.text = [WIBGamePlayManager sharedInstance].gameRound.questionType.questionString;
-    self.categoryLabel.alpha = 0;
+    self.categoryLabel.alpha = 0.0;
     
     UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
     [nc.navigationBar setBarTintColor:[WIBGamePlayManager sharedInstance].gameRound.questionType.themeColor];
-    //self.categoryLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
-    self.clarifyingLabel.text = [WIBGamePlayManager sharedInstance].gameRound.questionType.clarifyingString;
+    self.categoryLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
+    self.clarifyingLabel.text = [NSString stringWithFormat: @"Loading %@...", [WIBGamePlayManager sharedInstance].gameRound.questionType.clarifyingString];
     
     self.shimmeringView.contentView = self.loadingQuestionMarkView;
     self.shimmeringView.shimmering = YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)groupImageDownloadDidComplete:(NSNotification *)note
