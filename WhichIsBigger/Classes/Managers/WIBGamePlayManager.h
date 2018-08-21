@@ -42,9 +42,12 @@
 @property (nonatomic, assign, readonly) double secondsPerQuestion;
 @property (nonatomic, assign, readonly) NSInteger initialSecondsPerQuestion;
 @property (nonatomic, assign, readonly) double animationSpeed;
+@property (nonatomic, assign, readonly) double fastAnimationSpeed;
 
 // Caching
 @property (nonatomic, assign) BOOL localStorage;
+@property (nonatomic, assign) BOOL categoriesInLocalStorage;
+@property (nonatomic, assign) BOOL gameItemsInLocalStorage;
 
 // Scoring
 @property (nonatomic, assign, readonly) NSInteger highScore;

@@ -53,7 +53,6 @@
         
         shared.questionCeiling = 40;
         shared.questionFloor = 10;
-
     });
     return shared;
 }
@@ -74,9 +73,14 @@
 - (void)beginRoundForType:(WIBQuestionType *)type
 {
     self.gameRound = [[WIBGameRound alloc] initWithQuestionType:type];
-    [self.gameRound generateQuestions];
-    [[PFUser currentUser] setObject:self.availableQuestionTypes forKey:@"unlockedQuestionTypes"];
-    [[PFUser currentUser] saveInBackground];
+    @synchronized ([WIBDataModel sharedInstance]) {
+        [self.gameRound generateQuestions];
+    }
+    
+    if (self.unlockedQuestionType == type) {
+        [[PFUser currentUser] setObject:self.availableQuestionTypes forKey:@"unlockedQuestionTypes"];
+        [[PFUser currentUser] saveInBackground];
+    }
 }
 
 - (void)endGame
@@ -147,6 +151,11 @@
     double sec = ((double)-1 / (double)self.pointsPerLevel)* (double)self.currentLevelPoints + self.initialSecondsPerQuestion;
     return sec;
     
+}
+
+- (double)fastAnimationSpeed
+{
+    return self.secondsPerQuestion/10;
 }
 
 - (double)animationSpeed
@@ -296,13 +305,54 @@
 
 - (BOOL)localStorage
 {
-    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"localStorage"];
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
+    NSNumber *num;
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *versionNumber = [f numberFromString:version];
+    if (versionNumber.doubleValue >= 2) {
+         num = [[NSUserDefaults standardUserDefaults] objectForKey:@"localStorageV2"];
+    } else {
+         num = [[NSUserDefaults standardUserDefaults] objectForKey:@"localStorage"];
+    }
     return (num) ? num.integerValue: 0;
 }
 
 - (void)setLocalStorage:(BOOL)localStorage
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(localStorage) forKey:@"localStorage"];
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *versionNumber = [f numberFromString:version];
+    if (versionNumber.doubleValue >= 2) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(localStorage) forKey:@"localStorageV2"];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:@(localStorage) forKey:@"localStorage"];
+    }
+}
+
+- (BOOL)categoriesInLocalStorage
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"categoriesInLocalStorage"];
+    return (num) ? num.integerValue: 0;
+}
+
+- (void)setCategoriesInLocalStorage:(BOOL)categoriesInLocalStorage
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(categoriesInLocalStorage) forKey:@"categoriesInLocalStorage"];
+}
+
+- (BOOL)gameItemsInLocalStorage
+{
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"gameItemsInLocalStorage"];
+    return (num) ? num.integerValue: 0;
+}
+
+- (void)setGameItemsInLocalStorage:(BOOL)gameItemsInLocalStorage
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(gameItemsInLocalStorage) forKey:@"gameItemsInLocalStorage"];
 }
 
 - (float)accuracy
