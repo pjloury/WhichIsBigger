@@ -18,6 +18,7 @@
 - (void)generateDataModelWithCompletion:(void (^)())completion;
 - (void)preloadImages:(NSMutableArray *)gameQuestions;
 
+@property BOOL groupDownloadComplete;
 @property WIBReachability *reachability;
 
 @end
