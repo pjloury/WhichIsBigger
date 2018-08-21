@@ -32,6 +32,9 @@
 + (UIColor *)sexyOrangeColor;
 + (UIColor *)sexyDeepOrangeColor;
 
++ (UIColor *)quickAnswerColor;
++ (UIColor *)slowAnswerColor;
+
 + (UIColor *)colorWithString:(NSString *)hexString;
 + (UIColor *)colorForLevel:(NSInteger)level;
 

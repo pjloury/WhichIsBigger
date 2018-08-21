@@ -133,7 +133,7 @@
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
         [paragraphStyle setAlignment:NSTextAlignmentCenter];
         NSDictionary *bonusAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIColor lightPurpleColor], NSForegroundColorAttributeName,
+                                        [UIColor slowAnswerColor], NSForegroundColorAttributeName,
                                         font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName,nil];
         NSMutableAttributedString *bonusAttributedString = [[NSMutableAttributedString alloc] initWithString:@"Speed Bonus!" attributes:bonusAttributes];
         

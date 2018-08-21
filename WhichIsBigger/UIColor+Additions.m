@@ -107,6 +107,14 @@ alpha:1.0]
     return [UIColor colorWithRed:175 green:68 blue:255 alpha:.17];
 }
 
++ (UIColor *)quickAnswerColor {
+    return UIColorFromRGB(0x1FDE31);
+}
+
++ (UIColor *)slowAnswerColor {
+    return [UIColor lightPurpleColor];
+}
+
 + (UIColor *)randomColor
 {
     NSArray *colors = [UIColor colorArray];
