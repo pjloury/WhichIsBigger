@@ -95,10 +95,12 @@
     }
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        // For some reason this is returning zero objects
+        NSLog(@"======= NUMBER OF CATEGORIES FETCHED: %lu", (unsigned long)objects.count);
          [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];
          [self prefetchImagesForObjects:objects];
          if (completion) completion();
-         if (![WIBGamePlayManager sharedInstance].categoriesInLocalStorage) {
+         if (![WIBGamePlayManager sharedInstance].categoriesInLocalStorage && objects.count > 0) {
              [PFObject pinAllInBackground:objects withName: @"categories" block:^(BOOL succeeded, NSError * _Nullable error) {
                  if (succeeded){
                      [[WIBGamePlayManager sharedInstance] setCategoriesInLocalStorage: YES];
@@ -175,7 +177,7 @@
             [self insertObjects: objects intoDataModel:[WIBDataModel sharedInstance]];
             completion();
             
-            if (![WIBGamePlayManager sharedInstance].gameItemsInLocalStorage) {
+            if (![WIBGamePlayManager sharedInstance].gameItemsInLocalStorage && objects.count >0) {
                 [PFObject pinAllInBackground:objects withName: @"gameItems" block:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         [[WIBGamePlayManager sharedInstance] setGameItemsInLocalStorage: YES];

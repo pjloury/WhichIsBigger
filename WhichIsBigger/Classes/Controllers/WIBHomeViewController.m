@@ -50,18 +50,26 @@
     
     //[self addCrashButton];
     
+    NSLog(@"======================== BEFORE CONFIG NETWORK CALLS");
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
+        NSLog(@"======================== CONFIG RECEIVED");
         [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
-            [self.categoriesCollectionView reloadData];
-            [self.categoriesCollectionView layoutIfNeeded];
-            [self.categoriesCollectionView flashScrollIndicators];
-            [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
-                dispatch_async(dispatch_get_main_queue(),
-                               ^{
-                                   self.startNewGameButton.enabled = YES;
-                                   self.categoriesCollectionView.userInteractionEnabled = YES;
-                               });
-            }];
+            NSLog(@"======================== CATEGORIES RECEIVED");
+            dispatch_async(dispatch_get_main_queue(),
+                           ^{
+                               NSLog(@"======================== RELOADING CATEGORY COLLECTION VIEW");
+                               [self.categoriesCollectionView reloadData];
+                               [self.categoriesCollectionView layoutIfNeeded];
+                               [self.categoriesCollectionView flashScrollIndicators];
+                               
+                               [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
+                                   NSLog(@"======================== DATA MODEL COMPLETE");
+                                   dispatch_async(dispatch_get_main_queue(),
+                                                  ^{
+                                                      self.categoriesCollectionView.userInteractionEnabled = YES;
+                                                  });
+                               }];
+                           });
         }];
     }];
     
