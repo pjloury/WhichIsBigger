@@ -22,10 +22,7 @@ alpha:1.0]
 
 @implementation UIColor (Additions)
 
-+ (UIColor *)lighterGrayColor {
-    return[UIColor colorWithRed:175/255 green:68/255 blue:255/255 alpha:0.17];
-}
-//[UIColor colorWithRed:0.686 green:0.267 blue:1.0 alpha:1.0].CGColor;
+// Purple Colors
 
 + (UIColor *)faintPurpleColor {
     return UIColorFromRGB(0xFFFAFF);
@@ -38,6 +35,12 @@ alpha:1.0]
 + (UIColor *)lightPurpleColor {
     return UIColorFromRGB(0x9D1BFF);
 }
+
++ (UIColor *)darkPurpleColor {
+    return UIColorFromRGB(0x622aaa);
+}
+
+// Question Colors
 
 + (UIColor *)sexyRedColor {
     return UIColorFromRGB(0xF44336);
@@ -107,12 +110,22 @@ alpha:1.0]
     return [UIColor colorWithRed:175 green:68 blue:255 alpha:.17];
 }
 
+// Answer Colors
+
 + (UIColor *)quickAnswerColor {
     return UIColorFromRGB(0x1FDE31);
 }
 
 + (UIColor *)slowAnswerColor {
-    return [UIColor lightPurpleColor];
+    return UIColorFromRGB(0x8219E9);
+}
+
++ (UIColor *)correctAnswerGreenColor {
+    return UIColorFromRGB(0x40DD47);
+}
+
++ (UIColor *)incorrectAnswerRedColor {
+    return UIColorFromRGB(0xEA3434);
 }
 
 + (UIColor *)randomColor
@@ -182,6 +195,21 @@ alpha:1.0]
     return colors;
 }
 
++ (UIColor *)colorWithString:(NSString *)hexString
+{
+    NSMutableString *tempHex=[[NSMutableString alloc] init];
+    [tempHex appendString:hexString];
+    unsigned colorInt = 0;
+    [[NSScanner scannerWithString:tempHex] scanHexInt:&colorInt];
+    return UIColorFromRGB(colorInt);
+}
+
++ (UIColor *)colorForLevel:(NSInteger)level
+{
+    NSInteger index = level % [UIColor backgroundColorArray].count;
+    return [UIColor backgroundColorArray][index];
+}
+
 + (CAGradientLayer *)gradientLayerWithColor:(UIColor *)color {
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     NSUInteger firstColorIndex = [[UIColor colorArray] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -198,21 +226,6 @@ alpha:1.0]
         gradientLayer.colors = [NSArray arrayWithObjects:(id)[firstColor CGColor], (id)[secondColor CGColor], nil];
     }
     return gradientLayer;
-}
-
-+ (UIColor *)colorWithString:(NSString *)hexString
-{
-    NSMutableString *tempHex=[[NSMutableString alloc] init];
-    [tempHex appendString:hexString];
-    unsigned colorInt = 0;
-    [[NSScanner scannerWithString:tempHex] scanHexInt:&colorInt];
-    return UIColorFromRGB(colorInt);
-}
-
-+ (UIColor *)colorForLevel:(NSInteger)level
-{
-    NSInteger index = level % [UIColor backgroundColorArray].count;
-    return [UIColor backgroundColorArray][index];
 }
 
 @end

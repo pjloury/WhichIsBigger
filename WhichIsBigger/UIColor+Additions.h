@@ -10,10 +10,13 @@
 
 @interface UIColor (Additions)
 
+// Purple Colors
 + (UIColor *)faintPurpleColor;
 + (UIColor *)pastelPurpleColor;
-+ (UIColor *)lighterGrayColor;
 + (UIColor *)lightPurpleColor;
++ (UIColor *)darkPurpleColor;
+
+// Question Colors
 + (UIColor *)sexyRedColor;
 + (UIColor *)sexyPinkColor;
 + (UIColor *)sexyPurpleColor;
@@ -32,16 +35,18 @@
 + (UIColor *)sexyOrangeColor;
 + (UIColor *)sexyDeepOrangeColor;
 
+// Answer Colors
 + (UIColor *)quickAnswerColor;
 + (UIColor *)slowAnswerColor;
++ (UIColor *)correctAnswerGreenColor;
++ (UIColor *)incorrectAnswerRedColor;
 
+// Utility Functions
 + (UIColor *)colorWithString:(NSString *)hexString;
 + (UIColor *)colorForLevel:(NSInteger)level;
-
 + (UIColor *)randomColor;
 + (NSArray *)randomColorPair;
 + (NSMutableArray *)randomColors;
-
 + (CAGradientLayer *)gradientLayerWithColor:(UIColor *)color;
 
 @end
