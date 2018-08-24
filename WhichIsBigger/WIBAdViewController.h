@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIBBaseViewController.h"
 @import GoogleMobileAds;
 
-@interface WIBAdViewController : UIViewController<GADBannerViewDelegate>
+@interface WIBAdViewController : WIBBaseViewController<GADBannerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GADBannerView *adBannerView;
-@property BOOL bannerIsVisible;
 
 @end
