@@ -181,6 +181,7 @@
         self.scoreDescriptionlabel.alpha = 1.0;
         self.scoreLabel.alpha = 1.0;
     } completion:^(BOOL finished) {
+        //[self requestShare];
     }];
     
     if ([WIBGamePlayManager sharedInstance].score > 0) {
@@ -213,11 +214,14 @@
     }
     else {
         [self.scoreLabelTimer invalidate];
+        [[WIBSoundManager sharedInstance] stopSound];
     }
 }
 
 - (void)didFinishProgressUpdate
 {
+    [[WIBSoundManager sharedInstance] stopSound];
+    
     if([WIBGamePlayManager sharedInstance].score == [WIBGamePlayManager sharedInstance].highScore) {
         self.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)_incrementedScore];
         self.highScoreLabel.hidden = NO;
@@ -346,8 +350,12 @@
                             self.currentLevelImageView.image = [UIImage placeholderWithHeight:100];
                             self.currentLevelImageView.tintColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.tintColor;
                             self.currentLevelBackgroundView.backgroundColor = [WIBGamePlayManager sharedInstance].unlockedQuestionType.backgroundColor;
+                            if ([WIBGamePlayManager sharedInstance].level % 3 == 0) {
+                                [self requestReview];
+                            }
+                            
                             if ([WIBGamePlayManager sharedInstance].level % 4 == 0) {
-                                [SKStoreReviewController requestReview];
+                                [self requestShare];
                             }
                             
                             [FIRAnalytics logEventWithName:kFIREventLevelUp
@@ -364,6 +372,8 @@
                             self.goalLevelImageView.tintColor = [UIColor sexyAmberColor];
                         }
                         
+                        [[WIBSoundManager sharedInstance] playLevelUpSound];
+                        
                         self.goalLevelLabel.text = [NSString stringWithFormat:@"LEVEL %ld",([WIBGamePlayManager sharedInstance].level+1)];
                         
                         [UIView animateWithDuration:0.5 animations:^{
@@ -371,6 +381,64 @@
                             self.rightLevelView.alpha = 1.0;
                         } completion:nil];
     }];
+}
+
+- (void)requestReview
+{
+    [SKStoreReviewController requestReview];
+}
+
+- (void)requestShare
+{
+    NSString *title = @"Enjoying Which is Bigger?";
+    NSString *message = @"Tell others about it!";
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:message
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+
+   
+
+    NSString *shareButtonTitle = @"Share with a Friend";
+    [alertController addAction:[UIAlertAction actionWithTitle:shareButtonTitle
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:
+                                ^(UIAlertAction *action){
+                                    [self showShareUI: action controller: alertController];
+                                }]];
+    
+    NSString *cancelButtonTitle = @"No Thanks";
+    [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)showShareUI: (UIAlertAction *) action controller: (UIAlertController *) controller {
+    NSString *highScore = [NSString stringWithFormat:@"Have you played Which is Bigger? See if you can beat my top score of %ld!", [WIBGamePlayManager sharedInstance].highScore];
+    NSString *urlString = [[PFConfig currentConfig] objectForKey:@"appURL"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableArray *items = [NSMutableArray array];
+    [items addObject:highScore];
+    if (url) [items addObject:url];
+    
+    UIActivityViewController *shareController = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    NSArray *excludedActivities = @[
+                                    UIActivityTypePostToWeibo,
+                                    UIActivityTypePrint, UIActivityTypeCopyToPasteboard,
+                                    UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,
+                                    UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,
+                                    UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo];
+    shareController.excludedActivityTypes = excludedActivities;
+
+    if ( [controller respondsToSelector:@selector(popoverPresentationController)] ) {
+        shareController.modalPresentationStyle = UIModalPresentationPopover;
+        shareController.popoverPresentationController.sourceView = controller.view;
+    }
+    
+    [self presentViewController:shareController animated:YES completion:nil];
 }
 
 @end
