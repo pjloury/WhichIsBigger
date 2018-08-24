@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
+#import "WIBAdManager.h"
 #import "WIBHomeViewController.h"
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
@@ -21,6 +22,7 @@
 
 
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface WIBHomeViewController()<PFLogInViewControllerDelegate, GADInterstitialDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @property (weak, nonatomic) IBOutlet UIButton *highScoresButton;
@@ -74,6 +76,57 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPressHighScoresButton:) name:@"GameCenterDidFinishAuthentication" object:nil];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2.0
+                                     target:self
+                                   selector:@selector(showLaunchAdIfApplicable)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[WIBAdManager sharedInstance] loadGADInterstitial];
+    [WIBAdManager sharedInstance].interstitial.delegate = self;
+    [super viewWillAppear:animated];
+    self.highScoresButton.layer.cornerRadius = 6;
+    self.startNewGameButton.layer.cornerRadius = 6;
+    [self.categoriesCollectionView reloadData];
+    self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld pts", (long)[WIBGamePlayManager sharedInstance].lifeTimeScore];
+}
+
+# pragma mark - Ads
+
+- (BOOL)shouldShowNewRoundAd {
+    BOOL shouldShowNewRoundAd = NO;
+    NSInteger newRoundCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"newRoundCount"] integerValue];
+    newRoundCount = newRoundCount + 1;
+    if (newRoundCount % 4 == 0) shouldShowNewRoundAd = YES;
+    [[NSUserDefaults standardUserDefaults] setObject: @(newRoundCount) forKey: @"newRoundCount"];
+    return shouldShowNewRoundAd;
+}
+
+- (BOOL)shouldShowLaunchAd {
+    NSDate *startDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLaunchAdDate"];
+    if (!startDate) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastLaunchAdDate"];
+        return YES;
+    } else {
+        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [gregorianCalendar components:NSCalendarUnitDay
+                                                            fromDate:startDate
+                                                              toDate:[NSDate date]
+                                                             options:0];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastLaunchAdDate"];
+        return (components.day > 1);
+    }
+}
+
+- (void)showLaunchAdIfApplicable {
+    if ([WIBAdManager sharedInstance].interstitial.isReady && [self shouldShowLaunchAd] && ![WIBAdManager sharedInstance].interstitial.hasBeenUsed) {
+        [[WIBAdManager sharedInstance].interstitial presentFromRootViewController: self];
+        [WIBAdManager sharedInstance].adType = kLaunchAd;
+    }
 }
 
 - (void)addCrashButton
@@ -177,7 +230,16 @@
     WIBQuestionType *type = [[WIBGamePlayManager sharedInstance] questionTypes][indexPath.row];
     if ([[WIBGamePlayManager sharedInstance].availableQuestionTypes containsObject:type]) {
         [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
-        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+        if (type == [WIBGamePlayManager sharedInstance].unlockedQuestionType) {
+            [self performSegueWithIdentifier:@"homeToCategoryUnlock" sender:self];
+        } else {
+            if ([WIBAdManager sharedInstance].interstitial.isReady && [self shouldShowNewRoundAd] && ![WIBAdManager sharedInstance].interstitial.hasBeenUsed) {
+                [WIBAdManager sharedInstance].adType = kNewRoundAd;
+                [[WIBAdManager sharedInstance].interstitial presentFromRootViewController: self];
+            } else {
+                [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+            }
+        }
         [FIRAnalytics logEventWithName:kFIREventSelectContent
                             parameters:@{
                                          kFIRParameterItemID: @(indexPath.row),
@@ -194,6 +256,15 @@
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+# pragma mark - GADInterstitialDelegate
+- (void)interstitialWillDismissScreen:(GADInterstitial *)ad
+{
+    if ([WIBAdManager sharedInstance].adType == kNewRoundAd) {
+        [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+    }
+    [WIBAdManager sharedInstance].adType = kUndefined;
 }
 
 # pragma mark - Facebook

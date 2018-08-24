@@ -9,11 +9,13 @@
 #import "WIBGameCompleteViewController.h"
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
+#import "WIBAdManager.h"
 
 // Views
 #import "WIBPopButton.h"
 
 @interface WIBGameCompleteViewController ()
+@interface WIBGameCompleteViewController () <GADInterstitialDelegate>
 //@interface WIBGameCompleteViewController ()< FBSDKAppInviteDialogDelegate>
 @property (weak, nonatomic) IBOutlet WIBPopButton *randomButton;
 @property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
@@ -27,6 +29,8 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton= YES;
+    [[WIBAdManager sharedInstance] loadGADInterstitial];
+    WIBAdManager.sharedInstance.interstitial.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -39,7 +43,11 @@
 }
 
 - (IBAction)didPressDone:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([WIBAdManager sharedInstance].interstitial.isReady) {
+        [[WIBAdManager sharedInstance].interstitial presentFromRootViewController: self.navigationController];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)didPressActionButton:(id)sender {
@@ -84,6 +92,12 @@
     [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
 }
 
+# pragma mark - GADInterstitialDelegate
+- (void)interstitialWillDismissScreen:(GADInterstitial *)ad
+{
+     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+     
 //- (void)openFacebookShareFlow
 //{
 //    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
