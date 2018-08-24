@@ -40,6 +40,8 @@
 //    self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.playAgainButton.layer.cornerRadius = 6;
     self.randomButton.layer.cornerRadius = 6;
+    [[WIBSoundManager sharedInstance] playAchievementSound];
+    
 }
 
 - (IBAction)didPressDone:(id)sender {

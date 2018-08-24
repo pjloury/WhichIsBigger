@@ -80,6 +80,8 @@ const static double kIdealWaitTime = 3.0;
     self.questionTypeView.backgroundColor = questionType.backgroundColor;
     self.questionTypeView.layer.cornerRadius = 16.0f;
     
+    [[WIBSoundManager sharedInstance] playAchievementSound];
+    
     [confettiView startConfetti];
     [self performSelector:@selector(finishConfetti) withObject:nil afterDelay:1.25];
     [self performSelector:@selector(spinQuestionTypeView) withObject:nil afterDelay:0.5];

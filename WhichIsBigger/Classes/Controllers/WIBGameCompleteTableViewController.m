@@ -174,6 +174,7 @@
 
 - (void)revealScoreAndProgress
 {
+    [[WIBSoundManager sharedInstance] playPointsIncreaseSound];
     self.scoreLabelTimer = [NSTimer scheduledTimerWithTimeInterval:[WIBGamePlayManager sharedInstance].animationSpeed/125 target:self                                                             selector:@selector(incrementScore) userInfo:nil repeats:YES];
     
     [UIView animateWithDuration:0.5 animations:^{
