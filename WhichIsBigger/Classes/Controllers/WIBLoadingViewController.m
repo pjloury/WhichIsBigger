@@ -48,7 +48,7 @@ const static double kIdealWaitTime = 1.0;
     
     UINavigationController* nc = (UINavigationController*)[[[UIApplication sharedApplication] delegate] window].rootViewController;
     [nc.navigationBar setBarTintColor:[WIBGamePlayManager sharedInstance].gameRound.questionType.themeColor];
-    self.categoryLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] tintColor];
+    self.categoryLabel.textColor = [[[[WIBGamePlayManager sharedInstance] gameRound] questionType] themeColor];
     self.clarifyingLabel.text = [NSString stringWithFormat: @"Loading %@...", [WIBGamePlayManager sharedInstance].gameRound.questionType.clarifyingString];
     
     self.shimmeringView.contentView = self.loadingQuestionMarkView;
