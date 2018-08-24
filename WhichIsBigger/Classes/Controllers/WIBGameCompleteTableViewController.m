@@ -189,6 +189,18 @@
         [self.progressMeterSuperView setProgress:currentPercentage animated:YES completion:^(){
             [self didFinishProgressUpdate];
         }];
+        
+        if([WIBGamePlayManager sharedInstance].gameRound.newHighScore) {
+            self.scoreDescriptionlabel.text = @"HIGH SCORE! 🎉";
+        }
+        else if (WIBGamePlayManager.sharedInstance.gameRound.numberOfCorrectAnswers ==5) {
+            self.scoreDescriptionlabel.text = @"⭐️⭐️⭐️⭐️⭐️";
+        }
+        else {
+            self.scoreDescriptionlabel.text = @"SCORE";
+        }
+    } else {
+        self.scoreLabel.text = @"0 pts 😂 LOL!";
     }
 }
 

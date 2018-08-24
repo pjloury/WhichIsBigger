@@ -135,7 +135,6 @@
 
 - (void)questionAnsweredCorrectly
 {
-    self.currentQuestion.points = round([WIBGamePlayManager sharedInstance].pointsPerQuestion - ([WIBGamePlayManager sharedInstance].pointsPerQuestion * self.currentQuestion.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
     NSInteger points = round([WIBGamePlayManager sharedInstance].pointsPerQuestion - ([WIBGamePlayManager sharedInstance].pointsPerQuestion * self.currentQuestion.answerTime / [WIBGamePlayManager sharedInstance].secondsPerQuestion));
     if (points > 90) {
         points = 100;
@@ -161,5 +160,9 @@
     return total;
 }
 
+- (BOOL)newHighScore
+{
+    return self.score >= [WIBGamePlayManager sharedInstance].highScore;
+}
 
 @end

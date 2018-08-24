@@ -20,6 +20,7 @@
 
 // non-mutable
 @property (nonatomic, assign, readonly) NSInteger score;
+@property (nonatomic, assign, readonly) BOOL newHighScore;
 @property (nonatomic, assign, readonly) float accuracy;
 @property (nonatomic, strong, readonly) NSMutableArray *gameQuestions;
 @property (readonly) NSString *roundUUID;
