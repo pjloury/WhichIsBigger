@@ -115,6 +115,11 @@ const static double kIdealWaitTime = 3.0;
     self.shimmeringContentView.layer.transform = transform;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [WIBGamePlayManager sharedInstance].unlockedQuestionType = nil;
+}
+
 - (void)groupImageDownloadDidComplete:(NSNotification *)note
 {
     NSTimeInterval timeElapsed = [self.startDate timeIntervalSinceReferenceDate];

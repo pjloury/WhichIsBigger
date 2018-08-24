@@ -89,8 +89,6 @@
     self.lifeTimeScore = self.lifeTimeScore + self.score;
     if (self.availableQuestionTypes.count > [[[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"] count]) {
         self.unlockedQuestionType = self.availableQuestionTypes.lastObject;
-    } else {
-        self.unlockedQuestionType = nil;
     }
         
     if (self.gameRound.score > [[WIBGamePlayManager sharedInstance] highScore])
