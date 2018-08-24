@@ -21,7 +21,6 @@
 #import <Crashlytics/Crashlytics.h>
 
 
-@interface WIBHomeViewController()<PFLogInViewControllerDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @interface WIBHomeViewController()<PFLogInViewControllerDelegate, GADInterstitialDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
@@ -32,25 +31,16 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *categoriesCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
 
-
-@property (nonatomic) NSArray *readPermissions;
-
 @end
 
 @implementation WIBHomeViewController
 
-- (IBAction)crashButtonTapped:(id)sender {
-    [[Crashlytics sharedInstance] crash];
-}
+# pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.readPermissions = @[@"public_profile", @"email", @"user_friends"];
-    self.startNewGameButton.enabled = NO;
     self.categoriesCollectionView.userInteractionEnabled = NO;
-    
-    //[self addCrashButton];
     
     NSLog(@"======================== BEFORE CONFIG NETWORK CALLS");
     [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
@@ -74,6 +64,7 @@
                            });
         }];
     }];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPressHighScoresButton:) name:@"GameCenterDidFinishAuthentication" object:nil];
     
@@ -129,6 +120,8 @@
     }
 }
 
+# pragma mark - Crashlytics
+
 - (void)addCrashButton
 {
     UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -139,31 +132,15 @@
     [self.view addSubview:button];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.highScoresButton.layer.cornerRadius = 6;
-    self.startNewGameButton.layer.cornerRadius = 6;
-    [self.categoriesCollectionView reloadData];
-    self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld pts", (long)[WIBGamePlayManager sharedInstance].lifeTimeScore];
+- (IBAction)crashButtonTapped:(id)sender {
+    [[Crashlytics sharedInstance] crash];
 }
 
-//- (IBAction)didPressLoginButton:(id)sender
-//{
-//    // need to protect against the case where another user is already linked to the ID
-//    [PFFacebookUtils logInInBackgroundWithReadPermissions:self.readPermissions block:^(PFUser *user, NSError *error){
-//        if(error) {
-//            NSLog(error.description);
-//        }
-//        [self _facebookAuth];
-//        [self _scrapeFacebook];
-//    }];
-//}
+# pragma mark - Interactions
 
-- (IBAction)didPressNewGameButton:(id)sender
+- (IBAction)didPressHowToPlayButton:(id)sender
 {
-    [[WIBGamePlayManager sharedInstance] beginRound];
-    [self performSegueWithIdentifier:@"newGameSegue" sender:self];
+    [self performSegueWithIdentifier:@"tutorialSegue" sender:self];
 }
 
 - (IBAction)didPressHighScoresButton:(id)sender
@@ -204,8 +181,6 @@
         cell.imageView.tintColor = type.tintColor;
     } else {
         UIImage *image = [UIImage imageNamed:@"smallQuestionMark"];
-        //image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        //cell.imageView.tintColor = type.tintColor;
         cell.imageView.image = image;
         cell.label.text = [NSString stringWithFormat:@"LEVEL %ld", (indexPath.item +1)];
         cell.imageViewContainer.backgroundColor = [UIColor whiteColor];
@@ -250,6 +225,14 @@
         WIBQuestionTypeCell *cell = (WIBQuestionTypeCell *)[collectionView.dataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
         [cell.animationView startCanvasAnimation];
     }
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(collectionView.frame.size.width/3.0-collectionView.frame.size.width/10, collectionView.frame.size.height/3.0);
 }
 
 # pragma mark - Game Center Delegate
