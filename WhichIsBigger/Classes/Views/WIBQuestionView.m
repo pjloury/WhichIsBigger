@@ -49,7 +49,6 @@
     
     self.scoringDelegate = [WIBGamePlayManager sharedInstance];
     self.titleLabel.text = self.question.questionText ? : @"Which is Bigger?";
-    self.pointsLabel.alpha = 0.0;
 }
 
 - (void)refreshWithQuestion:(WIBGameQuestion *)question
