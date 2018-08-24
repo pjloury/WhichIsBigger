@@ -6,13 +6,21 @@
 //  Copyright (c) 2015 Angry Tortoise Productions. All rights reserved.
 //
 
+// Check if Request Review has intelligence
+// Add intelligence to "Share w/ a Friend"
+// GADNativeContentAd w/ GADNativeContentAdView
+// Add White Outline to Points Text
+// Question String: Change to "Who" when applicable
+// Want to compare yourself to others? Tap on your "Best Round" to view the leaderboard!
+// Looks like you're enjoying playing Which is Bigger? Would you like to share it with a friend?
+// Animate Points to the total
+
 #import "AppDelegate.h"
 #import "WIBNetworkManager.h"
 #import "WIBGameItem.h"
 #import "WIBGamePlayManager.h"
 #import "WIBHomeViewController.h"
-@import Firebase;
-@import Fabric;
+@import GoogleMobileAds;
 
 @interface AppDelegate ()
 
@@ -23,19 +31,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	  [application setStatusBarHidden:YES];
 	
-    [FIRApp configure];
-    //[Fabric.sharedSDK setDebug:YES];
+    NSLog(@"===============================START APP DELEGATE");
     
     // [Optional] Power your app with Local Datastore. For more info, go to
     // https://parse.com/docs/ios_guide#localdatastore/iOS
-    
-    // Do not cache PF Objects unless we know that they contain all the required properties
-    [Parse enableLocalDatastore];
     
     ParseClientConfiguration *clientConfig = [ParseClientConfiguration configurationWithBlock:^void(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"mQP5uTJvSvOmM2UNXxe31FsC5BZ1sP1rkABnynbd";
         configuration.clientKey = @"ckRmomV114XuUhuKU6WzpeY3zQg4h2McXCQSdEP9";
         configuration.server = @"https://fast-anchorage-42311.herokuapp.com/parse";
+        configuration.localDatastoreEnabled = YES;
     }];
     
     [Parse initializeWithConfiguration:clientConfig];
@@ -45,9 +50,8 @@
 
     //[PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFUser enableAutomaticUser];
+    // [PFUser enableRevocableSessionInBackground];
     
-    
-    [PFUser enableRevocableSessionInBackground];
     if ([GKLocalPlayer localPlayer].authenticated == YES) {
         [[WIBGamePlayManager sharedInstance] authenticateGameKitUser];
     }
@@ -60,25 +64,13 @@
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
     
-     
-//	return [[FBSDKApplicationDelegate sharedInstance] application:application
-//									didFinishLaunchingWithOptions:launchOptions];
+    
+    [FIRApp configure]; // This apparently isn't coming back on main thread
+    
+    [GADMobileAds configureWithApplicationID:@"ca-app-pub-4490282633558794~6852699468"];
+
+    NSLog(@"===============================END APP DELEGATE");
     return YES;
-}
-
-/*
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
-		 annotation:(id)annotation
-{
-	return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url
-												sourceApplication:sourceApplication
-													   annotation:annotation];
-}
-*/
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -92,18 +84,6 @@
     [[PFUser currentUser] setObject:@([WIBGamePlayManager sharedInstance].questionCeiling) forKey:@"questionCeiling"];
     
     [[PFUser currentUser] saveInBackground];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-//  [FBSDKAppEvents activateApp];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 # pragma mark - Remote Notifications
