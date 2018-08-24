@@ -13,6 +13,8 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 @import GameKit;
+@import Firebase;
+@import Fabric;
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -23,6 +25,7 @@
 #import "FBShimmeringView.h"
 #import "UIImage+Additions.h"
 #import "NSMutableArray+Shuffle.h"
+#import "WIBSoundManager.h"
 #import <iAd/iAd.h>
 
 #import <Parse/Parse.h>

@@ -13,15 +13,23 @@
 		602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */; };
 		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
 		6033C78F1B98238000C592CC /* WIBQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78D1B98238000C592CC /* WIBQuestionView.m */; };
-		6039C63420CC3BC400489A15 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6039C63320CC3BC400489A15 /* GoogleService-Info.plist */; };
 		604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014681B87006100E2C5D6 /* WIBOptionButton.m */; };
 		6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */; };
 		604014711B87E13900E2C5D6 /* WIBTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014701B87E13900E2C5D6 /* WIBTutorialViewController.m */; };
 		604014741B87E1CA00E2C5D6 /* WIBDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */; };
 		604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604DF0C81BB3DF8500595B2B /* WIBReachability.m */; };
-		6056506120DC09C80016D364 /* WIBAchievement.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6056506020DC09C80016D364 /* WIBAchievement.mov */; };
 		605D461F1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */; };
 		60621C4A1BD0424A00C8207E /* WIBGameRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 60621C491BD0424A00C8207E /* WIBGameRound.m */; };
+		6062349E20E5FCA10068E20D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062349D20E5FCA10068E20D /* AudioToolbox.framework */; };
+		6082DACF2105A21800502797 /* WIBSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6082DACE2105A21800502797 /* WIBSoundManager.m */; };
+		6082DAD12105B73900502797 /* CoinUnlock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6082DAD02105B73900502797 /* CoinUnlock.wav */; };
+		6082DAD82110BC8700502797 /* WIBAchievement.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6082DAD52110BC8700502797 /* WIBAchievement.mp3 */; };
+		6082DAD92110BC8700502797 /* CaChing2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6082DAD62110BC8700502797 /* CaChing2.m4a */; };
+		6082DADA2110BC8700502797 /* CaChing.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6082DAD72110BC8700502797 /* CaChing.m4a */; };
+		6082DAE0211F81CD00502797 /* WIBAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6082DADF211F81CD00502797 /* WIBAdManager.m */; };
+		609F0BC3212FABAC00012CCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 609F0BC2212FABAC00012CCB /* GoogleService-Info.plist */; };
+		609F0BC62130757100012CCB /* RifficFree-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 609F0BC52130757100012CCB /* RifficFree-Bold.ttf */; };
+		609F0BC92130B07200012CCB /* WIBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 609F0BC82130B07200012CCB /* WIBBaseViewController.m */; };
 		60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */; };
 		60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A125BF1BB13C0100563331 /* SystemConfiguration.framework */; };
 		60A43F001C687C4700EFC46E /* WIBQuestionTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A43EFF1C687C4700EFC46E /* WIBQuestionTypeCell.m */; };
@@ -89,7 +97,6 @@
 		6033C78B1B98238000C592CC /* WIBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionView.m; path = Classes/Views/WIBOptionView.m; sourceTree = "<group>"; };
 		6033C78C1B98238000C592CC /* WIBQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBQuestionView.h; path = Classes/Views/WIBQuestionView.h; sourceTree = "<group>"; };
 		6033C78D1B98238000C592CC /* WIBQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionView.m; path = Classes/Views/WIBQuestionView.m; sourceTree = "<group>"; };
-		6039C63320CC3BC400489A15 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		604014671B87006100E2C5D6 /* WIBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBOptionButton.h; path = Classes/Views/WIBOptionButton.h; sourceTree = "<group>"; };
 		604014681B87006100E2C5D6 /* WIBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBOptionButton.m; path = Classes/Views/WIBOptionButton.m; sourceTree = "<group>"; };
 		6040146A1B87A2CD00E2C5D6 /* WIBLogo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WIBLogo.xib; path = ../WIBLogo.xib; sourceTree = "<group>"; };
@@ -99,11 +106,23 @@
 		604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBDismissSegue.m; path = WhichIsBigger/Classes/WIBDismissSegue.m; sourceTree = "<group>"; };
 		604DF0C71BB3DF8500595B2B /* WIBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBReachability.h; path = Classes/Managers/WIBReachability.h; sourceTree = "<group>"; };
 		604DF0C81BB3DF8500595B2B /* WIBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBReachability.m; path = Classes/Managers/WIBReachability.m; sourceTree = "<group>"; };
-		6056506020DC09C80016D364 /* WIBAchievement.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = WIBAchievement.mov; sourceTree = "<group>"; };
 		605D461D1C5F3B6E00A7529E /* NSMutableArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Shuffle.h"; sourceTree = "<group>"; };
 		605D461E1C5F3B6E00A7529E /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
 		60621C481BD0424A00C8207E /* WIBGameRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameRound.h; path = "Classes/Data Model/WIBGameRound.h"; sourceTree = "<group>"; };
 		60621C491BD0424A00C8207E /* WIBGameRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBGameRound.m; path = "Classes/Data Model/WIBGameRound.m"; sourceTree = "<group>"; };
+		6062349D20E5FCA10068E20D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6082DACD2105A21800502797 /* WIBSoundManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WIBSoundManager.h; path = Classes/Managers/WIBSoundManager.h; sourceTree = "<group>"; };
+		6082DACE2105A21800502797 /* WIBSoundManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WIBSoundManager.m; path = Classes/Managers/WIBSoundManager.m; sourceTree = "<group>"; };
+		6082DAD02105B73900502797 /* CoinUnlock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CoinUnlock.wav; path = Resources/CoinUnlock.wav; sourceTree = "<group>"; };
+		6082DAD52110BC8700502797 /* WIBAchievement.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WIBAchievement.mp3; path = Resources/WIBAchievement.mp3; sourceTree = "<group>"; };
+		6082DAD62110BC8700502797 /* CaChing2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = CaChing2.m4a; path = Resources/CaChing2.m4a; sourceTree = "<group>"; };
+		6082DAD72110BC8700502797 /* CaChing.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = CaChing.m4a; path = Resources/CaChing.m4a; sourceTree = "<group>"; };
+		6082DADE211F81CD00502797 /* WIBAdManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WIBAdManager.h; path = Classes/Managers/WIBAdManager.h; sourceTree = "<group>"; };
+		6082DADF211F81CD00502797 /* WIBAdManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WIBAdManager.m; path = Classes/Managers/WIBAdManager.m; sourceTree = "<group>"; };
+		609F0BC2212FABAC00012CCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		609F0BC52130757100012CCB /* RifficFree-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RifficFree-Bold.ttf"; path = "../../../Library/Fonts/RifficFree-Bold.ttf"; sourceTree = "<group>"; };
+		609F0BC72130B07200012CCB /* WIBBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WIBBaseViewController.h; path = Classes/Controllers/WIBBaseViewController.h; sourceTree = "<group>"; };
+		609F0BC82130B07200012CCB /* WIBBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WIBBaseViewController.m; path = Classes/Controllers/WIBBaseViewController.m; sourceTree = "<group>"; };
 		60A125BC1BB1278500563331 /* WIBTutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBTutorialPageViewController.h; path = Classes/Controllers/WIBTutorialPageViewController.h; sourceTree = "<group>"; };
 		60A125BD1BB1278500563331 /* WIBTutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBTutorialPageViewController.m; path = Classes/Controllers/WIBTutorialPageViewController.m; sourceTree = "<group>"; };
 		60A125BF1BB13C0100563331 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -195,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6062349E20E5FCA10068E20D /* AudioToolbox.framework in Frameworks */,
 				60DC8B4E1C84346D0026DF38 /* QuartzCore.framework in Frameworks */,
 				60A125C01BB13C0100563331 /* SystemConfiguration.framework in Frameworks */,
 				601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */,
@@ -216,6 +236,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		609F0BC42130753F00012CCB /* Riffic Free */ = {
+			isa = PBXGroup;
+			children = (
+				609F0BC52130757100012CCB /* RifficFree-Bold.ttf */,
+			);
+			name = "Riffic Free";
+			sourceTree = "<group>";
+		};
 		60DC8B521C84EF170026DF38 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +267,7 @@
 		7D0CC6DC1AD4E7D400BB65BB = {
 			isa = PBXGroup;
 			children = (
-				6039C63320CC3BC400489A15 /* GoogleService-Info.plist */,
+				609F0BC2212FABAC00012CCB /* GoogleService-Info.plist */,
 				604014721B87E1CA00E2C5D6 /* WIBDismissSegue.h */,
 				604014731B87E1CA00E2C5D6 /* WIBDismissSegue.m */,
 				7D70EE621AEF3CE8002E1565 /* WIBConstants.h */,
@@ -311,6 +339,7 @@
 		7D0CC7301AD4EAC400BB65BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6062349D20E5FCA10068E20D /* AudioToolbox.framework */,
 				60B43E101BD7631200E9F604 /* GameKit.framework */,
 				60A125BF1BB13C0100563331 /* SystemConfiguration.framework */,
 				601172941BA6A19E00EE8182 /* AVFoundation.framework */,
@@ -333,6 +362,10 @@
 				604DF0C81BB3DF8500595B2B /* WIBReachability.m */,
 				7D943FA21AF0C6B90061387B /* WIBNetworkManager.h */,
 				7D943FA31AF0C6B90061387B /* WIBNetworkManager.m */,
+				6082DACD2105A21800502797 /* WIBSoundManager.h */,
+				6082DACE2105A21800502797 /* WIBSoundManager.m */,
+				6082DADE211F81CD00502797 /* WIBAdManager.h */,
+				6082DADF211F81CD00502797 /* WIBAdManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -361,6 +394,10 @@
 		7D8E8D5E1B4741A6005B4AA2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6082DAD72110BC8700502797 /* CaChing.m4a */,
+				6082DAD62110BC8700502797 /* CaChing2.m4a */,
+				6082DAD52110BC8700502797 /* WIBAchievement.mp3 */,
+				6082DAD02105B73900502797 /* CoinUnlock.wav */,
 				7D8E8D5F1B4741EF005B4AA2 /* Fonts */,
 			);
 			name = Resources;
@@ -369,7 +406,7 @@
 		7D8E8D5F1B4741EF005B4AA2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				6056506020DC09C80016D364 /* WIBAchievement.mov */,
+				609F0BC42130753F00012CCB /* Riffic Free */,
 				7D8E8D751B479BA6005B4AA2 /* BloggerSans */,
 				7D8E8D741B479B9B005B4AA2 /* OpenSans */,
 			);
@@ -429,10 +466,12 @@
 				602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */,
 				602A92F41C745E96007777EB /* WIBAdViewController.h */,
 				602A92F51C745E96007777EB /* WIBAdViewController.m */,
+				609F0BC72130B07200012CCB /* WIBBaseViewController.h */,
+				609F0BC82130B07200012CCB /* WIBBaseViewController.m */,
 				60DC8B4B1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.h */,
 				60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */,
-				7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */,
 				7D943FA71AF0C6DC0061387B /* WIBGameCompleteViewController.m */,
+				7D943FA61AF0C6DC0061387B /* WIBGameCompleteViewController.h */,
 				7D943FA81AF0C6DC0061387B /* WIBGameViewController.h */,
 				7D943FB71AF0C9CE0061387B /* WIBGameViewController.m */,
 				7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */,
@@ -561,16 +600,20 @@
 			files = (
 				7D8E8D791B479C67005B4AA2 /* Blogger_Sans-Medium.otf in Resources */,
 				7D0CC6F41AD4E7D400BB65BB /* Main.storyboard in Resources */,
+				609F0BC62130757100012CCB /* RifficFree-Bold.ttf in Resources */,
+				609F0BC3212FABAC00012CCB /* GoogleService-Info.plist in Resources */,
 				7D8E8D841B485FAB005B4AA2 /* LaunchScreen.storyboard in Resources */,
 				7D8E8D6A1B47420A005B4AA2 /* OpenSans-Bold.ttf in Resources */,
 				7D0CC6F61AD4E7D400BB65BB /* Images.xcassets in Resources */,
-				6056506120DC09C80016D364 /* WIBAchievement.mov in Resources */,
+				6082DAD82110BC8700502797 /* WIBAchievement.mp3 in Resources */,
 				7D8E8D771B479BB7005B4AA2 /* Blogger_Sans.otf in Resources */,
 				7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */,
+				6082DADA2110BC8700502797 /* CaChing.m4a in Resources */,
+				6082DAD92110BC8700502797 /* CaChing2.m4a in Resources */,
 				7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */,
-				6039C63420CC3BC400489A15 /* GoogleService-Info.plist in Resources */,
 				7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */,
 				6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */,
+				6082DAD12105B73900502797 /* CoinUnlock.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,13 +683,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WhichIsBigger/Pods-WhichIsBigger-resources.sh",
-				"${PODS_ROOT}/Parse/Parse/Resources/en.lproj",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/pt-BR.lproj",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-BR.lproj",
@@ -665,6 +709,7 @@
 			files = (
 				6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */,
 				60DC8B471C841EDA0026DF38 /* WIBAchievementCollectionViewCell.m in Sources */,
+				6082DACF2105A21800502797 /* WIBSoundManager.m in Sources */,
 				F30117881AF09C1700F1D854 /* WIBConstants.m in Sources */,
 				60DB38171BBF94C5001EC806 /* WIBDissimilarQuestion.m in Sources */,
 				604014691B87006100E2C5D6 /* WIBOptionButton.m in Sources */,
@@ -676,6 +721,7 @@
 				7D943FAF1AF0C7160061387B /* WIBImageView.m in Sources */,
 				7D0EE3191B4E5F5D000C0D97 /* WIBLoginViewController.m in Sources */,
 				60A125BE1BB1278500563331 /* WIBTutorialPageViewController.m in Sources */,
+				6082DAE0211F81CD00502797 /* WIBAdManager.m in Sources */,
 				7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */,
 				60DB381A1BBFB564001EC806 /* WIBQuestionType.m in Sources */,
 				7D943FA51AF0C6B90061387B /* WIBNetworkManager.m in Sources */,
@@ -685,6 +731,7 @@
 				F37659211ADE27D300932FC9 /* UIView+AutoLayout.m in Sources */,
 				7D943FA91AF0C6DC0061387B /* WIBGameCompleteViewController.m in Sources */,
 				604DF0C91BB3DF8500595B2B /* WIBReachability.m in Sources */,
+				609F0BC92130B07200012CCB /* WIBBaseViewController.m in Sources */,
 				7D943FB81AF0C9CE0061387B /* WIBGameViewController.m in Sources */,
 				602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */,
 				60E400B91C86EA8500A82850 /* UIImage+Additions.m in Sources */,
@@ -769,7 +816,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -804,7 +851,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
