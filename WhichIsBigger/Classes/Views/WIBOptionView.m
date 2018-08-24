@@ -70,8 +70,6 @@
     [self configureLabels];
 
     self.backgroundColor = [UIColor clearColor];
-    self.layer.cornerRadius = 10;
-    self.layer.masksToBounds = YES;
 }
 
 - (void)gameQuestionTimeUpHandler:(NSNotification *)note
@@ -118,23 +116,24 @@
 
 - (void)animateTimeOutLarger
 {
-    self.answerLabel.textColor = [UIColor greenColor];
+    self.answerLabel.textColor = [UIColor correctAnswerGreenColor];
 }
 
 - (void)animateTimeOutSmaller
 {
-    self.answerLabel.textColor = [UIColor redColor];
+    self.answerLabel.textColor = [UIColor incorrectAnswerRedColor];
 }
 
 - (void)animatePointsLabel:(NSInteger) points
 {
     if (points > 50) {
         UIFont *font = [UIFont fontWithName:@"Blogger-Sans" size:20.0];
+        UIFont *bonusFont = [UIFont fontWithName:@"RifficFree-Bold" size:20.0];
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
         [paragraphStyle setAlignment:NSTextAlignmentCenter];
         NSDictionary *bonusAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [UIColor slowAnswerColor], NSForegroundColorAttributeName,
-                                        font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName,nil];
+                                        bonusFont, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName,nil];
         NSMutableAttributedString *bonusAttributedString = [[NSMutableAttributedString alloc] initWithString:@"Speed Bonus!" attributes:bonusAttributes];
         
         NSDictionary *pointsAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -152,7 +151,7 @@
     self.pointsLabel.transform = CGAffineTransformMakeScale(1, 1);
     self.pointsLabel.alpha = 1;
     
-    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:0 options:0 animations:^{
+    [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].fastAnimationSpeed delay:0 options:0 animations:^{
         self.pointsLabel.transform = CGAffineTransformMakeScale(1.5, 1.5);
     } completion:^(BOOL finished) {
         [UIView animateKeyframesWithDuration:[WIBGamePlayManager sharedInstance].animationSpeed delay:1.8 options:0 animations:^{

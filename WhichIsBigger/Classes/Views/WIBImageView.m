@@ -39,12 +39,12 @@
             break;
         case WIBImageViewStateCorrect:
             self.layer.borderWidth = 4.0f;
-            self.layer.borderColor = [UIColor greenColor].CGColor;
+            self.layer.borderColor = [UIColor correctAnswerGreenColor].CGColor;
             self.layer.shadowColor = [UIColor clearColor].CGColor;
             break;
         case WIBImageViewStateIncorrect:
             self.layer.borderWidth = 4.0f;
-            self.layer.borderColor = [UIColor redColor].CGColor;
+            self.layer.borderColor = [UIColor incorrectAnswerRedColor].CGColor;
             self.layer.shadowColor = [UIColor clearColor].CGColor;
             break;
     }
@@ -95,7 +95,7 @@
         self.multiplierLabel.hidden = YES;
     }
     
-    self.layer.cornerRadius = 10;
+    self.layer.cornerRadius = 24;
     self.layer.masksToBounds = YES;
 }
 
