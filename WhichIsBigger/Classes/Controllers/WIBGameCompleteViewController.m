@@ -14,7 +14,6 @@
 // Views
 #import "WIBPopButton.h"
 
-@interface WIBGameCompleteViewController ()
 @interface WIBGameCompleteViewController () <GADInterstitialDelegate>
 //@interface WIBGameCompleteViewController ()< FBSDKAppInviteDialogDelegate>
 @property (weak, nonatomic) IBOutlet WIBPopButton *randomButton;
@@ -36,12 +35,29 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //self.playAgainButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
-//    self.challengeAFriendButton.layer.borderColor = [UIColor lightPurpleColor].CGColor;
     self.playAgainButton.layer.cornerRadius = 6;
     self.randomButton.layer.cornerRadius = 6;
+    
+    if ([WIBGamePlayManager sharedInstance].gameRound.newHighScore) {
+        [self showHighScoreAlert];
+    }
+}
+
+- (void)showHighScoreAlert {
+    NSString *title = @"New High Score! 🎉";
+    NSString *message = @"Tap on 'Best Round' to seee how you compare to others.";
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:message
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    NSString *cancelButtonTitle = @"Okay!";
+    [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+    
     [[WIBSoundManager sharedInstance] playAchievementSound];
     
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)didPressDone:(id)sender {
@@ -88,10 +104,6 @@
         [[WIBGamePlayManager sharedInstance] beginRoundForType:type];
         [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
     }
-}
-- (IBAction)didPressRandomButton:(id)sender {
-    [[WIBGamePlayManager sharedInstance] beginRound];
-    [self performSegueWithIdentifier:@"playAgainSegue" sender:self];
 }
 
 # pragma mark - GADInterstitialDelegate
