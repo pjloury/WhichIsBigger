@@ -14,6 +14,7 @@
 @interface WIBDataModel : NSObject 
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
+- (void)invalidateDataModel;
 
 - (WIBGameItem*)firstGameItemForQuestionType:(WIBQuestionType *)type;
 //- (WIBGameItem*)firstNonHumanGameItemForQuestionType:(WIBQuestionType *)type;

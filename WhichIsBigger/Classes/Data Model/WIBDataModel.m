@@ -12,7 +12,7 @@
 #import "WIBGamePlayManager.h"
 
 @interface WIBDataModel()
-@property (nonatomic, strong) NSMutableDictionary *gameItemsDictionary;
+@property (atomic, strong) NSMutableDictionary *gameItemsDictionary;
 @end
 
 @implementation WIBDataModel
@@ -31,6 +31,9 @@
 
 - (void)insertGameItem:(WIBGameItem *)gameItem
 {
+    if (!self.gameItemsDictionary) {
+        self.gameItemsDictionary = [NSMutableDictionary dictionary];
+    }
     NSMutableArray* categoryArray = [self.gameItemsDictionary objectForKey:gameItem.categoryString];
     if(!categoryArray)
     {
@@ -43,6 +46,10 @@
 - (BOOL)itemNameAlreadyUsed:(NSString *)name
 {
     return [[WIBGamePlayManager sharedInstance].gameRound.usedNames containsObject:name];
+}
+
+- (void)invalidateDataModel {
+    _gameItemsDictionary = nil;
 }
 
 - (WIBGameItem*)firstGameItemForQuestionType:(WIBQuestionType *)type
