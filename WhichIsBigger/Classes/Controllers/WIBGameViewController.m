@@ -30,8 +30,8 @@
 // Model
 @property (strong, nonatomic) WIBGameQuestion *question;
 @property (strong, atomic) NSTimer *timer;
-@property (strong, atomic) NSTimer *blinkTimer;
-@property (strong, atomic) NSTimer *nextButtonTimer;
+@property (strong, atomic) NSTimer *nextButtonBlinkTimer;
+@property (strong, atomic) NSTimer *nextButtonRevealTimer;
 @property (strong, atomic) NSDate *startDate;
 @property int currSeconds;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timerBarWidth;
@@ -87,8 +87,8 @@
 {
 	self.tapRecognizer.enabled = NO;
     [self.timerBar.layer removeAllAnimations];
-    [self.blinkTimer invalidate];
-    [self.nextButtonTimer invalidate];
+    [self.nextButtonBlinkTimer invalidate];
+    [self.nextButtonRevealTimer invalidate];
     self.nextButton.enabled = NO;
     self.nextButton.alpha = 0.0;
     self.questionView.comparsionSymbol.hidden = YES;
@@ -171,17 +171,15 @@
 - (void)questionViewDidFinishRevealingAnswer:(WIBQuestionView *)questionView
 {
     // if someone taps too late, don't construe this tap as a "next" tap
-    if([WIBGamePlayManager sharedInstance].questionNumber > NUMBER_OF_QUESTIONS) {
+    if([WIBGamePlayManager sharedInstance].questionNumber >= NUMBER_OF_QUESTIONS) {
         if (questionView.isGamePlayDisabled) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 self.tapRecognizer.enabled = YES;
-                [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
                 self.nextButton.enabled = YES;
             });
         }
         else {
             self.tapRecognizer.enabled = YES;
-            [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
             self.nextButton.enabled = YES;
         }
     }
@@ -194,7 +192,12 @@
         else {
             self.tapRecognizer.enabled = YES;
         }
-        self.nextButtonTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(revealNext) userInfo:nil repeats:NO];
+    }
+    [self.nextButtonRevealTimer invalidate];
+    if (questionView.isGamePlayDisabled) {
+        self.nextButtonRevealTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(revealNext) userInfo:nil repeats:NO];
+    } else {
+        self.nextButtonRevealTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(revealNext) userInfo:nil repeats:NO];
     }
 }
 
@@ -203,6 +206,10 @@
     void (^revealButton)() = ^void() {
         self.nextButton.alpha = 1.0;
     };
+    
+    if([WIBGamePlayManager sharedInstance].questionNumber >= NUMBER_OF_QUESTIONS) {
+        [self.nextButton setTitle:@"Finish" forState:UIControlStateNormal];
+    }
     
     [UIView animateWithDuration:0.1 animations:revealButton completion:^(BOOL finished){
         self.nextButton.enabled = YES;
@@ -213,10 +220,10 @@
         else {
             self.nextButtonParentView.type = CSAnimationTypeFlash;
         }
-        self.nextButtonParentView.delay = 0.2;
-        self.nextButtonParentView.duration = 0.5;
+        self.nextButtonParentView.delay = 0.3;
+        self.nextButtonParentView.duration = 0.6;
         
-        self.blinkTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target: self.nextButtonParentView
+        self.nextButtonBlinkTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target: self.nextButtonParentView
                                        selector: @selector(startCanvasAnimation) userInfo: nil repeats: YES];
         
     }];
