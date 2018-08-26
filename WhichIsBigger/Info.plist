@@ -32,11 +32,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>FacebookAppID</key>
 	<string>896440513763487</string>
 	<key>FacebookDisplayName</key>
 	<string>Which is Bigger?</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.games</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
@@ -75,6 +77,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>"Which is Bigger would like to always use your location"</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>"Which is Bigger would like to use your location when in use"</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Bold.ttf</string>

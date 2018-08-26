@@ -89,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		601172941BA6A19E00EE8182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		602621CC213244780055BF33 /* WhichIsBigger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhichIsBigger.entitlements; sourceTree = "<group>"; };
 		602A92F41C745E96007777EB /* WIBAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBAdViewController.h; sourceTree = "<group>"; };
 		602A92F51C745E96007777EB /* WIBAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBAdViewController.m; sourceTree = "<group>"; };
 		602A92F71C7AE98D007777EB /* WIBGameCompleteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteTableViewController.h; path = Classes/Controllers/WIBGameCompleteTableViewController.h; sourceTree = "<group>"; };
@@ -293,6 +294,7 @@
 		7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */ = {
 			isa = PBXGroup;
 			children = (
+				602621CC213244780055BF33 /* WhichIsBigger.entitlements */,
 				7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */,
 				7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */,
 				F37659221ADE3B9600932FC9 /* Categories */,
@@ -863,6 +865,7 @@
 			baseConfigurationReference = 9F43359260F796C113575D4B /* Pods-WhichIsBigger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WhichIsBigger/WhichIsBigger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -889,6 +892,7 @@
 			baseConfigurationReference = F426798995766FD701268EFA /* Pods-WhichIsBigger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WhichIsBigger/WhichIsBigger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
