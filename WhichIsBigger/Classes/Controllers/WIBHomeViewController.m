@@ -232,7 +232,7 @@
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(collectionView.frame.size.width/3.0-collectionView.frame.size.width/10, collectionView.frame.size.height/3.0 - collectionView.frame.size.height/20);
+    return CGSizeMake(collectionView.frame.size.width/3.0-collectionView.frame.size.width/10, collectionView.frame.size.height/3.0);
 }
 
 # pragma mark - Game Center Delegate

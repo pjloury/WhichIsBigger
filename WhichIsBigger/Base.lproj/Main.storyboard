@@ -195,10 +195,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="88" height="105"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ci4-0f-XYL">
-                                                            <rect key="frame" x="4" y="0.0" width="80" height="80"/>
+                                                            <rect key="frame" x="6.5" y="0.0" width="75" height="75"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QCA-tu-7BP">
-                                                                    <rect key="frame" x="10" y="10" width="60" height="60"/>
+                                                                    <rect key="frame" x="10" y="10" width="55" height="55"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.119986943" green="0.87121212120000002" blue="0.19307680769999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -206,13 +206,13 @@
                                                                 <constraint firstItem="QCA-tu-7BP" firstAttribute="centerX" secondItem="Ci4-0f-XYL" secondAttribute="centerX" id="ZwQ-Xh-ZMT"/>
                                                                 <constraint firstItem="QCA-tu-7BP" firstAttribute="leading" secondItem="Ci4-0f-XYL" secondAttribute="leading" constant="10" id="fEy-UT-Q5Z"/>
                                                                 <constraint firstItem="QCA-tu-7BP" firstAttribute="centerY" secondItem="Ci4-0f-XYL" secondAttribute="centerY" id="hFC-0Y-cxo"/>
-                                                                <constraint firstAttribute="width" constant="80" id="mGV-RA-Mxw"/>
+                                                                <constraint firstAttribute="width" constant="75" id="mGV-RA-Mxw"/>
                                                                 <constraint firstItem="QCA-tu-7BP" firstAttribute="top" secondItem="Ci4-0f-XYL" secondAttribute="top" constant="10" id="pHv-9n-Th4"/>
                                                                 <constraint firstAttribute="width" secondItem="Ci4-0f-XYL" secondAttribute="height" multiplier="1:1" id="yRG-Co-3d3"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="frP-8b-a3M">
-                                                            <rect key="frame" x="23.5" y="90" width="42" height="20"/>
+                                                            <rect key="frame" x="23.5" y="85" width="42" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="67" id="Hnc-vE-yb8"/>
                                                                 <constraint firstAttribute="height" constant="20" id="fwR-I2-NH3"/>
@@ -240,7 +240,6 @@
                                                         <constraint firstAttribute="bottom" secondItem="frP-8b-a3M" secondAttribute="bottom" constant="20" id="f5W-8x-gLb">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                         </constraint>
-                                                        <constraint firstAttribute="width" constant="88" id="sPR-UE-1gW"/>
                                                         <constraint firstItem="frP-8b-a3M" firstAttribute="centerX" secondItem="Ci4-0f-XYL" secondAttribute="centerX" id="sU4-EU-PAW"/>
                                                         <constraint firstItem="frP-8b-a3M" firstAttribute="top" secondItem="Ci4-0f-XYL" secondAttribute="bottom" constant="2" id="y11-p3-lWs">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -1559,13 +1558,13 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQH-Fk-81V" userLabel="Option View2" customClass="WIBOptionView">
-                                        <rect key="frame" x="104" y="342" width="167" height="167"/>
+                                        <rect key="frame" x="104" y="342" width="167" height="167.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yt-ZK-7yU" customClass="WIBOptionButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="167" height="167"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="167" height="167.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:QGn-eF-PHJ:image" translatesAutoresizingMaskIntoConstraints="NO" id="6v6-3t-5dC" customClass="WIBImageView">
-                                                        <rect key="frame" x="0.0" y="35" width="167" height="97"/>
+                                                        <rect key="frame" x="0.0" y="35" width="167" height="97.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="140" id="1lj-BK-B0K"/>
                                                         </constraints>
@@ -1576,7 +1575,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="EUX-II-1nK" userLabel="answerLabel">
-                                                        <rect key="frame" x="0.0" y="137" width="167" height="30"/>
+                                                        <rect key="frame" x="0.0" y="137.5" width="167" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="BIT-iy-Lup"/>
                                                         </constraints>
