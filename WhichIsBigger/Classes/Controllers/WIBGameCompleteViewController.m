@@ -70,7 +70,7 @@
 
 - (IBAction)didPressActionButton:(id)sender {
     NSString *highScore = [NSString stringWithFormat:@"Have you played Which is Bigger? See if you can beat my top score of %ld!", [WIBGamePlayManager sharedInstance].highScore];
-    NSString *urlString = [[PFConfig currentConfig] objectForKey:@"appURL"];
+    NSString *urlString = @"https://apps.apple.com/us/app/which-is-bigger-trivia-game/id1016172802";
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSMutableArray *items = [NSMutableArray array];

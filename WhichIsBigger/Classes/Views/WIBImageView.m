@@ -59,7 +59,10 @@
     
     if (self.gameItem.photoURL != nil && ![self.gameItem.photoURL isKindOfClass:[NSNull class]]) {
         NSLog(self.gameItem.photoURL);
-        [self sd_setImageWithURL:[NSURL URLWithString:self.gameItem.photoURL]
+        NSString* webStringURL = [self.gameItem.photoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+        NSURL *url = [NSURL URLWithString:webStringURL];
+        [self sd_setImageWithURL: url
                 placeholderImage:[UIImage placeholderWithHeight:100] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (!error)

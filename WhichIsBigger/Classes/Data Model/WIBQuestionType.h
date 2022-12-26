@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
 
 typedef NS_ENUM(NSUInteger, WIBComparisonType) {
     WIBComparisonLikeToLikeType,
@@ -16,9 +15,7 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
     WIBComparisonCount
 };
 
-@interface WIBQuestionType : PFObject<PFSubclassing>
-
-+ (NSString *)parseClassName;
+@interface WIBQuestionType : NSObject
 
 @property (nonatomic) WIBComparisonType comparisonType;
 @property (nonatomic) NSString *category;
@@ -29,7 +26,6 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
 @property (nonatomic) NSString *tintColorString;
 @property (nonatomic) NSNumber *pointsToUnlock;
 @property (nonatomic) NSNumber *safePointsToUnlock;
-@property (nonatomic) PFFile *image;
 @property (nonatomic) NSString *imageURL;
 @property (nonatomic) NSString *questionString;
 @property (nonatomic) NSString *clarifyingString;
@@ -40,6 +36,8 @@ typedef NS_ENUM(NSUInteger, WIBComparisonType) {
 - (UIColor *)themeColor;
 - (UIColor *)labelThemeColor;
 
-- (NSNumber *)puntosToUnlock;
+
+- (id) initWith: (WIBComparisonType) comparisonType category: (NSString *) category title: (NSString *) title primaryColor: (NSString *) primaryColor secondaryColor: (NSString *) secondaryColor pointsToUnlock: (NSNumber *) pointsToUnlock imageURL: (NSString *) imageURL questionString: (NSString *) questionString;
+
 
 @end

@@ -1,0 +1,12 @@
+name,category,query,units,tags,value,imageURL
+nan,nan,nan,nan,,,nan
+Manila,population,population,people,city,1780000.0,http://www.wolframcdn.com/waimage/hset006/ba2/ba277f62926d0875e7d984090c102639_v001xs.png
+Irvine,population,population,people,city,,nan
+Shanghai,population,population,people,city,24150000.0,http://www.wolframcdn.com/waimage/hset006/043/043d5a87cde180fde31872c6ee9484bd_v001xs.png
+Japan,nan,nan,nan,,,nan
+Cotton Gin,history,invented,date,,,nan
+Penicillin,history,discovered,date,,,nan
+Elton John,age,birthdate,date,['celebrity'],-718646400.0,http://www.wolframcdn.com/waimage/hset028/abc/abc7b86bdae6608c5807a55b1df4b20e_v001s.jpg
+Tokyo,population,population,people,city,13620000.0,http://www.wolframcdn.com/waimage/hset006/a28/a28f6352d3719b06bce2bf2162ebe597_v001xs.png
+Kevin Durant,weight,weight,lbs,['celebrity'],240.0,http://www.wolframcdn.com/waimage/hset028/f34/f347f7652f0df81c3e68eddd6b8e6ef0_v001s.png
+Elton John,height,height,inches,['celebrity'],68.0,http://www.wolframcdn.com/waimage/hset028/abc/abc7b86bdae6608c5807a55b1df4b20e_v001s.jpg

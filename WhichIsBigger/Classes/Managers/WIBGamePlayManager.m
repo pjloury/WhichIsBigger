@@ -29,8 +29,6 @@
 
 @property (nonatomic) NSString *roundUUID;
 
-@property NSArray *previousQuestionTypes;
-
 @end
 
 @implementation WIBGamePlayManager
@@ -42,20 +40,56 @@
     
     dispatch_once(&pred, ^{
         shared = [[WIBGamePlayManager alloc] init];
-        
-        if ([[PFUser currentUser] objectForKey:@"skewFactor"]) {
-            NSNumber *skewFactor = [[PFUser currentUser] objectForKey:@"skewFactor"];
-            shared.skewFactor = skewFactor.doubleValue;
-        }
-        else {
-            shared.skewFactor = 0.5;
-        }
-        
+        shared.skewFactor = 0.5;
         shared.questionCeiling = 40;
         shared.questionFloor = 10;
     });
     return shared;
 }
+
+# pragma mark - Testing
+- (void)generateQuestionTypes {
+    
+    WIBQuestionType *age = [[WIBQuestionType alloc] initWith: 0
+                                                      category: @"age" // This is used as a reference type in the data model
+                                                         title:  @"Age" // Under the little app icon on the home screen
+                                                  primaryColor:  @"FCEC61"
+                                                secondaryColor:  @"F09F44"
+                                                pointsToUnlock: @-1
+                                                      imageURL: @"https://cdn-icons-png.flaticon.com/512/9064/9064190.png"
+                                                questionString: @"Who is Older?" ];
+    
+    WIBQuestionType *weight = [[WIBQuestionType alloc] initWith: 0
+                                                      category: @"weight" // This is used as a reference type in the data model
+                                                         title:  @"Weight" // Under the little app icon on the home screen
+                                                  primaryColor:  @"6FB948"
+                                                secondaryColor:  @"6737B5"
+                                                pointsToUnlock: @600
+                                                      imageURL: @"https://cdn-icons-png.flaticon.com/512/2834/2834539.png"
+                                                questionString: @"Who is Heavier?" ];
+    
+    WIBQuestionType *height = [[WIBQuestionType alloc] initWith: 0
+                                                      category: @"height" // This is used as a reference type in the data model
+                                                         title:  @"Height" // Under the little app icon on the home screen
+                                                  primaryColor:  @"D63A64"
+                                                secondaryColor:  @"FAE251"
+                                                pointsToUnlock: @1200
+                                                      imageURL: @"https://cdn-icons-png.flaticon.com/512/8531/8531897.png"
+                                                questionString: @"Who is Taller?" ];
+    
+    WIBQuestionType *population = [[WIBQuestionType alloc] initWith: 0
+                                                      category: @"population" // This is used as a reference type in the data model
+                                                         title:  @"Population" // Under the little app icon on the home screen
+                                                  primaryColor:  @"D0D552"
+                                                secondaryColor:  @"55A9D8"
+                                                pointsToUnlock: @1800
+                                                      imageURL: @"https://cdn-icons-png.flaticon.com/512/33/33308.png"
+                                                questionString: @"Which is Bigger?" ];
+    
+    self.questionTypes = [@[age, weight, height, population] mutableCopy];
+    
+}
+
 
 # pragma mark - Game State
 
@@ -77,17 +111,20 @@
         [self.gameRound generateQuestions];
     }
     
+    /*
     if (self.unlockedQuestionType == type) {
-        [[PFUser currentUser] setObject:self.availableQuestionTypes forKey:@"unlockedQuestionTypes"];
-        [[PFUser currentUser] saveInBackground];
+        self.unlockedQuestionTypes = self.availableQuestionTypes;
     }
+     */
 }
 
 - (void)endGame
 {
     [self adjustDifficulty];
+    
     self.lifeTimeScore = self.lifeTimeScore + self.score;
-    if (self.availableQuestionTypes.count > [[[PFUser currentUser] objectForKey:@"unlockedQuestionTypes"] count]) {
+    
+    if (self.availableQuestionTypes.count > self.previouslyUnlockedQuestionTypes.count) {
         self.unlockedQuestionType = self.availableQuestionTypes.lastObject;
     }
         
@@ -102,14 +139,54 @@
     return [self.gameRound nextGameQuestion];
 }
 
+- (NSArray *) previouslyUnlockedQuestionTypes {
+    NSMutableArray *array = [NSMutableArray array];
+    for (WIBQuestionType *questionType in self.questionTypes) {
+        NSInteger previousScore = self.lifeTimeScore - self.score;
+        if (previousScore > [questionType.pointsToUnlock integerValue] ) {
+            [array addObject:questionType];
+        }
+    }
+    //return [self.questionTypes subarrayWithRange:NSMakeRange(0,3)];
+    return array;
+}
+
+
+- (NSArray *)availableQuestionTypes
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (WIBQuestionType *questionType in self.questionTypes) {
+        if (self.lifeTimeScore > [questionType.pointsToUnlock integerValue]) {
+            [array addObject:questionType];
+        }
+    }
+    //return [self.questionTypes subarrayWithRange:NSMakeRange(0,3)];
+    return array;
+}
+
+/*
+- (NSArray *) unlockedQuestionTypes
+{
+    return ((NSArray*)[[NSUserDefaults standardUserDefaults] objectForKey:@"unlockedQuestionTypes"]);
+    
+    
+}
+    
+- (void) setUnlockedQuestionTypes: (NSArray *) unlockedQuestionTypes
+{
+    [[NSUserDefaults standardUserDefaults] setObject:unlockedQuestionTypes forKey:@"unlockedQuestionTypes"];
+}
+*/
+    
+    
 - (NSInteger)pointsPerQuestion
 {
-    return [[[PFConfig currentConfig] objectForKey:@"pointsPerQuestion"] integerValue];
+    return 100;
 }
 
 - (NSInteger)pointsPerLevel
 {
-    return [[[PFConfig currentConfig] objectForKey:@"pointsPerLevel"] integerValue];
+    return 600;
 }
 
 - (NSInteger)level
@@ -124,13 +201,13 @@
 
 - (NSInteger)lifeTimeScore
 {
-    return [[[PFUser currentUser] objectForKey:@"lifeTimeScore"] integerValue];
+    return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"lifeTimeScore"]).integerValue;
 }
 
 - (void)setLifeTimeScore:(NSInteger)lifeTimeScore
 {
-    [[PFUser currentUser] setObject:@(lifeTimeScore) forKey:@"lifeTimeScore"];
-    [[PFUser currentUser] saveInBackground];
+    [[NSUserDefaults standardUserDefaults] setObject:@(lifeTimeScore) forKey:@"lifeTimeScore"];
+    NSLog(@"🎉Lifetime score: %ld",(long)lifeTimeScore);
     [self syncScoreWithGameKit:@"topScores" scoreValue:self.lifeTimeScore];
 }
 
@@ -141,7 +218,7 @@
 
 - (NSInteger)initialSecondsPerQuestion
 {
-    return [[[PFConfig currentConfig] objectForKey:@"initialSecondsPerQuestion"] integerValue];
+    return 5;
 }
 
 - (double)secondsPerQuestion
@@ -160,18 +237,6 @@
 {
     //return 0.5 * (self.secondsPerQuestion/SECONDS_PER_QUESTION) * 1.75;
     return self.secondsPerQuestion/6;
-}
-
-- (NSArray *)availableQuestionTypes
-{
-    NSMutableArray *array = [NSMutableArray array];
-    for (WIBQuestionType *questionType in self.questionTypes) {
-        if (self.lifeTimeScore > [questionType.puntosToUnlock integerValue]) {
-            [array addObject:questionType];
-        }
-    }
-    //return [self.questionTypes subarrayWithRange:NSMakeRange(0,3)];
-    return array;
 }
 
 - (double) skewFactor
@@ -223,17 +288,15 @@
     }
 }
 
+// Set during app initialization
 - (void)setQuestionTypes:(NSMutableArray *)questionTypes
 {
     _questionTypes = questionTypes;
-    self.previousQuestionTypes = self.availableQuestionTypes;
 }
 
 - (void)setHighScore:(NSInteger)highScore
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(highScore) forKey:@"highScore"];
-    [[PFUser currentUser] setObject:@(highScore) forKey:@"highScore"];
-    [[PFUser currentUser] saveInBackground];
     [self syncScoreWithGameKit:@"highScore" scoreValue:self.highScore];
 }
 
@@ -249,51 +312,46 @@
 
 - (void)setCurrentStreak:(NSInteger)currentStreak
 {
-//    [[NSUserDefaults standardUserDefaults] setObject:@(currentStreak) forKey:@"currentStreak"];
-    [[PFUser currentUser] setObject:@(currentStreak) forKey:@"currentStreak"];
-    [[PFUser currentUser] saveInBackground];
+    [[NSUserDefaults standardUserDefaults] setObject:@(currentStreak) forKey:@"currentStreak"];
 }
 
 - (NSInteger)currentStreak
 {
-//    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentStreak"];
-//    return (num) ? num.integerValue: 0;
-    return [[[PFUser currentUser] objectForKey:@"currentStreak" ] integerValue];
+    return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"currentStreak"]).integerValue;
 }
 
 - (void)setLongestStreak:(NSInteger)longestStreak
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(longestStreak) forKey:@"longestStreak"];
-    [[PFUser currentUser] setObject:@(longestStreak) forKey:@"longestStreak"];
-    [[PFUser currentUser] saveInBackground];
     [self syncScoreWithGameKit:@"longestStreak" scoreValue:self.longestStreak];
 }
 
 - (NSInteger)longestStreak
 {
-    return [[[PFUser currentUser] objectForKey:@"longestStreak" ] integerValue];
+    return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"longestStreak"]).integerValue;
 }
 
 - (NSInteger)totalCorrectAnswers
 {
-    return [[[PFUser currentUser] objectForKey:@"totalCorrectAnswers" ] integerValue];
+    return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"totalCorrectAnswers"]).integerValue;
 }
 
 - (void)setTotalCorrectAnswers:(NSUInteger)totalCorrectAnswers
 {
-    [[PFUser currentUser] setObject:@(totalCorrectAnswers) forKey:@"totalCorrectAnswers"];
-    [[PFUser currentUser] saveInBackground];
+    [[NSUserDefaults standardUserDefaults] setObject:@(totalCorrectAnswers) forKey:@"totalCorrectAnswers"];
+    [self syncScoreWithGameKit:@"totalCorrectAnswers" scoreValue:self.longestStreak];
 }
 
 - (NSInteger)totalAnswers
 {
-    return [[[PFUser currentUser] objectForKey:@"totalAnswers" ] integerValue];
+    return ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"totalAnswers"]).integerValue;
 }
 
 - (void)setTotalAnswers:(NSUInteger)totalAnswers
 {
-    [[PFUser currentUser] setObject:@(totalAnswers) forKey:@"totalAnswers"];
-    [[PFUser currentUser] saveInBackground];
+    [[NSUserDefaults standardUserDefaults] setObject:@(totalAnswers) forKey:@"totalAnswers"];
+    [self syncScoreWithGameKit:@"totalAnswers" scoreValue:self.longestStreak];
+
 }
 
 - (NSUInteger)questionNumber

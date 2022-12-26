@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WIBGameItem.h"
+#import "CHCSVParser.h"
 
 @class WIBQuestionType;
 
@@ -15,6 +16,7 @@
 + (WIBDataModel *)sharedInstance;
 - (void)insertGameItem:(WIBGameItem *)gameItem;
 - (void)invalidateDataModel;
+- (void)generateTestData;
 
 - (WIBGameItem*)firstGameItemForQuestionType:(WIBQuestionType *)type;
 //- (WIBGameItem*)firstNonHumanGameItemForQuestionType:(WIBQuestionType *)type;

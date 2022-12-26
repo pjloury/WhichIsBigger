@@ -7,7 +7,6 @@
 //
 
 #import "WIBNetworkManager.h"
-#import <Parse/Parse.h>
 
 // Data Model
 #import "WIBGameQuestion.h"
@@ -30,28 +29,6 @@
     });
     
     return shared;
-}
-
-- (void)getConfigurationWithCompletion:(void (^)())completion
-{    
-    PFConfig *optimisticConfig = [PFConfig currentConfig];
-    if (optimisticConfig) {
-        NSLog(@"=============================== USING CACHED CONFIG");
-        [PFConfig getConfigInBackground];
-        if (completion)
-            completion();
-    }
-    else {
-        if ([self.reachability isReachable]) {
-            NSLog(@"=============================== FETCHING CONFIG SYNCHRONOUSLY");
-            [PFConfig getConfig];
-            if (completion)
-                completion();
-        }
-        else {
-            [self showNetworkError];
-        }
-    }
 }
 
 - (void)showNetworkError {
@@ -77,73 +54,9 @@
 
 - (void)getCategoriesWithCompletion:(void (^)())completion
 {
-    PFQuery *query =  [PFQuery queryWithClassName:@"QuestionType"];
-    [query whereKey:@"name" containedIn:[[PFConfig currentConfig] objectForKey:@"questionTypeWhiteList"]];
-    
-    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-    NSString *latestVersion = [[PFConfig currentConfig] objectForKey:@"latestVersion"];
-    if ([latestVersion isEqualToString:version]) {
-        [query orderByAscending:@"safePointsToUnlock"];
-    } else {
-        [query orderByAscending:@"pointsToUnlock"];
-    }
-    
-    BOOL localQuery = NO;
-    if ([WIBGamePlayManager sharedInstance].categoriesInLocalStorage) {
-        [query fromLocalDatastore];
-        localQuery = YES;
-    }
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        // For some reason this is returning zero objects
-        NSLog(@"======= NUMBER OF CATEGORIES FETCHED: %lu", (unsigned long)objects.count);
-         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];
-         [self prefetchImagesForObjects:objects];
-         if (completion) completion();
-         if (![WIBGamePlayManager sharedInstance].categoriesInLocalStorage && objects.count > 0) {
-             [PFObject pinAllInBackground:objects withName: @"categories" block:^(BOOL succeeded, NSError * _Nullable error) {
-                 if (succeeded){
-                     [[WIBGamePlayManager sharedInstance] setCategoriesInLocalStorage: YES];
-                 }
-                 else if (error){
-                     NSLog(error.userInfo);
-                 }
-             }];
-             if(localQuery) {
-                 [self refreshCategoriesInBackground];
-             }
-         }
-     }];
-}
-
-- (void)refreshCategoriesInBackground {
-    PFQuery *query =  [PFQuery queryWithClassName:@"QuestionType"];
-    [query whereKey:@"name" containedIn:[[PFConfig currentConfig] objectForKey:@"questionTypeWhiteList"]];
-    
-    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-    NSString *latestVersion = [[PFConfig currentConfig] objectForKey:@"latestVersion"];
-    if ([latestVersion isEqualToString:version]) {
-        [query orderByAscending:@"safePointsToUnlock"];
-    } else {
-        [query orderByAscending:@"pointsToUnlock"];
-    }
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-         [WIBGamePlayManager sharedInstance].questionTypes = [objects copy];
-         [self prefetchImagesForObjects:objects];
-         [PFObject unpinAllObjectsInBackgroundWithName: @"categories" block:^(BOOL succeeded, NSError * _Nullable error) {
-             if (succeeded) {
-                 [PFObject pinAllInBackground:objects withName: @"categories" block:^(BOOL succeeded, NSError * _Nullable error) {
-                     if (succeeded){
-                         NSLog(@"===================== Successfully refreshed categories");
-                     }
-                     else if (error){
-                         NSLog(error.userInfo);
-                     }
-                 }];
-             }
-         }];
-     }];
+    [[WIBGamePlayManager sharedInstance] generateQuestionTypes];
+    completion();
+     
 }
 
 - (void)prefetchImagesForObjects:(NSArray *)array
@@ -157,98 +70,8 @@
 
 - (void)generateDataModelWithCompletion:(void (^)())completion
 {
-    PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
-    query.limit = GAME_ITEM_FETCH_LIMIT;
-    
-    BOOL localQuery = NO;
-    
-    if ([WIBGamePlayManager sharedInstance].gameItemsInLocalStorage)
-    {
-        NSLog(@"=============================== GENERATING DATA MODEL LOCALLY");
-        [query fromLocalDatastore];
-        localQuery = YES;
-    }
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-    {
-        if (!error)
-        {
-            NSLog(@"Successfully retrieved %lu GameItems.", (unsigned long)objects.count);
-            [self insertObjects: objects intoDataModel:[WIBDataModel sharedInstance]];
-            completion();
-            
-            if (![WIBGamePlayManager sharedInstance].gameItemsInLocalStorage && objects.count >0) {
-                [PFObject pinAllInBackground:objects withName: @"gameItems" block:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (succeeded) {
-                        [[WIBGamePlayManager sharedInstance] setGameItemsInLocalStorage: YES];
-                    }
-                    else if (error){
-                        NSLog(error.userInfo);
-                    }
-                }];
-            }
-        }
-        else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-            // If you get code 100, then use the local storage
-        }
-        if (localQuery) {
-            @synchronized([WIBDataModel sharedInstance]) {
-                [self refreshGameItemsInBackground];
-            }
-        }
-    }];
-}
-
-- (void)refreshGameItemsInBackground {
-    PFQuery *query =  [PFQuery queryWithClassName:@"GameItem"];
-    query.limit = GAME_ITEM_FETCH_LIMIT;
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-     {
-         if (!error) {
-             NSLog(@"======== Successfully retrieved %lu REFRESHED GameItems .", (unsigned long)objects.count);
-             [[WIBDataModel sharedInstance] invalidateDataModel];
-             [self insertObjects:objects intoDataModel:[WIBDataModel sharedInstance]];
-             
-             [PFObject unpinAllObjectsInBackgroundWithName: @"gameItems" block:^(BOOL succeeded, NSError * _Nullable error) {
-                 if (succeeded) {
-                     [PFObject pinAllInBackground:objects withName: @"gameItems" block:^(BOOL succeeded, NSError * _Nullable error) {
-                         if (succeeded){
-                             NSLog(@"===================== Successfully refreshed gameItems");
-                         }
-                         else if (error){
-                             NSLog(error.userInfo);
-                         }
-                     }];
-                 }
-             }];
-         }
-         else {
-             NSLog(@"Error: %@ %@", error, [error userInfo]);
-             // If you get code 100, then use the local storage
-         }
-     }];
-}
-
-- (void)insertObjects:(NSArray *) objects intoDataModel: (WIBDataModel *)dataModel
-{
-    for (PFObject *object in objects)
-    {
-        WIBGameItem *gameItem = [[WIBGameItem alloc] init];
-        gameItem.name = object[@"name"];
-        gameItem.baseQuantity = object[@"quantity"];
-        gameItem.unit = object[@"unit"];
-        gameItem.categoryString = object[@"category"];
-        gameItem.tagArray = object[@"tagArray"];
-        gameItem.photoURL = object[@"photoURL"];
-        gameItem.objectId = object.objectId;
-        if(gameItem.name && gameItem.baseQuantity)
-        {
-            [dataModel insertGameItem: gameItem];
-        }
-    }
+    [[WIBDataModel sharedInstance] generateTestData];
+    completion();
 }
 
 - (void)preloadImages:(NSMutableArray *)gameQuestions

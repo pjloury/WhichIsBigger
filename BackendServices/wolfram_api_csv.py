@@ -1,40 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
+#python wolfram_api.py --csv = /
+# NOTE: Not using this one anymore
 
-# Right now I'm getting the date parsing to work properly for historical events
-
-# 2 CATEGORIES/QUERY
-# image / ??
-# age/birthdate
-# height/height
-# weight/weight
-
-# history/date
-# image???
-# GDP/GDP
-# cities/population
-# countries/population
-# companies/founded
-
-# 4 UNITS
-# People, lbs, Years, dollars
-
-# 5 TAGS
-# Celebrity, Athlete, Woman
-#world, tech, science, usa, world
 
 from xml.etree import cElementTree as ElementTree
-import urllib2, urllib
+import urllib3, urllib
 import argparse
 import re
 import csv
 import time, datetime
-import pandas as pd
-import ast
+# from time import mktime
 from datetime import datetime
 
 from dateutil.parser import parse as dateparse
+
+#from api_keys import *
 
 __topic_re = re.compile("""(.+?)\s+\|""")
 __topic_re1 = re.compile("""(.+?)\s+\(""")
@@ -53,7 +35,10 @@ __list_re = re.compile("""\d+\s+\|\s+([^\|]*)\s+\|""")
 
 QUERYSTRING_IMAGE = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s&format=plaintext,html"
 QUERYSTRING = "http://api.wolframalpha.com/v2/query?input=%s&appid=%s"
+
+
 APP_ID='VWK3T2-4JGT62XJP7'
+############## WOLFRAM API ##############
 
 
 class Enum(set):
@@ -62,169 +47,65 @@ class Enum(set):
             return name
         raise AttributeError
 
+############## END WOLFRAM API ##############
+
 
 def main():
+    parser = argparse.ArgumentParser(description='wolfram to parse backend service')
 
-    FILENAME = "data.csv"
+    parser.add_argument('--csv', type=open, dest='csvfile',
+                        help='csv file to parse')
 
-    df = pd.read_csv(FILENAME)
-    df = df.astype({'name':'string','category':'string','query':'string','units':'string','imageURL':'string'})
+    args = parser.parse_args()
+    csvfile = args.csvfile
 
-    for index, row in df.iterrows():
+    # parse a csv file for entities to query
+    if csvfile:
 
-        print "reading a row"
+        print("loading csv")
 
-        NAME = row['name']
-        CATEGORY = row['category']
-        QUERY = row['query'].lower()
-        UNITS = row['units'].lower()
-        TAGS = row['tags']  # all tags in quotes
-        VALUE = row ['value']
+        reader = csv.reader(csvfile)
 
-        #TAGS = [t.lower() for t in TAGS.split(',')]
+        # skip first line of csv (assume this is header)
+        next(reader, None)
 
-        try:
-            if pd.isna(VALUE):
-                print "New Item Found:", NAME
-                query_string = "%s " + QUERY
-                (val, imgurl) = single_query(query_string, NAME, CATEGORY, UNITS, TAGS, VALUE)
-                ### HACK TO MAKE THIS LIST JUST A SINGLE
-                df.at[index, 'imageURL'] = imgurl
-                df.at[index, 'value'] = val
-                df.to_csv(FILENAME, index=False)
+        for row in reader:
 
-        except Exception as e:
-            print e
-            pass
+            print("reading a row")
+            if len(row) < 2:
+                continue
 
+            NAME = row[0]
+            CATEGORIES = row[1]
+            QUERY = row[2].lower()
+            UNITS = row[3].lower()
+            TAGS = row[4]  # all tags in quotes
+#            VALUE = row [5]
 
-    print(df)
+            TAGS = [t.lower() for t in TAGS.split(',')]
+            CATEGORIES = [t.lower() for t in CATEGORIES.split(',')]
 
+            for category in CATEGORIES:
 
-def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[], VALUE=0):
+                # gracefully catch exception and move to next query
+                try:
+                    query_string = "%s " + QUERY
+#                    single_query(query_string,NAME, category, UNITS, TAGS, VALUE)
+                    single_query(query_string,NAME, category, UNITS, TAGS)
 
-    QUERY = urllib.quote(query_string % NAME)
-
-    BUILT_QUERY = QUERYSTRING % (QUERY, APP_ID)
-    print "Built query", BUILT_QUERY
-
-
-    xml = urllib2.urlopen(BUILT_QUERY).read()
-    root = ElementTree.fromstring(xml)
-
-
-    TOPIC = get_topic(root)
-    topicItems = [x.strip() for x in TOPIC.split(',')]
-    if len(topicItems)>2:
-        TOPIC = topicItems[0] + ", " + topicItems[-1]
-    elif len(topicItems) == 2:
-        TOPIC = topicItems[1]
-    else :
-        TOPIC = NAME
-
-    PHOTO = get_image(TOPIC,TAGS)
-
-    QUANTITY = -1
-
-    if pd.isna(VALUE):
-
-        # if CATEGORY == "image": # assume we are just looking for the image
-        #     value = root.find("./pod[@title='Image']").find('markup').text
-        #     m = __image_re.search(value)
-        #     if m:
-        #         PHOTO = "http://" + m.group(1)
-
-        print "CATEGORY CHECK:", CATEGORY
-
-        if CATEGORY == "age":
-            print "Let's retrieve age!"
-            QUANTITY, UNIT = parse_age(QUERY, root)
-
-        elif CATEGORY == "population":
-
-            QUANTITY, UNIT = parse_population(QUERY, root)
-
-        elif CATEGORY == "height":
-
-            QUANTITY, UNIT = parse_height(QUERY, root)
-
-        elif CATEGORY == "weight":
-
-            QUANTITY, UNIT = parse_weight(QUERY, root)
-
-        else:
-            print "WARNING!!! Else not person age!"
-            QUANTITY, UNIT = parse(root, UNITS)
+                except Exception as e:
+                    print(e)
+                    pass
 
     else:
-        print "OMG ELSE!!"
+        raise ValueError('Please refer to commandline arguments')
 
-    # else:
-    #     # QUANTITY = int(mktime(time.strptime(VALUE, "%Y")))
-    #     epoch = datetime(1970, 1, 1)
-    #     t = datetime(int(VALUE), 1, 1)
-    #     diff = t-epoch
-    #     QUANTITY = diff.total_seconds()
-    #     print QUANTITY
-    #     UNIT = "date"
-
-
-    ############## PARSE API ##############
-    print "QUANTITY", QUANTITY
-
-    if "invented" in NAME.lower():
-        NAME = NAME.lower().strip("invented").title()
-    
-
-    return(QUANTITY,PHOTO)
-
-    ############## End PARSE API ##############
-
-
-def get_topic(root):
-    print root
-    topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
-
-    m = __topic_re.match(topic)
-
-    if m:
-        return m.group(1)
-    else:
-
-        m = __topic_re1.match(topic)
-
-        if m:
-            return m.group(1)
-
-        raise NameError('Error parsing topic')
-
-def get_image(NAME, TAGS):
-
-    NAME = NAME.encode('utf-8')
-
-    image_url = image_query(NAME)
-
-    photo = ''
-
-    if image_url:
-        photo = "http://" + image_url
-
-    
-    #elif "city" in TAGS and not photo:
-        # country = [x.strip() for x in NAME.split(',')][-1]
-        # countryItems = GameItem.Query.filter(name=country).limit(1)
-        # for countryItem in countryItems:
-        #     if (countryItem.photoURL):
-        #         photo = countryItem.photoURL
-        #         print "FOUND THE URL! " + photo
-        #         break
-
-    return photo
 
 def image_query(obj):
     obj = obj.encode('utf-8')
 
-    QUERY = urllib.quote(obj)
+#    QUERY = urllib.quote(obj)
+    QUERY = urllib.parse.urlencode(obj)
 
     BUILT_QUERY = QUERYSTRING_IMAGE % (QUERY, APP_ID)
 
@@ -248,10 +129,7 @@ def image_query(obj):
         return None
 
 def parse_age(QUERY, root):
-    print "IN PARSE AGE"
     value = root.find("./pod[@title='Date formats']").find('subpod').find('plaintext').text
-
-    print "Parse Age value", value
 
     if "month/day/year" in value:
 
@@ -273,21 +151,6 @@ def parse_age(QUERY, root):
 
 def parse_population(QUERY, root):
     value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
-
-    print "population value", value
-    # New Item Found: Manila
-    # Built query http://api.wolframalpha.com/v2/query?input=Manila%20population&appid=VWK3T2-4JGT62XJP7
-    # <Element 'queryresult' at 0x7f89f81243c0>
-    # CATEGORY CHECK: population
-    # population value 1.78 million people (country rank: 1st) (2015 estimate)
-    # QUANTITY 1780000.0 
-
-    #Why won't Manila and Irvine extract population values?
-    # New Item Found: Irvine
-    # Built query http://api.wolframalpha.com/v2/query?input=Irvine%20population&appid=VWK3T2-4JGT62XJP7
-    # <Element 'queryresult' at 0x7f8a18435a80>
-    # CATEGORY CHECK: population
-    # population value 307670 people (country rank: 65th) (2020 estimate)
 
     if "people" in value:
 
@@ -315,7 +178,7 @@ def parse_population(QUERY, root):
 
 def parse_height(QUERY, root):
     result = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
-    print result
+    print(result)
 
     m = __person_height_re.match(result)
 
@@ -403,17 +266,11 @@ def parse_weight(QUERY, root):
 def parse(root, UNITS):
     value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
+    print(value)
     if value.startswith('~~ '):
         value = value.strip('~~ ')
     m = __number_re.search(value)
 
-    #December 17, 1903
-    #month day, year
-    dt = datetime.strptime(value, "%B %d, %Y")
-    print "year", dt.year
-
-
-    print "m", m
     if m:
         QUANTITY = float(m.group(1))
         UNIT = m.group(2).lower()
@@ -430,7 +287,7 @@ def parse(root, UNITS):
         elif "date" in UNITS:
 
             try:
-                print "FUCK YOU 2"
+                print("FUCK YOU 2")
                 dt = dateparse(str(int(QUANTITY)))    
                 QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
 
@@ -447,29 +304,154 @@ def parse(root, UNITS):
     else:
         # check if it is a date
         try:
-            print value
+            print(value)
             if len(value) == 4:
                 epoch = datetime(1970, 1, 1)
                 t = datetime(int(value), 1, 1)
                 diff = t-epoch
                 QUANTITY = diff.total_seconds()
-                print QUANTITY
+                print(QUANTITY)
             else:
-                print "Not 4 chars"
-                print value
+                print("Not 4 chars")
+                print(value)
                 dt = dateparse(value)
-                print "date object year", dt.year
-                QUANTITY = dt.strftime('%s')
-                #print "epoch", epoch
-                #QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
-                #print "Quantityt", QUANTITY
+                QUANTITY = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
             UNIT = "date"
 
         except:
             raise NameError('Could not parse!')
 
-    print QUANTITY
+    print(QUANTITY)
     return (QUANTITY, UNIT)
+
+
+def get_image(NAME, TAGS):
+
+    NAME = NAME.encode('utf-8')
+
+    image_url = image_query(NAME)
+
+    photo = ''
+
+    if image_url:
+        photo = "http://" + image_url
+
+    elif "city" in TAGS and not photo:
+        country = [x.strip() for x in NAME.split(',')][-1]
+        countryItems = GameItem.Query.filter(name=country).limit(1)
+        for countryItem in countryItems:
+            if (countryItem.photoURL):
+                photo = countryItem.photoURL
+                print("FOUND THE URL! " + photo)
+                break
+
+    return photo
+
+def get_topic(root):
+    print(root)
+    topic = root.find("./pod[@title='Input interpretation']").find('subpod').find('plaintext').text
+
+    m = __topic_re.match(topic)
+
+    if m:
+        return m.group(1)
+    else:
+
+        m = __topic_re1.match(topic)
+
+        if m:
+            return m.group(1)
+
+        raise NameError('Error parsing topic')
+  
+
+def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[], VALUE=0):
+
+#    QUERY = urllib.quote(query_string % NAME)
+    QUERY = query_string
+
+    BUILT_QUERY = QUERYSTRING % (QUERY, APP_ID)
+
+    # TODO figure out how to read this using urllib3!
+
+    xml = urllib2.urlopen(BUILT_QUERY).read()
+    root = ElementTree.fromstring(xml)
+
+    print(root)
+
+    TOPIC = get_topic(root)
+    topicItems = [x.strip() for x in TOPIC.split(',')]
+    if len(topicItems)>2:
+        TOPIC = topicItems[0] + ", " + topicItems[-1]
+    elif len(topicItems) == 2:
+        TOPIC = topicItems[1]
+    else :
+        TOPIC = NAME
+
+    PHOTO = get_image(TOPIC,TAGS)
+
+    QUANTITY = -1
+
+    if not VALUE:
+
+        # assume we are just looking for the image
+        if CATEGORY == "image":
+            value = root.find("./pod[@title='Image']").find('markup').text
+            m = __image_re.search(value)
+            if m:
+                PHOTO = "http://" + m.group(1)
+
+        elif CATEGORY == "age":
+
+            QUANTITY, UNIT = parse_age(QUERY, root)
+
+        elif CATEGORY == "population":
+
+            QUANTITY, UNIT = parse_population(QUERY, root)
+
+        elif CATEGORY == "height":
+
+            QUANTITY, UNIT = parse_height(QUERY, root)
+
+        elif CATEGORY == "weight":
+
+            QUANTITY, UNIT = parse_weight(QUERY, root)
+
+        else:
+
+            QUANTITY, UNIT = parse(root, UNITS)
+
+    else:
+        # QUANTITY = int(mktime(time.strptime(VALUE, "%Y")))
+        epoch = datetime(1970, 1, 1)
+        t = datetime(int(VALUE), 1, 1)
+        diff = t-epoch
+        QUANTITY = diff.total_seconds()
+        print(QUANTITY)
+        UNIT = "date"
+
+
+    ############## PARSE API ##############
+    print(QUANTITY)
+    if "invented" in NAME.lower():
+        NAME = NAME.lower().strip("invented").title()
+    
+        
+#    kv = GameItem(category=CATEGORY, tagArray=TAGS, name=NAME, quantity=QUANTITY, unit=UNIT, photoURL=PHOTO)
+#    print "Finished " + NAME
+#    kv.save()
+
+    ############## End PARSE API ##############
+
+
+    ############# Swap in CSV save ##############
+    
+    row = [CATEGORY, TAGS, NAME, QUANTITY, UNIT, PHOTO]
+    
+    f = open('./game_items', 'w')
+    writer = csv.writer(f)
+    writer.writerow(row)
+    f.close()
 
 
 if __name__ == "__main__":

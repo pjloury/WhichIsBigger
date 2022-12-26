@@ -11,27 +11,24 @@
 
 @implementation WIBQuestionType
 
-@dynamic clarifyingString;
-@dynamic comparisonType;
-@dynamic category;
-@dynamic title;
-@dynamic backgroundColorString;
-@dynamic labelThemeColorString;
-@dynamic tintColorString;
-@dynamic themeColorString;
-@dynamic pointsToUnlock;
-@dynamic safePointsToUnlock;
-@dynamic image;
-@dynamic imageURL;
-@dynamic questionString;
-@dynamic name;
-
-+ (void)load {
-    [WIBQuestionType registerSubclass];
-}
-
-+ (NSString *)parseClassName {
-    return @"QuestionType";
+- (id) initWith: (WIBComparisonType) comparisonType category: (NSString *) category title: (NSString *) title primaryColor: (NSString *) primaryColor secondaryColor: (NSString *) secondaryColor pointsToUnlock: (NSNumber *) pointsToUnlock imageURL: (NSString *) imageURL questionString: (NSString *) questionString {
+    self = [super init];
+    if (self) {
+        _comparisonType = comparisonType;
+        _category = category;
+        _title = title;
+        _backgroundColorString = primaryColor;
+        _labelThemeColorString = secondaryColor;
+        _tintColorString = secondaryColor;
+        _themeColorString = secondaryColor;
+        _pointsToUnlock = pointsToUnlock;
+        _imageURL = imageURL;
+        _questionString = questionString;
+        _clarifyingString = title;
+        _name = title;
+        
+    }
+    return self;
 }
 
 - (UIColor *)backgroundColor {
@@ -48,16 +45,6 @@
 
 - (UIColor *)labelThemeColor {
     return [UIColor colorWithString:self.labelThemeColorString];
-}
-
-- (NSNumber *)puntosToUnlock {
-    NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-    NSString *latestVersion = [[PFConfig currentConfig] objectForKey:@"latestVersion"];
-    if ([latestVersion isEqualToString:version]) {
-        return self.safePointsToUnlock;
-    } else {
-        return self.pointsToUnlock;
-    }
 }
 
 

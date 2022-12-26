@@ -1,11 +1,4 @@
-1. install pip: https://pip.pypa.io/en/latest/installing.html
-
-2. get parse python api
-pip install git+https://github.com/dgrtwo/ParsePy.git
-
-3. export environment variables (for obsfucating app keys on github). PARSE_REST_KEY, PARSE_APP_KEY, WOLFRAM_APP_KEY
-
-4. usage: ./wolfram_api [category] [object]
-
-if result is found, a new game item will be created in parse
-
+1. Pip install pandas
+2. Set FILENAME in wolfram_api.py to a CSV with headers:
+	name | category | query | units | tags | value | imageURL
+2. Run wolfram_api.py

@@ -23,6 +23,7 @@
     
     BOOL questionTypeConstraintSatisfied = (requiredTags.count == 0);
     
+    /*
     for (NSString *tag in self.tagArray)
     {
         if ([((NSArray *)[PFConfig currentConfig][@"tagBlackList"]) containsObject:tag.lowercaseString])
@@ -33,9 +34,11 @@
             questionTypeConstraintSatisfied = YES;
         }
     }
+    */
     
     //return (questionTypeConstraintSatisfied && self.photoURL != nil && self.photoURL.length > 0);
-    return questionTypeConstraintSatisfied;
+    return YES;
+    
 }
 
 - (void)setTagArray:(NSArray *)tagArray

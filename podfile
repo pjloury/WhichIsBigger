@@ -2,16 +2,15 @@
 platform :ios, '8.0'
 
 target 'WhichIsBigger' do
-pod 'Parse'
-pod 'ParseUI'
 pod 'Canvas'
 pod 'Firebase/Core'
 pod 'Shimmer'
 pod 'SDWebImage/WebP'
+pod 'CHCSVParser', '2.1.0'
 pod 'Google-Mobile-Ads-SDK', '~> 7.0'
 pod 'KTCenterFlowLayout'
-pod 'Fabric', '~> 1.7.7'
-pod 'Crashlytics', '~> 3.10.2'
+pod 'FirebaseCrashlytics'
+
 end
 
 target 'WhichIsBiggerTests' do

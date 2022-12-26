@@ -149,27 +149,4 @@
     return fabs(total1-total2)/fmin(total1,total2) * 100;
 }
 
-- (void)saveInBackground
-{
-    PFObject *gameQuestion = [PFObject objectWithClassName:@"Question"];
-    
-    [gameQuestion setObject:@([WIBGamePlayManager sharedInstance].gameRound.questionIndex) forKey:@"questionNumber"];
-    [gameQuestion setObject:self.questionType.name forKey:@"quesetionType"];
-    [gameQuestion setObject:@(self.answeredCorrectly) forKey:@"answeredCorrectly"];
-    [gameQuestion setObject:@(self.answerTime) forKey:@"answerTime"];
-    [gameQuestion setObject:[WIBGamePlayManager sharedInstance].gameRound.roundUUID forKey:@"roundUUID"];
-    [gameQuestion setObject:@(self.points) forKey:@"points"];
-    
-    [gameQuestion setObject:@(self.option1.multiplier) forKey:@"multiplier1"];
-    [gameQuestion setObject:self.option1.item.objectId forKey:@"item1"];
-    
-    [gameQuestion setObject:self.option2.item.objectId forKey:@"multiplier2"];
-    [gameQuestion setObject:@(self.option2.multiplier) forKey:@"item2"];
-    
-    [gameQuestion setObject:[PFUser currentUser] forKey:@"user"];
-
-    [gameQuestion setObject:@(self.difficulty) forKey:@"difficulty"];
-    [gameQuestion saveInBackground];
-}
-
 @end

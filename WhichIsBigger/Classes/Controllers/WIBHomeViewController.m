@@ -11,17 +11,16 @@
 #import "WIBGameViewController.h"
 #import "WIBGamePlayManager.h"
 #import "WIBNetworkManager.h"
-#import "WIBLoginViewController.h"
 #import "WIBGameCompleteViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 @import Firebase;
 
 #import "WIBQuestionType.h"
 #import "WIBQuestionTypeCell.h"
-#import <Crashlytics/Crashlytics.h>
 
 
-@interface WIBHomeViewController()<PFLogInViewControllerDelegate, GADInterstitialDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+
+@interface WIBHomeViewController()<GADInterstitialDelegate, GKGameCenterControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate> 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 @property (weak, nonatomic) IBOutlet UIButton *highScoresButton;
@@ -43,28 +42,25 @@
     self.categoriesCollectionView.userInteractionEnabled = NO;
     
     NSLog(@"======================== BEFORE CONFIG NETWORK CALLS");
-    [[WIBNetworkManager sharedInstance] getConfigurationWithCompletion:^{
-        NSLog(@"======================== CONFIG RECEIVED");
-        [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
-            NSLog(@"======================== CATEGORIES RECEIVED");
-            dispatch_async(dispatch_get_main_queue(),
-                           ^{
-                               NSLog(@"======================== RELOADING CATEGORY COLLECTION VIEW");
-                               [self.categoriesCollectionView reloadData];
-                               [self.categoriesCollectionView layoutIfNeeded];
-                               [self.categoriesCollectionView flashScrollIndicators];
-                               
-                               [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
-                                   NSLog(@"======================== DATA MODEL COMPLETE");
-                                   dispatch_async(dispatch_get_main_queue(),
-                                                  ^{
-                                                      self.categoriesCollectionView.userInteractionEnabled = YES;
-                                                  });
-                               }];
-                           });
-        }];
+   
+    [[WIBNetworkManager sharedInstance] getCategoriesWithCompletion:^{
+        NSLog(@"======================== CATEGORIES RECEIVED");
+        dispatch_async(dispatch_get_main_queue(),
+                       ^{
+                           NSLog(@"======================== RELOADING CATEGORY COLLECTION VIEW");
+                           [self.categoriesCollectionView reloadData];
+                           [self.categoriesCollectionView layoutIfNeeded];
+                           [self.categoriesCollectionView flashScrollIndicators];
+                           
+                           [[WIBNetworkManager sharedInstance] generateDataModelWithCompletion:^{
+                               NSLog(@"======================== DATA MODEL COMPLETE");
+                               dispatch_async(dispatch_get_main_queue(),
+                                              ^{
+                                                  self.categoriesCollectionView.userInteractionEnabled = YES;
+                                              });
+                           }];
+                       });
     }];
-    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPressHighScoresButton:) name:@"GameCenterDidFinishAuthentication" object:nil];
     
@@ -133,7 +129,7 @@
 }
 
 - (IBAction)crashButtonTapped:(id)sender {
-    [[Crashlytics sharedInstance] crash];
+    //[[Crashlytics sharedInstance] crash];
 }
 
 # pragma mark - Interactions
@@ -249,56 +245,5 @@
     }
     [WIBAdManager sharedInstance].adType = kUndefined;
 }
-
-# pragma mark - Facebook
-//- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
-//{
-//    [self _facebookAuth];
-//}
-//
-//- (void)_facebookAuth
-//{
-//    if ([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-//        self.loginButton.hidden = YES;
-//        [self.profileButton setTitle:[[PFUser currentUser] objectForKey:@"firstName"] forState:UIControlStateNormal];
-//    }
-//    
-//    else {
-//        self.loginButton.hidden = NO;
-//        self.profileButton.hidden = YES;
-//    }
-//}
-
-//- (void)_scrapeFacebook
-//{
-//    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-//    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//        if (!error) {
-//            // result is a dictionary with the user's Facebook data
-//            NSDictionary *userData = (NSDictionary *)result;
-//            
-//            NSString *facebookID = userData[@"id"];
-//            NSString *name = userData[@"name"];
-//            //NSString *location = userData[@"location"][@"name"];
-//            
-//            NSString *picURLString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
-//            NSString *firstName = [name componentsSeparatedByString:@" "].firstObject;
-//            
-//            self.footerLabel.text = [NSString stringWithFormat:@"Welcome back, %@", firstName];
-//            
-//            [[PFUser currentUser] setObject:facebookID forKey:@"facebookID"];
-//            [[PFUser currentUser] setObject:name forKey:@"name"];
-//            [[PFUser currentUser] setObject:firstName forKey:@"firstName"];
-//            [[PFUser currentUser] setObject:picURLString forKey:@"picURLString"];
-//            [[PFUser currentUser] saveInBackground];
-//        }
-//        else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
-//            NSLog(@"The facebook session was invalidated");
-//            [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
-//        } else {
-//            NSLog(@"Some other error: %@", error);
-//        }
-//    }];
-//}
 
 @end

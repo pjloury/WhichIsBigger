@@ -22,6 +22,7 @@
 + (WIBGamePlayManager *)sharedInstance;
 
 // Game State
+- (void)generateQuestionTypes;
 - (void)beginRoundForType:(WIBQuestionType *)type;
 - (void)beginRound;
 - (void)endGame;

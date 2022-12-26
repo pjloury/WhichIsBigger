@@ -10,12 +10,12 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WIBQuestionType.h"
 #import "WIBGamePlayManager.h"
-#import "KRConfettiView.h"
+//#import  "KRConfettiView.h"
 
 const static double kIdealWaitTime = 3.0;
 
 @interface WIBQuestionTypeUnlockedViewController () {
-    KRConfettiView *confettiView;
+    //KRConfettiView *confettiView;
 }
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
@@ -45,15 +45,15 @@ const static double kIdealWaitTime = 3.0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupImageDownloadDidComplete:) name:kGroupImageDownloadCompleteNotification object:nil];
     self.advanceButton.enabled = NO;
     
-    confettiView = [[KRConfettiView alloc] initWithFrame:self.view.frame];
-    confettiView.colours = @[[UIColor colorWithRed:0.95 green:0.40 blue:0.27 alpha:1.0],
-                             [UIColor colorWithRed:1.00 green:0.78 blue:0.36 alpha:1.0],
-                             [UIColor colorWithRed:0.48 green:0.78 blue:0.64 alpha:1.0],
-                             [UIColor colorWithRed:0.30 green:0.76 blue:0.85 alpha:1.0],
-                             [UIColor colorWithRed:0.58 green:0.39 blue:0.55 alpha:1.0]];
-    confettiView.intensity = 0.8;
-    confettiView.type = Diamond;
-    [self.view insertSubview:confettiView belowSubview:self.advanceButton];
+//    confettiView = [[KRConfettiView alloc] initWithFrame:self.view.frame];
+//    confettiView.colours = @[[UIColor colorWithRed:0.95 green:0.40 blue:0.27 alpha:1.0],
+//                             [UIColor colorWithRed:1.00 green:0.78 blue:0.36 alpha:1.0],
+//                             [UIColor colorWithRed:0.48 green:0.78 blue:0.64 alpha:1.0],
+//                             [UIColor colorWithRed:0.30 green:0.76 blue:0.85 alpha:1.0],
+//                             [UIColor colorWithRed:0.58 green:0.39 blue:0.55 alpha:1.0]];
+//    confettiView.intensity = 0.8;
+//    confettiView.type = Diamond;
+//    [self.view insertSubview:confettiView belowSubview:self.advanceButton];
     
     WIBQuestionType *questionType = [[WIBGamePlayManager sharedInstance] unlockedQuestionType];
     
@@ -82,7 +82,7 @@ const static double kIdealWaitTime = 3.0;
     
     [[WIBSoundManager sharedInstance] playAchievementSound];
     
-    [confettiView startConfetti];
+//    [confettiView startConfetti];
     [self performSelector:@selector(finishConfetti) withObject:nil afterDelay:1.25];
     [self performSelector:@selector(spinQuestionTypeView) withObject:nil afterDelay:0.5];
     [self.shimmeringView setContentView:self.shimmeringContentView];
@@ -99,7 +99,7 @@ const static double kIdealWaitTime = 3.0;
 
 - (void)finishConfetti
 {
-    [confettiView stopConfetti];
+//    [confettiView stopConfetti];
 }
 
 - (void)spinQuestionTypeView
