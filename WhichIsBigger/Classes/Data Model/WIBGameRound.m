@@ -107,11 +107,6 @@
 
 - (WIBGameQuestion *)nextGameQuestion
 {
-    // always ask for next question. Manager should hold all of the state
-    if (self.currentQuestion)
-    {
-        [self.currentQuestion saveInBackground];
-    }
     self.currentQuestion = [self.gameQuestions objectAtIndex:self.questionIndex];
     self.questionIndex++;
     return self.currentQuestion;

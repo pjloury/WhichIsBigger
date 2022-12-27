@@ -150,7 +150,11 @@
 		60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionTypeUnlockedViewController.m; path = Classes/Controllers/WIBQuestionTypeUnlockedViewController.m; sourceTree = "<group>"; };
 		60E400B71C86EA8500A82850 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Additions.h"; path = "Classes/Data Model/UIImage+Additions.h"; sourceTree = "<group>"; };
 		60E400B81C86EA8500A82850 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Additions.m"; path = "Classes/Data Model/UIImage+Additions.m"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		60EF7BD729593251003332EB /* data.csv */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.csv; path = BackendServices/data.csv; sourceTree = SOURCE_ROOT; };
+=======
+		60EF7BD729593251003332EB /* data.csv */ = {isa = PBXFileReference; lastKnownFileType = text; name = data.csv; path = BackendServices/data.csv; sourceTree = SOURCE_ROOT; };
+>>>>>>> 768e297 (Successfully removed dependency on Parse)
 		6176F934D91FA67FBA1AE53B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -836,7 +840,11 @@
 				CODE_SIGN_ENTITLEMENTS = WhichIsBigger/WhichIsBigger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+<<<<<<< HEAD
 				CURRENT_PROJECT_VERSION = 2;
+=======
+				CURRENT_PROJECT_VERSION = 3;
+>>>>>>> 768e297 (Successfully removed dependency on Parse)
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -868,7 +876,11 @@
 				CODE_SIGN_ENTITLEMENTS = WhichIsBigger/WhichIsBigger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+<<<<<<< HEAD
 				CURRENT_PROJECT_VERSION = 2;
+=======
+				CURRENT_PROJECT_VERSION = 3;
+>>>>>>> 768e297 (Successfully removed dependency on Parse)
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
