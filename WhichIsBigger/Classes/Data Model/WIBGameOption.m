@@ -29,7 +29,7 @@
 
 - (NSNumber *)total
 {
-    if ([self.item.unit isEqualToString:@"epoch"]) {
+    if ([self.item.unit isEqualToString:@"epoch"] || [self.item.unit isEqualToString:@"years"]) {
         NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
         NSTimeInterval age = currentEpoch - self.item.baseQuantity.doubleValue;
         return [NSNumber numberWithDouble:age];
@@ -56,22 +56,25 @@
             return [NSString stringWithFormat:@"%@ ft", [fmt stringFromNumber:@(feet)]];
         }
     }
-    else if ([self.item.unit isEqualToString:@"date"])
+    else if ([self.item.unit isEqualToString:@"years"])
     {
-        NSTimeInterval theTimeInterval = self.item.baseQuantity.doubleValue;
+        NSTimeInterval dateEpoch = self.item.baseQuantity.doubleValue;
+        NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:dateEpoch];
         
-        // Get the system calendar
-        NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+        NSDate *now = [[NSDate alloc] init];
+
         
-        // Create the NSDates
-        NSDate *date1 = [[NSDate alloc] init];
-        NSDate *date2 = [[NSDate alloc] initWithTimeInterval:theTimeInterval sinceDate:date1];
+        NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                           components:NSCalendarUnitYear|NSCalendarUnitMonth
+                                           fromDate:date
+                                           toDate:now
+                                           options:0];
         
-        // Get conversion to months, days, hours, minutes
-        NSCalendarUnit unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
-        NSDateComponents *breakdownInfo = [sysCalendar components:unitFlags fromDate:date1  toDate:date2  options:0];
-        
-        return [NSString stringWithFormat:@"%ld years %ld months", (long)[breakdownInfo year],(long)[breakdownInfo month]];
+        if (ageComponents.month > 0){
+            return [NSString stringWithFormat:@"%ld years %ld months", ageComponents.year, ageComponents.month];
+        } else {
+            return [NSString stringWithFormat:@"%ld years", ageComponents.year];
+        }
     }
     else if ([self.item.unit isEqualToString:@"epoch"]) {
         NSCalendar *sysCalendar = [NSCalendar currentCalendar];

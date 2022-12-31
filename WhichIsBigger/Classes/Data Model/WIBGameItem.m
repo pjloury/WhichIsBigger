@@ -23,20 +23,6 @@
     
     BOOL questionTypeConstraintSatisfied = (requiredTags.count == 0);
     
-    /*
-    for (NSString *tag in self.tagArray)
-    {
-        if ([((NSArray *)[PFConfig currentConfig][@"tagBlackList"]) containsObject:tag.lowercaseString])
-        {
-            return NO;
-        }
-        if ([requiredTags containsObject:tag]) {
-            questionTypeConstraintSatisfied = YES;
-        }
-    }
-    */
-    
-    //return (questionTypeConstraintSatisfied && self.photoURL != nil && self.photoURL.length > 0);
     return YES;
     
 }
@@ -58,12 +44,6 @@
     if([self.unit isEqualToString:@"meters"])
     {
         return [NSNumber numberWithDouble:[_baseQuantity doubleValue] * 39.3701];
-    }
-    else if([self.unit isEqualToString:@"date"])
-    {
-        NSTimeInterval currentEpoch = [[NSDate date] timeIntervalSince1970];
-        NSTimeInterval age = currentEpoch - _baseQuantity.doubleValue;
-        return [NSNumber numberWithDouble:age];
     }
     else
     {

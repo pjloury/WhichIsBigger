@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B7A7BA9E314715BC13F934D /* libPods-WhichIsBigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6176F934D91FA67FBA1AE53B /* libPods-WhichIsBigger.a */; };
 		601172951BA6A19E00EE8182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601172941BA6A19E00EE8182 /* AVFoundation.framework */; };
+		60275570296003C4001CAE5D /* data_semicolons.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6027556F296003C4001CAE5D /* data_semicolons.csv */; };
 		602A92F61C745E96007777EB /* WIBAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F51C745E96007777EB /* WIBAdViewController.m */; };
 		602A92F91C7AE98D007777EB /* WIBGameCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602A92F81C7AE98D007777EB /* WIBGameCompleteTableViewController.m */; };
 		6033C78E1B98238000C592CC /* WIBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6033C78B1B98238000C592CC /* WIBOptionView.m */; };
@@ -46,7 +47,6 @@
 		60DC8B4D1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */; };
 		60DC8B4E1C84346D0026DF38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D811691BA4262800B2DA78 /* QuartzCore.framework */; };
 		60E400B91C86EA8500A82850 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E400B81C86EA8500A82850 /* UIImage+Additions.m */; };
-		60EF7BD829593251003332EB /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 60EF7BD729593251003332EB /* data.csv */; };
 		7D04768B1AEA1CFA003825F6 /* WIBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */; };
 		7D0CC6EB1AD4E7D400BB65BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6EA1AD4E7D400BB65BB /* main.m */; };
 		7D0CC6EE1AD4E7D400BB65BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */; };
@@ -91,6 +91,7 @@
 /* Begin PBXFileReference section */
 		601172941BA6A19E00EE8182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		602621CC213244780055BF33 /* WhichIsBigger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhichIsBigger.entitlements; sourceTree = "<group>"; };
+		6027556F296003C4001CAE5D /* data_semicolons.csv */ = {isa = PBXFileReference; lastKnownFileType = file; name = data_semicolons.csv; path = BackendServices/data_semicolons.csv; sourceTree = SOURCE_ROOT; };
 		602A92F41C745E96007777EB /* WIBAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIBAdViewController.h; sourceTree = "<group>"; };
 		602A92F51C745E96007777EB /* WIBAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIBAdViewController.m; sourceTree = "<group>"; };
 		602A92F71C7AE98D007777EB /* WIBGameCompleteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIBGameCompleteTableViewController.h; path = Classes/Controllers/WIBGameCompleteTableViewController.h; sourceTree = "<group>"; };
@@ -150,11 +151,6 @@
 		60DC8B4C1C8433500026DF38 /* WIBQuestionTypeUnlockedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIBQuestionTypeUnlockedViewController.m; path = Classes/Controllers/WIBQuestionTypeUnlockedViewController.m; sourceTree = "<group>"; };
 		60E400B71C86EA8500A82850 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Additions.h"; path = "Classes/Data Model/UIImage+Additions.h"; sourceTree = "<group>"; };
 		60E400B81C86EA8500A82850 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Additions.m"; path = "Classes/Data Model/UIImage+Additions.m"; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		60EF7BD729593251003332EB /* data.csv */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.csv; path = BackendServices/data.csv; sourceTree = SOURCE_ROOT; };
-=======
-		60EF7BD729593251003332EB /* data.csv */ = {isa = PBXFileReference; lastKnownFileType = text; name = data.csv; path = BackendServices/data.csv; sourceTree = SOURCE_ROOT; };
->>>>>>> 768e297 (Successfully removed dependency on Parse)
 		6176F934D91FA67FBA1AE53B /* libPods-WhichIsBigger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhichIsBigger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0476891AEA1CFA003825F6 /* WIBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WIBHomeViewController.h; path = Classes/Controllers/WIBHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7D04768A1AEA1CFA003825F6 /* WIBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WIBHomeViewController.m; path = Classes/Controllers/WIBHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -239,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		608E2618295ABE1C006CDB3D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6027556F296003C4001CAE5D /* data_semicolons.csv */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		609F0BC42130753F00012CCB /* Riffic Free */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,14 +258,6 @@
 				60DC8B491C841FC10026DF38 /* WIBAchievementDataSource.m */,
 			);
 			name = "View Models";
-			sourceTree = "<group>";
-		};
-		60F8045B290D002D00A80410 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				60EF7BD729593251003332EB /* data.csv */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		7A8391618E6BDC98E5C3DF80 /* Pods */ = {
@@ -304,7 +300,7 @@
 		7D0CC6E71AD4E7D400BB65BB /* WhichIsBigger */ = {
 			isa = PBXGroup;
 			children = (
-				60F8045B290D002D00A80410 /* Data */,
+				608E2618295ABE1C006CDB3D /* Data */,
 				602621CC213244780055BF33 /* WhichIsBigger.entitlements */,
 				7D0CC6EC1AD4E7D400BB65BB /* AppDelegate.h */,
 				7D0CC6ED1AD4E7D400BB65BB /* AppDelegate.m */,
@@ -617,8 +613,8 @@
 				7D8E8D6F1B47420A005B4AA2 /* OpenSans-Light.ttf in Resources */,
 				605004BF28E0FCDE00D16479 /* GoogleService-Info.plist in Resources */,
 				6082DADA2110BC8700502797 /* CaChing.m4a in Resources */,
-				60EF7BD829593251003332EB /* data.csv in Resources */,
 				6082DAD92110BC8700502797 /* CaChing2.m4a in Resources */,
+				60275570296003C4001CAE5D /* data_semicolons.csv in Resources */,
 				7DF8BEB61B49150D009577FB /* Blogger_Sans-Medium_Italic.otf in Resources */,
 				7D8E8D711B47420A005B4AA2 /* OpenSans-Regular.ttf in Resources */,
 				6040146B1B87A2CD00E2C5D6 /* WIBLogo.xib in Resources */,
@@ -840,11 +836,7 @@
 				CODE_SIGN_ENTITLEMENTS = WhichIsBigger/WhichIsBigger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 2;
-=======
 				CURRENT_PROJECT_VERSION = 3;
->>>>>>> 768e297 (Successfully removed dependency on Parse)
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -876,11 +868,7 @@
 				CODE_SIGN_ENTITLEMENTS = WhichIsBigger/WhichIsBigger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 2;
-=======
 				CURRENT_PROJECT_VERSION = 3;
->>>>>>> 768e297 (Successfully removed dependency on Parse)
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -31,21 +31,17 @@
 
 
 - (void) generateTestData {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"csv"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"data_semicolons" ofType:@"csv"];
 
     NSURL *url = [NSURL fileURLWithPath:path];
     
     NSError *error = nil;
-    //NSArray *rows = [NSArray arrayWithContentsOfCSVFile:path encoding:NSUTF8StringEncoding error:&error];
     
-    //CHCVParser *parser = [[CHCSVParser alloc] initWithContentsOfCSVURL:url];
-    
-    
-   NSString* fileContents = [NSString stringWithContentsOfURL:url encoding:NSASCIIStringEncoding error:&error];
-    
-    NSCharacterSet* separatorCharactersSet = [NSCharacterSet characterSetWithCharactersInString:@","];
+    NSString* fileContents = [NSString stringWithContentsOfURL:url encoding:NSASCIIStringEncoding error:&error];
 
-    
+    // Using Semicolons in order to parse the tags array
+    NSCharacterSet* separatorCharactersSet = [NSCharacterSet characterSetWithCharactersInString:@";"];
+
     NSMutableArray* rowStrings = [fileContents componentsSeparatedByString:@"\n"].mutableCopy;
     [rowStrings removeObjectAtIndex:0];
     for (NSString *rowString in rowStrings){
@@ -54,26 +50,33 @@
         if (fieldsInRow.count == 7) {
             WIBGameItem *item = [[WIBGameItem alloc] init];
             item.name = fieldsInRow[0];
-            
             item.categoryString = fieldsInRow[1];
             item.unit = fieldsInRow[3];
             item.tagArray = [NSArray arrayWithObject: fieldsInRow[4]];
-            //[fieldsInRow[4] componentsSeparatedByString:@","];
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
-            NSNumber *baseQuantity = [f numberFromString:fieldsInRow[5]];
-            
-            item.baseQuantity = fieldsInRow[5];
+            NSString * quantityString = fieldsInRow[5];
+            if (quantityString.length != 0) {
+                item.baseQuantity = [f numberFromString:fieldsInRow[5]];
+            } else {
+                item.baseQuantity = @0;             
+            }
             
             NSString *trimmedPhotoURL = [fieldsInRow[6] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-
             item.photoURL = trimmedPhotoURL;
             
-            
-            item.objectId = @"asdf1";
-            if (item.baseQuantity >0 && baseQuantity.integerValue >0) {
+            if (quantityString.length != 0 && ![item.photoURL isEqualToString:@"nan"] && item.photoURL.length != 0) {
                 [self insertGameItem: item];
+            } else {
+                NSLog(@"😳!");
             }
+        }
+        else {
+            NSException* myException = [NSException
+                    exceptionWithName:@"ImproperPrasing"
+                    reason:@"Wrong number of fields"
+                    userInfo:nil];
+            @throw myException;
         }
     }
 }
@@ -86,7 +89,6 @@
     gameItem1.categoryString = @"weight";
     gameItem1.tagArray = @[@"person", @"celebrity"];
     gameItem1.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/a/ab/Shaquille_O%27Neal_Buckley_Air_Base.jpg";
-    gameItem1.objectId = @"asdf1";
     
     [self insertGameItem: gameItem1];
     
@@ -97,7 +99,6 @@
     gameItem2.categoryString = @"weight";
     gameItem2.tagArray = @[@"person", @"celebrity"];
     gameItem2.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/e/e1/%D0%A2%D0%B8%D0%BC_%D0%9A%D1%83%D0%BA_%2802-09-2021%29.jpg";
-    gameItem2.objectId = @"asdf2";
     
     [self insertGameItem: gameItem2];
     
@@ -108,7 +109,6 @@
     gameItem3.categoryString = @"weight";
     gameItem3.tagArray = @[@"person", @"celebrity"];
     gameItem3.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/9/93/Mariah_Carey_WBLS_2018_Interview_2.jpg";
-    gameItem3.objectId = @"asdf3";
     
     [self insertGameItem: gameItem3];
     
@@ -119,7 +119,6 @@
     gameItem4.categoryString = @"weight";
     gameItem4.tagArray = @[@"person", @"celebrity"];
     gameItem4.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/1/10/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28cropped%29.jpg";
-    gameItem4.objectId = @"asdf4";
     
     [self insertGameItem: gameItem4];
     
@@ -130,7 +129,6 @@
     gameItem5.categoryString = @"weight";
     gameItem5.tagArray = @[@"person", @"celebrity"];
     gameItem5.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/7/75/Rihanna_Met_Gala_2017.jpg";
-    gameItem5.objectId = @"asdf5";
     
     [self insertGameItem: gameItem5];
     
@@ -141,7 +139,6 @@
     gameItem6.categoryString = @"weight";
     gameItem6.tagArray = @[@"person", @"celebrity"];
     gameItem6.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Natalie_Portman_%2848470988352%29_%28cropped%29.jpg/1280px-Natalie_Portman_%2848470988352%29_%28cropped%29.jpg";
-    gameItem6.objectId = @"asdf6";
     
     [self insertGameItem: gameItem6];
     
@@ -152,7 +149,6 @@
     gameItem7.categoryString = @"weight";
     gameItem7.tagArray = @[@"person", @"celebrity"];
     gameItem7.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/6/61/Michelle_Yeoh_Cannes_2017.jpg";
-    gameItem7.objectId = @"asdf7";
     
     [self insertGameItem: gameItem7];
     
@@ -163,7 +159,6 @@
     gameItem8.categoryString = @"weight";
     gameItem8.tagArray = @[@"person", @"celebrity"];
     gameItem8.photoURL = @"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ryan_Gosling_in_2018.jpg/1280px-Ryan_Gosling_in_2018.jpg";
-    gameItem8.objectId = @"asdf8";
     
     [self insertGameItem: gameItem8];
     
@@ -174,7 +169,6 @@
     gameItem9.categoryString = @"weight";
     gameItem9.tagArray = @[@"person", @"celebrity"];
     gameItem9.photoURL = @"https://i.scdn.co/image/ab6775700000ee85bd411915e73e26ce6ce36767";
-    gameItem9.objectId = @"asdf9";
     
     [self insertGameItem: gameItem9];
     
@@ -185,7 +179,6 @@
     gameItem10.categoryString = @"weight";
     gameItem10.tagArray = @[@"person", @"celebrity"];
     gameItem10.photoURL = @"https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-1/279848587_10200608999881536_659037373231340383_n.jpg?stp=dst-jpg_p320x320&_nc_cat=108&ccb=1-7&_nc_sid=0c64ff&_nc_ohc=lQK11VdTuAsAX-nM1b5&_nc_ht=scontent-ord5-1.xx&edm=AP4hL3IEAAAA&oh=00_AT_USo10gI-WZ3U4ewgsX00RuN1GQuLWbbIMMa1un6ovnw&oe=6334E343";
-    gameItem10.objectId = @"asdf3";
     
     [self insertGameItem: gameItem10];
     

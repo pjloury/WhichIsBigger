@@ -65,9 +65,9 @@ class Enum(set):
 
 def main():
 
-    FILENAME = "data.csv"
+    FILENAME = "data_semicolons.csv"
 
-    df = pd.read_csv(FILENAME)
+    df = pd.read_csv(FILENAME, sep=';')
     df = df.astype({'name':'string','category':'string','query':'string','units':'string','imageURL':'string'})
 
     for index, row in df.iterrows():
@@ -91,7 +91,7 @@ def main():
                 ### HACK TO MAKE THIS LIST JUST A SINGLE
                 df.at[index, 'imageURL'] = imgurl
                 df.at[index, 'value'] = val
-                df.to_csv(FILENAME, index=False)
+                df.to_csv(FILENAME, index=False, sep=';')
 
         except Exception as e:
             print e
@@ -275,19 +275,21 @@ def parse_population(QUERY, root):
     value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
 
     print "population value", value
+    # TODO: Parse Cities with populations less than 1 million
+    # Example: Irvine
+    # New Item Found: Irvine
+    # Built query http://api.wolframalpha.com/v2/query?input=Irvine%20population&appid=VWK3T2-4JGT62XJP7
+    # <Element 'queryresult' at 0x7f8a18435a80>
+    # CATEGORY CHECK: population
+    # population value 307670 people (country rank: 65th) (2020 estimate)
+    #
+    # WHEREAS: Manila works
     # New Item Found: Manila
     # Built query http://api.wolframalpha.com/v2/query?input=Manila%20population&appid=VWK3T2-4JGT62XJP7
     # <Element 'queryresult' at 0x7f89f81243c0>
     # CATEGORY CHECK: population
     # population value 1.78 million people (country rank: 1st) (2015 estimate)
     # QUANTITY 1780000.0 
-
-    #Why won't Manila and Irvine extract population values?
-    # New Item Found: Irvine
-    # Built query http://api.wolframalpha.com/v2/query?input=Irvine%20population&appid=VWK3T2-4JGT62XJP7
-    # <Element 'queryresult' at 0x7f8a18435a80>
-    # CATEGORY CHECK: population
-    # population value 307670 people (country rank: 65th) (2020 estimate)
 
     if "people" in value:
 

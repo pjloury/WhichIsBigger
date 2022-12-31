@@ -59,6 +59,8 @@
     
     if (self.gameItem.photoURL != nil && ![self.gameItem.photoURL isKindOfClass:[NSNull class]]) {
         NSLog(self.gameItem.photoURL);
+        //TODO There's an issue here with URLs like
+        // https://upload.wikimedia.org/wikipedia/commons/f/f9/LaMelo_Ball_%2528cropped%2529.jpg
         NSString* webStringURL = [self.gameItem.photoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
         NSURL *url = [NSURL URLWithString:webStringURL];

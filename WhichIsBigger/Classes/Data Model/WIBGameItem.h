@@ -18,7 +18,6 @@
 @property (nonatomic, strong) NSNumber *baseQuantity;
 @property (nonatomic, copy) NSString *categoryString;
 @property (nonatomic, strong) NSArray *tagArray;
-@property (nonatomic, copy) NSString *objectId;
 
 + (WIBGameItem *)maxOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
 + (WIBGameItem *)minOfItem:(WIBGameItem *)item1 item2:(WIBGameItem *)item2;
