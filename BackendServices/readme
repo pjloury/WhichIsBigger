@@ -7,3 +7,9 @@
 STEPS FOR ADDING A NEW CATEGORY
 1. Add the question type to WIBGamePlayManager– generateQuestionTypes
 2. NOTE: Each game item can have an empty or valid imageURL, but not "nan"
+
+DEPENDENCIES
+pip install grpcio
+pip install "regex<2022.1.18"
+pip install "tzlocal<2.0.0"
+pip install "dateparser<1.0.0"
