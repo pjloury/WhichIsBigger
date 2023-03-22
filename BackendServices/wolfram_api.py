@@ -33,6 +33,7 @@ import time, datetime
 import pandas as pd
 import ast
 from datetime import datetime
+import dateparser
 
 from dateutil.parser import parse as dateparse
 
@@ -84,7 +85,7 @@ def main():
         #TAGS = [t.lower() for t in TAGS.split(',')]
 
         try:
-            if pd.isna(VALUE):
+            if pd.isna(VALUE): # and CATEGORY == "history": # Can constrain to one category if desired
                 print "New Item Found:", NAME
                 query_string = "%s " + QUERY
                 (val, imgurl) = single_query(query_string, NAME, CATEGORY, UNITS, TAGS, VALUE)
@@ -121,6 +122,7 @@ def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[], VALUE=0):
         TOPIC = topicItems[1]
     else :
         TOPIC = NAME
+    print "TOPIC", TOPIC
 
     PHOTO = get_image(TOPIC,TAGS)
 
@@ -151,6 +153,10 @@ def single_query(query_string,NAME, CATEGORY, UNITS="", TAGS=[], VALUE=0):
         elif CATEGORY == "weight":
 
             QUANTITY, UNIT = parse_weight(QUERY, root)
+
+        elif CATEGORY == "history":
+
+            QUANTITY, UNIT = parse_history(QUERY, root)
 
         else:
             print "WARNING!!! Else not person age!"
@@ -400,6 +406,16 @@ def parse_weight(QUERY, root):
             raise NameError('No results found for query: %s' % QUERY)
 
         raise NameError('No match for weight query')
+
+
+def parse_history(QUERY, root):
+    value = root.find("./pod[@id='Result']").find('subpod').find('plaintext').text
+    print "HISTORY VALUE", value
+    tryToParseDateTime = dateparser.parse(value)
+    print "HISTORY Prased Year", tryToParseDateTime.year
+    epoch_time = time.mktime(tryToParseDateTime.timetuple())
+    print "HISTORY EPOCH time", epoch_time
+    return (epoch_time, "epoch")
 
 
 def parse(root, UNITS):

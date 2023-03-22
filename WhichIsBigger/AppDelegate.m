@@ -34,6 +34,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	  [application setStatusBarHidden:YES];
 	
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+    
     NSLog(@"===============================START APP DELEGATE");
     
     // [Optional] Power your app with Local Datastore. For more info, go to

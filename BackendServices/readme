@@ -2,3 +2,8 @@
 2. Set FILENAME in wolfram_api.py to a CSV with headers:
 	name | category | query | units | tags | value | imageURL
 2. Run wolfram_api.py
+
+
+STEPS FOR ADDING A NEW CATEGORY
+1. Add the question type to WIBGamePlayManager– generateQuestionTypes
+2. NOTE: Each game item can have an empty or valid imageURL, but not "nan"

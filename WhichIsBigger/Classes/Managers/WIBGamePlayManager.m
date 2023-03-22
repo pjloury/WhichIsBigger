@@ -84,9 +84,18 @@
                                                 secondaryColor:  @"55A9D8"
                                                 pointsToUnlock: @1800
                                                       imageURL: @"https://cdn-icons-png.flaticon.com/512/33/33308.png"
-                                                questionString: @"Which is Bigger?" ];
+                                                questionString: @"Which is Larger?" ];
     
-    self.questionTypes = [@[age, weight, height, population] mutableCopy];
+    WIBQuestionType *history = [[WIBQuestionType alloc] initWith: 0
+                                                      category: @"history" // This is used as a reference type in the data model
+                                                         title:  @"History" // Under the little app icon on the home screen
+                                                  primaryColor:  @"8e44ad"
+                                                secondaryColor:  @"f1c40f"
+                                                pointsToUnlock: @2400
+                                                      imageURL: @"https://cdn-icons-png.flaticon.com/128/3763/3763325.png"
+                                                questionString: @"Which is Older?" ];
+    
+    self.questionTypes = [@[age, weight, height, population, history] mutableCopy];
     
 }
 

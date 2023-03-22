@@ -65,7 +65,7 @@
             NSString *trimmedPhotoURL = [fieldsInRow[6] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
             item.photoURL = trimmedPhotoURL;
             
-            if (quantityString.length != 0 && ![item.photoURL isEqualToString:@"nan"] && item.photoURL.length != 0) {
+            if (quantityString.length != 0 && ![item.photoURL isEqualToString:@"nan"]) {// && item.photoURL.length != 0) {
                 [self insertGameItem: item];
             } else {
                 NSLog(@"😳!");
@@ -73,7 +73,7 @@
         }
         else {
             NSException* myException = [NSException
-                    exceptionWithName:@"ImproperPrasing"
+                    exceptionWithName:@"ImproperParsing"
                     reason:@"Wrong number of fields"
                     userInfo:nil];
             @throw myException;
@@ -301,6 +301,9 @@
 
     double percentDifference = (fabs((gameItem.baseQuantity.doubleValue - item.baseQuantity.doubleValue)/fmin(item.baseQuantity.doubleValue,gameItem.baseQuantity.doubleValue))) * 100;
     BOOL closeEnough = (percentDifference < questionCeiling && percentDifference > [WIBGamePlayManager sharedInstance].questionFloor);
+    if ( [type.category isEqualToString:@"history"]) {
+        closeEnough = @YES;
+    }
     
     static int tries = 0;
     
